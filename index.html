@@ -253,6 +253,8 @@
       align-items: center; justify-content: center; font-size: 20px;
     }
 
+    /* DEFAULT DESKTOP TABLES */
+    .table-container { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; text-align: left; }
     th, td { padding: 12px 16px; border-bottom: 1px solid var(--border-color); }
     th { color: var(--text-secondary); font-weight: 500; font-size: 13px; }
@@ -330,16 +332,85 @@
       .card-panel {
         padding: 16px;
       }
-      #view-sold-cards > div:first-child {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-      }
-      #btn-record-sale {
-        width: 100%;
-      }
       #groups-grid {
         grid-template-columns: 1fr;
+      }
+
+      /* MOBILE CARD VIEW FOR TABLES */
+      /* Removes side-scrolling and stacks data elegantly */
+      .table-container {
+        overflow-x: hidden !important; 
+      }
+      table[style*="min-width"] {
+        min-width: 100% !important; 
+      }
+      table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+      }
+      
+      /* Hide standard table headers */
+      thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+      
+      /* Style each row as a distinct "Card" */
+      tbody tr {
+        background: rgba(128,128,128,0.03);
+        border: 1px solid var(--border-color) !important;
+        border-radius: 8px;
+        margin-bottom: 16px;
+        padding: 8px 0;
+        box-sizing: border-box;
+      }
+
+      /* Style each cell as a labeled row inside the card */
+      td {
+        position: relative;
+        padding: 12px 16px 12px 40% !important; /* Make room for label */
+        border: none !important;
+        border-bottom: 1px dashed var(--border-color) !important;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        text-align: right;
+        min-height: 28px;
+      }
+      td:last-child {
+        border-bottom: none !important;
+      }
+
+      /* Generate labels dynamically from data-label attributes */
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 16px;
+        width: 35%;
+        text-align: left;
+        font-weight: 600;
+        color: var(--text-secondary);
+        font-size: 13px;
+        white-space: nowrap;
+      }
+
+      /* Adjust inputs and buttons inside mobile cards */
+      td input, td select {
+        width: auto !important;
+        min-width: 60%;
+        text-align: right;
+      }
+      td select {
+        direction: rtl; /* align select arrow properly */
+      }
+      
+      #btn-record-sale, #btn-save-cards {
+        width: 100%;
+      }
+      
+      .action-trigger + button {
+         margin-left: 8px;
       }
     }
   </style>
@@ -385,7 +456,6 @@
   </aside>
 
   <div class="main-wrapper">
-    <!-- MOBILE HAMBURGER HEADER -->
     <div class="mobile-header">
       <button class="mobile-menu-btn" id="mobile-toggle"><i class="fas fa-bars"></i></button>
       <h3 style="margin:0; font-size:18px;">Pokémon Tracker</h3>
@@ -435,7 +505,7 @@
             <select id="group-select" style="flex: 1; min-width: 200px;"><option value="">Loading Groups...</option></select>
             <button id="btn-new-group" class="btn-outline" style="white-space: nowrap;"><i class="fas fa-plus"></i> New Group</button>
           </div>
-          <div style="overflow-x: auto;">
+          <div class="table-container">
             <table style="min-width: 800px;">
               <thead>
                 <tr>
@@ -447,7 +517,7 @@
                   <th style="width: 12%;">Yen Price</th>
                   <th style="width: 8%;">Qty</th>
                   <th>Notes</th>
-                  <th style="width: 60px;"></th>
+                  <th style="width: 60px;">Action</th>
                 </tr>
               </thead>
               <tbody id="add-cards-body"></tbody>
@@ -489,7 +559,7 @@
               <option value="Indonesian">Indonesian</option>
             </select>
           </div>
-          <div style="overflow-x: auto;">
+          <div class="table-container">
             <table style="min-width: 1000px; white-space: nowrap;">
               <thead>
                 <tr>
@@ -511,11 +581,11 @@
           <button id="btn-record-sale" class="btn-primary"><i class="fas fa-plus"></i> Record Sale</button>
         </div>
         <div class="card-panel">
-          <div style="overflow-x: auto;">
+          <div class="table-container">
             <table style="min-width: 900px; white-space: nowrap;">
               <thead>
                 <tr>
-                  <th>Date</th><th>Card Name</th><th>Set</th><th>Rarity</th><th>Qty Sold</th><th>Selling Price</th><th>Profit</th><th>Notes</th><th>Action</th>
+                  <th>Select</th><th>Date</th><th>Card Name</th><th>Set</th><th>Rarity</th><th>Qty Sold</th><th>Selling Price</th><th>Profit</th><th>Notes</th><th>Action</th>
                 </tr>
               </thead>
               <tbody id="sales-body"></tbody>
@@ -541,10 +611,10 @@
           <p style="color: var(--text-secondary); margin-top: 4px;">Review and seamlessly restore deleted cards and sales records.</p>
         </div>
         <div class="card-panel">
-          <div style="overflow-x: auto;">
+          <div class="table-container">
             <table style="width: 100%; min-width: 700px; text-align: left; border-collapse: collapse;">
               <thead>
-                <tr><th style="width: 10%;">Type</th><th style="width: 20%;">Deleted On</th><th style="width: 50%;">Data / Details</th><th style="width: 20%;">Actions</th></tr>
+                <tr><th style="width: 10%;">Select</th><th style="width: 10%;">Type</th><th style="width: 20%;">Deleted On</th><th style="width: 40%;">Data / Details</th><th style="width: 20%;">Actions</th></tr>
               </thead>
               <tbody id="trash-body"></tbody>
             </table>
