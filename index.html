@@ -311,107 +311,111 @@
     /* ========================================= */
     @media (max-width: 768px) {
       .sidebar {
-        position: fixed;
-        left: -300px;
-        top: 0;
-        bottom: 0;
+        position: fixed; left: -300px; top: 0; bottom: 0;
         transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
-      .sidebar.open {
-        left: 0;
-      }
-      .mobile-header {
-        display: flex;
-      }
-      .main-content {
-        padding: 16px;
-      }
-      .dashboard-grid {
-        grid-template-columns: 1fr;
-      }
-      .card-panel {
-        padding: 16px;
-      }
-      #groups-grid {
-        grid-template-columns: 1fr;
-      }
+      .sidebar.open { left: 0; }
+      .mobile-header { display: flex; }
+      .main-content { padding: 16px; }
+      .dashboard-grid { grid-template-columns: 1fr; }
+      .card-panel { padding: 16px; }
+      #groups-grid { grid-template-columns: 1fr; }
+      #btn-record-sale, #btn-save-cards { width: 100%; }
 
-      /* MOBILE CARD VIEW FOR TABLES */
-      /* Removes side-scrolling and stacks data elegantly */
-      .table-container {
-        overflow-x: hidden !important; 
-      }
-      table[style*="min-width"] {
-        min-width: 100% !important; 
-      }
-      table, thead, tbody, th, td, tr {
-        display: block;
-        width: 100%;
-      }
+      /* ========================================= */
+      /* TAP-TO-EXPAND MOBILE ACCORDION VIEW       */
+      /* ========================================= */
+      .table-container { overflow-x: hidden !important; width: 100%; box-sizing: border-box; }
+      table, table[style*="min-width"] { min-width: 100% !important; width: 100% !important; }
+      thead { display: none; }
       
-      /* Hide standard table headers */
-      thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-      }
-      
-      /* Style each row as a distinct "Card" */
       tbody tr {
+        display: flex;
+        flex-wrap: wrap;
         background: rgba(128,128,128,0.03);
         border: 1px solid var(--border-color) !important;
         border-radius: 8px;
-        margin-bottom: 16px;
-        padding: 8px 0;
-        box-sizing: border-box;
+        margin-bottom: 12px;
+        padding: 14px 32px 14px 14px; /* Space for the dropdown arrow */
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+        -webkit-tap-highlight-color: transparent;
       }
 
-      /* Style each cell as a labeled row inside the card */
-      td {
-        position: relative;
-        padding: 12px 16px 12px 40% !important; /* Make room for label */
-        border: none !important;
+      /* Dropdown arrow icon */
+      tbody tr::after {
+        content: '\f107'; 
+        font-family: 'Font Awesome 6 Free', 'FontAwesome', sans-serif;
+        font-weight: 900;
+        position: absolute;
+        right: 14px;
+        top: 14px; 
+        color: var(--text-secondary);
+        transition: transform 0.3s ease;
+        pointer-events: none;
+      }
+      tbody tr.expanded::after { transform: rotate(180deg); }
+      
+      /* Hide everything by default on mobile */
+      tbody td {
+        display: none;
+        width: 100%;
+        padding: 12px 0;
         border-bottom: 1px dashed var(--border-color) !important;
-        display: flex;
-        align-items: center;
         justify-content: flex-end;
+        align-items: center;
         text-align: right;
         min-height: 28px;
+        box-sizing: border-box;
       }
-      td:last-child {
-        border-bottom: none !important;
-      }
-
-      /* Generate labels dynamically from data-label attributes */
-      td::before {
+      tbody td:last-child { border-bottom: none !important; }
+      
+      /* Label formatting for expanded cells */
+      tbody td::before {
         content: attr(data-label);
-        position: absolute;
-        left: 16px;
-        width: 35%;
-        text-align: left;
         font-weight: 600;
         color: var(--text-secondary);
         font-size: 13px;
-        white-space: nowrap;
+        margin-right: auto;
+        text-align: left;
       }
+      
+      /* EXPANDED STATE: Show all cells */
+      tbody tr.expanded td { display: flex; }
+      tbody tr.expanded td input, tbody tr.expanded td select { width: 60% !important; text-align: right; }
+      tbody tr.expanded td select { direction: rtl; }
 
-      /* Adjust inputs and buttons inside mobile cards */
-      td input, td select {
-        width: auto !important;
-        min-width: 60%;
-        text-align: right;
-      }
-      td select {
-        direction: rtl; /* align select arrow properly */
-      }
+      /* ============================================================== */
+      /* COLLAPSED STATE: SHOW EXACTLY 3 COLUMNS PER TABLE FORMAT       */
+      /* ============================================================== */
       
-      #btn-record-sale, #btn-save-cards {
-        width: 100%;
-      }
+      /* INVENTORY TABLE: Name, Rarity, Total Cost */
+      #inventory-body tr:not(.expanded) td:nth-child(1) { display: block; width: 45%; padding: 0; border: none !important; text-align: left; font-size: 14px; font-weight: 600;}
+      #inventory-body tr:not(.expanded) td:nth-child(3) { display: block; width: 20%; padding: 0; border: none !important; text-align: left; }
+      #inventory-body tr:not(.expanded) td:nth-child(9) { display: block; width: 35%; padding: 0; border: none !important; text-align: right; font-size: 14px; color: var(--accent-yellow); }
       
-      .action-trigger + button {
-         margin-left: 8px;
-      }
+      /* SOLD CARDS TABLE: Name, Rarity, Selling Price */
+      #sales-body tr:not(.expanded) td:nth-child(3) { display: block; width: 45%; padding: 0; border: none !important; text-align: left; font-size: 14px; font-weight: 600;}
+      #sales-body tr:not(.expanded) td:nth-child(5) { display: block; width: 20%; padding: 0; border: none !important; text-align: left; }
+      #sales-body tr:not(.expanded) td:nth-child(7) { display: block; width: 35%; padding: 0; border: none !important; text-align: right; font-size: 14px; color: var(--accent-yellow); }
+      
+      /* ADD CARDS TABLE: Name, Rarity, Yen Price */
+      #add-cards-body tr:not(.expanded) td:nth-child(2) { display: block; width: 45%; padding: 0; border: none !important; text-align: left; font-size: 14px; }
+      #add-cards-body tr:not(.expanded) td:nth-child(4) { display: block; width: 25%; padding: 0; border: none !important; text-align: left; }
+      #add-cards-body tr:not(.expanded) td:nth-child(6) { display: block; width: 30%; padding: 0; border: none !important; text-align: right; font-size: 14px; color: var(--accent-yellow); }
+      
+      /* TRASH BIN TABLE: Type, Date, Details */
+      #trash-body tr:not(.expanded) td:nth-child(2) { display: block; width: 30%; padding: 0; border: none !important; text-align: left; }
+      #trash-body tr:not(.expanded) td:nth-child(3) { display: block; width: 30%; padding: 0; border: none !important; text-align: left; font-size: 12px; opacity: 0.8; }
+      #trash-body tr:not(.expanded) td:nth-child(4) { display: block; width: 40%; padding: 0; border: none !important; text-align: right; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+      /* Remove labels in collapsed view */
+      tbody tr:not(.expanded) td::before { display: none; }
+      
+      /* Optimize inline inputs for the tight 3-column view */
+      tbody tr:not(.expanded) td select { width: 100% !important; padding: 2px; direction: ltr; font-size: 13px; }
+      tbody tr:not(.expanded) td input { width: 100% !important; padding: 4px; font-size: 13px; text-align: left; }
     }
   </style>
 </head>
