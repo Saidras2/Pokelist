@@ -260,12 +260,12 @@
     th { color: var(--text-secondary); font-weight: 500; font-size: 13px; }
     td { font-size: 14px; }
 
-    input[type="text"], input[type="number"], input[type="password"], select, input[type="date"] {
+    input[type="text"], input[type="number"], input[type="password"], select, input[type="date"], textarea {
       background: var(--bg-input); color: var(--text-primary); border: 1px solid var(--border-color);
       padding: 8px 12px; border-radius: 6px; outline: none; font-family: inherit; width: 100%; box-sizing: border-box;
     }
 
-    input:focus, select:focus { border-color: var(--accent-yellow); }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent-yellow); }
     select option { background-color: var(--bg-dropdown) !important; color: var(--text-primary) !important; }
     ::-webkit-calendar-picker-indicator { cursor: pointer; opacity: 0.6; transition: opacity 0.2s ease; }
     ::-webkit-calendar-picker-indicator:hover { opacity: 1; }
@@ -292,6 +292,14 @@
     }
     .group-stat-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
     .group-stat-row span { color: var(--text-secondary); }
+
+    /* Condition Modal UI Checklists */
+    .condition-group { margin-bottom: 12px; }
+    .condition-title { font-size: 15px; color: var(--accent-yellow); margin-bottom: 12px; font-weight: 700; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; }
+    .condition-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+    .check-label { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; cursor: pointer; color: var(--text-primary); line-height: 1.2; }
+    .check-label input { accent-color: var(--accent-yellow); cursor: pointer; margin-top: 1px; }
+    .side-panel { background: rgba(0,0,0,0.15); padding: 16px; border-radius: 8px; margin-bottom: 16px; border: 1px solid var(--border-color); }
 
     /* Modals */
     .modal-overlay {
@@ -391,9 +399,10 @@
       /* ============================================================== */
       
       /* INVENTORY TABLE: Name, Rarity, Total Cost */
-      #inventory-body tr:not(.expanded) td:nth-child(1) { display: block; width: 45%; padding: 0; border: none !important; text-align: left; font-size: 14px; font-weight: 600;}
-      #inventory-body tr:not(.expanded) td:nth-child(3) { display: block; width: 20%; padding: 0; border: none !important; text-align: left; }
-      #inventory-body tr:not(.expanded) td:nth-child(9) { display: block; width: 35%; padding: 0; border: none !important; text-align: right; font-size: 14px; color: var(--accent-yellow); }
+      /* INVENTORY TABLE: Name, Rarity, Total Cost */
+      #inventory-body tr:not(.expanded) td:nth-child(2) { display: block; width: 45%; padding: 0; border: none !important; text-align: left; font-size: 14px; font-weight: 600;}
+      #inventory-body tr:not(.expanded) td:nth-child(4) { display: block; width: 20%; padding: 0; border: none !important; text-align: left; }
+      #inventory-body tr:not(.expanded) td:nth-child(12) { display: block; width: 35%; padding: 0; border: none !important; text-align: right; font-size: 14px; color: var(--accent-yellow); }
       
       /* SOLD CARDS TABLE: Name, Rarity, Selling Price */
       #sales-body tr:not(.expanded) td:nth-child(3) { display: block; width: 45%; padding: 0; border: none !important; text-align: left; font-size: 14px; font-weight: 600;}
@@ -417,6 +426,31 @@
       tbody tr:not(.expanded) td select { width: 100% !important; padding: 2px; direction: ltr; font-size: 13px; }
       tbody tr:not(.expanded) td input { width: 100% !important; padding: 4px; font-size: 13px; text-align: left; }
     }
+/* ============================================================== */
+/* AUCTION VIEW MOBILE OPTIMIZATION                               */
+/* ============================================================== */
+@media (max-width: 768px) {
+    /* 1. Stack the Search Inputs and Dropdowns side-by-side fixes */
+    #view-auction .card-panel > div[style*="display: flex"] {
+        flex-wrap: wrap !important;
+    }
+    #view-auction input#auction-batch-input,
+    #view-auction input#auction-search,
+    #view-auction select#invoice-batch-select,
+    #view-auction select#invoice-winner-select {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        margin-bottom: 4px;
+    }
+
+   
+    /* 3. Ensure the "Sort by Batch" dropdown fits under the Title */
+    #view-auction .card-panel h3[style*="justify-content: space-between"] {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px;
+    }
+}
   </style>
 </head>
 <body data-theme="dark">
@@ -449,6 +483,7 @@
       <a href="#" class="nav-item" data-target="inventory"><i class="fas fa-box-open"></i> Inventory</a>
       <a href="#" class="nav-item" data-target="sold-cards"><i class="fas fa-shopping-cart"></i> Sold Cards</a>
       <a href="#" class="nav-item" data-target="groups"><i class="fas fa-layer-group"></i> Groups</a>
+      <a href="#" class="nav-item" data-target="auction"><i class="fas fa-gavel"></i> Auction & Sales</a>
       <a href="#" class="nav-item" data-target="trash"><i class="fas fa-trash-restore"></i> Recycle Bin</a>
     </nav>
 
@@ -505,21 +540,23 @@
           <p style="color: var(--text-secondary); margin-top: 4px;">Assign cards to a group for accurate shipping calculations.</p>
         </div>
         <div class="card-panel">
-          <div style="display: flex; gap: 16px; margin-bottom: 24px; max-width: 500px; flex-wrap: wrap;">
-            <select id="group-select" style="flex: 1; min-width: 200px;"><option value="">Loading Groups...</option></select>
+          <div style="display: flex; gap: 16px; margin-bottom: 24px; max-width: 650px; flex-wrap: wrap;">
+            <select id="group-select" style="flex: 1; min-width: 180px;"><option value="">Loading Groups...</option></select>
+            <input type="text" id="global-storage-input" placeholder="Location (e.g. Box A)" style="flex: 1; min-width: 150px;" title="Applies this storage location to all cards added below">
             <button id="btn-new-group" class="btn-outline" style="white-space: nowrap;"><i class="fas fa-plus"></i> New Group</button>
           </div>
           <div class="table-container">
-            <table style="min-width: 800px;">
+            <table style="min-width: 900px;">
               <thead>
                 <tr>
                   <th style="width: 40px;">#</th>
                   <th style="width: 20%;">Card Name</th>
                   <th style="width: 12%;">Set Code</th>
                   <th style="width: 10%;">Rarity</th>
-                  <th style="width: 12%;">Language</th>
-                  <th style="width: 12%;">Yen Price</th>
+                  <th style="width: 10%;">Language</th>
+                  <th style="width: 10%;">Yen Price</th>
                   <th style="width: 8%;">Qty</th>
+                  <th style="width: 10%;">Condition</th>
                   <th>Notes</th>
                   <th style="width: 60px;">Action</th>
                 </tr>
@@ -563,11 +600,19 @@
               <option value="Indonesian">Indonesian</option>
             </select>
           </div>
+          <div id="bulk-storage-div" style="display: none; justify-content: space-between; align-items: center; padding: 12px 16px; margin-bottom: 16px; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px;">
+            <span style="color: #38bdf8; font-weight: 600; font-size: 14px;"><span id="bulk-storage-count">0</span> card(s) selected</span>
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="bulk-storage-input" placeholder="New Location..." style="width: 150px; padding: 6px 12px; background: var(--bg-surface);">
+                <button id="btn-bulk-storage" class="btn-primary" style="padding: 6px 16px;"><i class="fas fa-box"></i> Move</button>
+            </div>
+          </div>
           <div class="table-container">
-            <table style="min-width: 1000px; white-space: nowrap;">
+            <table style="min-width: 1050px; white-space: nowrap;">
               <thead>
                 <tr>
-                  <th>Card Name</th><th>Set</th><th>Rarity</th><th>Language</th><th>Qty</th><th>Base (¥)</th><th>Base (Rp)</th><th>Shipping</th><th>Total Cost</th><th>Group</th><th>Action</th>
+                  <th class="bulk-check-header" style="width: 40px;"><input type="checkbox" id="check-all-inventory" style="cursor:pointer; width:16px; height:16px; accent-color: var(--accent-yellow);"></th>
+                  <th>Card Name</th><th>Set</th><th>Rarity</th><th>Language</th><th>Qty</th><th>Condition</th><th>Location</th><th>Base (¥)</th><th>Base (Rp)</th><th>Shipping</th><th>Total Cost</th><th>Group</th><th>Action</th>
                 </tr>
               </thead>
               <tbody id="inventory-body"></tbody>
@@ -589,7 +634,8 @@
             <table style="min-width: 900px; white-space: nowrap;">
               <thead>
                 <tr>
-                  <th>Select</th><th>Date</th><th>Card Name</th><th>Set</th><th>Rarity</th><th>Qty Sold</th><th>Selling Price</th><th>Profit</th><th>Notes</th><th>Action</th>
+                  <th class="bulk-check-header" style="width: 40px;"><input type="checkbox" id="check-all-sales" style="cursor:pointer; width:16px; height:16px; accent-color: var(--accent-yellow);"></th>
+                  <th>Date</th><th>Card Name</th><th>Set</th><th>Rarity</th><th>Qty Sold</th><th>Selling Price</th><th>Profit</th><th>Notes</th><th>Action</th>
                 </tr>
               </thead>
               <tbody id="sales-body"></tbody>
@@ -598,15 +644,253 @@
         </div>
       </div>
 
-      <div id="view-groups" class="view">
+     <div id="view-groups" class="view">
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
           <div>
             <h2 style="margin: 0; font-size: 24px;">Shipping Groups</h2>
             <p style="color: var(--text-secondary); margin-top: 4px;">Manage exchange rates and shipping distributions</p>
           </div>
-          <button id="btn-create-group-page" class="btn-primary"><i class="fas fa-plus"></i> Create Group</button>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button id="btn-reset-shipping-math" class="btn-outline" title="Clear historical max stock memory"><i class="fas fa-sync-alt"></i> Recalculate Shipping</button>
+            <button id="btn-create-group-page" class="btn-primary"><i class="fas fa-plus"></i> Create Group</button>
+          </div>
         </div>
         <div id="groups-grid"></div>
+      </div>
+
+     <!-- AUCTION & CLAIM SALE VIEW -->
+      <div id="view-auction" class="view">
+        <div style="margin-bottom: 24px;">
+          <h2 style="margin: 0; font-size: 24px;"><i class="fas fa-gavel" style="color: var(--accent-yellow); margin-right: 8px;"></i> Auction & Claim Sales</h2>
+          <p style="color: var(--text-secondary); margin-top: 4px;">Draft posts, track winners, and generate logistics invoices.</p>
+        </div>
+
+        <!-- EMBEDDED STYLE TO FORCE STRICT 2x2 GRID -->
+        <style>
+          .auction-strict-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Mobile: 1 column */
+            gap: 24px;
+            width: 100%;
+            align-items: stretch; /* Makes side-by-side panels equal height */
+          }
+          @media screen and (min-width: 1024px) {
+            .auction-strict-grid {
+              /* Desktop: Forces exactly 2 columns, prevents wide tables from breaking it */
+              grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+            }
+          }
+          .auction-strict-grid > .card-panel {
+            min-width: 0 !important; /* Forces panels to obey the grid */
+            margin-bottom: 0 !important;
+            display: flex;
+            flex-direction: column;
+          }
+        </style>
+
+        <div class="auction-strict-grid">
+
+          <!-- STAGE 1: Post Drafter -->
+          <div class="card-panel">
+            <h3 style="margin-top:0; margin-bottom: 16px;">1. Post Drafter (WTA / WTC)</h3>
+            <div style="display:flex; gap:10px; margin-bottom: 12px; flex-wrap: wrap;">
+              <input type="text" id="auction-batch-input" placeholder="Batch No. (e.g. BATCH-01)" style="flex: 0 1 200px; ">
+              <input type="text" id="auction-search" placeholder="Search inventory to add..." style="flex:1; min-width: 250px;">
+            </div>
+            <div id="auction-search-results" style="max-height: 150px; overflow-y: auto; margin-bottom: 16px; background: rgba(0,0,0,0.1); border-radius: 6px;"></div>
+            
+            <div class="table-container" style="margin-bottom: 16px; flex: 1;">
+              <table style="min-width: 700px;">
+                <thead>
+                  <tr>
+                    <th>Card Name</th>
+                    <th>Rarity</th>
+                    <th>OB (Rp)</th>
+                    <th>Next Bid (NB)</th>
+                    <th>BO (Rp)</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="auction-draft-body"></tbody>
+              </table>
+            </div>
+            <div style="display:flex; gap:12px; flex-wrap: wrap;">
+  <button id="btn-generate-fb-post" class="btn-primary">Generate FB Post & Copy</button>
+  <button id="btn-clear-draft" class="btn-outline"><i class="fas fa-eraser"></i> Clear View</button>
+</div>
+<textarea id="fb-post-output" style="width:100%; height:100px; margin-top:16px; padding:12px; border-radius:6px; background:var(--bg-input); color:inherit; border:1px solid var(--border-color); display:none; outline:none; font-family:inherit; box-sizing:border-box;"></textarea>
+          </div>
+
+          <!-- STAGE 2: Bid Logger -->
+          <div class="card-panel">
+            <h3 style="margin-top:0; margin-bottom: 16px;">2. Bid Logger (Live Tracking)</h3>
+            
+            <!-- NEW: Batch selector to load running auctions -->
+            <div style="display:flex; gap:16px; margin-bottom:16px; flex-wrap: wrap;">
+              <select id="logger-batch-select" style="flex: 1; min-width: 200px;">
+                <option value="">Select Running Batch...</option>
+                <!-- JS will populate this with active batches -->
+              </select>
+            </div>
+
+            <div class="table-container" style="margin-bottom: 16px; flex: 1;">
+              <!-- UPDATED MIN-WIDTH AND COLUMNS -->
+              <table style="min-width: 900px;">
+                <thead>
+                  <tr>
+                    <th>Card Name</th>
+                    <th>Winner Name</th>
+                    <th>Winning Bid (Rp)</th>
+                    <th>Evidence (Screenshot)</th> <!-- ADDED COLUMN -->
+                    <th>Status</th> <!-- RENAMED COLUMN -->
+                  </tr>
+                </thead>
+                <tbody id="auction-logger-body">
+                  <tr><td colspan="5" style="text-align:center; color:var(--text-secondary);">Select a batch to log winners.</td></tr>
+                </tbody>
+              </table>
+            </div>
+           <div style="text-align: right;">
+              <button type="button" id="btn-close-batch" style="padding:10px 16px; background:#ef4444; color:#fff; border:none; border-radius:6px; font-weight:600; cursor:pointer; margin-right: 10px;">
+                <i class="fas fa-ban"></i> Close Batch
+              </button>
+              <button id="btn-save-winners" class="btn-primary"><i class="fas fa-save"></i> Save Bids & Winners</button>
+            </div>
+          </div>
+
+          <!-- STAGE 3: Invoice & Fulfillment -->
+          <div class="card-panel">
+            <h3 style="margin-top:0; margin-bottom: 16px;">3. Invoice & Fulfillment Manager</h3>
+            
+            <div style="display:flex; gap:16px; margin-bottom:24px; flex-wrap: wrap;">
+              <select id="invoice-batch-select" style="flex: 1; min-width: 200px;">
+                <option value="">1. Select Auction Batch...</option>
+              </select>
+              <select id="invoice-winner-select" style="flex: 1; min-width: 200px;">
+                <option value="">2. Select a Winner...</option>
+              </select>
+            </div>
+
+            <div id="invoice-details" style="display:none; flex: 1;">
+              <div class="table-container" style="margin-bottom:24px;">
+                <table style="min-width: 600px;">
+                  <thead><tr><th>Card</th><th>Bid Price</th><th>Evidence</th></tr></thead>
+                  <tbody id="invoice-cards-body"></tbody>
+                </table>
+              </div>
+
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:24px; margin-bottom:24px; background:rgba(0,0,0,0.1); padding:24px; border-radius:12px; border:1px solid var(--border-color);">
+                <div>
+                  <label style="display:block; margin-bottom:6px; font-size:13px; color:var(--text-secondary);">Payment Method</label>
+                  <select id="inv-payment" style="margin-bottom:16px;">
+                    <option value="" disabled selected>Select Payment...</option>
+                    <option value="Direct Transfer">Direct Transfer</option>
+                    <option value="Rekber">Rekber</option>
+                    <option value="Shopee">Shopee</option>
+                  </select>
+                  
+                  <div id="inv-shipping-section">
+                    <label style="display:block; margin-bottom:6px; font-size:13px; color:var(--text-secondary);">Courier</label>
+                    <select id="inv-courier" style="margin-bottom:16px;">
+                      <option value="" disabled selected>Select Courier...</option>
+                      <option value="Lion Parcel - Bosspack">Lion Parcel - Bosspack</option>
+                      <option value="Lion Parcel - Regular">Lion Parcel - Regular</option>
+                      <option value="Lion Parcel - Ekonomi">Lion Parcel - Ekonomi</option>
+                      <option value="J&T - Regular">J&T - Regular</option>
+                    </select>
+                    <label style="display:block; margin-bottom:6px; font-size:13px; color:var(--text-secondary);">Use Insurance?</label>
+                    <select id="inv-insurance" style="margin-bottom:16px;">
+                      <option value="" disabled selected>Select...</option>
+                      <option value="No">No</option><option value="Yes">Yes</option>
+                    </select>
+                    <label style="display:block; margin-bottom:6px; font-size:13px; color:var(--text-secondary);">Base Shipping Fee (Rp)</label>
+                    <input type="text" id="inv-ship-fee" value="" placeholder="Rp 0" style="margin-bottom:16px;">
+                  </div>
+                  
+                  <label style="display:block; margin-bottom:6px; font-size:13px; color:var(--text-secondary);">Toploaders (Rp 1.300/pc)</label>
+                  <input type="number" id="inv-toploader" value="0" min="0">
+                </div>
+                
+                <div>
+                  <label style="display:block; margin-bottom:6px; font-size:13px; color:var(--text-secondary);">Address</label>
+                  <textarea id="inv-address" style="width:100%; height:75px; padding:12px; margin-bottom:16px; box-sizing:border-box;"></textarea>
+                  
+                  <label style="display:block; margin-bottom:6px; font-size:13px; color:var(--text-secondary);">Phone Number</label>
+                  <input type="text" id="inv-phone" style="width:100%; padding:10px; border-radius:6px; border:1px solid var(--border-color); background: transparent; color: inherit; box-sizing: border-box; margin-bottom: 16px;">
+
+                  <label style="display:block; margin-bottom:6px; font-size:13px; color:var(--text-secondary);">Pickup / Dropoff Code</label>
+                  <input type="text" id="inv-resi" style="width:100%; padding:10px; border-radius:6px; border:1px solid var(--border-color); background: transparent; color: inherit; box-sizing: border-box; margin-bottom: 16px;">
+
+                  <div id="inv-tracking-container" style="display: none;">
+                      <label style="display:block; margin-bottom:6px; font-size:13px; color:var(--text-secondary);">Tracking Number</label>
+                      <input type="text" id="inv-tracking" style="width:100%; padding:10px; border-radius:6px; border:1px solid var(--border-color); background: transparent; color: inherit; box-sizing: border-box; margin-bottom: 16px;">
+                  </div>
+
+                  <label style="display:block; margin-bottom:6px; font-size:13px; color:var(--text-secondary);">Invoice Status</label>
+                  <select id="inv-status" style="margin-bottom:24px; border-color: var(--accent-yellow);">
+                    <option value="" disabled selected>Select Status...</option>
+                    <option value="Unpaid">Unpaid</option>
+                    <option value="Paid">Paid (Preparing)</option>
+                    <option value="Ready to Ship">Ready to Ship</option>
+                    <option value="Shipped">Shipped (Deduct Stock)</option>
+                  </select>
+                  
+                  <div style="font-size:14px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom: 8px;"><span style="color:var(--text-secondary);">Subtotal:</span> <strong id="inv-subtotal">Rp 0</strong></div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom: 8px;"><span style="color:var(--text-secondary);">Shipping Fee:</span> <strong id="inv-ship-display">Rp 0</strong></div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom: 8px;"><span style="color:var(--text-secondary);">Insurance:</span> <strong id="inv-insurance-display">Rp 0</strong></div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom: 16px;"><span style="color:var(--text-secondary);">Packing & Toploader:</span> <strong id="inv-extra-fee" style="color:var(--accent-yellow);">Rp 0</strong></div>
+                    <hr style="border-color:var(--border-color); margin:12px 0;">
+                    <div style="display:flex; justify-content:space-between; font-size:18px;"><span style="color:var(--text-secondary);">Grand Total:</span> <strong id="inv-grand-total">Rp 0</strong></div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display:flex; gap:12px; justify-content:flex-end; flex-wrap: wrap;">
+                <button id="btn-download-evidence" class="btn-outline"><i class="fas fa-download"></i> Evidence</button>
+                <button id="btn-copy-invoice" class="btn-outline"><i class="fas fa-copy"></i> Copy Text</button>
+                <button id="btn-save-invoice-db" class="btn-primary"><i class="fas fa-save"></i> Save Invoice Data</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- STAGE 4: Saved Invoices History -->
+          <div class="card-panel">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+              <h3 style="margin:0;">4. Saved Invoices History</h3>
+              <div style="display:flex; gap:12px; align-items:center;">
+                 <select id="sort-invoices" style="width:auto; padding:6px 12px; border-radius:6px; background:transparent; border:1px solid var(--border-color); color:inherit;">
+                    <option value="batch-desc">Sort by Batch (Newest)</option>
+                    <option value="batch-asc">Sort by Batch (Oldest)</option>
+                    <option value="status">Sort by Status</option>
+                    <option value="courier">Sort by Courier</option>
+                 </select>
+                 <button id="btn-bulk-delete-invoices" class="btn-outline" style="color:#ef4444; border-color:rgba(239, 68, 68, 0.3); display:none;"><i class="fas fa-trash"></i> Delete Selected</button>
+              </div>
+            </div>
+            <div class="table-container" style="flex: 1;">
+              <table style="min-width: 1000px; white-space: nowrap;">
+               <thead>
+                  <tr>
+                    <th style="width: 40px;"><input type="checkbox" id="check-all-invoices" style="accent-color: var(--accent-yellow);"></th>
+                    <th>Batch No.</th>
+                    <th>Winner</th>
+                    <th>Total (Rp)</th>
+                    <th>Courier</th>
+                    <th>Phone</th>
+                    <th>Pickup/Dropoff Code</th>
+                    <th>Tracking Number</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="saved-invoices-body">
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
       </div>
 
       <div id="view-trash" class="view">
@@ -618,7 +902,10 @@
           <div class="table-container">
             <table style="width: 100%; min-width: 700px; text-align: left; border-collapse: collapse;">
               <thead>
-                <tr><th style="width: 10%;">Select</th><th style="width: 10%;">Type</th><th style="width: 20%;">Deleted On</th><th style="width: 40%;">Data / Details</th><th style="width: 20%;">Actions</th></tr>
+                <tr>
+                  <th class="bulk-check-header-trash" style="width: 40px;"><input type="checkbox" id="check-all-trash" style="cursor:pointer; width:16px; height:16px; accent-color: var(--accent-yellow);"></th>
+                  <th style="width: 10%;">Type</th><th style="width: 20%;">Deleted On</th><th style="width: 40%;">Data / Details</th><th style="width: 20%;">Actions</th>
+                </tr>
               </thead>
               <tbody id="trash-body"></tbody>
             </table>
@@ -629,6 +916,7 @@
   </div>
 
   <div id="modal-overlay" class="modal-overlay"></div>
+  
   <div id="modal-group" class="modal">
     <h3 style="margin-top:0; margin-bottom: 20px;">📦 Create New Group</h3>
     <label style="display:block; margin-bottom:6px; font-size:13px; color:var(--text-secondary);">Group Name (e.g. Batch 01)</label>
@@ -643,6 +931,156 @@
     </div>
   </div>
 
+  <!-- CONDITION CHECKLIST MODAL -->
+  <div id="modal-condition" class="modal" style="width: 95%; max-width: 600px; max-height: 90vh; display: none; flex-direction: column;">
+    <h3 style="margin-top:0; margin-bottom: 16px;"><i class="fas fa-search-plus" style="color:var(--accent-yellow); margin-right:8px;"></i>Card Condition</h3>
+    <div id="condition-content" style="overflow-y: auto; flex: 1; padding-right: 8px; margin-bottom: 16px;">
+      <!-- Generated Dynamically by JS based on criteria -->
+    </div>
+    <div style="display:flex; justify-content:flex-end; gap:10px;">
+      <button class="btn-outline close-condition-modal" id="cancel-condition">Cancel</button>
+      <button id="save-condition-btn" class="btn-primary">Save Condition</button>
+    </div>
+  </div>
+
+  <!-- POKEMON SET CODES DATALIST -->
+  <datalist id="pokemon-set-list">
+    <!-- JAPANESE PROMO ERAS -->
+    <option value="M-P">Mega Evolution Era Promos (2025-2026)</option>
+    <option value="SV-P">Scarlet & Violet Era Promos</option>
+    <option value="S-P">Sword & Shield Era Promos</option>
+    <option value="S8a-P">25th Anniversary Promos</option>
+    <option value="SM-P">Sun & Moon Era Promos</option>
+    <option value="XY-P">XY Era Promos</option>
+    <option value="BW-P">Black & White Era Promos</option>
+    <option value="L-P">LEGEND Era Promos (HGSS)</option>
+    <option value="DPt-P">Platinum Era Promos</option>
+    <option value="DP-P">Diamond & Pearl Era Promos</option>
+    <option value="PCG-P">EX Era Promos (Pokemon Card Game)</option>
+    <option value="ADV-P">EX Era Promos (Advanced Generation)</option>
+    <option value="P">Classic Unnumbered / Black Star Promos</option>
+    <option value="PLAY">Pokemon Player's Club Promos</option>
+    <option value="PROMO">General Non-Numbered Promos</option>
+
+    <!-- ENGLISH PROMO ERAS -->
+    <option value="SVP">Scarlet & Violet Black Star Promos</option>
+    <option value="SWSH">Sword & Shield Black Star Promos</option>
+    <option value="SM">Sun & Moon Black Star Promos</option>
+    <option value="XY">XY Black Star Promos</option>
+    <option value="BW">Black & White Black Star Promos</option>
+    <option value="HGSS">HeartGold & SoulSilver Black Star Promos</option>
+    <option value="DP">Diamond & Pearl Black Star Promos</option>
+    <option value="BSP">WotC / Nintendo Black Star Promos</option>
+
+    <!-- JAPANESE MEGA / SV ERA (2025-2026) -->
+    <option value="M6">Storm Emeralda</option>
+    <option value="M5">Abyss Eye</option>
+    <option value="M4">Ninja Spinner</option>
+    <option value="M3">Perfect Order</option>
+    <option value="M2">Dream Mega Evolution ex</option>
+    <option value="M1X">Inferno X</option>
+    <option value="M1S">Mega Symphonia</option>
+    <option value="M1L">Mega Brave</option>
+    <option value="SV11W">White Flare</option>
+    <option value="SV11B">Black Bolt</option>
+    <option value="SV10">The Glory of Team Rocket</option>
+    <option value="SV9a">Heat Wave Arena</option>
+    <option value="SV9">Battle Partners</option>
+    <option value="SV8a">Terastal Festival ex</option>
+    <option value="SV8">Super Electric Breaker</option>
+    <option value="SV7a">Paradise Dragona</option>
+    <option value="SV7">Stellar Miracle</option>
+    <option value="SV6a">Night Wanderer</option>
+    <option value="SV6">Mask of Change</option>
+    <option value="SV5a">Crimson Haze</option>
+    <option value="SV5K">Wild Force</option>
+    <option value="SV5M">Cyber Judge</option>
+    <option value="SV4a">Shiny Treasure ex</option>
+    <option value="SV4K">Ancient Roar</option>
+    <option value="SV4M">Future Flash</option>
+    <option value="SV3a">Raging Surf</option>
+    <option value="SV3">Ruler of the Black Flame</option>
+    <option value="SV2a">Pokemon 151</option>
+    <option value="SV2D">Clay Burst</option>
+    <option value="SV2P">Snow Hazard</option>
+    <option value="SV1a">Triplet Beat</option>
+    <option value="SV1S">Scarlet ex</option>
+    <option value="SV1V">Violet ex</option>
+
+    <!-- ENGLISH MEGA / SV ERA (2025-2026) -->
+    <option value="DRE">Delta Reign (2026)</option>
+    <option value="30C">30th Celebration (2026)</option>
+    <option value="PBL">Pitch Black (2026)</option>
+    <option value="CRI">Chaos Rising (2026)</option>
+    <option value="POR">Perfect Order (2026)</option>
+    <option value="ASC">Ascended Heroes (2026)</option>
+    <option value="MPB">Mega Evolution: Pitch Black</option>
+    <option value="MCR">Mega Evolution: Chaos Rising</option>
+    <option value="MPO">Mega Evolution: Perfect Order</option>
+    <option value="MAH">Mega Evolution: Ascended Heroes</option>
+    <option value="PFL">Phantasmal Flames (2025)</option>
+    <option value="MEG">Mega Evolution Base (2025)</option>
+    <option value="WHT">White Flare</option>
+    <option value="BLK">Black Bolt</option>
+    <option value="DRI">Destined Rivals</option>
+    <option value="JTG">Journey Together</option>
+    <option value="PRE">Prismatic Evolutions</option>
+    <option value="SSP">Surging Sparks</option>
+    <option value="SCR">Stellar Crown</option>
+    <option value="SFA">Shrouded Fable</option>
+    <option value="TWM">Twilight Masquerade</option>
+    <option value="TEF">Temporal Forces</option>
+    <option value="PAF">Paldean Fates</option>
+    <option value="PAR">Paradox Rift</option>
+    <option value="MEW">151</option>
+    <option value="OBF">Obsidian Flames</option>
+    <option value="PAL">Paldea Evolved</option>
+    <option value="SVI">Scarlet & Violet Base</option>
+
+    <!-- JAPANESE SWORD & SHIELD ERA -->
+    <option value="S12a">VSTAR Universe</option>
+    <option value="S12">Paradigm Trigger</option>
+    <option value="S11a">Incandescent Arcana</option>
+    <option value="S11">Lost Abyss</option>
+    <option value="S10b">Pokemon GO</option>
+    <option value="S10a">Dark Phantasma</option>
+    <option value="S10P">Space Juggler</option>
+    <option value="S10D">Time Gazer</option>
+    <option value="S9a">Battle Region</option>
+    <option value="S9">Star Birth</option>
+    <option value="S8b">VMAX Climax</option>
+    <option value="S8">Fusion Arts</option>
+    <option value="S7D">Skyscraping Perfection</option>
+    <option value="S7R">Blue Sky Stream</option>
+    <option value="S6a">Eevee Heroes</option>
+    <option value="S6H">Silver Lance</option>
+    <option value="S6K">Jet-Black Spirit</option>
+    <option value="S5a">Matchless Fighter</option>
+    <option value="S5I">Ichigeki Master</option>
+    <option value="S5R">Rengeki Master</option>
+    <option value="S4a">Shiny Star V</option>
+    <option value="S4">Astonishing Volt Tackle</option>
+    <option value="S3a">Legendary Heartbeat</option>
+    <option value="S3">Infinity Zone</option>
+    <option value="S2a">Explosive Walker</option>
+    <option value="S2">Rebellion Crash</option>
+    <option value="S1a">VMAX Rising</option>
+    <option value="S1W">Sword</option>
+    <option value="S1H">Shield</option>
+
+    <!-- ENGLISH SWORD & SHIELD ERA -->
+    <option value="CRZ">Crown Zenith</option>
+    <option value="SIT">Silver Tempest</option>
+    <option value="LOR">Lost Origin</option>
+    <option value="PGO">Pokemon GO</option>
+    <option value="ASR">Astral Radiance</option>
+    <option value="BRS">Brilliant Stars</option>
+    <option value="FST">Fusion Strike</option>
+    <option value="CEL">Celebrations</option>
+    <option value="EVS">Evolving Skies</option>
+  </datalist>
+
   <script src="app.js"></script>
+
 </body>
 </html>
