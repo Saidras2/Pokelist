@@ -277,3 +277,34 @@ input, select {
 [id*="popup"] * {
   color: inherit;
 }
+
+/* ADD THIS TO YOUR style.css */
+
+body[data-theme="dark"] {
+  color-scheme: dark; /* Fixes the calendar pop-up and scrollbars */
+}
+
+body[data-theme="dark"] option {
+  background-color: var(--bg-card); /* Fixes the dropdown menu background */
+  color: var(--text-primary);
+}
+
+/* ============================================================== */
+/* AUCTION VIEW: DESKTOP SIDE-BY-SIDE PANELS (1 with 2, 3 with 4) */
+/* ============================================================== */
+@media screen and (min-width: 1024px) {
+    .auction-desktop-grid {
+        display: grid;
+        /* minmax(0, 1fr) is critical: it stops wide tables from breaking the grid columns */
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 24px;
+        align-items: start;
+    }
+
+    .auction-desktop-grid > .card-panel {
+        margin-bottom: 0 !important;
+        min-width: 0; 
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
