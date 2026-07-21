@@ -1,1 +1,2360 @@
-const _0x34ccac=_0x4d08;(function(_0x4f1ec6,_0x1c5dc4){const _0x513d6b=_0x4d08,_0x3624bc=_0x4f1ec6();while(!![]){try{const _0x291a58=-parseInt(_0x513d6b(0x2dc))/0x1*(parseInt(_0x513d6b(0x2b7))/0x2)+parseInt(_0x513d6b(0x362))/0x3*(-parseInt(_0x513d6b(0x2b4))/0x4)+-parseInt(_0x513d6b(0x368))/0x5*(-parseInt(_0x513d6b(0x303))/0x6)+-parseInt(_0x513d6b(0x3b8))/0x7*(parseInt(_0x513d6b(0x20a))/0x8)+-parseInt(_0x513d6b(0x3aa))/0x9*(-parseInt(_0x513d6b(0x270))/0xa)+-parseInt(_0x513d6b(0x36b))/0xb*(-parseInt(_0x513d6b(0x251))/0xc)+-parseInt(_0x513d6b(0x229))/0xd*(parseInt(_0x513d6b(0x299))/0xe);if(_0x291a58===_0x1c5dc4)break;else _0x3624bc['push'](_0x3624bc['shift']());}catch(_0x50d6ea){_0x3624bc['push'](_0x3624bc['shift']());}}}(_0x5cb7,0xaf7cf));const API_URL='https://script.google.com/macros/s/AKfycbymA0CfeEuSx7_yetVi8gSxNDL9Zvbse30dHa9FsVPoa5zDZkipTwVlsHpKL7hooozvvg/exec';let state={'inventory':[],'groups':[],'sales':[],'trash':[]},saleCart=[],masterPokemonDictionary={};function _0x4d08(_0x561a89,_0x2d0f81){_0x561a89=_0x561a89-0x1e3;const _0x5cb7b3=_0x5cb7();let _0x4d08a0=_0x5cb7b3[_0x561a89];return _0x4d08a0;}const customPokemonDictionary={'buusuta':_0x34ccac(0x3ad),'buusutaa':'Flareon','bacyuru':_0x34ccac(0x2a7),'bachuru':_0x34ccac(0x2a7),'burakki':'Umbreon','burakkii':_0x34ccac(0x23f),'rizaadon':'Charizard','lizaadon':_0x34ccac(0x2e4),'kairyu':_0x34ccac(0x2f0),'kairyuu':_0x34ccac(0x2f0),'gekkouga':_0x34ccac(0x329),'myuutsuu':_0x34ccac(0x357),'myutsu':_0x34ccac(0x357),'pukachu':'Pikachu'};async function loadMasterDictionary(){const _0x4222cd=_0x34ccac;try{const _0x4f0376=await fetch(_0x4222cd(0x333)),_0x36dfa3=await _0x4f0376[_0x4222cd(0x249)](),_0x67bcbe=_0x36dfa3['split']('\x0a');let _0x4cdcbe={};for(let _0x3d1241=0x1;_0x3d1241<_0x67bcbe[_0x4222cd(0x2ca)];_0x3d1241++){const _0xe7e73a=_0x67bcbe[_0x3d1241][_0x4222cd(0x33e)](',');if(_0xe7e73a['length']<0x3)continue;const _0x3c1247=_0xe7e73a[0x0],_0x41f2ef=_0xe7e73a[0x1],_0x4700f5=_0xe7e73a[0x2][_0x4222cd(0x2a0)](/"/g,'')['trim']();if(!_0x4cdcbe[_0x3c1247])_0x4cdcbe[_0x3c1247]={};if(_0x41f2ef==='9')_0x4cdcbe[_0x3c1247]['en']=_0x4700f5;if(_0x41f2ef==='2')_0x4cdcbe[_0x3c1247][_0x4222cd(0x2af)]=_0x4700f5[_0x4222cd(0x26b)]();if(_0x41f2ef==='1')_0x4cdcbe[_0x3c1247][_0x4222cd(0x2e1)]=_0x4700f5;if(_0x41f2ef==='11')_0x4cdcbe[_0x3c1247][_0x4222cd(0x2da)]=_0x4700f5;}Object['values'](_0x4cdcbe)['forEach'](_0x3f9d94=>{const _0x43ffb7=_0x4222cd;if(_0x3f9d94['en']){if(_0x3f9d94[_0x43ffb7(0x2af)])masterPokemonDictionary[_0x3f9d94[_0x43ffb7(0x2af)]]=_0x3f9d94['en'];if(_0x3f9d94['kana'])masterPokemonDictionary[_0x3f9d94[_0x43ffb7(0x2e1)]]=_0x3f9d94['en'];if(_0x3f9d94[_0x43ffb7(0x2da)])masterPokemonDictionary[_0x3f9d94[_0x43ffb7(0x2da)]]=_0x3f9d94['en'];}});}catch(_0x5a0895){console[_0x4222cd(0x399)](_0x4222cd(0x245),_0x5a0895);}}function toKatakana(_0xa8f155){const _0x26ebce=_0x34ccac;return _0xa8f155[_0x26ebce(0x2a0)](/[\u3041-\u3096]/g,function(_0x33b519){const _0x5b6b98=_0x26ebce;return String['fromCharCode'](_0x33b519[_0x5b6b98(0x302)](0x0)+0x60);});}function translatePokemonName(_0x3487fd){const _0x3a2af8=_0x34ccac;if(!_0x3487fd)return _0x3487fd;const _0x275a19=_0x3487fd[_0x3a2af8(0x26b)]()[_0x3a2af8(0x2e2)]();if(customPokemonDictionary[_0x275a19])return customPokemonDictionary[_0x275a19];if(masterPokemonDictionary[_0x275a19])return masterPokemonDictionary[_0x275a19];const _0xfe0e37=toKatakana(_0x275a19);if(_0xfe0e37[_0x3a2af8(0x2ca)]>=0x2)for(let _0x4c9de0 in masterPokemonDictionary){if(_0x4c9de0[_0x3a2af8(0x355)](_0xfe0e37))return masterPokemonDictionary[_0x4c9de0];}if(_0x275a19[_0x3a2af8(0x2ca)]>=0x3)for(let _0x2c35c2 in masterPokemonDictionary){if(/^[a-z]+$/[_0x3a2af8(0x3a9)](_0x2c35c2)&&_0x2c35c2[_0x3a2af8(0x24a)](_0x275a19))return masterPokemonDictionary[_0x2c35c2];}return _0x3487fd;}let views,navItems,addCardsBody,modalOverlay,groupModal;document[_0x34ccac(0x31d)]('DOMContentLoaded',()=>{const _0x44f8b4=_0x34ccac;views=document[_0x44f8b4(0x2d4)](_0x44f8b4(0x214)),navItems=document[_0x44f8b4(0x2d4)]('.nav-item'),addCardsBody=document['getElementById'](_0x44f8b4(0x228)),modalOverlay=document['getElementById'](_0x44f8b4(0x3a1)),groupModal=document[_0x44f8b4(0x37e)](_0x44f8b4(0x265)),setupThemeToggle(),setupNavigation(),setupModals(),setupSearchFilters(),addMultipleRows(0xa);const _0x15bff9=document[_0x44f8b4(0x37e)](_0x44f8b4(0x36e)),_0x547202=document[_0x44f8b4(0x22c)](_0x44f8b4(0x2db));_0x15bff9&&_0x15bff9[_0x44f8b4(0x31d)](_0x44f8b4(0x30a),()=>{const _0xf9d7d1=_0x44f8b4;_0x547202[_0xf9d7d1(0x343)][_0xf9d7d1(0x2dd)](_0xf9d7d1(0x2a1));});document[_0x44f8b4(0x31d)](_0x44f8b4(0x30a),_0x5eecaf=>{const _0x4b8b40=_0x44f8b4;if(window[_0x4b8b40(0x26d)]<=0x300&&_0x547202['classList'][_0x4b8b40(0x36f)](_0x4b8b40(0x2a1))){if(!_0x547202[_0x4b8b40(0x36f)](_0x5eecaf[_0x4b8b40(0x2d8)])&&!_0x15bff9['contains'](_0x5eecaf[_0x4b8b40(0x2d8)]))_0x547202[_0x4b8b40(0x343)]['remove']('open');}});const _0xefe657=document[_0x44f8b4(0x37e)]('auth-screen'),_0x18c5e8=document[_0x44f8b4(0x37e)](_0x44f8b4(0x2fa)),_0xaefb45=document[_0x44f8b4(0x37e)](_0x44f8b4(0x218)),_0x5bd373=document[_0x44f8b4(0x37e)](_0x44f8b4(0x2ab));async function _0x1b4713(){const _0x2f679f=_0x44f8b4,_0x3aafde=_0x18c5e8[_0x2f679f(0x2df)];if(!_0x3aafde)return;_0xaefb45[_0x2f679f(0x2ed)]=_0x2f679f(0x376),_0xaefb45[_0x2f679f(0x308)]['opacity']='0.7',_0xaefb45['style'][_0x2f679f(0x287)]='none';try{const _0x22e722=await fetch(API_URL+_0x2f679f(0x352)+encodeURIComponent(_0x3aafde)),_0x18594e=await _0x22e722['json']();_0x18594e[_0x2f679f(0x399)]===_0x2f679f(0x24d)?(_0x5bd373['style'][_0x2f679f(0x22e)]=_0x2f679f(0x227),_0x18c5e8['value']='',_0xaefb45['textContent']=_0x2f679f(0x26c),_0xaefb45[_0x2f679f(0x308)][_0x2f679f(0x252)]='1',_0xaefb45[_0x2f679f(0x308)][_0x2f679f(0x287)]=_0x2f679f(0x261)):(sessionStorage[_0x2f679f(0x35d)](_0x2f679f(0x323),_0x3aafde),state['inventory']=_0x18594e[_0x2f679f(0x279)]||[],state[_0x2f679f(0x27a)]=_0x18594e[_0x2f679f(0x27a)]||[],state['sales']=_0x18594e[_0x2f679f(0x2a5)]||[],state['trash']=_0x18594e[_0x2f679f(0x3b7)]||[],updateDashboard(),renderInventory(),renderGroups(),renderSales(),renderTrash(),loadMasterDictionary(),_0xefe657['style'][_0x2f679f(0x252)]='0',setTimeout(()=>_0xefe657['style'][_0x2f679f(0x22e)]=_0x2f679f(0x317),0x190));}catch(_0x136dc5){_0x5bd373[_0x2f679f(0x2ed)]=_0x2f679f(0x354),_0x5bd373[_0x2f679f(0x308)][_0x2f679f(0x22e)]=_0x2f679f(0x227),_0xaefb45[_0x2f679f(0x2ed)]=_0x2f679f(0x26c),_0xaefb45[_0x2f679f(0x308)][_0x2f679f(0x252)]='1',_0xaefb45['style'][_0x2f679f(0x287)]=_0x2f679f(0x261);}}sessionStorage[_0x44f8b4(0x259)](_0x44f8b4(0x323))?(_0xefe657['style'][_0x44f8b4(0x22e)]=_0x44f8b4(0x317),fetchData(),loadMasterDictionary()):(_0xaefb45[_0x44f8b4(0x31d)]('click',_0x1b4713),_0x18c5e8[_0x44f8b4(0x31d)](_0x44f8b4(0x39b),_0x18aae0=>{const _0x3f29d8=_0x44f8b4;if(_0x18aae0[_0x3f29d8(0x257)]==='Enter')_0x1b4713();}));const _0x7d13d2=document[_0x44f8b4(0x37e)](_0x44f8b4(0x35a));if(_0x7d13d2)_0x7d13d2[_0x44f8b4(0x31d)](_0x44f8b4(0x30a),openGlobalSaleSearchModal);document[_0x44f8b4(0x31d)](_0x44f8b4(0x30a),()=>{const _0x364b97=_0x44f8b4;document[_0x364b97(0x2d4)]('.action-dropdown')[_0x364b97(0x3bf)](_0x2eb40a=>_0x2eb40a[_0x364b97(0x29e)]());});});function setupNavigation(){if(!navItems)return;navItems['forEach'](_0x2efe92=>{_0x2efe92['addEventListener']('click',_0x486c4a=>{const _0x13a1f8=_0x4d08;_0x486c4a[_0x13a1f8(0x3af)]();const _0x180e7b=_0x2efe92['getAttribute'](_0x13a1f8(0x3c1));navItems['forEach'](_0x4ff540=>_0x4ff540[_0x13a1f8(0x343)][_0x13a1f8(0x29e)](_0x13a1f8(0x266))),_0x2efe92['classList'][_0x13a1f8(0x3b4)]('active'),views[_0x13a1f8(0x3bf)](_0x125bbe=>_0x125bbe[_0x13a1f8(0x343)][_0x13a1f8(0x29e)](_0x13a1f8(0x266)));const _0x564273=document[_0x13a1f8(0x37e)](_0x13a1f8(0x2c5)+_0x180e7b);if(_0x564273)_0x564273[_0x13a1f8(0x343)][_0x13a1f8(0x3b4)](_0x13a1f8(0x266));refreshCurrentView(_0x180e7b);if(window['innerWidth']<=0x300)document[_0x13a1f8(0x22c)](_0x13a1f8(0x2db))['classList'][_0x13a1f8(0x29e)](_0x13a1f8(0x2a1));});});}function setupThemeToggle(){const _0x1f3a65=_0x34ccac,_0x39a337=document[_0x1f3a65(0x37e)](_0x1f3a65(0x3a5))||document[_0x1f3a65(0x22c)](_0x1f3a65(0x28c));if(!_0x39a337)return;const _0x26f1f2=localStorage['getItem'](_0x1f3a65(0x202))||_0x1f3a65(0x39c);_0x26f1f2==='dark'?(document[_0x1f3a65(0x2d1)]['setAttribute']('data-theme','dark'),document[_0x1f3a65(0x2d1)][_0x1f3a65(0x343)]['remove'](_0x1f3a65(0x1ed)),document[_0x1f3a65(0x2d1)][_0x1f3a65(0x343)][_0x1f3a65(0x3b4)](_0x1f3a65(0x39c)),_0x39a337[_0x1f3a65(0x37a)]=_0x1f3a65(0x339)):(document['body'][_0x1f3a65(0x381)](_0x1f3a65(0x382),_0x1f3a65(0x1ed)),document[_0x1f3a65(0x2d1)]['classList']['remove'](_0x1f3a65(0x39c)),document[_0x1f3a65(0x2d1)][_0x1f3a65(0x343)][_0x1f3a65(0x3b4)]('light'),_0x39a337[_0x1f3a65(0x37a)]=_0x1f3a65(0x37b)),_0x39a337['addEventListener'](_0x1f3a65(0x30a),()=>{const _0x5a2302=_0x1f3a65,_0xc4f446=document[_0x5a2302(0x2d1)][_0x5a2302(0x25a)](_0x5a2302(0x382))===_0x5a2302(0x39c)||document[_0x5a2302(0x2d1)][_0x5a2302(0x343)]['contains'](_0x5a2302(0x39c));_0xc4f446?(document[_0x5a2302(0x2d1)][_0x5a2302(0x381)](_0x5a2302(0x382),'light'),document[_0x5a2302(0x2d1)][_0x5a2302(0x343)][_0x5a2302(0x29e)]('dark'),document[_0x5a2302(0x2d1)][_0x5a2302(0x343)][_0x5a2302(0x3b4)](_0x5a2302(0x1ed)),_0x39a337[_0x5a2302(0x37a)]=_0x5a2302(0x37b),localStorage[_0x5a2302(0x35d)](_0x5a2302(0x202),_0x5a2302(0x1ed))):(document[_0x5a2302(0x2d1)]['setAttribute'](_0x5a2302(0x382),_0x5a2302(0x39c)),document[_0x5a2302(0x2d1)][_0x5a2302(0x343)][_0x5a2302(0x29e)](_0x5a2302(0x1ed)),document[_0x5a2302(0x2d1)][_0x5a2302(0x343)]['add'](_0x5a2302(0x39c)),_0x39a337[_0x5a2302(0x37a)]=_0x5a2302(0x339),localStorage[_0x5a2302(0x35d)](_0x5a2302(0x202),'dark'));});}function setupSearchFilters(){const _0x51c1cf=_0x34ccac,_0x3f8310=document[_0x51c1cf(0x37e)](_0x51c1cf(0x1f0));if(_0x3f8310)_0x3f8310[_0x51c1cf(0x31d)](_0x51c1cf(0x3c3),renderInventory);const _0x1fd823=document[_0x51c1cf(0x37e)](_0x51c1cf(0x293)),_0x5030f4=document[_0x51c1cf(0x37e)]('filter-lang'),_0x586ae8=document[_0x51c1cf(0x37e)]('sort-inventory');if(_0x1fd823)_0x1fd823[_0x51c1cf(0x31d)]('change',renderInventory);if(_0x5030f4)_0x5030f4[_0x51c1cf(0x31d)](_0x51c1cf(0x3ac),renderInventory);if(_0x586ae8)_0x586ae8[_0x51c1cf(0x31d)](_0x51c1cf(0x3ac),renderInventory);}async function fetchData(){const _0xe99dc9=_0x34ccac,_0x10675d=sessionStorage[_0xe99dc9(0x259)](_0xe99dc9(0x323));if(!_0x10675d)return;try{const _0x1b2678=await fetch(API_URL+'?pass='+encodeURIComponent(_0x10675d)),_0x2b0f39=await _0x1b2678[_0xe99dc9(0x1fe)]();if(_0x2b0f39[_0xe99dc9(0x399)])return;state[_0xe99dc9(0x279)]=_0x2b0f39['inventory']||[],state[_0xe99dc9(0x27a)]=_0x2b0f39[_0xe99dc9(0x27a)]||[],state[_0xe99dc9(0x2a5)]=_0x2b0f39[_0xe99dc9(0x2a5)]||[],state['trash']=_0x2b0f39[_0xe99dc9(0x3b7)]||[],updateDashboard(),renderInventory(),renderGroups(),renderSales(),renderTrash();}catch(_0x4f4cc3){console[_0xe99dc9(0x399)](_0xe99dc9(0x3c5),_0x4f4cc3);}}async function postData(_0x7e245a,_0x4081a1){const _0x2d9179=_0x34ccac,_0x45c3e4=sessionStorage['getItem'](_0x2d9179(0x323));if(!_0x45c3e4)return;try{const _0x52990c=await fetch(API_URL,{'method':_0x2d9179(0x3bd),'body':JSON[_0x2d9179(0x273)]({'action':_0x7e245a,'pass':_0x45c3e4,..._0x4081a1})}),_0xc50d41=await _0x52990c[_0x2d9179(0x1fe)]();_0xc50d41['success']?await fetchData():alert(_0x2d9179(0x1f7)+_0xc50d41[_0x2d9179(0x399)]);}catch(_0x2ffa3c){console[_0x2d9179(0x399)](_0x2d9179(0x288),_0x2ffa3c);}}async function silentPostData(_0x4c9637,_0x1a7c37){const _0xd83572=_0x34ccac,_0x448428=sessionStorage['getItem'](_0xd83572(0x323));if(!_0x448428)return;try{await fetch(API_URL,{'method':'POST','body':JSON['stringify']({'action':_0x4c9637,'pass':_0x448428,..._0x1a7c37})});}catch(_0x4f737b){}}function refreshCurrentView(_0x86cc3c){const _0x43e5a4=_0x34ccac;if(_0x86cc3c===_0x43e5a4(0x1f5))updateDashboard();if(_0x86cc3c===_0x43e5a4(0x279))renderInventory();if(_0x86cc3c===_0x43e5a4(0x27a))renderGroups();if(_0x86cc3c===_0x43e5a4(0x33b))renderSales();if(_0x86cc3c===_0x43e5a4(0x3b7))renderTrash();}function getCalculatedData(){const _0x384940=_0x34ccac;let _0x4a8879={};state['groups'][_0x384940(0x3bf)](_0x47f7c6=>{const _0x468b61=_0x384940;_0x4a8879[_0x47f7c6[_0x468b61(0x1e8)]]={'rate':Number(_0x47f7c6['exchangerate']||0x0),'shippingFee':Number(_0x47f7c6[_0x468b61(0x392)]||0x0),'totalCardsInGroup':0x0,'shippingDivider':0x1};});let _0xf9b9bb={};state['inventory'][_0x384940(0x3bf)](_0x2b6170=>{const _0x57616e=_0x384940;if(_0x4a8879[_0x2b6170[_0x57616e(0x3ca)]])_0xf9b9bb[_0x2b6170[_0x57616e(0x3ca)]]=(_0xf9b9bb[_0x2b6170['group']]||0x0)+Number(_0x2b6170['quantity']||0x0);});let _0x255d2d=JSON[_0x384940(0x275)](localStorage['getItem']('maxGroupStock'))||{};Object[_0x384940(0x3b9)](_0x4a8879)[_0x384940(0x3bf)](_0x522c57=>{const _0x36e1fa=_0x384940,_0x5c7f9c=_0xf9b9bb[_0x522c57]||0x0,_0x1220a6=_0x255d2d[_0x522c57]||0x0;if(_0x5c7f9c>_0x1220a6)_0x255d2d[_0x522c57]=_0x5c7f9c;_0x4a8879[_0x522c57][_0x36e1fa(0x216)]=_0x5c7f9c,_0x4a8879[_0x522c57][_0x36e1fa(0x2d3)]=_0x255d2d[_0x522c57]>0x0?_0x255d2d[_0x522c57]:0x1;}),localStorage[_0x384940(0x35d)](_0x384940(0x2a3),JSON[_0x384940(0x273)](_0x255d2d));let _0x18168a={},_0xb01fc7=0x0,_0x2275fb=0x0;return state['inventory'][_0x384940(0x3bf)](_0xd59592=>{const _0x574779=_0x384940,_0x53a5d1=((_0xd59592['name']||'')+'_'+(_0xd59592['set']||'')+'_'+(_0xd59592[_0x574779(0x234)]||'')+'_'+(_0xd59592[_0x574779(0x32b)]||''))[_0x574779(0x26b)]()['trim'](),_0x370bf1=Number(_0xd59592[_0x574779(0x1e4)]||0x0),_0xbfa87e=Number(_0xd59592[_0x574779(0x310)]||0x0),_0x125814=_0x4a8879[_0xd59592[_0x574779(0x3ca)]]||{'rate':0x0,'shippingFee':0x0,'totalCardsInGroup':0x0,'shippingDivider':0x1},_0x5c8b56=_0xbfa87e*_0x125814[_0x574779(0x311)],_0x16f4c4=_0x125814['shippingDivider']>0x0?_0x125814[_0x574779(0x298)]/_0x125814[_0x574779(0x2d3)]:0x0,_0x4d0050=_0x5c8b56+_0x16f4c4;_0x370bf1>0x0&&(_0x2275fb+=_0xbfa87e*_0x370bf1,_0xb01fc7+=_0x4d0050*_0x370bf1),!_0x18168a[_0x53a5d1]&&(_0x18168a[_0x53a5d1]={'id':_0xd59592['id'],'name':_0xd59592[_0x574779(0x1e8)],'set':_0xd59592[_0x574779(0x1ea)],'rarity':_0xd59592[_0x574779(0x234)],'language':_0xd59592[_0x574779(0x32b)],'quantity':0x0,'yenprice':0x0,'priceRp':0x0,'shippingAllocation':0x0,'totalCost':0x0,'group':_0xd59592[_0x574779(0x3ca)],'_rawItems':[]}),_0x18168a[_0x53a5d1]['quantity']+=_0x370bf1,_0x18168a[_0x53a5d1][_0x574779(0x2ea)][_0x574779(0x2e7)]({'qty':_0x370bf1,'yenPrice':_0xbfa87e,'basePriceRp':_0x5c8b56,'shippingPerCard':_0x16f4c4,'totalCostPerCard':_0x4d0050,'group':_0xd59592[_0x574779(0x3ca)]});}),Object[_0x384940(0x37c)](_0x18168a)[_0x384940(0x3bf)](_0x448868=>{const _0x35714e=_0x384940;let _0x3f9017=0x0,_0x424d77=0x0,_0x52e01b=0x0,_0x268df4=0x0,_0x512e01=new Set(),_0x3f9e91=_0x448868[_0x35714e(0x1e4)];_0x3f9e91===0x0?(_0x448868[_0x35714e(0x2ea)][_0x35714e(0x3bf)](_0x206460=>{const _0x4865a7=_0x35714e;_0x3f9017+=_0x206460[_0x4865a7(0x2cb)],_0x424d77+=_0x206460[_0x4865a7(0x2cd)],_0x52e01b+=_0x206460['shippingPerCard'],_0x268df4+=_0x206460['totalCostPerCard'];if(_0x206460[_0x4865a7(0x3ca)])_0x512e01[_0x4865a7(0x3b4)](_0x206460[_0x4865a7(0x3ca)]);}),_0x3f9e91=_0x448868[_0x35714e(0x2ea)]['length']||0x1):_0x448868[_0x35714e(0x2ea)][_0x35714e(0x3bf)](_0x479e41=>{const _0x462601=_0x35714e;if(_0x479e41[_0x462601(0x330)]>0x0){_0x3f9017+=_0x479e41[_0x462601(0x2cb)]*_0x479e41['qty'],_0x424d77+=_0x479e41[_0x462601(0x2cd)]*_0x479e41['qty'],_0x52e01b+=_0x479e41['shippingPerCard']*_0x479e41[_0x462601(0x330)],_0x268df4+=_0x479e41[_0x462601(0x32e)]*_0x479e41[_0x462601(0x330)];if(_0x479e41['group'])_0x512e01['add'](_0x479e41[_0x462601(0x3ca)]);}});_0x448868['yenprice']=_0x3f9017/_0x3f9e91,_0x448868[_0x35714e(0x31b)]=_0x424d77/_0x3f9e91,_0x448868[_0x35714e(0x20c)]=_0x52e01b/_0x3f9e91,_0x448868[_0x35714e(0x3ba)]=_0x268df4/_0x3f9e91;if(_0x512e01[_0x35714e(0x3cf)]>0x1)_0x448868[_0x35714e(0x3ca)]=Array[_0x35714e(0x387)](_0x512e01)[_0x35714e(0x312)](',\x20');else{if(_0x512e01[_0x35714e(0x3cf)]===0x1)_0x448868[_0x35714e(0x3ca)]=Array['from'](_0x512e01)[0x0];}}),{'mergedList':Object[_0x384940(0x37c)](_0x18168a),'totalValueRp':_0xb01fc7,'totalValueYen':_0x2275fb,'groupsMap':_0x4a8879};}function updateDashboard(){const _0x10f40c=_0x34ccac,_0x589d7a=getCalculatedData(),_0xfb9ea=state[_0x10f40c(0x279)]['reduce']((_0x3e4177,_0x7ed6bb)=>_0x3e4177+Number(_0x7ed6bb[_0x10f40c(0x1e4)]||0x0),0x0);let _0x4fcf0e=0x0,_0x173897=0x0;state[_0x10f40c(0x2a5)]['forEach'](_0x574482=>{const _0x49f4d9=_0x10f40c;_0x4fcf0e+=Number(_0x574482[_0x49f4d9(0x31f)]||0x0);const _0x392d44=state[_0x49f4d9(0x279)][_0x49f4d9(0x3cc)](_0x338c19=>_0x338c19['id']===_0x574482[_0x49f4d9(0x385)]);if(_0x392d44){const _0x394a51=_0x589d7a[_0x49f4d9(0x34c)][_0x392d44[_0x49f4d9(0x3ca)]]||{'rate':0x0,'shippingFee':0x0,'totalCardsInGroup':0x0,'shippingDivider':0x1},_0x4abfd3=Number(_0x392d44['yenprice']||0x0)*_0x394a51[_0x49f4d9(0x311)],_0x36e006=_0x394a51[_0x49f4d9(0x2d3)]>0x0?_0x394a51[_0x49f4d9(0x298)]/_0x394a51[_0x49f4d9(0x2d3)]:0x0;_0x173897+=(_0x4abfd3+_0x36e006)*Number(_0x574482[_0x49f4d9(0x1e4)]||0x1);}});const _0xc313f6=_0x4fcf0e-_0x173897,_0x3ee09a=document[_0x10f40c(0x37e)](_0x10f40c(0x30f)),_0x1582b0=document[_0x10f40c(0x37e)](_0x10f40c(0x2ae)),_0x191578=document[_0x10f40c(0x37e)](_0x10f40c(0x2b5)),_0x1fc32d=document[_0x10f40c(0x37e)]('stat-val-yen'),_0x30c079=document[_0x10f40c(0x37e)](_0x10f40c(0x35e)),_0x1506a5=document[_0x10f40c(0x37e)](_0x10f40c(0x282));if(_0x3ee09a)_0x3ee09a[_0x10f40c(0x2ed)]=_0x589d7a['mergedList'][_0x10f40c(0x20e)](_0x31a7ca=>_0x31a7ca[_0x10f40c(0x1e4)]>0x0)[_0x10f40c(0x2ca)];if(_0x1582b0)_0x1582b0['textContent']=_0xfb9ea;if(_0x191578)_0x191578['textContent']=_0x10f40c(0x30b)+Math[_0x10f40c(0x2a6)](_0x589d7a[_0x10f40c(0x342)])[_0x10f40c(0x269)](_0x10f40c(0x2c8));if(_0x1fc32d)_0x1fc32d[_0x10f40c(0x2ed)]='¥'+_0x589d7a['totalValueYen'][_0x10f40c(0x269)](_0x10f40c(0x3c9));if(_0x30c079)_0x30c079[_0x10f40c(0x2ed)]=state[_0x10f40c(0x2a5)][_0x10f40c(0x28a)]((_0x2bf9c6,_0x2db27e)=>_0x2bf9c6+Number(_0x2db27e[_0x10f40c(0x1e4)]||0x0),0x0);if(_0x1506a5)_0x1506a5['textContent']='Rp\x20'+Math[_0x10f40c(0x2a6)](_0xc313f6)[_0x10f40c(0x269)](_0x10f40c(0x2c8));renderSalesMetricsChart();}function renderSalesMetricsChart(){const _0x2532b1=_0x34ccac;let _0x39d4a9=document[_0x2532b1(0x37e)](_0x2532b1(0x23b));if(!_0x39d4a9)return;let _0x147cc5=document[_0x2532b1(0x37e)](_0x2532b1(0x296));!_0x147cc5&&(_0x147cc5=document['createElement']('div'),_0x147cc5['id']=_0x2532b1(0x296),_0x147cc5[_0x2532b1(0x2f6)]=_0x2532b1(0x373),_0x147cc5[_0x2532b1(0x308)]['cssText']=_0x2532b1(0x2f4),_0x39d4a9['appendChild'](_0x147cc5));const _0x4fec42=['Jan','Feb',_0x2532b1(0x286),_0x2532b1(0x28b),_0x2532b1(0x272),_0x2532b1(0x289),_0x2532b1(0x3ce),_0x2532b1(0x35b),'Sep',_0x2532b1(0x347),_0x2532b1(0x3b2),'Dec'];let _0x44cad5={};for(let _0x503d86=0xb;_0x503d86>=0x0;_0x503d86--){let _0x276760=new Date();_0x276760[_0x2532b1(0x315)](_0x276760[_0x2532b1(0x1eb)]()-_0x503d86);let _0x1c6951=_0x276760[_0x2532b1(0x209)]()+'-'+String(_0x276760['getMonth']())[_0x2532b1(0x29d)](0x2,'0');_0x44cad5[_0x1c6951]={'label':_0x4fec42[_0x276760[_0x2532b1(0x1eb)]()]+'\x20\x27'+String(_0x276760[_0x2532b1(0x209)]())['substring'](0x2,0x4),'revenue':0x0,'cards':0x0};}state[_0x2532b1(0x2a5)]&&state[_0x2532b1(0x2a5)][_0x2532b1(0x2ca)]>0x0&&state[_0x2532b1(0x2a5)][_0x2532b1(0x3bf)](_0x59328e=>{const _0x4faf81=_0x2532b1;let _0x3603c7=new Date(_0x59328e[_0x4faf81(0x1e5)]||Date['now']()),_0xfe794c=_0x3603c7[_0x4faf81(0x209)]()+'-'+String(_0x3603c7[_0x4faf81(0x1eb)]())['padStart'](0x2,'0');_0x44cad5[_0xfe794c]&&(_0x44cad5[_0xfe794c][_0x4faf81(0x2c6)]+=Number(_0x59328e['price']||0x0),_0x44cad5[_0xfe794c][_0x4faf81(0x300)]+=Number(_0x59328e['quantity']||0x0));});const _0x5b3942=Object[_0x2532b1(0x37c)](_0x44cad5);let _0x3e8848=Math[_0x2532b1(0x3d7)](..._0x5b3942[_0x2532b1(0x32d)](_0x4286a7=>_0x4286a7[_0x2532b1(0x2c6)]));const _0x15152d=_0x3e8848>0x0?_0x3e8848*1.1:0x186a0,_0x54de97=_0x23fffc=>_0x23fffc>=0xf4240?(_0x23fffc/0xf4240)['toFixed'](0x1)['replace']('.0','')+'m':(_0x23fffc/0x3e8)[_0x2532b1(0x248)](0x0)+'k';let _0x1cbeba=_0x2532b1(0x358)+_0x54de97(_0x15152d)+'</span></div><div\x20style=\x22border-top:1px\x20dashed\x20rgba(150,150,150,0.25);\x20width:100%;\x20position:relative;\x22><span\x20style=\x22position:absolute;\x20top:-8px;\x20left:-50px;\x20font-size:10px;\x20color:inherit;\x20opacity:0.6;\x20width:\x2045px;\x20text-align:\x20right;\x22>'+_0x54de97(_0x15152d*0.75)+'</span></div><div\x20style=\x22border-top:1px\x20dashed\x20rgba(150,150,150,0.25);\x20width:100%;\x20position:relative;\x22><span\x20style=\x22position:absolute;\x20top:-8px;\x20left:-50px;\x20font-size:10px;\x20color:inherit;\x20opacity:0.6;\x20width:\x2045px;\x20text-align:\x20right;\x22>'+_0x54de97(_0x15152d*0.5)+_0x2532b1(0x3d1)+_0x54de97(_0x15152d*0.25)+'</span></div><div\x20style=\x22border-top:1px\x20solid\x20rgba(150,150,150,0.4);\x20width:100%;\x20position:relative;\x22><span\x20style=\x22position:absolute;\x20top:-8px;\x20left:-50px;\x20font-size:10px;\x20color:inherit;\x20opacity:0.6;\x20width:\x2045px;\x20text-align:\x20right;\x22>0</span></div></div>',_0x1cfccc='';_0x5b3942[_0x2532b1(0x3bf)](_0x22246e=>{const _0x17492b=_0x2532b1,_0x4ef431=_0x22246e['revenue']/_0x15152d*0x64,_0x41f984=_0x22246e['revenue']>0x0;_0x1cfccc+=_0x17492b(0x20d)+_0x4ef431+_0x17492b(0x1f1)+Math[_0x17492b(0x2a6)](_0x22246e[_0x17492b(0x2c6)])[_0x17492b(0x269)](_0x17492b(0x2c8))+_0x17492b(0x21b)+_0x22246e[_0x17492b(0x300)]+_0x17492b(0x391)+Math[_0x17492b(0x3d7)](_0x4ef431,0x1)+_0x17492b(0x212)+(_0x41f984?_0x17492b(0x207):_0x17492b(0x2d2))+_0x17492b(0x25c)+(_0x41f984?_0x17492b(0x23d):_0x17492b(0x317))+_0x17492b(0x356)+(_0x41f984?_0x17492b(0x2c9):_0x17492b(0x34f))+';\x20border-bottom:\x20none;\x22></div><div\x20style=\x22margin-top:8px;\x20font-size:11px;\x20color:inherit;\x20opacity:'+(_0x41f984?_0x17492b(0x30d):_0x17492b(0x320))+';\x20font-weight:500;\x20height:\x2016px;\x22>'+_0x22246e[_0x17492b(0x225)]+'</div></div>';}),_0x147cc5[_0x2532b1(0x37a)]=_0x2532b1(0x394)+_0x1cbeba+_0x2532b1(0x20f)+_0x1cfccc+_0x2532b1(0x340),_0x147cc5[_0x2532b1(0x2d4)](_0x2532b1(0x268))[_0x2532b1(0x3bf)](_0x307292=>{const _0x1bd13b=_0x2532b1,_0x3342aa=_0x307292['querySelector'](_0x1bd13b(0x274)),_0x371d08=_0x307292['querySelector'](_0x1bd13b(0x230));_0x307292['addEventListener'](_0x1bd13b(0x2d5),()=>{const _0x25982c=_0x1bd13b;_0x3342aa[_0x25982c(0x308)][_0x25982c(0x252)]='1',_0x3342aa[_0x25982c(0x308)][_0x25982c(0x24b)]=_0x25982c(0x215),_0x371d08[_0x25982c(0x308)][_0x25982c(0x276)]!=='1%'&&(_0x371d08[_0x25982c(0x308)]['filter']=_0x25982c(0x3d8),_0x371d08[_0x25982c(0x308)]['transform']=_0x25982c(0x30c),_0x371d08[_0x25982c(0x308)]['transformOrigin']=_0x25982c(0x233));}),_0x307292['addEventListener'](_0x1bd13b(0x254),()=>{const _0x434fdf=_0x1bd13b;_0x3342aa['style']['opacity']='0',_0x3342aa['style'][_0x434fdf(0x24b)]=_0x434fdf(0x3d9),_0x371d08['style']['height']!=='1%'&&(_0x371d08[_0x434fdf(0x308)][_0x434fdf(0x20e)]=_0x434fdf(0x1f9),_0x371d08[_0x434fdf(0x308)]['transform']='scaleY(1)');});});}function setupModals(){const _0x412639=_0x34ccac,_0x5b3b5f=document[_0x412639(0x37e)]('btn-new-group'),_0xe4efda=document['getElementById'](_0x412639(0x304));if(_0x5b3b5f)_0x5b3b5f[_0x412639(0x31d)](_0x412639(0x30a),openGroupModal);if(_0xe4efda)_0xe4efda['addEventListener'](_0x412639(0x30a),openGroupModal);document[_0x412639(0x2d4)](_0x412639(0x2fe))[_0x412639(0x3bf)](_0x4c4b65=>_0x4c4b65[_0x412639(0x31d)](_0x412639(0x30a),closeModal));}function openGroupModal(){const _0x3cf1e6=_0x34ccac;modalOverlay&&groupModal&&(modalOverlay[_0x3cf1e6(0x308)][_0x3cf1e6(0x22e)]='block',groupModal[_0x3cf1e6(0x308)]['display']=_0x3cf1e6(0x227));}function closeModal(){const _0x2d8ba2=_0x34ccac;modalOverlay&&groupModal&&(modalOverlay[_0x2d8ba2(0x308)][_0x2d8ba2(0x22e)]=_0x2d8ba2(0x317),groupModal['style'][_0x2d8ba2(0x22e)]=_0x2d8ba2(0x317));const _0x465c4f=document['getElementById'](_0x2d8ba2(0x235));if(_0x465c4f)_0x465c4f[_0x2d8ba2(0x308)][_0x2d8ba2(0x22e)]=_0x2d8ba2(0x317);}const saveGroupBtn=document['getElementById'](_0x34ccac(0x346));saveGroupBtn&&saveGroupBtn[_0x34ccac(0x31d)](_0x34ccac(0x30a),()=>{const _0x1654c3=_0x34ccac,_0x8dab50=document[_0x1654c3(0x37e)](_0x1654c3(0x291))[_0x1654c3(0x2df)],_0x4dd0eb=document[_0x1654c3(0x37e)](_0x1654c3(0x360))['value'],_0x44c3db=document[_0x1654c3(0x37e)](_0x1654c3(0x243))['value'];_0x8dab50&&_0x4dd0eb&&_0x44c3db?(postData(_0x1654c3(0x2c3),{'id':_0x1654c3(0x258)+Date[_0x1654c3(0x2a4)](),'name':_0x8dab50,'exchangeRate':_0x4dd0eb,'shippingFee':_0x44c3db}),document[_0x1654c3(0x37e)](_0x1654c3(0x291))[_0x1654c3(0x2df)]='',document[_0x1654c3(0x37e)]('new-group-rate')[_0x1654c3(0x2df)]='',document[_0x1654c3(0x37e)](_0x1654c3(0x243))[_0x1654c3(0x2df)]='',closeModal()):alert('Please\x20fill\x20out\x20all\x20fields\x20before\x20saving.');});const addRowBtn=document[_0x34ccac(0x37e)](_0x34ccac(0x318));if(addRowBtn)addRowBtn[_0x34ccac(0x31d)](_0x34ccac(0x30a),()=>addMultipleRows(0x1));const add10RowsBtn=document[_0x34ccac(0x37e)](_0x34ccac(0x3c4));if(add10RowsBtn)add10RowsBtn['addEventListener'](_0x34ccac(0x30a),()=>addMultipleRows(0xa));function addMultipleRows(_0xd078c){for(let _0x3fa7d2=0x0;_0x3fa7d2<_0xd078c;_0x3fa7d2++)addEmptyCardRow();}function addEmptyCardRow(){const _0x1f911a=_0x34ccac;if(!addCardsBody)return;const _0x2d52b8=document[_0x1f911a(0x2ec)]('tr'),_0x204cec=addCardsBody[_0x1f911a(0x1e3)][_0x1f911a(0x2ca)]+0x1;_0x2d52b8[_0x1f911a(0x37a)]=_0x1f911a(0x2c2)+_0x204cec+_0x1f911a(0x278),_0x2d52b8[_0x1f911a(0x31d)](_0x1f911a(0x30a),_0x3de393=>{const _0x37ab2b=_0x1f911a,_0x242c95=[_0x37ab2b(0x2d9),_0x37ab2b(0x38b),_0x37ab2b(0x39e)][_0x37ab2b(0x355)](_0x3de393['target'][_0x37ab2b(0x36d)])||_0x3de393[_0x37ab2b(0x2d8)][_0x37ab2b(0x34b)]('button');if(_0x242c95)return;if(_0x2d52b8[_0x37ab2b(0x343)]['contains'](_0x37ab2b(0x223))&&(_0x3de393['target'][_0x37ab2b(0x25a)](_0x37ab2b(0x23a))===_0x37ab2b(0x2e3)||_0x3de393[_0x37ab2b(0x2d8)]['closest']('[contenteditable=\x22true\x22]')))return;if(window[_0x37ab2b(0x26d)]<=0x300)_0x2d52b8['classList'][_0x37ab2b(0x2dd)](_0x37ab2b(0x223));});const _0x20efb9=_0x2d52b8['querySelector']('.c-name'),_0x44b570=_0x7a4f14=>{const _0x3e800b=_0x1f911a;if(_0x7a4f14[_0x3e800b(0x30e)])return;let _0x1cc9b9=_0x7a4f14['target'][_0x3e800b(0x2df)],_0x317d9c=translatePokemonName(_0x1cc9b9);_0x1cc9b9!==_0x317d9c&&(_0x7a4f14['target'][_0x3e800b(0x2df)]=_0x317d9c,_0x7a4f14[_0x3e800b(0x2d8)][_0x3e800b(0x308)][_0x3e800b(0x20b)]=_0x3e800b(0x22f),_0x7a4f14[_0x3e800b(0x2d8)][_0x3e800b(0x308)]['backgroundColor']=_0x3e800b(0x2aa),setTimeout(()=>_0x7a4f14[_0x3e800b(0x2d8)]['style'][_0x3e800b(0x363)]='transparent',0x12c));};_0x20efb9[_0x1f911a(0x31d)](_0x1f911a(0x3c2),_0x44b570),_0x20efb9[_0x1f911a(0x31d)]('keydown',_0x482bcf=>{const _0x5282fd=_0x1f911a;if(_0x482bcf[_0x5282fd(0x257)]===_0x5282fd(0x2b9))_0x44b570(_0x482bcf);}),_0x20efb9[_0x1f911a(0x31d)](_0x1f911a(0x284),_0x15d708=>{setTimeout(()=>_0x44b570(_0x15d708),0x32);}),_0x2d52b8[_0x1f911a(0x22c)](_0x1f911a(0x39d))['addEventListener'](_0x1f911a(0x30a),()=>{const _0x515c08=_0x1f911a;_0x2d52b8[_0x515c08(0x29e)](),reindexRows();}),addCardsBody['appendChild'](_0x2d52b8);}function _0x5cb7(){const _0x2b330b=['display:\x20none;\x20justify-content:\x20space-between;\x20align-items:\x20center;\x20padding:\x2012px\x2016px;\x20background:\x20rgba(234,\x20179,\x208,\x200.1);\x20border:\x201px\x20solid\x20rgba(234,\x20179,\x208,\x200.3);\x20border-radius:\x208px;','display','background-color\x200.3s','.chart-bar-fill',';\x20color:\x20','\x20sale\x20record(s)?\x20This\x20will\x20restore\x20their\x20stock\x20back\x20to\x20the\x20inventory.','bottom','rarity','modal-sale','sales-body','sale-modal-title','#a855f7','table','contenteditable','view-dashboard','\x20pcs</span><span\x20style=\x22color:var(--accent-yellow);\x22><i\x20class=\x22fas\x20fa-tag\x22></i>\x20Base\x20Cost:\x20Rp\x20','0\x200\x2012px\x20rgba(253,224,71,0.15)','rgba(34,\x20197,\x2094,\x200.15)','Umbreon','width','.edit-set','</span></strong></div>\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22group-stat-row\x22><span>Cards\x20Tracked</span><strong>','new-group-shipping','random','Failed\x20to\x20load\x20master\x20dictionary','maxQty','replaceChild','toFixed','text','startsWith','transform','#ef4444','Unauthorized','\x20item(s)?\x20This\x20cannot\x20be\x20undone.','T00:00:00','.sale-check','6775008sjKzaO','opacity','</span></td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Action\x22><div\x20style=\x22display:\x20flex;\x20gap:\x204px;\x20align-items:\x20center;\x20justify-content:\x20flex-end;\x22><button\x20class=\x22btn-outline\x20btn-delete-sale\x22\x20style=\x22padding:\x204px\x208px;\x20color:\x20#ef4444;\x20border-color:\x20rgba(239,\x2068,\x2068,\x200.3);\x22\x20title=\x22Delete\x20Sale\x22><i\x20class=\x22fas\x20fa-trash\x22></i></button></div></td>\x0a\x20\x20\x20\x20','mouseleave','btn-bulk-delete','btn-save-cards','key','GRP_','getItem','getAttribute','parentNode',';\x20border-radius:4px\x204px\x200\x200;\x20cursor:pointer;\x20transition:\x20all\x200.2s\x20ease;\x20box-shadow:\x20','group-card','/pc</span></div><div\x20style=\x22display:flex;\x20gap:12px;\x20flex-wrap:wrap;\x22><div\x20style=\x22flex:1;\x20min-width:\x20100px;\x22><label\x20style=\x22display:block;\x20margin-bottom:6px;\x20font-size:12px;\x20color:\x20var(--text-secondary);\x22>Qty\x20Sold</label><input\x20type=\x22number\x22\x20class=\x22cart-qty\x22\x20data-index=\x22','<option\x20value=\x22all\x22>All\x20Years</option>',')</span>\x20<span\x20style=\x22color:var(--accent-yellow);\x22>Stock:\x20','auto','.editable-group','Please\x20enter\x20a\x20valid\x20quantity\x20and\x20selling\x20price\x20for\x20','<input\x20type=\x22checkbox\x22\x20id=\x22check-all-sales\x22\x20style=\x22cursor:pointer;\x20width:16px;\x20height:16px;\x20accent-color:\x20var(--accent-yellow);\x22>','modal-group','active','?\x20This\x20action\x20cannot\x20be\x20undone.','.chart-column-node','toLocaleString','sales-controls-div','toLowerCase','Unlock\x20Database','innerWidth','\x20<strong>','<div\x20style=\x22display:flex;\x20justify-content:space-between;\x20margin-bottom:8px;\x20align-items:center;\x22><strong\x20style=\x22font-size:14px;\x22>','10uIZLdT','Are\x20you\x20sure\x20you\x20want\x20to\x20delete\x20','May','stringify','.chart-tooltip-bubble','parse','height','\x20back\x20to\x20the\x20active\x20tracker?','</td>\x0a\x20\x20\x20\x20<td\x20data-label=\x22Card\x20Name\x22><input\x20type=\x22text\x22\x20class=\x22c-name\x22\x20placeholder=\x22Name\x22></td>\x0a\x20\x20\x20\x20<td\x20data-label=\x22Set\x20Code\x22><input\x20type=\x22text\x22\x20class=\x22c-set\x22\x20placeholder=\x22Set\x20Code\x22></td>\x0a\x20\x20\x20\x20<td\x20data-label=\x22Rarity\x22><select\x20class=\x22c-rarity\x22><option\x20value=\x22Promo\x22>Promo</option><option\x20value=\x22C\x22\x20selected>C</option><option\x20value=\x22U\x22>U</option><option\x20value=\x22S\x22>S</option><option\x20value=\x22RR\x22>RR</option><option\x20value=\x22RRR\x22>RRR</option><option\x20value=\x22AR\x22>AR</option><option\x20value=\x22CHR\x22>CHR</option><option\x20value=\x22SR\x22>SR</option><option\x20value=\x22SAR\x22>SAR</option><option\x20value=\x22UR\x22>UR</option><option\x20value=\x22MUR\x22>MUR</option></select></td>\x0a\x20\x20\x20\x20<td\x20data-label=\x22Language\x22><select\x20class=\x22c-lang\x22><option>Japanese</option><option>English</option><option>Indonesian</option></select></td>\x0a\x20\x20\x20\x20<td\x20data-label=\x22Yen\x20Price\x22><input\x20type=\x22number\x22\x20class=\x22c-yen\x22\x20placeholder=\x220\x22></td>\x0a\x20\x20\x20\x20<td\x20data-label=\x22Qty\x22><input\x20type=\x22number\x22\x20class=\x22c-qty\x22\x20value=\x221\x22\x20min=\x221\x22></td>\x0a\x20\x20\x20\x20<td\x20data-label=\x22Notes\x22><input\x20type=\x22text\x22\x20class=\x22c-notes\x22\x20placeholder=\x22Notes\x22></td>\x0a\x20\x20\x20\x20<td\x20data-label=\x22Action\x22><button\x20class=\x22btn-outline\x20del-row\x22><i\x20class=\x22fas\x20fa-trash\x22></i></button></td>\x0a\x20\x20','inventory','groups','?\x20This\x20will\x20restore\x20','sale-cart-container','</div></div>\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22card-panel\x22\x20style=\x22margin-bottom:\x200;\x20padding:\x2020px;\x20display:\x20flex;\x20flex-direction:\x20column;\x20justify-content:\x20flex-start;\x20height:\x20100%;\x20box-sizing:\x20border-box;\x22><h4\x20style=\x22margin:\x200\x200\x2016px\x200;\x20color:\x20var(--text-secondary);\x20font-size:\x2013px;\x20font-weight:\x20500;\x22><i\x20class=\x22fas\x20fa-chart-bar\x22\x20style=\x22color:var(--accent-yellow);\x20margin-right:4px;\x22></i>\x20Top\x20Sets\x20(Filtered)</h4><div\x20style=\x22flex:\x201;\x20display:\x20flex;\x20flex-direction:\x20column;\x20justify-content:\x20center;\x22>','\x20record(s)','updateGroup','group-select','.cart-price','stat-profit','Insufficient\x20stock\x20for\x20','compositionend','\x20item(s)?','Mar','pointerEvents','Failed\x20to\x20save\x20data','Jun','reduce','Apr','.theme-toggle','</strong></td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Group\x22><span\x20style=\x22color:\x20','updateCard','rgba(128,128,128,0.1)','</span><button\x20class=\x22btn-outline\x20btn-delete-group\x22\x20style=\x22padding:\x204px\x208px;\x20color:\x20#ef4444;\x20border-color:\x20rgba(239,\x2068,\x2068,\x200.3);\x22\x20title=\x22Delete\x20Group\x22><i\x20class=\x22fas\x20fa-trash\x22></i></button></div></div>\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22group-stat-row\x22><span>Exchange\x20Rate</span><strong>¥1\x20=\x20Rp\x20<span\x20class=\x22editable-group\x20edit-g-rate\x22\x20contenteditable=\x22true\x22\x20title=\x22Click\x20to\x20edit\x22\x20style=\x22padding:2px\x206px;\x20border-radius:4px;\x22>','new-group-name','toISOString','filter-group','</td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Profit\x22\x20style=\x22color:\x20','trash-controls-div','dashboard-analytics-chart-panel','<div\x20style=\x22margin-bottom:\x2010px;\x22><div\x20style=\x22display:\x20flex;\x20justify-content:\x20space-between;\x20font-size:\x2011px;\x20margin-bottom:\x204px;\x20color:\x20var(--text-secondary);\x22><span>','shippingFee','308uaLuNs','filter-lang','Are\x20you\x20sure\x20you\x20want\x20to\x20delete\x20the\x20empty\x20group\x20\x22','button','padStart','remove','restoreTrash','replace','open','Unknown','maxGroupStock','now','sales','round','Joltik','.c-yen','\x20pcs</h2></div>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22stat-card\x22\x20style=\x22padding:\x2020px;\x20flex-direction:\x20column;\x20align-items:\x20flex-start;\x20justify-content:\x20flex-start;\x20height:\x20100%;\x20box-sizing:\x20border-box;\x20margin:\x200;\x20display:\x20flex;\x22><h4\x20style=\x22margin:\x200\x200\x2012px\x200;\x20color:\x20var(--text-secondary);\x20font-size:\x2013px;\x20font-weight:\x20500;\x20width:\x20100%;\x22><i\x20class=\x22fas\x20fa-trophy\x22\x20style=\x22color:var(--accent-yellow);\x20margin-right:4px;\x22></i>\x20Top\x20Selling\x20Cards</h4><div\x20style=\x22width:100%;\x20display:flex;\x20flex-direction:column;\x20gap:12px;\x20flex:\x201;\x20justify-content:\x20center;\x22>','rgba(34,\x20197,\x2094,\x200.2)','auth-error','\x20pcs.','All\x20rows\x20are\x20empty!\x20Please\x20enter\x20at\x20least\x20one\x20card\x20name\x20to\x20save.','stat-total','romaji','exchangeRate','padding:10px\x2012px;\x20cursor:pointer;\x20font-size:13px;\x20border-bottom:1px\x20solid\x20var(--border-color);\x20display:flex;\x20justify-content:space-between;','.btn-destroy-trash','.c-lang','1160072NPlYTh','stat-val-rp','💰\x20Record\x20Bulk\x20Sale','2VgBcyn','<option\x20value=\x22All\x20Languages\x22>All\x20Languages</option><option\x20value=\x22Japanese\x22>Japanese</option><option\x20value=\x22English\x22>English</option><option\x20value=\x22Indonesian\x22>Indonesian</option>','Enter','var(--text-secondary)','cloneNode','English','</td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Notes\x22><span\x20class=\x22editable-cell\x20edit-sale-notes\x22\x20contenteditable=\x22true\x22\x20title=\x22Click\x20to\x20edit\x22>','<option\x20value=\x22\x22>Select\x20a\x20group...</option>','CARD_','checked','</td>\x20\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Qty\x20Sold\x22>','\x0a\x20\x20\x20\x20<td\x20data-label=\x22#\x22>','saveGroup','\x20|\x20Yen:\x20¥','view-','revenue','.inline-edit-select','id-ID','#fef08a','length','yenPrice','\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Card\x20Name\x22><span\x20class=\x22editable-cell\x20edit-name\x22\x20contenteditable=\x22true\x22\x20title=\x22Click\x20to\x20edit\x22><strong\x20style=\x22color:','basePriceRp','\x22\x20style=\x22background:transparent;\x20color:inherit;\x20border:1px\x20dashed\x20transparent;\x20outline:none;\x20cursor:pointer;\x20padding:2px\x204px;\x20border-radius:4px;\x20font-size:inherit;\x20font-family:inherit;\x20color-scheme:\x20inherit;\x22></td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Card\x20Name\x22><strong>','GroupBundle','</h2></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22stat-card\x22\x20style=\x22padding:\x2020px;\x20flex-direction:\x20column;\x20align-items:\x20flex-start;\x20justify-content:\x20center;\x20height:\x20100%;\x20box-sizing:\x20border-box;\x20margin:\x200;\x22><h4\x20style=\x22margin:\x200\x200\x208px\x200;\x20color:\x20var(--text-secondary);\x20font-size:\x2013px;\x20font-weight:\x20500;\x22>Filtered\x20Profit</h4><h2\x20style=\x22margin:\x200;\x20font-size:\x2020px;\x20color:\x20','body','rgba(150,150,150,0.15)','shippingDivider','querySelectorAll','mouseenter','rev','Are\x20you\x20sure\x20you\x20want\x20to\x20restore\x20this\x20','target','INPUT','kanji','.sidebar','343583UIXomt','toggle','Unknown\x20Data','value','\x20sold</span></div>','kana','trim','true','Charizard','Promo','type','push','\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Select\x22><input\x20type=\x22checkbox\x22\x20class=\x22sale-check\x22\x20data-index=\x22','<strong>','_rawItems','rgba(168,\x2085,\x20247,\x200.15)','createElement','textContent','<div\x20style=\x22padding:10px\x2012px;\x20color:var(--text-secondary);\x20font-size:13px;\x22>No\x20available\x20cards\x20found</div>','.edit-sale-date','Dragonite','\x0a\x20\x20\x20\x20<div\x20style=\x22background:\x20var(--bg-surface);\x20margin:\x206%\x20auto;\x20padding:\x2024px;\x20border:\x201px\x20solid\x20var(--border-color);\x20width:\x2090%;\x20max-width:\x20580px;\x20border-radius:\x2012px;\x20box-shadow:\x200\x2025px\x2050px\x20-12px\x20rgba(0,0,0,0.3);\x20position:relative;\x20max-height:\x2085vh;\x20display:\x20flex;\x20flex-direction:\x20column;\x20color:\x20var(--text-primary);\x22>\x0a\x20\x20\x20\x20\x20\x20<h3\x20id=\x22sale-modal-title\x22\x20style=\x22margin-top:0;\x20margin-bottom:16px;\x20font-size:18px;\x22>💰\x20Record\x20Sale</h3>\x0a\x20\x20\x20\x20\x20\x20<div\x20id=\x22select-card-section\x22\x20style=\x22margin-bottom:16px;\x20position:relative\x20!important;\x20z-index:\x20100;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<label\x20style=\x22display:block;\x20margin-bottom:6px;\x20font-size:13px;\x20color:\x20var(--text-secondary);\x22>Search\x20&\x20Add\x20Cards\x20to\x20Sale</label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<input\x20type=\x22text\x22\x20id=\x22sale-search-inventory\x22\x20placeholder=\x22Type\x20card\x20name\x20or\x20set...\x22\x20autocomplete=\x22off\x22\x20style=\x22width:100%;\x20padding:10px;\x20border-radius:6px;\x20border:1px\x20solid\x20var(--border-color);\x20background:\x20transparent;\x20color:\x20inherit;\x20box-sizing:\x20border-box;\x20margin-bottom:0;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20id=\x22sale-inventory-results\x22\x20style=\x22display:none;\x20position:absolute;\x20top:calc(100%\x20+\x204px);\x20left:0;\x20width:100%;\x20max-height:180px;\x20overflow-y:auto;\x20border:1px\x20solid\x20var(--border-color);\x20border-radius:6px;\x20background:var(--bg-surface);\x20box-shadow:\x200\x2010px\x2025px\x20-3px\x20rgba(0,0,0,0.3);\x20z-index:\x20999999;\x22></div>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20<div\x20id=\x22sale-cart-container\x22\x20style=\x22flex:\x201;\x20overflow-y:\x20auto;\x20margin-bottom:\x2016px;\x20display:\x20none;\x20flex-direction:\x20column;\x20gap:\x2012px;\x20padding-right:\x204px;\x22></div>\x0a\x20\x20\x20\x20\x20\x20<div\x20style=\x22display:flex;\x20gap:12px;\x20margin-bottom:20px;\x20margin-top:\x20auto;\x20flex-wrap:wrap;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22flex:1;\x20min-width:\x20120px;\x22><label\x20style=\x22display:block;\x20margin-bottom:6px;\x20font-size:13px;\x20color:\x20var(--text-secondary);\x22>Date\x20Sold</label><input\x20type=\x22date\x22\x20id=\x22sale-date\x22\x20style=\x22width:100%;\x20padding:10px;\x20border-radius:6px;\x20border:1px\x20solid\x20var(--border-color);\x20background:\x20transparent;\x20color:\x20inherit;\x20box-sizing:\x20border-box;\x20color-scheme:\x20inherit;\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22flex:2;\x20min-width:\x20200px;\x22><label\x20style=\x22display:block;\x20margin-bottom:6px;\x20font-size:13px;\x20color:\x20var(--text-secondary);\x22>Global\x20Notes</label><input\x20type=\x22text\x22\x20id=\x22sale-notes\x22\x20placeholder=\x22e.g.\x20Sold\x20via\x20marketplace\x22\x20style=\x22width:100%;\x20padding:10px;\x20border-radius:6px;\x20border:1px\x20solid\x20var(--border-color);\x20background:\x20transparent;\x20color:\x20inherit;\x20box-sizing:\x20border-box;\x22></div>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20<div\x20style=\x22display:flex;\x20justify-content:flex-end;\x20gap:10px;\x22><button\x20type=\x22button\x22\x20id=\x22btn-close-sale\x22\x20class=\x22btn-outline\x22\x20style=\x22padding:10px\x2016px;\x20border-radius:6px;\x20cursor:pointer;\x22>Cancel</button><button\x20type=\x22button\x22\x20id=\x22btn-submit-sale\x22\x20style=\x22padding:10px\x2016px;\x20background:var(--accent-yellow,\x20#eab308);\x20color:#000;\x20border:none;\x20border-radius:6px;\x20font-weight:600;\x20cursor:pointer;\x22>Confirm\x20Sale</button></div>\x0a\x20\x20\x20\x20</div>\x0a\x20\x20','payload','Are\x20you\x20sure\x20you\x20want\x20to\x20restore\x20','margin-top:\x2024px;\x20padding:\x2024px;\x20position:\x20relative;\x20border-radius:\x2012px;\x20box-sizing:\x20border-box;\x20overflow:\x20hidden;\x20border:\x201px\x20solid\x20var(--border-color);\x20background:\x20var(--bg-surface);\x20color:\x20var(--text-primary);','focus','className','.edit-qty','<option\x20value=\x22All\x20Groups\x22>All\x20Groups</option>','<tr><td\x20colspan=\x225\x22\x20style=\x22text-align:center;\x20padding:\x2024px;\x20color:\x20var(--text-secondary);\x22>Your\x20Recycle\x20Bin\x20is\x20empty.</td></tr>','auth-password','.bulk-check-header-trash','sort','bulk-check-header','.close-modal','<input\x20type=\x22checkbox\x22\x20id=\x22check-all-trash\x22\x20style=\x22cursor:pointer;\x20width:16px;\x20height:16px;\x20accent-color:\x20var(--accent-yellow);\x22>','cards','\x22\x20selected','charCodeAt','15474ONHqTF','btn-create-group-page','</strong>\x20|\x20Rate:\x20¥1\x20=\x20Rp\x20','splice','</strong>\x20|\x20Sold:\x20','style','Card','click','Rp\x20','scaleY(1.02)','0.9','isComposing','stat-unique','yenprice','rate','join','</strong></span></td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Set\x22><span\x20class=\x22editable-cell\x20edit-set\x22\x20contenteditable=\x22true\x22\x20title=\x22Click\x20to\x20edit\x22>','</strong>','setMonth','keyup','none','btn-add-row',';\x22><i\x20class=\x22fas\x20fa-folder-open\x22></i>\x20','substr','priceRp','price-high','addEventListener','</div></div>\x0a\x20\x20','price','0.5','.edit-g-rate','display:\x20flex;\x20justify-content:\x20space-between;\x20align-items:\x20center;\x20background:\x20rgba(128,128,128,0.05);\x20padding:\x2012px\x2016px;\x20border-radius:\x208px;\x20border:\x201px\x20solid\x20var(--border-color);\x20flex-wrap:\x20wrap;\x20gap:\x2012px;','appPass','inventory-body','.edit-rarity','selected','display:\x20grid;\x20gap:\x2020px;\x20margin-bottom:\x2024px;\x20align-items:\x20stretch;','<tr><td\x20colspan=\x2211\x22\x20style=\x22text-align:center;\x20color:\x20var(--text-secondary);\x22>No\x20matching\x20cards\x20found.</td></tr>','Greninja','.edit-g-ship','language','</td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Total\x20Cost\x22><strong>Rp\x20','map','totalCostPerCard','40px','qty','trash-body','\x22\x20style=\x22width:100%;\x20padding:10px;\x20border-radius:6px;\x20border:1px\x20solid\x20var(--border-color);\x20background:\x20transparent;\x20color:\x20inherit;\x20box-sizing:\x20border-box;\x22></div><div\x20style=\x22flex:2;\x20min-width:\x20180px;\x22><label\x20style=\x22display:block;\x20margin-bottom:6px;\x20font-size:12px;\x20color:\x20var(--text-secondary);\x22>Total\x20Selling\x20Price</label><input\x20type=\x22text\x22\x20class=\x22cart-price\x22\x20data-index=\x22','https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/pokemon_species_names.csv','\x20stock\x20back\x20to\x20the\x20inventory.','border','<div\x20style=\x22color:\x20var(--text-secondary);\x20font-size:\x2014px;\x20font-weight:\x20500;\x22\x20id=\x22sales-count-display\x22></div><div\x20style=\x22display:\x20flex;\x20align-items:\x20center;\x20gap:\x2010px;\x20flex-wrap:\x20wrap;\x22><label\x20style=\x22font-size:\x2013px;\x20color:\x20var(--text-secondary);\x20margin:\x200;\x22>Sort:</label><select\x20id=\x22sort-sales\x22\x20style=\x22width:\x20auto;\x20display:\x20inline-block;\x20padding:\x206px\x2012px;\x20border-radius:\x206px;\x20background:\x20transparent;\x20color:\x20inherit;\x20border:\x201px\x20solid\x20var(--border-color);\x20outline:\x20none;\x20cursor:\x20pointer;\x20font-size:\x2013px;\x22><option\x20value=\x22newest\x22>Newest\x20First</option><option\x20value=\x22oldest\x22>Oldest\x20First</option><option\x20value=\x22az\x22>Name\x20(A-Z)</option><option\x20value=\x22za\x22>Name\x20(Z-A)</option><option\x20value=\x22price-high\x22>Price\x20(High-Low)</option><option\x20value=\x22price-low\x22>Price\x20(Low-High)</option></select><label\x20style=\x22font-size:\x2013px;\x20color:\x20var(--text-secondary);\x20margin:\x200;\x20margin-left:\x208px;\x22>Filter:</label><select\x20id=\x22sales-month-filter\x22\x20style=\x22width:\x20auto;\x20display:\x20inline-block;\x20padding:\x206px\x2012px;\x20border-radius:\x206px;\x20background:\x20transparent;\x20color:\x20inherit;\x20border:\x201px\x20solid\x20var(--border-color);\x20outline:\x20none;\x20cursor:\x20pointer;\x20font-size:\x2013px;\x22><option\x20value=\x22all\x22>All\x20Months</option><option\x20value=\x220\x22>Jan</option><option\x20value=\x221\x22>Feb</option><option\x20value=\x222\x22>Mar</option><option\x20value=\x223\x22>Apr</option><option\x20value=\x224\x22>May</option><option\x20value=\x225\x22>Jun</option><option\x20value=\x226\x22>Jul</option><option\x20value=\x227\x22>Aug</option><option\x20value=\x228\x22>Sep</option><option\x20value=\x229\x22>Oct</option><option\x20value=\x2210\x22>Nov</option><option\x20value=\x2211\x22>Dec</option></select><select\x20id=\x22sales-year-filter\x22\x20style=\x22width:\x20auto;\x20display:\x20inline-block;\x20padding:\x206px\x2012px;\x20border-radius:\x206px;\x20background:\x20transparent;\x20color:\x20inherit;\x20border:\x201px\x20solid\x20var(--border-color);\x20outline:\x20none;\x20cursor:\x20pointer;\x20font-size:\x2013px;\x22><option\x20value=\x22all\x22>All\x20Years</option></select></div>','currentTarget','1px\x20dashed\x20var(--border-color)','<i\x20class=\x22fas\x20fa-moon\x22></i>\x20Night','SAR','sold-cards','No\x20Set','\x22\x20value=\x22','split','deletedAt','</div></div>','Please\x20select\x20or\x20create\x20a\x20group\x20first.','totalValueRp','classList','\x20unique\x20card(s)\x20•\x20',';\x22>','save-new-group','Oct','💰\x20Record\x20Sale','.bulk-check-header','\x20|\x20Contains\x20','closest','groupsMap','<span\x20style=\x22color:\x20var(--accent-yellow);\x20font-weight:\x20600;\x20font-size:\x2014px;\x22><span\x20id=\x22bulk-trash-count\x22>0</span>\x20item(s)\x20selected</span><div\x20style=\x22display:\x20flex;\x20gap:\x2010px;\x22><button\x20id=\x22btn-bulk-restore-trash\x22\x20style=\x22background:\x20transparent;\x20color:\x20var(--text-primary);\x20border:\x201px\x20solid\x20var(--border-color);\x20padding:\x208px\x2016px;\x20border-radius:\x206px;\x20font-weight:\x20600;\x20cursor:\x20pointer;\x20display:\x20flex;\x20align-items:\x20center;\x20gap:\x208px;\x20transition:\x20all\x200.2s;\x22><i\x20class=\x22fas\x20fa-undo\x22\x20style=\x22color:\x20var(--accent-yellow);\x22></i>\x20Restore\x20Selected</button><button\x20id=\x22btn-bulk-delete-trash\x22\x20style=\x22background:\x20#ef4444;\x20color:\x20#fff;\x20border:\x20none;\x20padding:\x208px\x2016px;\x20border-radius:\x206px;\x20font-weight:\x20600;\x20cursor:\x20pointer;\x20display:\x20flex;\x20align-items:\x20center;\x20gap:\x208px;\x22><i\x20class=\x22fas\x20fa-trash\x22></i>\x20Delete\x20Permanently</button></div>','newest','transparent','</td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Actions\x22><div\x20style=\x22display:flex;\x20justify-content:\x20flex-end;\x20gap:8px;\x22><button\x20class=\x22btn-outline\x20btn-restore-trash\x22\x20style=\x22padding:\x206px\x2012px;\x20font-weight:\x20500;\x20color:\x20var(--accent-yellow);\x20border-color:\x20rgba(234,\x20179,\x208,\x200.3);\x22\x20title=\x22Restore\x20back\x20to\x20tracker\x22><i\x20class=\x22fas\x20fa-undo\x22></i>\x20Restore</button><button\x20class=\x22btn-outline\x20btn-destroy-trash\x22\x20style=\x22padding:\x206px\x2012px;\x20font-weight:\x20500;\x20color:\x20#ef4444;\x20border-color:\x20rgba(239,\x2068,\x2068,\x200.3);\x22\x20title=\x22Delete\x20Permanently\x22><i\x20class=\x22fas\x20fa-times\x22></i>\x20Delete</button></div></td>\x0a\x20\x20\x20\x20','1fr','?pass=','Are\x20you\x20sure\x20you\x20want\x20to\x20delete\x20the\x20group\x20\x22','Network\x20error.\x20Try\x20again.','includes',';\x20border:\x201px\x20solid\x20','Mewtwo','<div\x20style=\x22position:absolute;\x20top:0;\x20left:55px;\x20right:0;\x20height:100%;\x20display:flex;\x20flex-direction:column;\x20justify-content:space-between;\x20z-index:0;\x20pointer-events:none;\x20padding-bottom:\x2024px;\x20box-sizing:\x20border-box;\x22><div\x20style=\x22border-top:1px\x20dashed\x20rgba(150,150,150,0.25);\x20width:100%;\x20position:relative;\x22><span\x20style=\x22position:absolute;\x20top:-8px;\x20left:-50px;\x20font-size:10px;\x20color:inherit;\x20opacity:0.6;\x20width:\x2045px;\x20text-align:\x20right;\x22>','sale-date','btn-record-sale','Aug','</span></strong></div>\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22group-stat-row\x22><span>Total\x20Shipping\x20Fee</span><strong>Rp\x20<span\x20class=\x22editable-group\x20edit-g-ship\x22\x20contenteditable=\x22true\x22\x20title=\x22Click\x20to\x20edit\x22\x20style=\x22padding:2px\x206px;\x20border-radius:4px;\x22>','setItem','stat-sold','<strong>Group:\x20','new-group-rate','</span></td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Rarity\x22\x20title=\x22Click\x20to\x20change\x20Rarity\x22><select\x20class=\x22inline-edit-select\x20edit-rarity\x22\x20style=\x22width:\x20auto;\x20background:transparent;\x20color:inherit;\x20border:1px\x20dashed\x20transparent;\x20outline:none;\x20cursor:pointer;\x20padding:2px\x204px;\x20border-radius:4px;\x20font-size:inherit;\x22><option\x20value=\x22\x22>—</option>','3lqHbYf','backgroundColor','sale-inventory-results','#22c55e','btn-bulk-delete-trash','</span><span\x20style=\x22font-weight:600;\x20color:var(--text-primary);\x22>Rp\x20','1395jLIWpl','cardId','</span>','22ZZcrDk','<span\x20style=\x22color:\x20#ef4444;\x20font-weight:\x20600;\x20font-size:\x2014px;\x22><span\x20id=\x22bulk-delete-count\x22>0</span>\x20sale(s)\x20selected</span><button\x20id=\x22btn-bulk-delete\x22\x20style=\x22background:\x20#ef4444;\x20color:\x20#fff;\x20border:\x20none;\x20padding:\x208px\x2016px;\x20border-radius:\x206px;\x20font-weight:\x20600;\x20cursor:\x20pointer;\x20display:\x20flex;\x20align-items:\x20center;\x20gap:\x208px;\x22><i\x20class=\x22fas\x20fa-trash\x22></i>\x20Delete\x20Selected</button>','tagName','mobile-toggle','contains','<strong\x20style=\x22color:','display:none;\x20position:\x20fixed;\x20z-index:\x202000;\x20left:\x200;\x20top:\x200;\x20width:\x20100%;\x20height:\x20100%;\x20background:\x20rgba(0,0,0,0.6);\x20backdrop-filter:\x20blur(5px);','sale-notes','card-panel','value=\x22','insertBefore','Verifying...','1px\x20dashed\x20transparent','btn-submit-sale','left','innerHTML','<i\x20class=\x22fas\x20fa-sun\x22></i>\x20Day','values','\x20pcs\x20|\x20Price:\x20Rp\x20','getElementById','sort-sales','</span></td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Base\x20(¥)\x22><span\x20class=\x22editable-cell\x20edit-yen\x22\x20contenteditable=\x22true\x22\x20title=\x22Click\x20to\x20edit\x22>¥','setAttribute','data-theme','.c-set','.c-rarity','cardid','groups-grid','from',';\x20font-weight:\x20600;\x22>','All\x20Languages','sold-cards-stats-panel','SELECT','.edit-yen','[contenteditable=\x22true\x22]',')</span></strong><button\x20type=\x22button\x22\x20class=\x22btn-remove-cart\x22\x20data-index=\x22','rgba(239,\x2068,\x2068,\x200.12)','\x20card(s)','\x20Card(s)\x20Sold</div></div><div\x20class=\x22chart-bar-fill\x22\x20style=\x22width:70%;\x20max-width:40px;\x20height:','shippingfee','updateSale','<div\x20style=\x22display:\x20flex;\x20justify-content:\x20space-between;\x20align-items:\x20flex-end;\x20margin-bottom:\x2024px;\x22><div><h3\x20style=\x22margin-top:0;\x20margin-bottom:4px;\x20font-size:16px;\x20color:inherit;\x20opacity:0.9;\x20display:flex;\x20align-items:center;\x20gap:8px;\x22><i\x20class=\x22fas\x20fa-chart-line\x22\x20style=\x22color:var(--accent-yellow,\x20#eab308);\x22></i>\x20Revenue\x20History\x20(Last\x2012\x20Months)</h3><p\x20style=\x22color:inherit;\x20opacity:0.6;\x20font-size:12px;\x20margin:0;\x22>Hover\x20over\x20the\x20columns\x20to\x20see\x20detailed\x20monthly\x20metrics.</p></div></div><div\x20style=\x22position:relative;\x20display:flex;\x20height:240px;\x20padding-left:\x2055px;\x20align-items:flex-end;\x22>','localeCompare','getBoundingClientRect','appendChild','.btn-delete-group','error','rgba(234,179,8,0.15)','keydown','dark','.del-row','BUTTON','flex','check-all-trash','modal-overlay','Are\x20you\x20sure\x20you\x20want\x20to\x20delete\x20this\x20sale\x20record\x20for\x20','bulk-action-trash-div','<span><strong>','theme-toggle',';\x22><i\x20class=\x22fas\x20fa-ellipsis-v\x22></i></button><button\x20class=\x22btn-outline\x20btn-delete-card\x22\x20style=\x22padding:\x204px\x208px;\x20color:\x20#ef4444;\x20border-color:\x20rgba(239,\x2068,\x2068,\x200.3);\x22\x20title=\x22Delete\x20card\x22><i\x20class=\x22fas\x20fa-trash\x22></i></button></div></td>\x0a\x20\x20\x20\x20','firstChild','stopPropagation','test','2603448lVFPOL','Showing\x20','change','Flareon','MUR','preventDefault','style=\x22opacity:0.5;\x20pointer-events:none;\x22','sales-year-filter','Nov','CHR','add','.btn-remove-cart','background','trash','1021517gbFwFQ','keys','totalCost','btn-bulk-restore-trash','slice','POST','.btn-delete-sale','forEach','RRR','data-target','blur','input','btn-add-10-rows','Failed\x20to\x20fetch\x20data','Permanently\x20delete\x20this\x20','thead\x20tr','\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Select\x22><input\x20type=\x22checkbox\x22\x20class=\x22trash-check\x22\x20data-index=\x22','ja-JP','group','\x22\x20placeholder=\x22e.g.\x20Rp\x2075.000\x22\x20style=\x22width:100%;\x20padding:10px;\x20border-radius:6px;\x20border:1px\x20solid\x20var(--border-color);\x20background:\x20transparent;\x20color:\x20inherit;\x20box-sizing:\x20border-box;\x22></div></div>','find','\x20<span\x20style=\x22color:var(--text-secondary);\x20font-weight:normal;\x22>(','Jul','size','</span></td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Action\x22><div\x20style=\x22display:\x20flex;\x20gap:\x204px;\x20align-items:\x20center;\x20justify-content:\x20flex-end;\x22><button\x20class=\x22btn-outline\x20action-trigger\x22\x20style=\x22padding:\x204px\x208px;\x20color:\x20','</span></div><div\x20style=\x22border-top:1px\x20dashed\x20rgba(150,150,150,0.25);\x20width:100%;\x20position:relative;\x22><span\x20style=\x22position:absolute;\x20top:-8px;\x20left:-50px;\x20font-size:10px;\x20color:inherit;\x20opacity:0.6;\x20width:\x2045px;\x20text-align:\x20right;\x22>','inventory-subtitle','sale-search-inventory','<p\x20style=\x22color:\x20var(--text-secondary);\x22>No\x20groups\x20created\x20yet.</p>','gridTemplateColumns','all','max','brightness(1.15)','translateY(10px)','\x22\x20min=\x221\x22\x20max=\x22','padding:14px;\x20border:1px\x20solid\x20var(--border-color);\x20border-radius:8px;\x20background:\x20rgba(128,128,128,0.05);\x20position:\x20relative;','deleteTrash','children','quantity','date','div','substring','name','</select></td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Language\x22\x20title=\x22Click\x20to\x20change\x20Language\x22><select\x20class=\x22inline-edit-select\x20edit-lang\x22\x20style=\x22width:\x20auto;\x20background:transparent;\x20color:inherit;\x20border:1px\x20dashed\x20transparent;\x20outline:none;\x20cursor:pointer;\x20padding:2px\x204px;\x20border-radius:4px;\x20font-size:inherit;\x22><option\x20value=\x22\x22>—</option>','set','getMonth','cssText','light','TRASH_','Sale','search-inventory','%\x20+\x2016px);\x20background:var(--bg-surface);\x20color:var(--text-primary);\x20padding:8px\x2012px;\x20border-radius:8px;\x20font-size:12px;\x20white-space:nowrap;\x20box-shadow:0\x2010px\x2025px\x20rgba(0,0,0,0.15);\x20border:1px\x20solid\x20var(--border-color);\x20text-align:center;\x20transition:\x20all\x200.2s\x20cubic-bezier(0.4,\x200,\x200.2,\x201);\x20z-index:10;\x20transform:\x20translateY(10px);\x22><div\x20style=\x22font-weight:700;\x20color:var(--accent-yellow);\x20margin-bottom:\x202px;\x22>Rp\x20','<option\x20value=\x22',';\x22>Rp\x20','notes','dashboard','sort-inventory','Google\x20Sheets\x20Error:\x20','data-index','brightness(1)','.trash-check','\x20pcs</strong></div>\x0a\x20\x20\x20\x20','.trash-check:checked','</select></td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Qty\x22><span\x20class=\x22editable-cell\x20edit-qty\x22\x20contenteditable=\x22true\x22\x20title=\x22Click\x20to\x20edit\x22\x20style=\x22background:\x20','json','</span></td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Base\x20(Rp)\x22>Rp\x20','price-low','</option>','theme','deleteGroup','</span></h3><div\x20style=\x22display:\x20flex;\x20align-items:\x20center;\x20gap:\x2012px;\x22><span\x20style=\x22font-size:12px;\x20color:\x20var(--text-secondary);\x22>ID:\x20','.c-qty','bulk-delete-count','linear-gradient(to\x20top,\x20#ca8a04,\x20#fde047)','.c-name','getFullYear','8HanIJu','transition','shippingAllocation','<div\x20class=\x22chart-column-node\x22\x20style=\x22flex:1;\x20display:flex;\x20flex-direction:column;\x20align-items:center;\x20position:relative;\x20z-index:1;\x20height:\x20100%;\x20justify-content:\x20flex-end;\x22><div\x20class=\x22chart-tooltip-bubble\x22\x20style=\x22opacity:0;\x20pointer-events:none;\x20position:absolute;\x20bottom:calc(','filter','<div\x20style=\x22display:flex;\x20width:\x20100%;\x20height:\x20calc(100%\x20-\x2024px);\x20position:\x20relative;\x20z-index:\x201;\x22>','cardInfo','abs','%;\x20background:','%</h2></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22stat-card\x22\x20style=\x22padding:\x2020px;\x20flex-direction:\x20column;\x20align-items:\x20flex-start;\x20justify-content:\x20center;\x20height:\x20100%;\x20box-sizing:\x20border-box;\x20margin:\x200;\x22><h4\x20style=\x22margin:\x200\x200\x208px\x200;\x20color:\x20var(--text-secondary);\x20font-size:\x2013px;\x20font-weight:\x20500;\x22>Cards\x20Sold</h4><h2\x20style=\x22margin:\x200;\x20font-size:\x2020px;\x20color:\x20var(--text-primary);\x22>','.view','translateY(0px)','totalCardsInGroup','getTimezoneOffset','btn-login','inherit','top','</div><div\x20style=\x22color:inherit;\x20opacity:0.7;\x20font-size:11px;\x22>','<div\x20style=\x22display:flex;\x20justify-content:space-between;\x20align-items:center;\x20font-size:12px;\x20padding:\x204px\x200;\x20border-bottom:1px\x20dashed\x20rgba(255,255,255,0.04);\x22><span\x20style=\x22overflow:hidden;\x20text-overflow:ellipsis;\x20white-space:nowrap;\x20max-width:180px;\x22>','exchangerate','view-sold-cards','display:\x20flex;\x20flex-direction:\x20column;\x20gap:\x2012px;\x20margin-bottom:\x2016px;','Japanese','position:\x20absolute;\x20background:\x20var(--bg-surface);\x20border:\x201px\x20solid\x20var(--border-color);\x20border-radius:\x208px;\x20padding:\x204px\x200;\x20box-shadow:\x200\x2010px\x2015px\x20-3px\x20rgba(0,0,0,0.2);\x20z-index:\x201000;\x20min-width:\x20140px;\x20color:\x20var(--text-primary);','display:\x20none;\x20justify-content:\x20space-between;\x20align-items:\x20center;\x20padding:\x2012px\x2016px;\x20background:\x20rgba(239,\x2068,\x2068,\x200.1);\x20border:\x201px\x20solid\x20rgba(239,\x2068,\x2068,\x200.3);\x20border-radius:\x208px;','expanded','\x0a\x20\x20\x20\x20\x20\x20<div\x20style=\x22display:\x20grid;\x20grid-template-columns:\x201fr\x201fr;\x20grid-template-rows:\x201fr\x201fr;\x20gap:\x2020px;\x20align-content:\x20stretch;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22stat-card\x22\x20style=\x22padding:\x2020px;\x20flex-direction:\x20column;\x20align-items:\x20flex-start;\x20justify-content:\x20center;\x20height:\x20100%;\x20box-sizing:\x20border-box;\x20margin:\x200;\x22><h4\x20style=\x22margin:\x200\x200\x208px\x200;\x20color:\x20var(--text-secondary);\x20font-size:\x2013px;\x20font-weight:\x20500;\x22>Filtered\x20Revenue</h4><h2\x20style=\x22margin:\x200;\x20font-size:\x2020px;\x20color:\x20var(--accent-yellow);\x22>Rp\x20','label','bulk-delete-div','block','add-cards-body','377975vSFhMk','\x20card(s)\x20inside\x20it?\x0a\x0aThis\x20will\x20move\x20them\x20to\x20the\x20Recycle\x20Bin.','sales-month-filter','querySelector'];_0x5cb7=function(){return _0x2b330b;};return _0x5cb7();}function reindexRows(){const _0x12f54a=_0x34ccac;if(!addCardsBody)return;const _0x1de8d5=addCardsBody[_0x12f54a(0x2d4)]('tr');_0x1de8d5['forEach']((_0x392fe2,_0x374cb8)=>{const _0x500d09=_0x12f54a;_0x392fe2['children'][0x0][_0x500d09(0x2ed)]=_0x374cb8+0x1;});}const saveCardsBtn=document[_0x34ccac(0x37e)](_0x34ccac(0x256));saveCardsBtn&&saveCardsBtn[_0x34ccac(0x31d)](_0x34ccac(0x30a),()=>{const _0xf78eba=_0x34ccac,_0x50971d=document[_0xf78eba(0x37e)](_0xf78eba(0x280))['value'];if(!_0x50971d)return alert(_0xf78eba(0x341));const _0x42cd0a=addCardsBody[_0xf78eba(0x2d4)]('tr');let _0x5c677c=[];_0x42cd0a['forEach']((_0x271f95,_0x5d9e55)=>{const _0x48ab50=_0xf78eba,_0x12b69e=_0x271f95[_0x48ab50(0x22c)](_0x48ab50(0x208))[_0x48ab50(0x2df)]['trim'](),_0x3580dc=_0x271f95[_0x48ab50(0x22c)](_0x48ab50(0x2a8))[_0x48ab50(0x2df)];_0x12b69e&&_0x5c677c[_0x48ab50(0x2e7)]({'id':_0x48ab50(0x2bf)+Date['now']()+'_'+_0x5d9e55+'_'+Math[_0x48ab50(0x244)]()['toString'](0x24)[_0x48ab50(0x31a)](0x2,0x5),'group':_0x50971d,'name':_0x12b69e,'set':_0x271f95[_0x48ab50(0x22c)](_0x48ab50(0x383))[_0x48ab50(0x2df)],'rarity':_0x271f95[_0x48ab50(0x22c)](_0x48ab50(0x384))[_0x48ab50(0x2df)],'language':_0x271f95['querySelector'](_0x48ab50(0x2b3))[_0x48ab50(0x2df)],'yenPrice':_0x3580dc||0x0,'quantity':_0x271f95[_0x48ab50(0x22c)](_0x48ab50(0x205))[_0x48ab50(0x2df)]||0x1});}),_0x5c677c[_0xf78eba(0x2ca)]>0x0?(postData('saveCards',{'cards':_0x5c677c}),addCardsBody[_0xf78eba(0x37a)]='',addMultipleRows(0xa)):alert(_0xf78eba(0x2ad));});function renderInventory(){const _0x4192c7=_0x34ccac,_0x51112e=document[_0x4192c7(0x37e)](_0x4192c7(0x324));if(!_0x51112e)return;_0x51112e[_0x4192c7(0x37a)]='';const _0x2b312a=getCalculatedData();let _0x32f703=_0x2b312a['mergedList'];const _0x5a26a3=document['getElementById'](_0x4192c7(0x1f0));if(_0x5a26a3){const _0x3af6bf=_0x5a26a3[_0x4192c7(0x2df)]['toLowerCase']()[_0x4192c7(0x2e2)]();_0x3af6bf&&(_0x32f703=_0x32f703[_0x4192c7(0x20e)](_0x47dd29=>{const _0x21d4f7=_0x4192c7,_0x3adfce=String(_0x47dd29[_0x21d4f7(0x1e8)]||'')[_0x21d4f7(0x26b)]()['trim'](),_0x157a43=String(_0x47dd29['set']||'')[_0x21d4f7(0x26b)]()[_0x21d4f7(0x2e2)](),_0xda12ec=String(_0x47dd29[_0x21d4f7(0x234)]||'')['toLowerCase']()[_0x21d4f7(0x2e2)]();if(_0x3af6bf[_0x21d4f7(0x2ca)]<=0x2)return _0x3adfce['startsWith'](_0x3af6bf);else return _0x3adfce[_0x21d4f7(0x355)](_0x3af6bf)||_0x157a43[_0x21d4f7(0x355)](_0x3af6bf)||_0xda12ec['includes'](_0x3af6bf);}));}const _0x3ca825=document[_0x4192c7(0x37e)](_0x4192c7(0x293))[_0x4192c7(0x2df)],_0x2fa909=document[_0x4192c7(0x37e)](_0x4192c7(0x29a))['value'];if(_0x3ca825&&!_0x3ca825[_0x4192c7(0x26b)]()['includes'](_0x4192c7(0x3d6)))_0x32f703=_0x32f703[_0x4192c7(0x20e)](_0x7185e=>_0x7185e[_0x4192c7(0x3ca)]&&String(_0x7185e['group'])[_0x4192c7(0x26b)]()===_0x3ca825[_0x4192c7(0x26b)]());if(_0x2fa909&&!_0x2fa909[_0x4192c7(0x26b)]()[_0x4192c7(0x355)](_0x4192c7(0x3d6)))_0x32f703=_0x32f703[_0x4192c7(0x20e)](_0xc17ea4=>_0xc17ea4[_0x4192c7(0x32b)]&&String(_0xc17ea4[_0x4192c7(0x32b)])[_0x4192c7(0x26b)]()===_0x2fa909[_0x4192c7(0x26b)]());const _0x2f6bb7=document[_0x4192c7(0x37e)](_0x4192c7(0x1f6))?document[_0x4192c7(0x37e)]('sort-inventory')[_0x4192c7(0x2df)]:'default';if(_0x2f6bb7==='az')_0x32f703['sort']((_0x30f8ea,_0x33e22b)=>String(_0x30f8ea['name']||'')[_0x4192c7(0x395)](String(_0x33e22b[_0x4192c7(0x1e8)]||'')));else{if(_0x2f6bb7==='za')_0x32f703['sort']((_0x27bb87,_0x3a8071)=>String(_0x3a8071[_0x4192c7(0x1e8)]||'')[_0x4192c7(0x395)](String(_0x3a8071[_0x4192c7(0x1e8)]||'')));else{if(_0x2f6bb7===_0x4192c7(0x31c))_0x32f703[_0x4192c7(0x2fc)]((_0x5adfb0,_0x5a8160)=>Number(_0x5a8160[_0x4192c7(0x3ba)]||0x0)-Number(_0x5adfb0['totalCost']||0x0));else{if(_0x2f6bb7===_0x4192c7(0x200))_0x32f703[_0x4192c7(0x2fc)]((_0x2752aa,_0x4d055f)=>Number(_0x2752aa[_0x4192c7(0x3ba)]||0x0)-Number(_0x4d055f[_0x4192c7(0x3ba)]||0x0));}}}const _0x3ed54f=_0x32f703['reduce']((_0x3250ee,_0x139aa6)=>_0x3250ee+Number(_0x139aa6[_0x4192c7(0x1e4)]||0x0),0x0),_0x37dbe3=document[_0x4192c7(0x37e)](_0x4192c7(0x3d2));if(_0x37dbe3)_0x37dbe3[_0x4192c7(0x2ed)]=_0x32f703[_0x4192c7(0x20e)](_0xef4fd=>_0xef4fd[_0x4192c7(0x1e4)]>0x0)['length']+_0x4192c7(0x344)+_0x3ed54f+'\x20total\x20in\x20stock';if(_0x32f703[_0x4192c7(0x2ca)]===0x0){_0x51112e[_0x4192c7(0x37a)]=_0x4192c7(0x328);return;}const _0xbd7388=[_0x4192c7(0x2e5),'C','U','S','RR',_0x4192c7(0x3c0),'AR',_0x4192c7(0x3b3),'SR',_0x4192c7(0x33a),'UR',_0x4192c7(0x3ae)],_0x1e6111=[_0x4192c7(0x220),_0x4192c7(0x2bc),'Indonesian'];_0x32f703[_0x4192c7(0x3bf)](_0x4649d3=>{const _0x1ff80d=_0x4192c7,_0x177969=Number(_0x4649d3[_0x1ff80d(0x1e4)]||0x0),_0x15d354=_0x177969<=0x0,_0x47adcc=document[_0x1ff80d(0x2ec)]('tr'),_0x5bb45a=_0x15d354?_0x1ff80d(0x38f):_0x1ff80d(0x34f),_0x1ec79a=_0x15d354?_0x1ff80d(0x24c):_0x1ff80d(0x219),_0x1c857f=_0x15d354?'rgba(239,\x2068,\x2068,\x200.2)':_0x1ff80d(0x39a),_0x1f5868=_0x15d354?_0x1ff80d(0x24c):'var(--accent-yellow)',_0xd4ddc1=_0x15d354?_0x1ff80d(0x24c):_0x1ff80d(0x2ba);_0x47adcc[_0x1ff80d(0x308)]['backgroundColor']=_0x5bb45a,_0x47adcc[_0x1ff80d(0x308)]['color']=_0x1ec79a,_0x47adcc[_0x1ff80d(0x31d)](_0x1ff80d(0x30a),_0x5a13e7=>{const _0x5bb273=_0x1ff80d,_0x389f3d=[_0x5bb273(0x2d9),_0x5bb273(0x38b),_0x5bb273(0x39e)]['includes'](_0x5a13e7['target'][_0x5bb273(0x36d)])||_0x5a13e7[_0x5bb273(0x2d8)][_0x5bb273(0x34b)](_0x5bb273(0x29c));if(_0x389f3d)return;if(_0x47adcc[_0x5bb273(0x343)][_0x5bb273(0x36f)](_0x5bb273(0x223))&&(_0x5a13e7[_0x5bb273(0x2d8)]['getAttribute']('contenteditable')==='true'||_0x5a13e7[_0x5bb273(0x2d8)][_0x5bb273(0x34b)](_0x5bb273(0x38d))))return;if(window[_0x5bb273(0x26d)]<=0x300)_0x47adcc[_0x5bb273(0x343)][_0x5bb273(0x2dd)]('expanded');});const _0x91fc04=_0xbd7388['map'](_0x5c4996=>_0x1ff80d(0x1f2)+_0x5c4996+'\x22>'+_0x5c4996+_0x1ff80d(0x201))[_0x1ff80d(0x312)](''),_0x2db07a=_0x1e6111[_0x1ff80d(0x32d)](_0x1293c8=>_0x1ff80d(0x1f2)+_0x1293c8+'\x22>'+_0x1293c8+_0x1ff80d(0x201))[_0x1ff80d(0x312)]('');_0x47adcc[_0x1ff80d(0x37a)]=_0x1ff80d(0x2cc)+_0x1ec79a+'\x22>'+(_0x4649d3[_0x1ff80d(0x1e8)]||'—')+_0x1ff80d(0x313)+(_0x4649d3[_0x1ff80d(0x1ea)]||'—')+_0x1ff80d(0x361)+_0x91fc04[_0x1ff80d(0x2a0)](_0x1ff80d(0x374)+_0x4649d3[_0x1ff80d(0x234)]+'\x22',_0x1ff80d(0x374)+_0x4649d3[_0x1ff80d(0x234)]+_0x1ff80d(0x301))+_0x1ff80d(0x1e9)+_0x2db07a[_0x1ff80d(0x2a0)](_0x1ff80d(0x374)+_0x4649d3['language']+'\x22',_0x1ff80d(0x374)+_0x4649d3[_0x1ff80d(0x32b)]+'\x22\x20selected')+_0x1ff80d(0x1fd)+_0x1c857f+';\x20color:\x20'+_0x1f5868+';\x20padding:\x202px\x208px;\x20border-radius:\x204px;\x20font-weight:600;\x20display:inline-block;\x22>'+_0x177969+_0x1ff80d(0x380)+Number(_0x4649d3['yenprice'])[_0x1ff80d(0x269)](_0x1ff80d(0x3c9))+_0x1ff80d(0x1ff)+Math['round'](_0x4649d3[_0x1ff80d(0x31b)])[_0x1ff80d(0x269)](_0x1ff80d(0x2c8))+'</td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Shipping\x22>Rp\x20'+Math[_0x1ff80d(0x2a6)](_0x4649d3['shippingAllocation'])[_0x1ff80d(0x269)](_0x1ff80d(0x2c8))+_0x1ff80d(0x32c)+Math[_0x1ff80d(0x2a6)](_0x4649d3[_0x1ff80d(0x3ba)])[_0x1ff80d(0x269)](_0x1ff80d(0x2c8))+_0x1ff80d(0x28d)+_0xd4ddc1+_0x1ff80d(0x319)+(_0x4649d3['group']||'—')+_0x1ff80d(0x3d0)+_0x1ec79a+_0x1ff80d(0x3a6);function _0x5131dd(){const _0x356137=_0x1ff80d;let _0x3c67ed=_0x47adcc['querySelector']('.edit-name')[_0x356137(0x2ed)][_0x356137(0x2e2)](),_0x5f2182=translatePokemonName(_0x3c67ed);_0x3c67ed!==_0x5f2182&&(_0x3c67ed=_0x5f2182,_0x47adcc['querySelector']('.edit-name')[_0x356137(0x37a)]=_0x356137(0x370)+_0x1ec79a+'\x22>'+_0x3c67ed+_0x356137(0x314));const _0x47a5b0=_0x3c67ed,_0x768f36=_0x47adcc[_0x356137(0x22c)](_0x356137(0x241))[_0x356137(0x2ed)][_0x356137(0x2e2)](),_0x1664e6=_0x47adcc[_0x356137(0x22c)](_0x356137(0x325))['value'],_0xf62828=_0x47adcc[_0x356137(0x22c)]('.edit-lang')[_0x356137(0x2df)],_0x3b4c5d=Number(_0x47adcc[_0x356137(0x22c)](_0x356137(0x2f7))[_0x356137(0x2ed)]['trim']())||0x0,_0xaa15ea=Number(_0x47adcc[_0x356137(0x22c)](_0x356137(0x38c))['textContent'][_0x356137(0x2a0)](/[¥,]/g,'')[_0x356137(0x2e2)]())||0x0,_0x3153c9=_0x47a5b0==='—'?'':_0x47a5b0,_0x3350c1=_0x768f36==='—'?'':_0x768f36,_0x1985f1=_0x1664e6==='—'?'':_0x1664e6,_0x1bb10e=_0xf62828==='—'?'':_0xf62828,_0x8ef3a5=Number(_0x4649d3[_0x356137(0x1e4)])||0x0,_0x401e0f=_0x3b4c5d!==_0x8ef3a5,_0x2ab139=_0x3153c9!==(_0x4649d3['name']||'')||_0x3350c1!==(_0x4649d3[_0x356137(0x1ea)]||'')||_0x1985f1!==(_0x4649d3[_0x356137(0x234)]||'')||_0x1bb10e!==(_0x4649d3[_0x356137(0x32b)]||'')||_0xaa15ea!==_0x4649d3[_0x356137(0x310)];if(!_0x401e0f&&!_0x2ab139)return;const _0x1cfd06=String(_0x4649d3[_0x356137(0x1e8)]||'')[_0x356137(0x26b)]()[_0x356137(0x2e2)](),_0x1728e8=String(_0x4649d3[_0x356137(0x1ea)]||'')[_0x356137(0x26b)]()[_0x356137(0x2e2)](),_0x5af78a=String(_0x4649d3['rarity']||'')[_0x356137(0x26b)]()[_0x356137(0x2e2)](),_0x1910d6=String(_0x4649d3['language']||'')['toLowerCase']()[_0x356137(0x2e2)](),_0x3a07ab=state[_0x356137(0x279)][_0x356137(0x20e)](_0x8bbff9=>String(_0x8bbff9[_0x356137(0x1e8)]||'')[_0x356137(0x26b)]()[_0x356137(0x2e2)]()===_0x1cfd06&&String(_0x8bbff9[_0x356137(0x1ea)]||'')['toLowerCase']()[_0x356137(0x2e2)]()===_0x1728e8&&String(_0x8bbff9[_0x356137(0x234)]||'')[_0x356137(0x26b)]()[_0x356137(0x2e2)]()===_0x5af78a&&String(_0x8bbff9[_0x356137(0x32b)]||'')['toLowerCase']()[_0x356137(0x2e2)]()===_0x1910d6);let _0x791363=_0x3b4c5d-_0x8ef3a5;_0x3a07ab[_0x356137(0x3bf)]((_0x4fbff2,_0x5b9eed)=>{const _0x1f0cc8=_0x356137;_0x2ab139&&(_0x4fbff2['name']=_0x3153c9,_0x4fbff2[_0x1f0cc8(0x1ea)]=_0x3350c1,_0x4fbff2['rarity']=_0x1985f1,_0x4fbff2[_0x1f0cc8(0x32b)]=_0x1bb10e,_0x4fbff2[_0x1f0cc8(0x310)]=_0xaa15ea);if(_0x401e0f){if(_0x791363>0x0)_0x5b9eed===0x0&&(_0x4fbff2[_0x1f0cc8(0x1e4)]=Number(_0x4fbff2[_0x1f0cc8(0x1e4)]||0x0)+_0x791363,_0x791363=0x0);else{if(_0x791363<0x0){const _0x947123=Number(_0x4fbff2[_0x1f0cc8(0x1e4)]||0x0),_0x16d827=Math['min'](_0x947123,Math['abs'](_0x791363));_0x4fbff2[_0x1f0cc8(0x1e4)]=_0x947123-_0x16d827,_0x791363+=_0x16d827;}}}silentPostData(_0x1f0cc8(0x28e),{'id':_0x4fbff2['id'],'name':_0x4fbff2['name'],'set':_0x4fbff2[_0x1f0cc8(0x1ea)],'rarity':_0x4fbff2[_0x1f0cc8(0x234)],'language':_0x4fbff2[_0x1f0cc8(0x32b)],'group':_0x4fbff2[_0x1f0cc8(0x3ca)],'yenPrice':_0x4fbff2[_0x1f0cc8(0x310)],'quantity':_0x4fbff2[_0x1f0cc8(0x1e4)]});}),updateDashboard(),renderInventory();}_0x47adcc[_0x1ff80d(0x2d4)]('.editable-cell')[_0x1ff80d(0x3bf)](_0x2951a5=>{const _0x10917c=_0x1ff80d;_0x2951a5[_0x10917c(0x31d)](_0x10917c(0x2d5),()=>_0x2951a5[_0x10917c(0x308)]['background']='rgba(128,128,128,0.1)'),_0x2951a5[_0x10917c(0x31d)](_0x10917c(0x254),()=>_0x2951a5['style'][_0x10917c(0x3b6)]=_0x10917c(0x34f)),_0x2951a5['addEventListener'](_0x10917c(0x39b),_0x2b5d9b=>{const _0x80779=_0x10917c;_0x2b5d9b[_0x80779(0x257)]===_0x80779(0x2b9)&&(_0x2b5d9b[_0x80779(0x3af)](),_0x2951a5['blur']());}),_0x2951a5[_0x10917c(0x31d)](_0x10917c(0x3c2),()=>{const _0x336739=_0x10917c;_0x2951a5[_0x336739(0x308)][_0x336739(0x3b6)]=_0x336739(0x34f),_0x5131dd();});}),_0x47adcc[_0x1ff80d(0x2d4)](_0x1ff80d(0x2c7))['forEach'](_0x33dc87=>{const _0x3e5239=_0x1ff80d;_0x33dc87['addEventListener'](_0x3e5239(0x2d5),()=>_0x33dc87[_0x3e5239(0x308)]['border']=_0x3e5239(0x338)),_0x33dc87[_0x3e5239(0x31d)](_0x3e5239(0x254),()=>_0x33dc87[_0x3e5239(0x308)][_0x3e5239(0x335)]=_0x3e5239(0x377)),_0x33dc87[_0x3e5239(0x31d)](_0x3e5239(0x3ac),_0x5131dd);}),_0x47adcc[_0x1ff80d(0x22c)]('.btn-delete-card')[_0x1ff80d(0x31d)](_0x1ff80d(0x30a),_0x2248a2=>{const _0x559a51=_0x1ff80d;_0x2248a2[_0x559a51(0x3a8)]();if(confirm('Are\x20you\x20sure\x20you\x20want\x20to\x20delete\x20'+_0x4649d3[_0x559a51(0x1e8)]+'?')){const _0x28ef87=String(_0x4649d3['name']||'')['toLowerCase']()[_0x559a51(0x2e2)](),_0x876fe=String(_0x4649d3[_0x559a51(0x1ea)]||'')[_0x559a51(0x26b)]()[_0x559a51(0x2e2)](),_0xb6136b=String(_0x4649d3[_0x559a51(0x234)]||'')['toLowerCase']()[_0x559a51(0x2e2)](),_0x3473c7=state[_0x559a51(0x279)][_0x559a51(0x20e)](_0x56476e=>String(_0x56476e[_0x559a51(0x1e8)]||'')[_0x559a51(0x26b)]()[_0x559a51(0x2e2)]()===_0x28ef87&&String(_0x56476e[_0x559a51(0x1ea)]||'')['toLowerCase']()['trim']()===_0x876fe&&String(_0x56476e['rarity']||'')[_0x559a51(0x26b)]()[_0x559a51(0x2e2)]()===_0xb6136b);let _0x35eaa3=JSON[_0x559a51(0x275)](localStorage[_0x559a51(0x259)](_0x559a51(0x2a3)))||{};_0x3473c7[_0x559a51(0x3bf)](_0x4cef31=>{const _0x3eed51=_0x559a51,_0x35aae2=Number(_0x4cef31[_0x3eed51(0x1e4)]||0x0),_0x3ea1b2=_0x4cef31['group'];_0x3ea1b2&&_0x35eaa3[_0x3ea1b2]&&(_0x35eaa3[_0x3ea1b2]=Math[_0x3eed51(0x3d7)](0x0,_0x35eaa3[_0x3ea1b2]-_0x35aae2)),state['inventory']=state[_0x3eed51(0x279)]['filter'](_0x5d1f7e=>_0x5d1f7e['id']!==_0x4cef31['id']),postData('deleteCard',{'id':_0x4cef31['id']});}),localStorage[_0x559a51(0x35d)](_0x559a51(0x2a3),JSON[_0x559a51(0x273)](_0x35eaa3)),updateDashboard(),renderInventory();}});const _0x47fee8=_0x47adcc['querySelector']('.action-trigger');_0x47fee8[_0x1ff80d(0x31d)](_0x1ff80d(0x30a),_0x514127=>{const _0x40ccfb=_0x1ff80d;_0x514127['stopPropagation'](),document[_0x40ccfb(0x2d4)]('.action-dropdown')[_0x40ccfb(0x3bf)](_0x2893e3=>_0x2893e3[_0x40ccfb(0x29e)]());const _0x19d29a=document[_0x40ccfb(0x2ec)]('div');_0x19d29a[_0x40ccfb(0x2f6)]='action-dropdown',_0x19d29a[_0x40ccfb(0x308)][_0x40ccfb(0x1ec)]=_0x40ccfb(0x221);const _0x5cb657=_0x47fee8[_0x40ccfb(0x396)]();_0x19d29a[_0x40ccfb(0x308)][_0x40ccfb(0x21a)]=_0x5cb657[_0x40ccfb(0x233)]+window['scrollY']+0x4+'px',_0x19d29a['style'][_0x40ccfb(0x379)]=_0x5cb657[_0x40ccfb(0x379)]+window['scrollX']-0x6e+'px',_0x19d29a['innerHTML']='<div\x20class=\x22dropdown-item\x20dropdown-sale\x22\x20style=\x22padding:\x2010px\x2014px;\x20cursor:\x20pointer;\x20display:\x20flex;\x20align-items:\x20center;\x20gap:\x208px;\x20font-size:13px;\x20font-weight:500;\x22\x20'+(_0x177969<=0x0?_0x40ccfb(0x3b0):'')+'><i\x20class=\x22fas\x20fa-money-bill-wave\x22\x20style=\x22color:\x20#22c55e;\x22></i>\x20Record\x20Sale</div>';const _0x1a69ab=_0x19d29a[_0x40ccfb(0x22c)]('.dropdown-item');_0x1a69ab[_0x40ccfb(0x31d)](_0x40ccfb(0x2d5),()=>_0x1a69ab['style'][_0x40ccfb(0x3b6)]=_0x40ccfb(0x28f)),_0x1a69ab[_0x40ccfb(0x31d)](_0x40ccfb(0x254),()=>_0x1a69ab['style'][_0x40ccfb(0x3b6)]=_0x40ccfb(0x34f)),_0x1a69ab[_0x40ccfb(0x31d)](_0x40ccfb(0x30a),()=>{const _0x4a14b7=_0x40ccfb;_0x19d29a[_0x4a14b7(0x29e)](),openSaleModal(_0x4649d3);}),document[_0x40ccfb(0x2d1)]['appendChild'](_0x19d29a);}),_0x51112e[_0x1ff80d(0x397)](_0x47adcc);});}function ensureSaleModalExists(){const _0x56155a=_0x34ccac;if(document[_0x56155a(0x37e)]('modal-sale'))return;const _0x15659c=document['createElement'](_0x56155a(0x1e6));_0x15659c['id']=_0x56155a(0x235),_0x15659c[_0x56155a(0x308)][_0x56155a(0x1ec)]=_0x56155a(0x371),_0x15659c[_0x56155a(0x37a)]=_0x56155a(0x2f1),document[_0x56155a(0x2d1)][_0x56155a(0x397)](_0x15659c);const _0x5bde01=document[_0x56155a(0x37e)](_0x56155a(0x364)),_0x9ae230=document[_0x56155a(0x37e)](_0x56155a(0x3d3));document[_0x56155a(0x37e)]('btn-close-sale')['addEventListener']('click',()=>{const _0x1e2be6=_0x56155a;_0x15659c[_0x1e2be6(0x308)][_0x1e2be6(0x22e)]=_0x1e2be6(0x317);if(_0x5bde01)_0x5bde01[_0x1e2be6(0x308)][_0x1e2be6(0x22e)]=_0x1e2be6(0x317);}),document[_0x56155a(0x37e)](_0x56155a(0x378))['addEventListener']('click',submitSaleRecord);function _0x3c8077(){const _0x59ddb5=_0x56155a,_0x22c2ca=_0x9ae230['value'][_0x59ddb5(0x26b)]()[_0x59ddb5(0x2e2)]();if(!_0x22c2ca){_0x5bde01&&(_0x5bde01[_0x59ddb5(0x308)][_0x59ddb5(0x22e)]='none',_0x5bde01[_0x59ddb5(0x37a)]='');return;}const _0x4a3d2c=state[_0x59ddb5(0x279)][_0x59ddb5(0x20e)](_0x5826b1=>Number(_0x5826b1['quantity']||0x0)>0x0),_0x3102ee=_0x4a3d2c['filter'](_0x4c56e7=>{const _0x1f6018=_0x59ddb5,_0x4677cb=String(_0x4c56e7[_0x1f6018(0x1e8)]||'')[_0x1f6018(0x26b)]()[_0x1f6018(0x2e2)](),_0x79a13c=String(_0x4c56e7[_0x1f6018(0x1ea)]||'')[_0x1f6018(0x26b)]()[_0x1f6018(0x2e2)](),_0xf295b5=String(_0x4c56e7['rarity']||'')[_0x1f6018(0x26b)]()[_0x1f6018(0x2e2)]();if(_0x22c2ca[_0x1f6018(0x2ca)]<=0x2)return _0x4677cb['startsWith'](_0x22c2ca);else return _0x4677cb[_0x1f6018(0x355)](_0x22c2ca)||_0x79a13c[_0x1f6018(0x355)](_0x22c2ca)||_0xf295b5[_0x1f6018(0x355)](_0x22c2ca);});if(!_0x5bde01)return;if(_0x3102ee[_0x59ddb5(0x2ca)]===0x0){_0x5bde01[_0x59ddb5(0x37a)]=_0x59ddb5(0x2ee),_0x5bde01['style'][_0x59ddb5(0x22e)]='block';return;}_0x5bde01[_0x59ddb5(0x37a)]='',_0x3102ee[_0x59ddb5(0x3bf)](_0x1c0b77=>{const _0x2a86c8=_0x59ddb5,_0x3b14e5=getCalculatedData(),_0x50df7b=_0x3b14e5[_0x2a86c8(0x34c)][_0x1c0b77['group']]||{'rate':0x0,'shippingFee':0x0,'totalCardsInGroup':0x0,'shippingDivider':0x1},_0x158953=Number(_0x1c0b77[_0x2a86c8(0x310)]||0x0)*_0x50df7b[_0x2a86c8(0x311)],_0x502743=_0x50df7b[_0x2a86c8(0x2d3)]>0x0?_0x50df7b[_0x2a86c8(0x298)]/_0x50df7b[_0x2a86c8(0x2d3)]:0x0,_0x31a2c7=_0x158953+_0x502743,_0x26c77e=document[_0x2a86c8(0x2ec)](_0x2a86c8(0x1e6));_0x26c77e[_0x2a86c8(0x308)][_0x2a86c8(0x1ec)]=_0x2a86c8(0x2b1),_0x26c77e[_0x2a86c8(0x37a)]=_0x2a86c8(0x3a4)+_0x1c0b77[_0x2a86c8(0x1e8)]+'</strong>\x20('+(_0x1c0b77[_0x2a86c8(0x1ea)]||_0x2a86c8(0x33c))+_0x2a86c8(0x260)+_0x1c0b77[_0x2a86c8(0x1e4)]+_0x2a86c8(0x36a),_0x26c77e[_0x2a86c8(0x31d)](_0x2a86c8(0x2d5),()=>_0x26c77e[_0x2a86c8(0x308)]['background']=_0x2a86c8(0x28f)),_0x26c77e[_0x2a86c8(0x31d)]('mouseleave',()=>_0x26c77e['style'][_0x2a86c8(0x3b6)]=_0x2a86c8(0x34f)),_0x26c77e[_0x2a86c8(0x31d)]('mousedown',_0x25d43b=>{const _0x4a40e9=_0x2a86c8;_0x25d43b[_0x4a40e9(0x3af)](),selectCardForSale(_0x1c0b77,_0x31a2c7),_0x5bde01['style'][_0x4a40e9(0x22e)]=_0x4a40e9(0x317),_0x9ae230[_0x4a40e9(0x2df)]='',_0x9ae230[_0x4a40e9(0x2f5)]();}),_0x5bde01[_0x2a86c8(0x397)](_0x26c77e);}),_0x5bde01[_0x59ddb5(0x308)][_0x59ddb5(0x22e)]=_0x59ddb5(0x227);}_0x9ae230['addEventListener'](_0x56155a(0x3c3),_0x3c8077),_0x9ae230[_0x56155a(0x31d)](_0x56155a(0x316),_0x3c8077),_0x9ae230[_0x56155a(0x31d)](_0x56155a(0x3c2),()=>{setTimeout(()=>{const _0x496791=_0x4d08;if(_0x5bde01)_0x5bde01[_0x496791(0x308)][_0x496791(0x22e)]=_0x496791(0x317);},0x96);});}function renderSaleCart(){const _0x44e5b8=_0x34ccac,_0x2db3c9=document[_0x44e5b8(0x37e)](_0x44e5b8(0x27c));if(!_0x2db3c9)return;if(saleCart[_0x44e5b8(0x2ca)]===0x0){_0x2db3c9[_0x44e5b8(0x308)][_0x44e5b8(0x22e)]=_0x44e5b8(0x317),_0x2db3c9[_0x44e5b8(0x37a)]='';return;}_0x2db3c9[_0x44e5b8(0x308)]['display']='flex',_0x2db3c9[_0x44e5b8(0x37a)]='',saleCart[_0x44e5b8(0x3bf)]((_0x256844,_0x319f9d)=>{const _0x164e59=_0x44e5b8,_0x40fa1f=document[_0x164e59(0x2ec)](_0x164e59(0x1e6));_0x40fa1f[_0x164e59(0x308)][_0x164e59(0x1ec)]=_0x164e59(0x3db);const _0x237f19=_0x256844[_0x164e59(0x31f)]?'Rp\x20'+Number(_0x256844['price'])[_0x164e59(0x269)]('id-ID'):'';_0x40fa1f[_0x164e59(0x37a)]=_0x164e59(0x26f)+_0x256844[_0x164e59(0x1e8)]+_0x164e59(0x3cd)+(_0x256844[_0x164e59(0x1ea)]||_0x164e59(0x33c))+_0x164e59(0x38e)+_0x319f9d+'\x22\x20style=\x22background:none;\x20border:none;\x20color:#ef4444;\x20cursor:pointer;\x20padding:4px;\x22\x20title=\x22Remove\x22><i\x20class=\x22fas\x20fa-times\x22></i></button></div><div\x20style=\x22font-size:12px;\x20color:var(--text-secondary);\x20margin-bottom:12px;\x20display:flex;\x20gap:12px;\x22><span><i\x20class=\x22fas\x20fa-box\x22></i>\x20Stock:\x20'+_0x256844[_0x164e59(0x246)]+_0x164e59(0x23c)+Math[_0x164e59(0x2a6)](_0x256844['unitCost'])[_0x164e59(0x269)](_0x164e59(0x2c8))+_0x164e59(0x25e)+_0x319f9d+_0x164e59(0x33d)+_0x256844[_0x164e59(0x330)]+_0x164e59(0x3da)+_0x256844[_0x164e59(0x246)]+_0x164e59(0x332)+_0x319f9d+_0x164e59(0x33d)+_0x237f19+_0x164e59(0x3cb),_0x2db3c9[_0x164e59(0x397)](_0x40fa1f);}),_0x2db3c9[_0x44e5b8(0x2d4)](_0x44e5b8(0x3b5))['forEach'](_0x31c05d=>{_0x31c05d['addEventListener']('click',_0x1e3680=>{const _0x33b4a5=_0x4d08,_0xd24c=_0x1e3680[_0x33b4a5(0x337)][_0x33b4a5(0x25a)](_0x33b4a5(0x1f8));saleCart[_0x33b4a5(0x306)](_0xd24c,0x1),renderSaleCart();});}),_0x2db3c9[_0x44e5b8(0x2d4)]('.cart-qty')['forEach'](_0x8f7dcd=>{const _0x42274f=_0x44e5b8;_0x8f7dcd[_0x42274f(0x31d)](_0x42274f(0x3c3),_0x5a82ee=>{const _0x11df9c=_0x42274f,_0x53f0fe=_0x5a82ee['target'][_0x11df9c(0x25a)]('data-index');let _0x12ceb9=Number(_0x5a82ee[_0x11df9c(0x2d8)]['value']);_0x12ceb9>saleCart[_0x53f0fe][_0x11df9c(0x246)]&&(_0x12ceb9=saleCart[_0x53f0fe][_0x11df9c(0x246)],_0x5a82ee['target'][_0x11df9c(0x2df)]=_0x12ceb9),saleCart[_0x53f0fe][_0x11df9c(0x330)]=_0x12ceb9;});}),_0x2db3c9['querySelectorAll'](_0x44e5b8(0x281))[_0x44e5b8(0x3bf)](_0x4e6b39=>{const _0x390668=_0x44e5b8;_0x4e6b39[_0x390668(0x31d)](_0x390668(0x3c3),_0x3132d0=>{const _0x58babb=_0x390668,_0x462a9e=_0x3132d0[_0x58babb(0x2d8)]['getAttribute'](_0x58babb(0x1f8));let _0x18e8d2=_0x3132d0[_0x58babb(0x2d8)][_0x58babb(0x2df)][_0x58babb(0x2a0)](/[^0-9]/g,'');saleCart[_0x462a9e][_0x58babb(0x31f)]=Number(_0x18e8d2)||0x0;if(_0x18e8d2)_0x3132d0[_0x58babb(0x2d8)]['value']=_0x58babb(0x30b)+Number(_0x18e8d2)[_0x58babb(0x269)](_0x58babb(0x2c8));else _0x3132d0[_0x58babb(0x2d8)]['value']='';});});}function openGlobalSaleSearchModal(){const _0x2a28a6=_0x34ccac;ensureSaleModalExists(),saleCart=[],renderSaleCart(),document[_0x2a28a6(0x37e)](_0x2a28a6(0x237))['textContent']=_0x2a28a6(0x2b6),document[_0x2a28a6(0x37e)]('select-card-section')[_0x2a28a6(0x308)]['display']=_0x2a28a6(0x227),document['getElementById'](_0x2a28a6(0x3d3))[_0x2a28a6(0x2df)]='',document[_0x2a28a6(0x37e)](_0x2a28a6(0x372))['value']='';const _0x3e354d=new Date(),_0x3fa46d=_0x3e354d[_0x2a28a6(0x217)]()*0xea60;document[_0x2a28a6(0x37e)](_0x2a28a6(0x359))[_0x2a28a6(0x2df)]=new Date(_0x3e354d-_0x3fa46d)['toISOString']()[_0x2a28a6(0x33e)]('T')[0x0],document[_0x2a28a6(0x37e)]('modal-sale')[_0x2a28a6(0x308)][_0x2a28a6(0x22e)]=_0x2a28a6(0x227);}function openSaleModal(_0x4fdc9f){const _0x4e1a99=_0x34ccac;ensureSaleModalExists(),saleCart=[];const _0x2b3d6c=getCalculatedData(),_0x4b7c76=_0x2b3d6c[_0x4e1a99(0x34c)][_0x4fdc9f[_0x4e1a99(0x3ca)]]||{'rate':0x0,'shippingFee':0x0,'totalCardsInGroup':0x0,'shippingDivider':0x1},_0x211199=Number(_0x4fdc9f[_0x4e1a99(0x310)]||0x0)*_0x4b7c76[_0x4e1a99(0x311)],_0x21bbc9=_0x4b7c76[_0x4e1a99(0x2d3)]>0x0?_0x4b7c76[_0x4e1a99(0x298)]/_0x4b7c76[_0x4e1a99(0x2d3)]:0x0,_0x5cbadc=_0x211199+_0x21bbc9;document[_0x4e1a99(0x37e)](_0x4e1a99(0x237))['textContent']=_0x4e1a99(0x348),document[_0x4e1a99(0x37e)]('select-card-section')[_0x4e1a99(0x308)]['display']=_0x4e1a99(0x227),document['getElementById'](_0x4e1a99(0x3d3))['value']='',document[_0x4e1a99(0x37e)]('sale-notes')[_0x4e1a99(0x2df)]='';const _0xa3b9d2=new Date(),_0x350304=_0xa3b9d2['getTimezoneOffset']()*0xea60;document[_0x4e1a99(0x37e)]('sale-date')[_0x4e1a99(0x2df)]=new Date(_0xa3b9d2-_0x350304)[_0x4e1a99(0x292)]()[_0x4e1a99(0x33e)]('T')[0x0],selectCardForSale(_0x4fdc9f,_0x5cbadc),document[_0x4e1a99(0x37e)](_0x4e1a99(0x235))[_0x4e1a99(0x308)]['display']=_0x4e1a99(0x227);}function selectCardForSale(_0x287bc9,_0x599fa9){const _0x5ef927=_0x34ccac,_0x29c61f=saleCart[_0x5ef927(0x3cc)](_0x133a3e=>_0x133a3e['id']===_0x287bc9['id']);!_0x29c61f&&saleCart[_0x5ef927(0x2e7)]({'id':_0x287bc9['id'],'name':_0x287bc9[_0x5ef927(0x1e8)],'set':_0x287bc9[_0x5ef927(0x1ea)],'rarity':_0x287bc9['rarity'],'maxQty':_0x287bc9[_0x5ef927(0x1e4)],'qty':0x1,'price':'','unitCost':_0x599fa9}),renderSaleCart();}function submitSaleRecord(){const _0x184d79=_0x34ccac;if(saleCart[_0x184d79(0x2ca)]===0x0)return alert('Please\x20add\x20at\x20least\x20one\x20card\x20to\x20the\x20cart.');for(let _0x36a12a=0x0;_0x36a12a<saleCart[_0x184d79(0x2ca)];_0x36a12a++){const _0x25566d=saleCart[_0x36a12a];if(!_0x25566d[_0x184d79(0x31f)]||_0x25566d[_0x184d79(0x330)]<=0x0)return alert(_0x184d79(0x263)+_0x25566d[_0x184d79(0x1e8)]+'.');if(_0x25566d[_0x184d79(0x330)]>_0x25566d[_0x184d79(0x246)])return alert(_0x184d79(0x283)+_0x25566d[_0x184d79(0x1e8)]+'.\x20You\x20only\x20have\x20'+_0x25566d[_0x184d79(0x246)]+_0x184d79(0x2ac));}const _0x21ffd9=document[_0x184d79(0x37e)](_0x184d79(0x372))[_0x184d79(0x2df)],_0x34d943=document[_0x184d79(0x37e)](_0x184d79(0x359))[_0x184d79(0x2df)],_0x3a006f=_0x34d943?new Date(_0x34d943+'T00:00:00')[_0x184d79(0x292)]():new Date()[_0x184d79(0x292)]();saleCart[_0x184d79(0x3bf)](_0x4c59d8=>{const _0x31d011=_0x184d79;let _0x17ad68=_0x4c59d8[_0x31d011(0x330)];const _0x23dd03=String(_0x4c59d8['name']||'')[_0x31d011(0x26b)]()[_0x31d011(0x2e2)](),_0x3ca319=String(_0x4c59d8[_0x31d011(0x1ea)]||'')['toLowerCase']()['trim'](),_0x3fa4d3=String(_0x4c59d8[_0x31d011(0x234)]||'')[_0x31d011(0x26b)]()[_0x31d011(0x2e2)](),_0x4692ed=state[_0x31d011(0x279)][_0x31d011(0x20e)](_0x1d3555=>String(_0x1d3555[_0x31d011(0x1e8)]||'')[_0x31d011(0x26b)]()[_0x31d011(0x2e2)]()===_0x23dd03&&String(_0x1d3555[_0x31d011(0x1ea)]||'')[_0x31d011(0x26b)]()[_0x31d011(0x2e2)]()===_0x3ca319&&String(_0x1d3555['rarity']||'')['toLowerCase']()[_0x31d011(0x2e2)]()===_0x3fa4d3&&Number(_0x1d3555['quantity'])>0x0);_0x4692ed[_0x31d011(0x3bf)](_0x5daacc=>{const _0x361f2e=_0x31d011;if(_0x17ad68<=0x0)return;const _0x5d1133=Number(_0x5daacc[_0x361f2e(0x1e4)]),_0x731b92=Math['min'](_0x5d1133,_0x17ad68);_0x5daacc[_0x361f2e(0x1e4)]=_0x5d1133-_0x731b92;const _0x56ad7d=_0x4c59d8['price']/_0x4c59d8[_0x361f2e(0x330)]*_0x731b92;state[_0x361f2e(0x2a5)][_0x361f2e(0x2e7)]({'date':_0x3a006f,'cardid':_0x5daacc['id'],'name':_0x5daacc[_0x361f2e(0x1e8)],'set':_0x5daacc[_0x361f2e(0x1ea)],'rarity':_0x5daacc[_0x361f2e(0x234)],'quantity':_0x731b92,'price':_0x56ad7d,'notes':_0x21ffd9}),silentPostData('recordSale',{'date':_0x3a006f,'cardId':_0x5daacc['id'],'name':_0x5daacc[_0x361f2e(0x1e8)],'set':_0x5daacc[_0x361f2e(0x1ea)],'rarity':_0x5daacc['rarity'],'quantity':_0x731b92,'price':_0x56ad7d,'notes':_0x21ffd9}),_0x17ad68-=_0x731b92;});}),document[_0x184d79(0x37e)](_0x184d79(0x235))['style'][_0x184d79(0x22e)]=_0x184d79(0x317),saleCart=[],renderInventory(),renderSales(),updateDashboard();}function updateSoldCardsStatsAndCharts(_0x570a68){const _0x35a9f5=_0x34ccac;let _0x55fed6=0x0,_0x18cfbf=0x0,_0x1ab881=0x0;const _0x39f2ca=getCalculatedData();let _0x274a07={},_0x82cbf8={};_0x570a68[_0x35a9f5(0x3bf)](_0x13a9b1=>{const _0x83229=_0x35a9f5;let _0x1fdf7f=Number(_0x13a9b1['price']||0x0);_0x55fed6+=_0x1fdf7f;let _0x2b24cb=Number(_0x13a9b1[_0x83229(0x1e4)]||0x0);_0x1ab881+=_0x2b24cb;let _0x957bea=_0x13a9b1[_0x83229(0x1ea)]||'Unknown\x20Set';if(!_0x274a07[_0x957bea])_0x274a07[_0x957bea]=0x0;_0x274a07[_0x957bea]+=_0x1fdf7f;let _0x5c2852=(_0x13a9b1['name']||_0x83229(0x2a2))+'\x20('+_0x957bea+')';if(!_0x82cbf8[_0x5c2852])_0x82cbf8[_0x5c2852]=0x0;_0x82cbf8[_0x5c2852]+=_0x2b24cb;const _0x59a277=state[_0x83229(0x279)][_0x83229(0x3cc)](_0xaea0d8=>_0xaea0d8['id']===_0x13a9b1[_0x83229(0x385)]);let _0x76e4b3=0x0;if(_0x59a277){const _0x4c8c30=_0x39f2ca['groupsMap'][_0x59a277['group']]||{'rate':0x0,'shippingFee':0x0,'totalCardsInGroup':0x0,'shippingDivider':0x1},_0x327392=Number(_0x59a277[_0x83229(0x310)]||0x0)*_0x4c8c30[_0x83229(0x311)],_0xc6515e=_0x4c8c30[_0x83229(0x2d3)]>0x0?_0x4c8c30[_0x83229(0x298)]/_0x4c8c30[_0x83229(0x2d3)]:0x0;_0x76e4b3=(_0x327392+_0xc6515e)*_0x2b24cb;}_0x18cfbf+=_0x1fdf7f-_0x76e4b3;});const _0x5e97ba=_0x55fed6>0x0?(_0x18cfbf/_0x55fed6*0x64)[_0x35a9f5(0x248)](0x1):0x0;let _0x425033=Object['keys'](_0x82cbf8)[_0x35a9f5(0x32d)](_0x13cf21=>({'cardInfo':_0x13cf21,'qty':_0x82cbf8[_0x13cf21]}))[_0x35a9f5(0x2fc)]((_0x201a61,_0x487694)=>_0x487694[_0x35a9f5(0x330)]-_0x201a61[_0x35a9f5(0x330)])[_0x35a9f5(0x3bc)](0x0,0x3),_0xc1ddde='';_0x425033['length']>0x0?_0x425033[_0x35a9f5(0x3bf)]((_0x168473,_0x220c11)=>{const _0x427744=_0x35a9f5,_0x22c78a=['🥇','🥈','🥉'];_0xc1ddde+=_0x427744(0x21c)+_0x22c78a[_0x220c11]+_0x427744(0x26e)+_0x168473[_0x427744(0x210)]+'</strong></span><span\x20style=\x22color:var(--accent-yellow);\x20font-weight:700;\x20white-space:nowrap;\x22>'+_0x168473[_0x427744(0x330)]+_0x427744(0x2e0);}):_0xc1ddde='<div\x20style=\x22color:var(--text-secondary);\x20font-size:12px;\x20text-align:center;\x20padding:10px\x200;\x22>No\x20sales\x20recorded</div>';let _0x8e7733=Object[_0x35a9f5(0x3b9)](_0x274a07)[_0x35a9f5(0x32d)](_0x2cabb3=>({'set':_0x2cabb3,'rev':_0x274a07[_0x2cabb3]}))[_0x35a9f5(0x2fc)]((_0xbe2c78,_0x27b7db)=>_0x27b7db[_0x35a9f5(0x2d6)]-_0xbe2c78['rev'])['slice'](0x0,0x5),_0x5b4a56=_0x8e7733['length']>0x0?_0x8e7733[0x0][_0x35a9f5(0x2d6)]:0x1,_0x19ed0f='';_0x8e7733[_0x35a9f5(0x3bf)](_0x571c16=>{const _0x54a06f=_0x35a9f5;let _0x55b8fe=Math[_0x54a06f(0x3d7)](_0x571c16['rev']/_0x5b4a56*0x64,0x2);_0x19ed0f+=_0x54a06f(0x297)+_0x571c16[_0x54a06f(0x1ea)]+_0x54a06f(0x367)+Math[_0x54a06f(0x2a6)](_0x571c16['rev'])[_0x54a06f(0x269)](_0x54a06f(0x2c8))+'</span></div><div\x20style=\x22width:\x20100%;\x20background:\x20rgba(128,128,128,0.1);\x20height:\x206px;\x20border-radius:\x203px;\x20overflow:\x20hidden;\x22><div\x20style=\x22width:\x20'+_0x55b8fe+'%;\x20background:\x20var(--accent-yellow);\x20height:\x20100%;\x20border-radius:\x203px;\x22></div></div></div>';});let _0x2f9496=document[_0x35a9f5(0x37e)](_0x35a9f5(0x21e)),_0x147404=document[_0x35a9f5(0x37e)](_0x35a9f5(0x38a));if(!_0x147404){_0x147404=document[_0x35a9f5(0x2ec)](_0x35a9f5(0x1e6)),_0x147404['id']=_0x35a9f5(0x38a),_0x147404[_0x35a9f5(0x308)][_0x35a9f5(0x1ec)]=_0x35a9f5(0x327);const _0x3eb760=_0x2f9496[_0x35a9f5(0x22c)]('.card-panel');_0x2f9496[_0x35a9f5(0x375)](_0x147404,_0x3eb760);}const _0x4938a2=window['innerWidth']<0x400;_0x4938a2?_0x147404[_0x35a9f5(0x308)][_0x35a9f5(0x3d5)]=_0x35a9f5(0x351):_0x147404['style'][_0x35a9f5(0x3d5)]='1.3fr\x201fr\x201.2fr',_0x147404['innerHTML']=_0x35a9f5(0x224)+Math[_0x35a9f5(0x2a6)](_0x55fed6)['toLocaleString'](_0x35a9f5(0x2c8))+_0x35a9f5(0x2d0)+(_0x18cfbf>=0x0?'#22c55e':_0x35a9f5(0x24c))+_0x35a9f5(0x1f3)+Math[_0x35a9f5(0x2a6)](_0x18cfbf)[_0x35a9f5(0x269)](_0x35a9f5(0x2c8))+'</h2></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22stat-card\x22\x20style=\x22padding:\x2020px;\x20flex-direction:\x20column;\x20align-items:\x20flex-start;\x20justify-content:\x20center;\x20height:\x20100%;\x20box-sizing:\x20border-box;\x20margin:\x200;\x22><h4\x20style=\x22margin:\x200\x200\x208px\x200;\x20color:\x20var(--text-secondary);\x20font-size:\x2013px;\x20font-weight:\x20500;\x22>Profit\x20Margin</h4><h2\x20style=\x22margin:\x200;\x20font-size:\x2020px;\x20color:\x20var(--text-primary);\x22>'+_0x5e97ba+_0x35a9f5(0x213)+_0x1ab881+_0x35a9f5(0x2a9)+_0xc1ddde+_0x35a9f5(0x27d)+(_0x8e7733['length']>0x0?_0x19ed0f:'<div\x20style=\x22color:var(--text-secondary);\x20font-size:12px;\x20text-align:center;\x22>No\x20sets\x20data\x20available</div>')+_0x35a9f5(0x31e);}function renderGroups(){const _0x188b8d=_0x34ccac,_0x10e3de=document[_0x188b8d(0x37e)](_0x188b8d(0x386)),_0x3467f6=document['getElementById']('group-select'),_0x3dd0bc=getCalculatedData();_0x3467f6&&(_0x3467f6[_0x188b8d(0x37a)]=_0x188b8d(0x2be),state[_0x188b8d(0x27a)]['forEach'](_0x35225a=>{const _0x406916=_0x188b8d;_0x3467f6[_0x406916(0x37a)]+=_0x406916(0x1f2)+_0x35225a[_0x406916(0x1e8)]+'\x22>'+_0x35225a[_0x406916(0x1e8)]+'</option>';}));const _0x13d7ee=document[_0x188b8d(0x37e)](_0x188b8d(0x293)),_0x3ba37e=document[_0x188b8d(0x37e)](_0x188b8d(0x29a));if(_0x13d7ee&&_0x3ba37e){const _0x38cb23=_0x13d7ee[_0x188b8d(0x2df)]||'All\x20Groups',_0x31820d=_0x3ba37e[_0x188b8d(0x2df)]||_0x188b8d(0x389);let _0x45c4c0=_0x188b8d(0x2f8);state['groups'][_0x188b8d(0x3bf)](_0x1099a3=>{const _0x5816a3=_0x188b8d;_0x45c4c0+=_0x5816a3(0x1f2)+_0x1099a3[_0x5816a3(0x1e8)]+'\x22>'+_0x1099a3[_0x5816a3(0x1e8)]+_0x5816a3(0x201);}),_0x13d7ee['innerHTML']=_0x45c4c0,_0x13d7ee[_0x188b8d(0x2df)]=_0x38cb23,_0x3ba37e[_0x188b8d(0x37a)]=_0x188b8d(0x2b8),_0x3ba37e[_0x188b8d(0x2df)]=_0x31820d;}if(!_0x10e3de)return;_0x10e3de[_0x188b8d(0x37a)]='';if(!state[_0x188b8d(0x27a)]||state['groups'][_0x188b8d(0x2ca)]===0x0){_0x10e3de['innerHTML']=_0x188b8d(0x3d4);return;}state['groups']['forEach'](_0x364a20=>{const _0x1f3949=_0x188b8d,_0x5d4da1=_0x3dd0bc[_0x1f3949(0x34c)][_0x364a20[_0x1f3949(0x1e8)]]||{'totalCardsInGroup':0x0},_0x423db2=document[_0x1f3949(0x2ec)](_0x1f3949(0x1e6));_0x423db2[_0x1f3949(0x2f6)]=_0x1f3949(0x25d),_0x423db2['innerHTML']='\x0a\x20\x20\x20\x20\x20\x20<div\x20style=\x22display:flex;\x20justify-content:space-between;\x20align-items:center;\x20margin-bottom:12px;\x22><h3\x20style=\x22margin:0;\x20display:flex;\x20align-items:center;\x22><i\x20class=\x22fas\x20fa-box\x22\x20style=\x22color:\x20var(--accent-yellow);\x20margin-right:6px;\x22></i><span\x20class=\x22editable-group\x20edit-g-name\x22\x20contenteditable=\x22true\x22\x20title=\x22Click\x20to\x20edit\x22\x20style=\x22padding:2px\x206px;\x20border-radius:4px;\x22>'+_0x364a20[_0x1f3949(0x1e8)]+_0x1f3949(0x204)+String(_0x364a20['id'])[_0x1f3949(0x1e7)](0x4,0xa)+_0x1f3949(0x290)+(_0x364a20[_0x1f3949(0x21d)]||0x0)+_0x1f3949(0x35c)+Number(_0x364a20[_0x1f3949(0x392)]||0x0)[_0x1f3949(0x269)](_0x1f3949(0x2c8))+_0x1f3949(0x242)+_0x5d4da1[_0x1f3949(0x216)]+_0x1f3949(0x1fb),_0x423db2[_0x1f3949(0x2d4)](_0x1f3949(0x262))[_0x1f3949(0x3bf)](_0x2d2489=>{const _0xf47351=_0x1f3949;_0x2d2489[_0xf47351(0x31d)](_0xf47351(0x2d5),()=>_0x2d2489[_0xf47351(0x308)][_0xf47351(0x3b6)]='rgba(128,128,128,0.1)'),_0x2d2489[_0xf47351(0x31d)](_0xf47351(0x254),()=>_0x2d2489[_0xf47351(0x308)][_0xf47351(0x3b6)]=_0xf47351(0x34f)),_0x2d2489['addEventListener']('keydown',_0x2c177f=>{const _0x4dcacd=_0xf47351;_0x2c177f['key']===_0x4dcacd(0x2b9)&&(_0x2c177f[_0x4dcacd(0x3af)](),_0x2d2489['blur']());}),_0x2d2489[_0xf47351(0x31d)](_0xf47351(0x3c2),()=>{const _0x1e92fd=_0xf47351;_0x2d2489[_0x1e92fd(0x308)][_0x1e92fd(0x3b6)]=_0x1e92fd(0x34f);const _0x2e00e7=_0x364a20[_0x1e92fd(0x1e8)];let _0x5c744c=_0x423db2[_0x1e92fd(0x22c)]('.edit-g-name')['textContent'][_0x1e92fd(0x2e2)](),_0x4f8bfc=Number(_0x423db2['querySelector'](_0x1e92fd(0x321))[_0x1e92fd(0x2ed)][_0x1e92fd(0x2a0)](/[^0-9]/g,''))||0x0,_0x577d9d=Number(_0x423db2[_0x1e92fd(0x22c)](_0x1e92fd(0x32a))[_0x1e92fd(0x2ed)]['replace'](/[^0-9]/g,''))||0x0;if(!_0x5c744c)_0x5c744c=_0x2e00e7;const _0x3705f7=_0x2e00e7!==_0x5c744c;state[_0x1e92fd(0x27a)]['forEach'](_0x51421e=>{const _0x165606=_0x1e92fd;_0x51421e['id']===_0x364a20['id']&&(_0x51421e[_0x165606(0x1e8)]=_0x5c744c,_0x51421e[_0x165606(0x21d)]=_0x4f8bfc,_0x51421e[_0x165606(0x392)]=_0x577d9d);}),_0x3705f7&&state['inventory'][_0x1e92fd(0x3bf)](_0x3da7ec=>{const _0x3855d=_0x1e92fd;if(_0x3da7ec[_0x3855d(0x3ca)]===_0x2e00e7)_0x3da7ec[_0x3855d(0x3ca)]=_0x5c744c;}),updateDashboard(),renderInventory(),renderGroups(),silentPostData(_0x1e92fd(0x27f),{'id':_0x364a20['id'],'oldName':_0x2e00e7,'name':_0x5c744c,'rate':_0x4f8bfc,'shipping':_0x577d9d,'nameChanged':_0x3705f7});});}),_0x423db2[_0x1f3949(0x22c)](_0x1f3949(0x398))[_0x1f3949(0x31d)](_0x1f3949(0x30a),()=>{const _0x5859e5=_0x1f3949,_0x41bc6d=state[_0x5859e5(0x279)][_0x5859e5(0x20e)](_0x1f9585=>_0x1f9585[_0x5859e5(0x3ca)]===_0x364a20[_0x5859e5(0x1e8)]),_0x5095e5=_0x41bc6d[_0x5859e5(0x2ca)]>0x0?_0x5859e5(0x353)+_0x364a20['name']+'\x22\x20AND\x20the\x20'+_0x41bc6d[_0x5859e5(0x2ca)]+_0x5859e5(0x22a):_0x5859e5(0x29b)+_0x364a20[_0x5859e5(0x1e8)]+'\x22?';if(confirm(_0x5095e5)){const _0x598270={'group':{'id':_0x364a20['id'],'name':_0x364a20['name'],'exchangeRate':_0x364a20['exchangerate'],'shippingFee':_0x364a20[_0x5859e5(0x392)]},'cards':_0x41bc6d};state['trash']['unshift']({'id':_0x5859e5(0x1ee)+Date['now']()+Math['floor'](Math[_0x5859e5(0x244)]()*0x3e8),'type':'GroupBundle','deletedAt':new Date()[_0x5859e5(0x292)](),'payload':JSON[_0x5859e5(0x273)](_0x598270)}),state[_0x5859e5(0x27a)]=state[_0x5859e5(0x27a)][_0x5859e5(0x20e)](_0x40f046=>_0x40f046['id']!==_0x364a20['id']),state[_0x5859e5(0x279)]=state[_0x5859e5(0x279)][_0x5859e5(0x20e)](_0xfc9e4f=>_0xfc9e4f['group']!==_0x364a20['name']),updateDashboard(),renderInventory(),renderGroups(),renderTrash(),postData(_0x5859e5(0x203),{'id':_0x364a20['id'],'name':_0x364a20['name']});}}),_0x10e3de[_0x1f3949(0x397)](_0x423db2);});}function renderSales(){const _0x3472f4=_0x34ccac,_0x280bd1=document[_0x3472f4(0x37e)](_0x3472f4(0x236));if(!_0x280bd1)return;_0x280bd1[_0x3472f4(0x37a)]='';const _0x3e3aa6=_0x280bd1[_0x3472f4(0x34b)](_0x3472f4(0x239));if(_0x3e3aa6){const _0x3ff789=_0x3e3aa6[_0x3472f4(0x22c)](_0x3472f4(0x3c7));if(_0x3ff789&&!_0x3ff789[_0x3472f4(0x22c)](_0x3472f4(0x349))){const _0x37e226=document[_0x3472f4(0x2ec)]('th');_0x37e226[_0x3472f4(0x2f6)]=_0x3472f4(0x2fd),_0x37e226[_0x3472f4(0x308)][_0x3472f4(0x240)]='40px',_0x37e226[_0x3472f4(0x37a)]=_0x3472f4(0x264),_0x3ff789[_0x3472f4(0x375)](_0x37e226,_0x3ff789['firstChild']);}let _0x554a0e=document['getElementById'](_0x3472f4(0x26a));if(!_0x554a0e){_0x554a0e=document['createElement'](_0x3472f4(0x1e6)),_0x554a0e['id']='sales-controls-div',_0x554a0e[_0x3472f4(0x308)][_0x3472f4(0x1ec)]=_0x3472f4(0x21f);const _0x47a0bd=document[_0x3472f4(0x2ec)]('div');_0x47a0bd[_0x3472f4(0x308)][_0x3472f4(0x1ec)]=_0x3472f4(0x322),_0x47a0bd[_0x3472f4(0x37a)]=_0x3472f4(0x336),_0x554a0e[_0x3472f4(0x397)](_0x47a0bd);const _0x56e43d=document['createElement'](_0x3472f4(0x1e6));_0x56e43d['id']=_0x3472f4(0x226),_0x56e43d['style']['cssText']=_0x3472f4(0x222),_0x56e43d[_0x3472f4(0x37a)]=_0x3472f4(0x36c),_0x554a0e[_0x3472f4(0x397)](_0x56e43d),_0x3e3aa6[_0x3472f4(0x25b)][_0x3472f4(0x375)](_0x554a0e,_0x3e3aa6),document[_0x3472f4(0x37e)](_0x3472f4(0x37f))[_0x3472f4(0x31d)](_0x3472f4(0x3ac),()=>{renderSales();}),document[_0x3472f4(0x37e)](_0x3472f4(0x22b))['addEventListener'](_0x3472f4(0x3ac),()=>{renderSales();}),document[_0x3472f4(0x37e)]('sales-year-filter')['addEventListener'](_0x3472f4(0x3ac),()=>{renderSales();});}else document[_0x3472f4(0x37e)]('bulk-delete-div')['style'][_0x3472f4(0x22e)]='none';const _0x62b9cd=document[_0x3472f4(0x37e)](_0x3472f4(0x3b1));if(_0x62b9cd&&state['sales']){const _0x273746=_0x62b9cd[_0x3472f4(0x2df)],_0x67a299=[...new Set(state['sales']['map'](_0x4d2742=>new Date(_0x4d2742[_0x3472f4(0x1e5)]||Date['now']())[_0x3472f4(0x209)]()))][_0x3472f4(0x2fc)]((_0x17d9ce,_0xdb3324)=>_0xdb3324-_0x17d9ce);if(_0x67a299['length']===0x0)_0x67a299[_0x3472f4(0x2e7)](new Date()[_0x3472f4(0x209)]());let _0x19e4ce=_0x3472f4(0x25f);_0x67a299[_0x3472f4(0x3bf)](_0x2f5769=>{const _0x4b4494=_0x3472f4;_0x19e4ce+=_0x4b4494(0x1f2)+_0x2f5769+'\x22\x20'+(String(_0x2f5769)===_0x273746?_0x4b4494(0x326):'')+'>'+_0x2f5769+'</option>';}),_0x62b9cd[_0x3472f4(0x37a)]=_0x19e4ce;if(!_0x67a299[_0x3472f4(0x355)](Number(_0x273746))&&_0x273746!==_0x3472f4(0x3d6))_0x62b9cd[_0x3472f4(0x2df)]=_0x3472f4(0x3d6);}}const _0x5287c6=document[_0x3472f4(0x37e)](_0x3472f4(0x22b))?document[_0x3472f4(0x37e)](_0x3472f4(0x22b))['value']:'all',_0x45f0f0=document[_0x3472f4(0x37e)]('sales-year-filter')?document[_0x3472f4(0x37e)](_0x3472f4(0x3b1))[_0x3472f4(0x2df)]:'all';let _0x329b22=[...state['sales']];_0x329b22=_0x329b22[_0x3472f4(0x20e)](_0x1a7156=>{const _0x1835dc=_0x3472f4,_0x4df0ed=new Date(_0x1a7156[_0x1835dc(0x1e5)]||Date[_0x1835dc(0x2a4)]()),_0x56c8fa=_0x5287c6===_0x1835dc(0x3d6)||_0x4df0ed['getMonth']()===Number(_0x5287c6),_0x5b9435=_0x45f0f0===_0x1835dc(0x3d6)||_0x4df0ed[_0x1835dc(0x209)]()===Number(_0x45f0f0);return _0x56c8fa&&_0x5b9435;});const _0x3d6c82=document['getElementById']('sort-sales')?document[_0x3472f4(0x37e)](_0x3472f4(0x37f))[_0x3472f4(0x2df)]:_0x3472f4(0x34e);if(_0x3d6c82==='newest')_0x329b22[_0x3472f4(0x2fc)]((_0x4b9471,_0x29305a)=>new Date(_0x29305a[_0x3472f4(0x1e5)]||0x0)-new Date(_0x4b9471[_0x3472f4(0x1e5)]||0x0));else{if(_0x3d6c82==='oldest')_0x329b22[_0x3472f4(0x2fc)]((_0x58347e,_0x48cb9d)=>new Date(_0x58347e[_0x3472f4(0x1e5)]||0x0)-new Date(_0x48cb9d['date']||0x0));else{if(_0x3d6c82==='az')_0x329b22[_0x3472f4(0x2fc)]((_0x317d00,_0x25ab5f)=>String(_0x317d00[_0x3472f4(0x1e8)]||'')[_0x3472f4(0x395)](String(_0x25ab5f[_0x3472f4(0x1e8)]||'')));else{if(_0x3d6c82==='za')_0x329b22[_0x3472f4(0x2fc)]((_0x4db718,_0x428e79)=>String(_0x428e79[_0x3472f4(0x1e8)]||'')[_0x3472f4(0x395)](String(_0x4db718[_0x3472f4(0x1e8)]||'')));else{if(_0x3d6c82==='price-high')_0x329b22[_0x3472f4(0x2fc)]((_0x4f2e06,_0x3dc470)=>Number(_0x3dc470[_0x3472f4(0x31f)]||0x0)-Number(_0x4f2e06[_0x3472f4(0x31f)]||0x0));else{if(_0x3d6c82==='price-low')_0x329b22['sort']((_0x9789be,_0x4d99e9)=>Number(_0x9789be[_0x3472f4(0x31f)]||0x0)-Number(_0x4d99e9['price']||0x0));}}}}}const _0x285a94=document[_0x3472f4(0x37e)]('sales-count-display');if(_0x285a94)_0x285a94['textContent']=_0x3472f4(0x3ab)+_0x329b22[_0x3472f4(0x2ca)]+_0x3472f4(0x27e);updateSoldCardsStatsAndCharts(_0x329b22);if(_0x329b22['length']===0x0){_0x280bd1['innerHTML']='<tr><td\x20colspan=\x2210\x22\x20style=\x22text-align:center;\x20color:\x20var(--text-secondary);\x22>No\x20sales\x20records\x20found\x20for\x20this\x20period.</td></tr>';return;}const _0x515836=getCalculatedData();_0x329b22[_0x3472f4(0x3bf)]((_0x3c1a42,_0x1c8863)=>{const _0x2054af=_0x3472f4,_0x16983a=state[_0x2054af(0x279)]['find'](_0x1294a8=>_0x1294a8['id']===_0x3c1a42['cardid']);let _0x2ddace=0x0;if(_0x16983a){const _0x478f43=_0x515836['groupsMap'][_0x16983a[_0x2054af(0x3ca)]]||{'rate':0x0,'shippingFee':0x0,'totalCardsInGroup':0x0,'shippingDivider':0x1},_0x327b3a=Number(_0x16983a['yenprice']||0x0)*_0x478f43[_0x2054af(0x311)],_0x38747a=_0x478f43['shippingDivider']>0x0?_0x478f43[_0x2054af(0x298)]/_0x478f43[_0x2054af(0x2d3)]:0x0,_0x1cf403=_0x327b3a+_0x38747a;_0x2ddace=_0x1cf403*Number(_0x3c1a42[_0x2054af(0x1e4)]||0x1);}const _0x24b19c=Number(_0x3c1a42[_0x2054af(0x31f)]||0x0),_0x2f5a19=_0x24b19c-_0x2ddace,_0x36d460=_0x2f5a19<0x0,_0x385108=_0x36d460?_0x2054af(0x24c):_0x2054af(0x365),_0x5e4db2=(_0x36d460?'-':'')+'Rp\x20'+Math[_0x2054af(0x211)](Math[_0x2054af(0x2a6)](_0x2f5a19))['toLocaleString'](_0x2054af(0x2c8)),_0x198243=new Date(_0x3c1a42[_0x2054af(0x1e5)]||Date[_0x2054af(0x2a4)]()),_0x53c97c=_0x198243[_0x2054af(0x217)]()*0xea60,_0x23f438=new Date(_0x198243['getTime']()-_0x53c97c)['toISOString']()[_0x2054af(0x33e)]('T')[0x0],_0x2aa4b5=document['createElement']('tr');_0x2aa4b5[_0x2054af(0x31d)]('click',_0x5e8a59=>{const _0x20f880=_0x2054af,_0x59f11f=[_0x20f880(0x2d9),_0x20f880(0x38b),'BUTTON'][_0x20f880(0x355)](_0x5e8a59[_0x20f880(0x2d8)][_0x20f880(0x36d)])||_0x5e8a59[_0x20f880(0x2d8)][_0x20f880(0x34b)](_0x20f880(0x29c));if(_0x59f11f)return;if(_0x2aa4b5[_0x20f880(0x343)][_0x20f880(0x36f)](_0x20f880(0x223))&&(_0x5e8a59[_0x20f880(0x2d8)][_0x20f880(0x25a)](_0x20f880(0x23a))===_0x20f880(0x2e3)||_0x5e8a59[_0x20f880(0x2d8)]['closest'](_0x20f880(0x38d))))return;if(window[_0x20f880(0x26d)]<=0x300)_0x2aa4b5[_0x20f880(0x343)]['toggle'](_0x20f880(0x223));}),_0x2aa4b5[_0x2054af(0x37a)]=_0x2054af(0x2e8)+_0x1c8863+'\x22\x20style=\x22cursor:pointer;\x20width:16px;\x20height:16px;\x20accent-color:\x20var(--accent-yellow);\x22></td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Date\x22\x20title=\x22Click\x20to\x20edit\x20date\x22><input\x20type=\x22date\x22\x20class=\x22inline-edit-date\x20edit-sale-date\x22\x20value=\x22'+_0x23f438+_0x2054af(0x2ce)+(_0x3c1a42[_0x2054af(0x1e8)]||'—')+'</strong></td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Set\x22>'+(_0x3c1a42[_0x2054af(0x1ea)]||'—')+'</td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Rarity\x22>'+(_0x3c1a42[_0x2054af(0x234)]||'—')+_0x2054af(0x2c1)+(_0x3c1a42['quantity']||0x1)+'</td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Selling\x20Price\x22>Rp\x20'+_0x24b19c['toLocaleString'](_0x2054af(0x2c8))+_0x2054af(0x294)+_0x385108+_0x2054af(0x388)+_0x5e4db2+_0x2054af(0x2bd)+(_0x3c1a42[_0x2054af(0x1f4)]||'—')+_0x2054af(0x253);const _0x218007=_0x2aa4b5['querySelector'](_0x2054af(0x2ef));_0x218007[_0x2054af(0x31d)](_0x2054af(0x2d5),()=>_0x218007[_0x2054af(0x308)][_0x2054af(0x335)]=_0x2054af(0x338)),_0x218007[_0x2054af(0x31d)](_0x2054af(0x254),()=>_0x218007[_0x2054af(0x308)][_0x2054af(0x335)]=_0x2054af(0x377)),_0x218007[_0x2054af(0x31d)](_0x2054af(0x3ac),_0x227d98=>{const _0x53caa9=_0x2054af,_0x56f7b7=_0x227d98['target'][_0x53caa9(0x2df)];if(!_0x56f7b7)return;const _0x39b508=new Date(_0x56f7b7+_0x53caa9(0x24f))[_0x53caa9(0x292)]();_0x3c1a42[_0x53caa9(0x1e5)]=_0x39b508,silentPostData(_0x53caa9(0x393),{'oldDate':_0x3c1a42[_0x53caa9(0x1e5)],'cardId':_0x3c1a42[_0x53caa9(0x385)],'newDate':_0x39b508,'notes':_0x3c1a42[_0x53caa9(0x1f4)]}),updateDashboard(),renderSales();});const _0x3bf687=_0x2aa4b5[_0x2054af(0x22c)]('.edit-sale-notes');_0x3bf687[_0x2054af(0x31d)](_0x2054af(0x2d5),()=>_0x3bf687[_0x2054af(0x308)][_0x2054af(0x3b6)]=_0x2054af(0x28f)),_0x3bf687[_0x2054af(0x31d)](_0x2054af(0x254),()=>_0x3bf687[_0x2054af(0x308)][_0x2054af(0x3b6)]=_0x2054af(0x34f)),_0x3bf687[_0x2054af(0x31d)](_0x2054af(0x39b),_0x1007cc=>{const _0x8959ac=_0x2054af;_0x1007cc[_0x8959ac(0x257)]===_0x8959ac(0x2b9)&&(_0x1007cc[_0x8959ac(0x3af)](),_0x3bf687[_0x8959ac(0x3c2)]());}),_0x3bf687['addEventListener'](_0x2054af(0x3c2),()=>{const _0x23b761=_0x2054af;_0x3bf687[_0x23b761(0x308)]['background']=_0x23b761(0x34f);let _0xe154c=_0x3bf687[_0x23b761(0x2ed)][_0x23b761(0x2e2)]();if(_0xe154c==='—')_0xe154c='';_0xe154c!==(_0x3c1a42[_0x23b761(0x1f4)]||'')&&(_0x3c1a42[_0x23b761(0x1f4)]=_0xe154c,silentPostData(_0x23b761(0x393),{'oldDate':_0x3c1a42[_0x23b761(0x1e5)],'cardId':_0x3c1a42[_0x23b761(0x385)],'newDate':_0x3c1a42['date'],'notes':_0xe154c}));}),_0x2aa4b5[_0x2054af(0x22c)](_0x2054af(0x3be))[_0x2054af(0x31d)](_0x2054af(0x30a),()=>{const _0xe7898f=_0x2054af;if(confirm(_0xe7898f(0x3a2)+_0x3c1a42[_0xe7898f(0x1e8)]+_0xe7898f(0x27b)+_0x3c1a42['quantity']+_0xe7898f(0x334))){if(_0x16983a)_0x16983a[_0xe7898f(0x1e4)]=Number(_0x16983a[_0xe7898f(0x1e4)]||0x0)+Number(_0x3c1a42['quantity']||0x1);state['sales']=state[_0xe7898f(0x2a5)]['filter'](_0x4a4cae=>_0x4a4cae!==_0x3c1a42),updateDashboard(),renderSales(),renderInventory(),postData('deleteSale',{'date':_0x3c1a42[_0xe7898f(0x1e5)],'cardId':_0x3c1a42['cardid'],'quantity':_0x3c1a42[_0xe7898f(0x1e4)]});}}),_0x280bd1[_0x2054af(0x397)](_0x2aa4b5);});let _0x33b427=document['getElementById']('check-all-sales');const _0x5bc0d3=document['querySelectorAll'](_0x3472f4(0x250)),_0x1e87c3=document[_0x3472f4(0x37e)](_0x3472f4(0x255)),_0x4f25f5=document[_0x3472f4(0x37e)](_0x3472f4(0x206)),_0xc4941a=document[_0x3472f4(0x37e)](_0x3472f4(0x226));if(_0x33b427){const _0x563d79=_0x33b427[_0x3472f4(0x2bb)](!![]);_0x33b427['parentNode'][_0x3472f4(0x247)](_0x563d79,_0x33b427),_0x33b427=_0x563d79,_0x33b427[_0x3472f4(0x2c0)]=![];}if(_0x33b427&&_0x5bc0d3&&_0x1e87c3&&_0x4f25f5&&_0xc4941a){function _0x917be9(){const _0x50328b=_0x3472f4,_0x2c6864=document[_0x50328b(0x2d4)]('.sale-check:checked')[_0x50328b(0x2ca)];_0x2c6864>0x0?(_0xc4941a[_0x50328b(0x308)][_0x50328b(0x22e)]=_0x50328b(0x39f),_0x4f25f5[_0x50328b(0x2ed)]=_0x2c6864):_0xc4941a[_0x50328b(0x308)][_0x50328b(0x22e)]='none',_0x33b427[_0x50328b(0x2c0)]=_0x2c6864===_0x5bc0d3[_0x50328b(0x2ca)]&&_0x5bc0d3[_0x50328b(0x2ca)]>0x0;}_0x33b427['addEventListener']('change',_0x21a8ed=>{const _0x246948=_0x3472f4;_0x5bc0d3[_0x246948(0x3bf)](_0x15c884=>_0x15c884[_0x246948(0x2c0)]=_0x21a8ed['target'][_0x246948(0x2c0)]),_0x917be9();}),_0x5bc0d3[_0x3472f4(0x3bf)](_0x310856=>{const _0xe17fd3=_0x3472f4;_0x310856[_0xe17fd3(0x31d)](_0xe17fd3(0x3ac),_0x917be9);});const _0x5914cd=_0x1e87c3[_0x3472f4(0x2bb)](!![]);_0x1e87c3[_0x3472f4(0x25b)]['replaceChild'](_0x5914cd,_0x1e87c3),_0x5914cd[_0x3472f4(0x31d)](_0x3472f4(0x30a),()=>{const _0x2c4f5f=_0x3472f4,_0x2ed623=document[_0x2c4f5f(0x2d4)]('.sale-check:checked');if(_0x2ed623[_0x2c4f5f(0x2ca)]===0x0)return;if(confirm(_0x2c4f5f(0x271)+_0x2ed623['length']+_0x2c4f5f(0x232))){const _0x46eb2e=Array[_0x2c4f5f(0x387)](_0x2ed623)[_0x2c4f5f(0x32d)](_0x886cf4=>_0x329b22[_0x886cf4[_0x2c4f5f(0x25a)](_0x2c4f5f(0x1f8))]);_0x46eb2e[_0x2c4f5f(0x3bf)](_0x4299ff=>{const _0x21427f=_0x2c4f5f,_0x1aec0d=state[_0x21427f(0x279)]['find'](_0x4e7f8a=>_0x4e7f8a['id']===_0x4299ff[_0x21427f(0x385)]);if(_0x1aec0d)_0x1aec0d[_0x21427f(0x1e4)]=Number(_0x1aec0d[_0x21427f(0x1e4)]||0x0)+Number(_0x4299ff[_0x21427f(0x1e4)]||0x1);state[_0x21427f(0x2a5)]=state[_0x21427f(0x2a5)]['filter'](_0x21ae40=>_0x21ae40!==_0x4299ff);}),updateDashboard(),renderInventory(),renderSales(),async function _0x2d17a5(){const _0x2b1532=_0x2c4f5f;for(const _0x28deb3 of _0x46eb2e){try{await fetch(API_URL,{'method':'POST','body':JSON[_0x2b1532(0x273)]({'action':'deleteSale','date':_0x28deb3['date'],'cardId':_0x28deb3[_0x2b1532(0x385)],'quantity':_0x28deb3[_0x2b1532(0x1e4)]})});}catch(_0xef135e){}}}();}});}}function renderTrash(){const _0x9af5e3=_0x34ccac,_0x6eaf82=document[_0x9af5e3(0x37e)](_0x9af5e3(0x331));if(!_0x6eaf82)return;_0x6eaf82[_0x9af5e3(0x37a)]='';const _0x55716a=_0x6eaf82[_0x9af5e3(0x34b)](_0x9af5e3(0x239));if(_0x55716a){const _0x3ee985=_0x55716a[_0x9af5e3(0x22c)](_0x9af5e3(0x3c7));if(_0x3ee985&&!_0x3ee985[_0x9af5e3(0x22c)](_0x9af5e3(0x2fb))){const _0x20f985=document[_0x9af5e3(0x2ec)]('th');_0x20f985['className']='bulk-check-header-trash',_0x20f985[_0x9af5e3(0x308)][_0x9af5e3(0x240)]=_0x9af5e3(0x32f),_0x20f985[_0x9af5e3(0x37a)]=_0x9af5e3(0x2ff),_0x3ee985[_0x9af5e3(0x375)](_0x20f985,_0x3ee985[_0x9af5e3(0x3a7)]);}let _0x58cdb3=document[_0x9af5e3(0x37e)](_0x9af5e3(0x295));if(!_0x58cdb3){_0x58cdb3=document['createElement'](_0x9af5e3(0x1e6)),_0x58cdb3['id']=_0x9af5e3(0x295),_0x58cdb3['style'][_0x9af5e3(0x1ec)]=_0x9af5e3(0x21f);const _0x3d5962=document[_0x9af5e3(0x2ec)](_0x9af5e3(0x1e6));_0x3d5962['id']=_0x9af5e3(0x3a3),_0x3d5962[_0x9af5e3(0x308)][_0x9af5e3(0x1ec)]=_0x9af5e3(0x22d),_0x3d5962[_0x9af5e3(0x37a)]=_0x9af5e3(0x34d),_0x58cdb3[_0x9af5e3(0x397)](_0x3d5962),_0x55716a[_0x9af5e3(0x25b)][_0x9af5e3(0x375)](_0x58cdb3,_0x55716a);}else document[_0x9af5e3(0x37e)](_0x9af5e3(0x3a3))[_0x9af5e3(0x308)]['display']=_0x9af5e3(0x317);}if(!state[_0x9af5e3(0x3b7)]||state[_0x9af5e3(0x3b7)][_0x9af5e3(0x2ca)]===0x0){_0x6eaf82[_0x9af5e3(0x37a)]=_0x9af5e3(0x2f9);return;}let _0x52419b=[...state[_0x9af5e3(0x3b7)]][_0x9af5e3(0x2fc)]((_0x18c136,_0x47a8cd)=>new Date(_0x47a8cd[_0x9af5e3(0x33f)])-new Date(_0x18c136[_0x9af5e3(0x33f)]));_0x52419b[_0x9af5e3(0x3bf)]((_0x250bdc,_0x400e7b)=>{const _0x587777=_0x9af5e3;let _0xa0d69c=_0x587777(0x2de);try{const _0x564e91=JSON['parse'](_0x250bdc[_0x587777(0x2f2)]);if(_0x250bdc['type']===_0x587777(0x309))_0xa0d69c=_0x587777(0x2e9)+(_0x564e91[_0x587777(0x1e8)]||_0x587777(0x2a2))+'</strong>\x20('+(_0x564e91[_0x587777(0x1ea)]||'No\x20Set')+')\x20-\x20Stock:\x20'+_0x564e91['quantity']+_0x587777(0x2c4)+Number(_0x564e91['yenPrice'])[_0x587777(0x269)]('ja-JP');else{if(_0x250bdc[_0x587777(0x2e6)]==='Sale')_0xa0d69c=_0x587777(0x2e9)+(_0x564e91[_0x587777(0x1e8)]||_0x587777(0x2a2))+_0x587777(0x307)+_0x564e91[_0x587777(0x1e4)]+_0x587777(0x37d)+Number(_0x564e91[_0x587777(0x31f)])[_0x587777(0x269)](_0x587777(0x2c8));else _0x250bdc['type']===_0x587777(0x2cf)&&(_0xa0d69c=_0x587777(0x35f)+_0x564e91['group'][_0x587777(0x1e8)]+_0x587777(0x305)+_0x564e91['group'][_0x587777(0x2b0)]+_0x587777(0x34a)+(_0x564e91['cards']?_0x564e91['cards'][_0x587777(0x2ca)]:0x0)+_0x587777(0x390));}}catch(_0x71f7bf){}const _0x26945c=_0x250bdc[_0x587777(0x2e6)]===_0x587777(0x309)?'rgba(59,\x20130,\x20246,\x200.15)':_0x250bdc[_0x587777(0x2e6)]===_0x587777(0x1ef)?_0x587777(0x23e):_0x587777(0x2eb),_0x3c37ba=_0x250bdc[_0x587777(0x2e6)]===_0x587777(0x309)?'#3b82f6':_0x250bdc[_0x587777(0x2e6)]==='Sale'?_0x587777(0x365):_0x587777(0x238),_0x158fbb=_0x250bdc[_0x587777(0x2e6)]===_0x587777(0x2cf)?'Group\x20&\x20Cards':_0x250bdc['type'],_0x247d0d=document[_0x587777(0x2ec)]('tr');_0x247d0d[_0x587777(0x31d)](_0x587777(0x30a),_0x480109=>{const _0x40d6b4=_0x587777,_0x3fdb9a=[_0x40d6b4(0x2d9),_0x40d6b4(0x38b),'BUTTON'][_0x40d6b4(0x355)](_0x480109[_0x40d6b4(0x2d8)][_0x40d6b4(0x36d)])||_0x480109[_0x40d6b4(0x2d8)][_0x40d6b4(0x34b)](_0x40d6b4(0x29c));if(_0x3fdb9a)return;if(_0x247d0d[_0x40d6b4(0x343)][_0x40d6b4(0x36f)](_0x40d6b4(0x223))&&(_0x480109[_0x40d6b4(0x2d8)]['getAttribute'](_0x40d6b4(0x23a))===_0x40d6b4(0x2e3)||_0x480109['target'][_0x40d6b4(0x34b)](_0x40d6b4(0x38d))))return;if(window[_0x40d6b4(0x26d)]<=0x300)_0x247d0d[_0x40d6b4(0x343)][_0x40d6b4(0x2dd)](_0x40d6b4(0x223));}),_0x247d0d[_0x587777(0x37a)]=_0x587777(0x3c8)+_0x400e7b+'\x22\x20style=\x22cursor:pointer;\x20width:16px;\x20height:16px;\x20accent-color:\x20var(--accent-yellow);\x22></td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Type\x22><span\x20style=\x22padding:4px\x208px;\x20border-radius:4px;\x20font-size:12px;\x20font-weight:600;\x20background:\x20'+_0x26945c+_0x587777(0x231)+_0x3c37ba+_0x587777(0x345)+_0x158fbb+'</span></td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Deleted\x20On\x22>'+new Date(_0x250bdc[_0x587777(0x33f)])[_0x587777(0x269)]()+'</td>\x0a\x20\x20\x20\x20\x20\x20<td\x20data-label=\x22Details\x22>'+_0xa0d69c+_0x587777(0x350),_0x247d0d[_0x587777(0x22c)]('.btn-restore-trash')['addEventListener'](_0x587777(0x30a),()=>{const _0x550b67=_0x587777;if(confirm(_0x550b67(0x2d7)+_0x158fbb+_0x550b67(0x277)))restoreSingleTrash(_0x250bdc);}),_0x247d0d['querySelector'](_0x587777(0x2b2))[_0x587777(0x31d)](_0x587777(0x30a),()=>{const _0x49e30e=_0x587777;if(confirm(_0x49e30e(0x3c6)+_0x158fbb+_0x49e30e(0x267)))deleteSingleTrash(_0x250bdc);}),_0x6eaf82[_0x587777(0x397)](_0x247d0d);});let _0x208c7c=document['getElementById'](_0x9af5e3(0x3a0));const _0x34a87a=document[_0x9af5e3(0x2d4)](_0x9af5e3(0x1fa)),_0x5ea9ca=document['getElementById'](_0x9af5e3(0x3bb)),_0x36befa=document[_0x9af5e3(0x37e)](_0x9af5e3(0x366)),_0x57fadf=document[_0x9af5e3(0x37e)]('bulk-trash-count'),_0x35cd51=document[_0x9af5e3(0x37e)](_0x9af5e3(0x3a3));if(_0x208c7c){const _0x46ef21=_0x208c7c[_0x9af5e3(0x2bb)](!![]);_0x208c7c[_0x9af5e3(0x25b)][_0x9af5e3(0x247)](_0x46ef21,_0x208c7c),_0x208c7c=_0x46ef21,_0x208c7c[_0x9af5e3(0x2c0)]=![];}if(_0x208c7c&&_0x34a87a&&_0x5ea9ca&&_0x36befa&&_0x57fadf&&_0x35cd51){function _0x2be5e8(){const _0x1488a1=_0x9af5e3,_0x49823e=document['querySelectorAll'](_0x1488a1(0x1fc))[_0x1488a1(0x2ca)];_0x49823e>0x0?(_0x35cd51[_0x1488a1(0x308)][_0x1488a1(0x22e)]=_0x1488a1(0x39f),_0x57fadf[_0x1488a1(0x2ed)]=_0x49823e):_0x35cd51[_0x1488a1(0x308)][_0x1488a1(0x22e)]=_0x1488a1(0x317),_0x208c7c[_0x1488a1(0x2c0)]=_0x49823e===_0x34a87a[_0x1488a1(0x2ca)]&&_0x34a87a[_0x1488a1(0x2ca)]>0x0;}_0x208c7c['addEventListener'](_0x9af5e3(0x3ac),_0x339986=>{const _0x16d3f6=_0x9af5e3;_0x34a87a[_0x16d3f6(0x3bf)](_0x461336=>_0x461336[_0x16d3f6(0x2c0)]=_0x339986['target'][_0x16d3f6(0x2c0)]),_0x2be5e8();}),_0x34a87a[_0x9af5e3(0x3bf)](_0x467384=>{const _0x5cc0d6=_0x9af5e3;_0x467384[_0x5cc0d6(0x31d)](_0x5cc0d6(0x3ac),_0x2be5e8);});const _0x1de02c=_0x5ea9ca['cloneNode'](!![]);_0x5ea9ca[_0x9af5e3(0x25b)][_0x9af5e3(0x247)](_0x1de02c,_0x5ea9ca),_0x1de02c[_0x9af5e3(0x31d)](_0x9af5e3(0x30a),()=>{const _0x51b61d=_0x9af5e3,_0x3fae53=document[_0x51b61d(0x2d4)](_0x51b61d(0x1fc));if(_0x3fae53[_0x51b61d(0x2ca)]===0x0)return;if(confirm(_0x51b61d(0x2f3)+_0x3fae53['length']+_0x51b61d(0x285))){const _0x23d511=Array['from'](_0x3fae53)['map'](_0x4dd105=>_0x52419b[_0x4dd105[_0x51b61d(0x25a)]('data-index')]);_0x23d511[_0x51b61d(0x3bf)](_0x2da36b=>processRestoreState(_0x2da36b)),updateDashboard(),renderInventory(),renderGroups(),renderTrash(),async function _0x67ad2c(){const _0x56904f=_0x51b61d;for(const _0x3bec92 of _0x23d511){try{await fetch(API_URL,{'method':'POST','body':JSON['stringify']({'action':_0x56904f(0x29f),'trashId':_0x3bec92['id']})});}catch(_0x24b84e){}}}();}});const _0x29ef93=_0x36befa[_0x9af5e3(0x2bb)](!![]);_0x36befa['parentNode']['replaceChild'](_0x29ef93,_0x36befa),_0x29ef93[_0x9af5e3(0x31d)](_0x9af5e3(0x30a),()=>{const _0x32b476=_0x9af5e3,_0x3eb17f=document[_0x32b476(0x2d4)](_0x32b476(0x1fc));if(_0x3eb17f[_0x32b476(0x2ca)]===0x0)return;if(confirm('Permanently\x20delete\x20'+_0x3eb17f[_0x32b476(0x2ca)]+_0x32b476(0x24e))){const _0x40f874=Array[_0x32b476(0x387)](_0x3eb17f)['map'](_0x5f2e4f=>_0x52419b[_0x5f2e4f['getAttribute'](_0x32b476(0x1f8))]);_0x40f874[_0x32b476(0x3bf)](_0x4cad2f=>{const _0x4152a1=_0x32b476;state[_0x4152a1(0x3b7)]=state['trash']['filter'](_0xea6c4b=>_0xea6c4b['id']!==_0x4cad2f['id']);}),renderTrash(),async function _0x380719(){const _0x32a907=_0x32b476;for(const _0x2bf04e of _0x40f874){try{await fetch(API_URL,{'method':_0x32a907(0x3bd),'body':JSON[_0x32a907(0x273)]({'action':_0x32a907(0x3dc),'trashId':_0x2bf04e['id']})});}catch(_0x516a96){}}}();}});}}function processRestoreState(_0x2cf0d5){const _0x2d8ff3=_0x34ccac;state[_0x2d8ff3(0x3b7)]=state[_0x2d8ff3(0x3b7)][_0x2d8ff3(0x20e)](_0x15838a=>_0x15838a['id']!==_0x2cf0d5['id']);try{const _0xa9e8da=JSON['parse'](_0x2cf0d5[_0x2d8ff3(0x2f2)]);if(_0x2cf0d5[_0x2d8ff3(0x2e6)]===_0x2d8ff3(0x2cf))state[_0x2d8ff3(0x27a)][_0x2d8ff3(0x2e7)]({'id':_0xa9e8da[_0x2d8ff3(0x3ca)]['id'],'name':_0xa9e8da[_0x2d8ff3(0x3ca)][_0x2d8ff3(0x1e8)],'exchangerate':_0xa9e8da[_0x2d8ff3(0x3ca)]['exchangeRate'],'shippingfee':_0xa9e8da[_0x2d8ff3(0x3ca)][_0x2d8ff3(0x298)]}),_0xa9e8da['cards']&&_0xa9e8da[_0x2d8ff3(0x300)]['forEach'](_0x5b9fb2=>state[_0x2d8ff3(0x279)]['push'](_0x5b9fb2));else{if(_0x2cf0d5[_0x2d8ff3(0x2e6)]===_0x2d8ff3(0x309))state[_0x2d8ff3(0x279)][_0x2d8ff3(0x2e7)](_0xa9e8da);else{if(_0x2cf0d5[_0x2d8ff3(0x2e6)]==='Sale'){state[_0x2d8ff3(0x2a5)][_0x2d8ff3(0x2e7)]({'date':_0xa9e8da[_0x2d8ff3(0x1e5)],'cardid':_0xa9e8da[_0x2d8ff3(0x369)],'name':_0xa9e8da[_0x2d8ff3(0x1e8)],'set':_0xa9e8da[_0x2d8ff3(0x1ea)],'rarity':_0xa9e8da['rarity'],'quantity':_0xa9e8da[_0x2d8ff3(0x1e4)],'price':_0xa9e8da[_0x2d8ff3(0x31f)],'notes':_0xa9e8da[_0x2d8ff3(0x1f4)]});const _0x2f75ef=state[_0x2d8ff3(0x279)]['find'](_0x5907ff=>_0x5907ff['id']===_0xa9e8da[_0x2d8ff3(0x369)]);if(_0x2f75ef)_0x2f75ef['quantity']=Number(_0x2f75ef['quantity']||0x0)-Number(_0xa9e8da[_0x2d8ff3(0x1e4)]||0x0);}}}}catch(_0xc7e57){}}function restoreSingleTrash(_0x1920cc){processRestoreState(_0x1920cc),updateDashboard(),renderInventory(),renderGroups(),renderTrash(),postData('restoreTrash',{'trashId':_0x1920cc['id']});}function deleteSingleTrash(_0xb8c95c){const _0x19f6f1=_0x34ccac;state['trash']=state['trash'][_0x19f6f1(0x20e)](_0x44c9ec=>_0x44c9ec['id']!==_0xb8c95c['id']),renderTrash(),silentPostData(_0x19f6f1(0x3dc),{'trashId':_0xb8c95c['id']});}
+// ALWAYS Use Actual Target App URL
+const API_URL = 'https://script.google.com/macros/s/AKfycbymA0CfeEuSx7_yetVi8gSxNDL9Zvbse30dHa9FsVPoa5zDZkipTwVlsHpKL7hooozvvg/exec'; 
+
+// Added batches array to global state to hold Google Sheets data
+let state = { inventory: [], groups: [], sales: [], trash: [], invoices: [], batches: [] };
+let saleCart = [];
+let masterPokemonDictionary = {};
+
+const customPokemonDictionary = {
+  "buusuta": "Flareon", "buusutaa": "Flareon", "bacyuru": "Joltik", "bachuru": "Joltik",
+  "burakki": "Umbreon", "burakkii": "Umbreon", "rizaadon": "Charizard", "lizaadon": "Charizard",
+  "kairyu": "Dragonite", "kairyuu": "Dragonite", "gekkouga": "Greninja", "myuutsuu": "Mewtwo",
+  "myutsu": "Mewtwo", "pukachu": "Pikachu"
+};
+
+async function loadMasterDictionary() {
+  try {
+    const response = await fetch('https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/pokemon_species_names.csv');
+    const csvText = await response.text();
+    const lines = csvText.split('\n');
+    let tempMap = {}; 
+    for(let i = 1; i < lines.length; i++) {
+      const parts = lines[i].split(',');
+      if(parts.length < 3) continue;
+      const speciesId = parts[0];
+      const langId = parts[1]; 
+      const name = parts[2].replace(/"/g, '').trim();
+      if (!tempMap[speciesId]) tempMap[speciesId] = {};
+      if (langId === '9') tempMap[speciesId].en = name;                
+      if (langId === '2') tempMap[speciesId].romaji = name.toLowerCase(); 
+      if (langId === '1') tempMap[speciesId].kana = name;              
+      if (langId === '11') tempMap[speciesId].kanji = name;            
+    }
+    Object.values(tempMap).forEach(entry => {
+      if (entry.en) {
+        if (entry.romaji) masterPokemonDictionary[entry.romaji] = entry.en;
+        if (entry.kana) masterPokemonDictionary[entry.kana] = entry.en;
+        if (entry.kanji) masterPokemonDictionary[entry.kanji] = entry.en;
+      }
+    });
+  } catch (e) {
+    console.error("Failed to load master dictionary", e);
+  }
+}
+
+function toKatakana(str) {
+  return str.replace(/[\u3041-\u3096]/g, function(match) {
+    return String.fromCharCode(match.charCodeAt(0) + 0x60);
+  });
+}
+
+function translatePokemonName(input) {
+  if (!input) return input;
+  const lowerInput = input.toLowerCase().trim();
+  if (customPokemonDictionary[lowerInput]) return customPokemonDictionary[lowerInput];
+  if (masterPokemonDictionary[lowerInput]) return masterPokemonDictionary[lowerInput];
+  const katakanaInput = toKatakana(lowerInput);
+  if (katakanaInput.length >= 2) {
+    for (let key in masterPokemonDictionary) {
+      if (key.includes(katakanaInput)) return masterPokemonDictionary[key];
+    }
+  }
+  if (lowerInput.length >= 3) {
+    for (let key in masterPokemonDictionary) {
+      if (/^[a-z]+$/.test(key) && key.startsWith(lowerInput)) return masterPokemonDictionary[key];
+    }
+  }
+  return input; 
+}
+
+let views, navItems, addCardsBody, modalOverlay, groupModal;
+
+const conditionCriteria = {
+  "Scratches": ["Light", "Moderate", "Heavy"],
+  "Dents": ["Micro", "Minor", "Moderate", "Major"],
+  "Marks": ["Light Surface", "Stain / Dirt", "Heavy Blemish"],
+  "Whitening": ["Slight", "Moderate", "Heavy"],
+  "Lifting / Peeling": ["Minor Edge", "Moderate", "Severe"],
+  "Texture Loss": ["Slight", "Moderate", "Severe"],
+  "Shining / Foil Wear": ["Faint", "Prominent"],
+  "Print Lines": ["Faint", "Single", "Multiple", "Severe"],
+  "Creases": ["Micro / Spider", "Minor", "Major"],
+  "Perfect Centering": ["Yes"]
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  views = document.querySelectorAll('.view');
+  navItems = document.querySelectorAll('.nav-item');
+  addCardsBody = document.getElementById('add-cards-body');
+  modalOverlay = document.getElementById('modal-overlay');
+  groupModal = document.getElementById('modal-group');
+  
+  setupThemeToggle();
+  setupNavigation();
+  setupModals();
+  setupSearchFilters(); 
+  buildConditionModalUI();
+  addMultipleRows(10); 
+
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const sidebar = document.querySelector('.sidebar');
+  if (mobileToggle) { mobileToggle.addEventListener('click', () => { sidebar.classList.toggle('open'); }); }
+  document.addEventListener('click', (e) => { if (window.innerWidth <= 768 && sidebar.classList.contains('open')) { if (!sidebar.contains(e.target) && !mobileToggle.contains(e.target)) sidebar.classList.remove('open'); } });
+
+  const authScreen = document.getElementById('auth-screen');
+  const authInput = document.getElementById('auth-password');
+  const authBtn = document.getElementById('btn-login');
+  const authErr = document.getElementById('auth-error');
+
+  async function unlockDatabase() {
+    const attemptedPass = authInput.value;
+    if(!attemptedPass) return;
+    authBtn.textContent = "Verifying...";
+    authBtn.style.opacity = "0.7";
+    authBtn.style.pointerEvents = "none";
+    try {
+      const res = await fetch(`${API_URL}?pass=${encodeURIComponent(attemptedPass)}`);
+      const data = await res.json();
+      if (data.error === "Unauthorized") {
+        authErr.style.display = 'block'; authInput.value = ''; authBtn.textContent = "Unlock Database"; authBtn.style.opacity = "1"; authBtn.style.pointerEvents = "auto";
+      } else {
+        sessionStorage.setItem('appPass', attemptedPass);
+        state.inventory = data.inventory || []; state.groups = data.groups || []; state.sales = data.sales || []; state.trash = data.trash || []; state.invoices = data.invoices || []; state.batches = data.batches || [];
+        updateDashboard(); renderInventory(); renderGroups(); renderSales(); renderTrash(); loadMasterDictionary();
+        refreshLoggerDropdown(); 
+        authScreen.style.opacity = '0'; setTimeout(() => authScreen.style.display = 'none', 400);
+      }
+    } catch(err) {
+      authErr.textContent = "Network error. Try again."; authErr.style.display = 'block'; authBtn.textContent = "Unlock Database"; authBtn.style.opacity = "1"; authBtn.style.pointerEvents = "auto";
+    }
+  }
+
+  if (sessionStorage.getItem('appPass')) { authScreen.style.display = 'none'; fetchData(); loadMasterDictionary(); } else { authBtn.addEventListener('click', unlockDatabase); authInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') unlockDatabase(); }); }
+
+  const recordSaleBtn = document.getElementById('btn-record-sale');
+  if (recordSaleBtn) recordSaleBtn.addEventListener('click', openGlobalSaleSearchModal);
+  document.addEventListener('click', () => { document.querySelectorAll('.action-dropdown').forEach(d => d.remove()); });
+});
+
+/* ============================================================== */
+/* CONDITION CHECKLIST MODAL LOGIC                                */
+/* ============================================================== */
+let currentConditionBtn = null;
+
+function buildConditionModalUI() {
+  const contentDiv = document.getElementById('condition-content');
+  if (!contentDiv) return;
+  
+  let html = '';
+  
+  html += `<div class="side-panel"><div class="condition-title">Overall Grade</div>
+           <div class="condition-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+             <label class="check-label"><input type="radio" name="overall-grade" value="M-NM"> Mint / Near Mint (M-NM)</label>
+             <label class="check-label"><input type="radio" name="overall-grade" value="NM"> Near Mint (NM)</label>
+             <label class="check-label"><input type="radio" name="overall-grade" value="Binder"> Binder</label>
+           </div></div>`;
+
+  ['Frontside', 'Backside'].forEach(side => {
+      html += `<div class="side-panel"><div class="condition-title">${side} Checklist</div>`;
+      for (const [category, options] of Object.entries(conditionCriteria)) {
+          html += `<div class="condition-group"><div style="font-size:12px; color:var(--text-secondary); margin-bottom:6px; font-weight: 500;">${category}</div><div class="condition-grid">`;
+          options.forEach(opt => {
+              const val = `${category}(${opt})`;
+              html += `<label class="check-label"><input type="checkbox" data-side="${side}" value="${val}"> ${opt}</label>`;
+          });
+          html += `</div></div>`;
+      }
+      html += `</div>`;
+  });
+            
+  contentDiv.innerHTML = html;
+
+  document.getElementById('save-condition-btn').addEventListener('click', () => {
+    if(!currentConditionBtn) return;
+    const data = { front: [], back: [], grade: '' };
+    
+    document.querySelectorAll('#modal-condition input[type="checkbox"]:checked').forEach(chk => {
+        if(chk.getAttribute('data-side') === 'Frontside') data.front.push(chk.value);
+        if(chk.getAttribute('data-side') === 'Backside') data.back.push(chk.value);
+    });
+    
+    const grade = document.querySelector('#modal-condition input[name="overall-grade"]:checked');
+    if(grade) data.grade = grade.value;
+    
+    currentConditionBtn.setAttribute('data-cond', JSON.stringify(data));
+    
+    const count = data.front.length + data.back.length + (data.grade ? 1 : 0);
+    if(count > 0) {
+      currentConditionBtn.innerHTML = `✅ Set (${count})`;
+      currentConditionBtn.style.color = 'var(--accent-yellow)';
+      currentConditionBtn.style.borderColor = 'var(--accent-yellow)';
+    } else {
+      currentConditionBtn.innerHTML = `Set`;
+      currentConditionBtn.style.color = '';
+      currentConditionBtn.style.borderColor = '';
+    }
+    
+    document.getElementById('modal-overlay').style.display = 'none';
+    document.getElementById('modal-condition').style.display = 'none';
+  });
+  
+  document.getElementById('cancel-condition').addEventListener('click', () => {
+    document.getElementById('modal-overlay').style.display = 'none';
+    document.getElementById('modal-condition').style.display = 'none';
+  });
+}
+
+function openConditionModal(btn) {
+  currentConditionBtn = btn;
+  const data = JSON.parse(btn.getAttribute('data-cond') || '{}');
+  
+  document.querySelectorAll('#modal-condition input[type="checkbox"]').forEach(chk => chk.checked = false);
+  document.querySelectorAll('#modal-condition input[type="radio"]').forEach(rad => rad.checked = false);
+  
+  if(data.front) {
+    data.front.forEach(val => {
+       const cb = document.querySelector(`#modal-condition input[data-side="Frontside"][value="${val}"]`);
+       if(cb) cb.checked = true;
+    });
+  }
+  if(data.back) {
+    data.back.forEach(val => {
+       const cb = document.querySelector(`#modal-condition input[data-side="Backside"][value="${val}"]`);
+       if(cb) cb.checked = true;
+    });
+  }
+  if(data.grade) {
+     const rad = document.querySelector(`#modal-condition input[name="overall-grade"][value="${data.grade}"]`);
+     if(rad) rad.checked = true;
+  }
+  
+  document.getElementById('modal-overlay').style.display = 'block';
+  document.getElementById('modal-condition').style.display = 'flex';
+}
+
+function setupNavigation() {
+  if (!navItems) return;
+  navItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault(); const target = item.getAttribute('data-target');
+      navItems.forEach(n => n.classList.remove('active')); item.classList.add('active');
+      views.forEach(v => v.classList.remove('active'));
+      const targetView = document.getElementById(`view-${target}`); if (targetView) targetView.classList.add('active');
+      refreshCurrentView(target);
+      if (window.innerWidth <= 768) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+}
+
+function setupThemeToggle() {
+  const themeToggle = document.getElementById('theme-toggle') || document.querySelector('.theme-toggle'); if (!themeToggle) return;
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  if (savedTheme === 'dark') { document.body.setAttribute('data-theme', 'dark'); document.body.classList.remove('light'); document.body.classList.add('dark'); themeToggle.innerHTML = '<i class="fas fa-moon"></i> Night'; } else { document.body.setAttribute('data-theme', 'light'); document.body.classList.remove('dark'); document.body.classList.add('light'); themeToggle.innerHTML = '<i class="fas fa-sun"></i> Day'; }
+  themeToggle.addEventListener('click', () => {
+    const isDark = document.body.getAttribute('data-theme') === 'dark' || document.body.classList.contains('dark');
+    if (isDark) { document.body.setAttribute('data-theme', 'light'); document.body.classList.remove('dark'); document.body.classList.add('light'); themeToggle.innerHTML = '<i class="fas fa-sun"></i> Day'; localStorage.setItem('theme', 'light'); } else { document.body.setAttribute('data-theme', 'dark'); document.body.classList.remove('light'); document.body.classList.add('dark'); themeToggle.innerHTML = '<i class="fas fa-moon"></i> Night'; localStorage.setItem('theme', 'dark'); }
+  });
+}
+
+function setupSearchFilters() {
+  const searchInput = document.getElementById('search-inventory'); 
+  if (searchInput) {
+    let searchTimeout;
+    searchInput.addEventListener('input', () => {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => { renderInventory(); }, 300);
+    });
+  }
+  const filterGroup = document.getElementById('filter-group'); const filterLang = document.getElementById('filter-lang'); const sortInventory = document.getElementById('sort-inventory');
+  if (filterGroup) filterGroup.addEventListener('change', renderInventory); if (filterLang) filterLang.addEventListener('change', renderInventory); if (sortInventory) sortInventory.addEventListener('change', renderInventory);
+}
+async function fetchData() {
+  const pass = sessionStorage.getItem('appPass'); if(!pass) return;
+  try {
+    const res = await fetch(`${API_URL}?pass=${encodeURIComponent(pass)}`); const data = await res.json(); if(data.error) return; 
+    state.inventory = data.inventory || []; state.groups = data.groups || []; state.sales = data.sales || []; state.trash = data.trash || []; state.invoices = data.invoices || []; state.batches = data.batches || [];
+    updateDashboard(); renderInventory(); renderGroups(); renderSales(); renderTrash(); refreshLoggerDropdown();
+  } catch(err) { console.error("Failed to fetch data", err); }
+}
+
+async function postData(action, payload) {
+  const pass = sessionStorage.getItem('appPass'); if(!pass) return;
+  try { const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action, pass, ...payload }) }); const data = await res.json(); if(data.success) { await fetchData(); } else { alert("Google Sheets Error: " + data.error); } } catch(err) { console.error("Failed to save data", err); }
+}
+
+async function silentPostData(action, payload) {
+  const pass = sessionStorage.getItem('appPass'); if(!pass) return;
+  try { await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action, pass, ...payload }) }); } catch(err) {}
+}
+
+function refreshCurrentView(view) { if (view === 'dashboard') updateDashboard(); if (view === 'inventory') renderInventory(); if (view === 'groups') renderGroups(); if (view === 'sold-cards') renderSales(); if (view === 'trash') renderTrash(); }
+
+function getCalculatedData() {
+  let groupsMap = {};
+  state.groups.forEach(g => { groupsMap[g.name] = { rate: Number(g.exchangerate || 0), shippingFee: Number(g.shippingfee || 0), totalCardsInGroup: 0, shippingDivider: 1 }; });
+  let currentGroupStock = {};
+  state.inventory.forEach(item => { if (groupsMap[item.group]) currentGroupStock[item.group] = (currentGroupStock[item.group] || 0) + Number(item.quantity || 0); });
+  let maxGroupStock = JSON.parse(localStorage.getItem('maxGroupStock')) || {};
+  Object.keys(groupsMap).forEach(group => { const currentStock = currentGroupStock[group] || 0; const historicalMax = maxGroupStock[group] || 0; if (currentStock > historicalMax) maxGroupStock[group] = currentStock; groupsMap[group].totalCardsInGroup = currentStock; groupsMap[group].shippingDivider = maxGroupStock[group] > 0 ? maxGroupStock[group] : 1; });
+  localStorage.setItem('maxGroupStock', JSON.stringify(maxGroupStock));
+
+  let mergedInventory = {}; let totalValueRp = 0; let totalValueYen = 0;
+  state.inventory.forEach(item => {
+    const key = `${item.name || ''}_${item.set || ''}_${item.rarity || ''}_${item.language || ''}_${item.condition || ''}`.toLowerCase().trim(); const qty = Number(item.quantity || 0); const yenPrice = Number(item.yenprice || 0); const groupInfo = groupsMap[item.group] || { rate: 0, shippingFee: 0, totalCardsInGroup: 0, shippingDivider: 1 }; const basePriceRp = yenPrice * groupInfo.rate; const shippingPerCard = groupInfo.shippingDivider > 0 ? (groupInfo.shippingFee / groupInfo.shippingDivider) : 0; const totalCostPerCard = basePriceRp + shippingPerCard;
+    if (qty > 0) { totalValueYen += (yenPrice * qty); totalValueRp += (totalCostPerCard * qty); }
+    if (!mergedInventory[key]) { mergedInventory[key] = { id: item.id, name: item.name, set: item.set, rarity: item.rarity, language: item.language, condition: item.condition, storage: item.storage, quantity: 0, yenprice: 0, priceRp: 0, shippingAllocation: 0, totalCost: 0, group: item.group, _rawItems: [] }; }
+    mergedInventory[key].quantity += qty; mergedInventory[key]._rawItems.push({ qty, yenPrice, basePriceRp, shippingPerCard, totalCostPerCard, group: item.group, storage: item.storage });
+  });
+
+  Object.values(mergedInventory).forEach(mergedItem => {
+    let totalYen = 0, totalBaseRp = 0, totalShipping = 0, totalCost = 0; let activeGroups = new Set(); let activeStorage = new Set(); let qtyToAverage = mergedItem.quantity;
+    if (qtyToAverage === 0) { mergedItem._rawItems.forEach(raw => { totalYen += raw.yenPrice; totalBaseRp += raw.basePriceRp; totalShipping += raw.shippingPerCard; totalCost += raw.totalCostPerCard; if(raw.group) activeGroups.add(raw.group); if(raw.storage) activeStorage.add(raw.storage); }); qtyToAverage = mergedItem._rawItems.length || 1; } else { mergedItem._rawItems.forEach(raw => { if (raw.qty > 0) { totalYen += (raw.yenPrice * raw.qty); totalBaseRp += (raw.basePriceRp * raw.qty); totalShipping += (raw.shippingPerCard * raw.qty); totalCost += (raw.totalCostPerCard * raw.qty); if(raw.group) activeGroups.add(raw.group); if(raw.storage) activeStorage.add(raw.storage); } }); }
+    mergedItem.yenprice = totalYen / qtyToAverage; mergedItem.priceRp = totalBaseRp / qtyToAverage; mergedItem.shippingAllocation = totalShipping / qtyToAverage; mergedItem.totalCost = totalCost / qtyToAverage;
+    if (activeGroups.size > 1) mergedItem.group = Array.from(activeGroups).join(', '); else if (activeGroups.size === 1) mergedItem.group = Array.from(activeGroups)[0];
+    if (activeStorage.size > 1) mergedItem.storage = Array.from(activeStorage).join(', '); else if (activeStorage.size === 1) mergedItem.storage = Array.from(activeStorage)[0]; else mergedItem.storage = '';
+  });
+  return { mergedList: Object.values(mergedInventory), totalValueRp, totalValueYen, groupsMap };
+}function updateDashboard() {
+  const calc = getCalculatedData();
+  const totalQty = state.inventory.reduce((sum, c) => sum + Number(c.quantity || 0), 0);
+  let totalSalesRevenue = 0; let totalCostOfSold = 0;
+  state.sales.forEach(sale => { totalSalesRevenue += Number(sale.price || 0); const linkedCard = state.inventory.find(c => c.id === sale.cardid); if (linkedCard) { const groupInfo = calc.groupsMap[linkedCard.group] || { rate: 0, shippingFee: 0, totalCardsInGroup: 0, shippingDivider: 1 }; const basePriceRp = Number(linkedCard.yenprice || 0) * groupInfo.rate; const shippingPerCard = groupInfo.shippingDivider > 0 ? (groupInfo.shippingFee / groupInfo.shippingDivider) : 0; totalCostOfSold += (basePriceRp + shippingPerCard) * Number(sale.quantity || 1); } });
+  const netProfit = totalSalesRevenue - totalCostOfSold;
+  
+  const uniqueEl = document.getElementById('stat-unique'); const totalEl = document.getElementById('stat-total'); const rpEl = document.getElementById('stat-val-rp'); const yenEl = document.getElementById('stat-val-yen'); const soldEl = document.getElementById('stat-sold'); const profitEl = document.getElementById('stat-profit');
+  if (uniqueEl) uniqueEl.textContent = calc.mergedList.filter(c => c.quantity > 0).length; if (totalEl) totalEl.textContent = totalQty; if (rpEl) rpEl.textContent = "Rp " + Math.round(calc.totalValueRp).toLocaleString('id-ID'); if (yenEl) yenEl.textContent = "¥" + calc.totalValueYen.toLocaleString('ja-JP'); if (soldEl) soldEl.textContent = state.sales.reduce((sum, s) => sum + Number(s.quantity || 0), 0); if (profitEl) profitEl.textContent = "Rp " + Math.round(netProfit).toLocaleString('id-ID');
+  renderSalesMetricsChart();
+}
+
+function renderSalesMetricsChart() {
+  let viewDashboard = document.getElementById('view-dashboard'); if (!viewDashboard) return;
+  let chartPanel = document.getElementById('dashboard-analytics-chart-panel');
+  if (!chartPanel) { chartPanel = document.createElement('div'); chartPanel.id = 'dashboard-analytics-chart-panel'; chartPanel.className = 'card-panel'; chartPanel.style.cssText = 'margin-top: 24px; padding: 24px; position: relative; border-radius: 12px; box-sizing: border-box; overflow: hidden; border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-primary);'; viewDashboard.appendChild(chartPanel); }
+  const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; let operationalDistribution = {};
+  for (let i = 11; i >= 0; i--) { let d = new Date(); d.setMonth(d.getMonth() - i); let key = `${d.getFullYear()}-${String(d.getMonth()).padStart(2, '0')}`; operationalDistribution[key] = { label: `${monthLabels[d.getMonth()]} '${String(d.getFullYear()).substring(2,4)}`, revenue: 0, cards: 0 }; }
+  if (state.sales && state.sales.length > 0) { state.sales.forEach(sale => { let sDate = new Date(sale.date || Date.now()); let key = `${sDate.getFullYear()}-${String(sDate.getMonth()).padStart(2, '0')}`; if (operationalDistribution[key]) { operationalDistribution[key].revenue += Number(sale.price || 0); operationalDistribution[key].cards += Number(sale.quantity || 0); } }); }
+  const dataset = Object.values(operationalDistribution); let maxDataValue = Math.max(...dataset.map(item => item.revenue)); const maxRevenue = maxDataValue > 0 ? maxDataValue * 1.1 : 100000; 
+  const formatCurrency = (val) => val >= 1000000 ? (val/1000000).toFixed(1).replace('.0','') + 'm' : (val/1000).toFixed(0) + 'k';
+  let gridHTML = `<div style="position:absolute; top:0; left:55px; right:0; height:100%; display:flex; flex-direction:column; justify-content:space-between; z-index:0; pointer-events:none; padding-bottom: 24px; box-sizing: border-box;"><div style="border-top:1px dashed rgba(150,150,150,0.25); width:100%; position:relative;"><span style="position:absolute; top:-8px; left:-50px; font-size:10px; color:inherit; opacity:0.6; width: 45px; text-align: right;">${formatCurrency(maxRevenue)}</span></div><div style="border-top:1px dashed rgba(150,150,150,0.25); width:100%; position:relative;"><span style="position:absolute; top:-8px; left:-50px; font-size:10px; color:inherit; opacity:0.6; width: 45px; text-align: right;">${formatCurrency(maxRevenue * 0.75)}</span></div><div style="border-top:1px dashed rgba(150,150,150,0.25); width:100%; position:relative;"><span style="position:absolute; top:-8px; left:-50px; font-size:10px; color:inherit; opacity:0.6; width: 45px; text-align: right;">${formatCurrency(maxRevenue * 0.5)}</span></div><div style="border-top:1px dashed rgba(150,150,150,0.25); width:100%; position:relative;"><span style="position:absolute; top:-8px; left:-50px; font-size:10px; color:inherit; opacity:0.6; width: 45px; text-align: right;">${formatCurrency(maxRevenue * 0.25)}</span></div><div style="border-top:1px solid rgba(150,150,150,0.4); width:100%; position:relative;"><span style="position:absolute; top:-8px; left:-50px; font-size:10px; color:inherit; opacity:0.6; width: 45px; text-align: right;">0</span></div></div>`;
+  let barElementsHTML = '';
+  dataset.forEach(point => { const proportionalHeight = (point.revenue / maxRevenue) * 100; const hasData = point.revenue > 0; barElementsHTML += `<div class="chart-column-node" style="flex:1; display:flex; flex-direction:column; align-items:center; position:relative; z-index:1; height: 100%; justify-content: flex-end;"><div class="chart-tooltip-bubble" style="opacity:0; pointer-events:none; position:absolute; bottom:calc(${proportionalHeight}% + 16px); background:var(--bg-surface); color:var(--text-primary); padding:8px 12px; border-radius:8px; font-size:12px; white-space:nowrap; box-shadow:0 10px 25px rgba(0,0,0,0.15); border:1px solid var(--border-color); text-align:center; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); z-index:10; transform: translateY(10px);"><div style="font-weight:700; color:var(--accent-yellow); margin-bottom: 2px;">Rp ${Math.round(point.revenue).toLocaleString('id-ID')}</div><div style="color:inherit; opacity:0.7; font-size:11px;">${point.cards} Card(s) Sold</div></div><div class="chart-bar-fill" style="width:70%; max-width:40px; height:${Math.max(proportionalHeight, 1)}%; background:${hasData ? 'linear-gradient(to top, #ca8a04, #fde047)' : 'rgba(150,150,150,0.15)'}; border-radius:4px 4px 0 0; cursor:pointer; transition: all 0.2s ease; box-shadow: ${hasData ? '0 0 12px rgba(253,224,71,0.15)' : 'none'}; border: 1px solid ${hasData ? '#fef08a' : 'transparent'}; border-bottom: none;"></div><div style="margin-top:8px; font-size:11px; color:inherit; opacity:${hasData ? '0.9' : '0.5'}; font-weight:500; height: 16px;">${point.label}</div></div>`; });
+  chartPanel.innerHTML = `<div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px;"><div><h3 style="margin-top:0; margin-bottom:4px; font-size:16px; color:inherit; opacity:0.9; display:flex; align-items:center; gap:8px;"><i class="fas fa-chart-line" style="color:var(--accent-yellow, #eab308);"></i> Revenue History (Last 12 Months)</h3><p style="color:inherit; opacity:0.6; font-size:12px; margin:0;">Hover over the columns to see detailed monthly metrics.</p></div></div><div style="position:relative; display:flex; height:240px; padding-left: 55px; align-items:flex-end;">${gridHTML}<div style="display:flex; width: 100%; height: calc(100% - 24px); position: relative; z-index: 1;">${barElementsHTML}</div></div>`;
+  chartPanel.querySelectorAll('.chart-column-node').forEach(node => { const bubble = node.querySelector('.chart-tooltip-bubble'); const bar = node.querySelector('.chart-bar-fill'); node.addEventListener('mouseenter', () => { bubble.style.opacity = '1'; bubble.style.transform = 'translateY(0px)'; if (bar.style.height !== '1%') { bar.style.filter = 'brightness(1.15)'; bar.style.transform = 'scaleY(1.02)'; bar.style.transformOrigin = 'bottom'; } }); node.addEventListener('mouseleave', () => { bubble.style.opacity = '0'; bubble.style.transform = 'translateY(10px)'; if (bar.style.height !== '1%') { bar.style.filter = 'brightness(1)'; bar.style.transform = 'scaleY(1)'; } }); });
+}
+
+function setupModals() {
+  const newGroupBtn1 = document.getElementById('btn-new-group'); const newGroupBtn2 = document.getElementById('btn-create-group-page');
+  if (newGroupBtn1) newGroupBtn1.addEventListener('click', openGroupModal); if (newGroupBtn2) newGroupBtn2.addEventListener('click', openGroupModal);
+  document.querySelectorAll('.close-modal').forEach(btn => btn.addEventListener('click', closeModal));
+}
+function openGroupModal() { if (modalOverlay && groupModal) { modalOverlay.style.display = 'block'; groupModal.style.display = 'block'; } }
+function closeModal() { if (modalOverlay && groupModal) { modalOverlay.style.display = 'none'; groupModal.style.display = 'none'; } const saleModal = document.getElementById('modal-sale'); if (saleModal) saleModal.style.display = 'none'; }
+
+const saveGroupBtn = document.getElementById('save-new-group');
+if (saveGroupBtn) {
+  saveGroupBtn.addEventListener('click', () => {
+    const name = document.getElementById('new-group-name').value; 
+    const rate = document.getElementById('new-group-rate').value; 
+    const shipping = document.getElementById('new-group-shipping').value;
+    
+    if(name && rate && shipping) { 
+      const newId = 'GRP_' + Date.now();
+      
+      // 1. INSTANT LOCAL UPDATE: Add to memory and refresh UI instantly
+      state.groups.push({ id: newId, name: name, exchangerate: rate, shippingfee: shipping });
+      renderGroups(); 
+      
+      // 2. SILENT SYNC & REFRESH: Send to Sheets and fetch fresh data in the background
+      (async function backgroundSync() {
+          await silentPostData('saveGroup', { id: newId, name: name, exchangeRate: rate, shippingFee: shipping });
+          fetchData(); 
+      })();
+      
+      // 3. CLEAN UP UI
+      document.getElementById('new-group-name').value = ''; 
+      document.getElementById('new-group-rate').value = ''; 
+      document.getElementById('new-group-shipping').value = ''; 
+      closeModal(); 
+    } else { 
+      alert("Please fill out all fields before saving."); 
+    }
+  });
+}
+
+const addRowBtn = document.getElementById('btn-add-row'); if (addRowBtn) addRowBtn.addEventListener('click', () => addMultipleRows(1));
+const add10RowsBtn = document.getElementById('btn-add-10-rows'); if (add10RowsBtn) add10RowsBtn.addEventListener('click', () => addMultipleRows(10));
+function addMultipleRows(count) { for(let i = 0; i < count; i++) addEmptyCardRow(); }
+
+function addEmptyCardRow() {
+  if (!addCardsBody) return;
+  const tr = document.createElement('tr');
+  const count = addCardsBody.children.length + 1;
+  tr.innerHTML = `
+    <td data-label="#">${count}</td>
+    <td data-label="Card Name"><input type="text" class="c-name" placeholder="Name"></td>
+    <td data-label="Set Code"><input type="text" class="c-set" placeholder="Set Code" list="pokemon-set-list"></td>
+    <td data-label="Rarity"><select class="c-rarity"><option value="Promo">Promo</option><option value="C" selected>C</option><option value="U">U</option><option value="S">S</option><option value="RR">RR</option><option value="RRR">RRR</option><option value="AR">AR</option><option value="CHR">CHR</option><option value="SR">SR</option><option value="SAR">SAR</option><option value="UR">UR</option><option value="MUR">MUR</option></select></td>
+    <td data-label="Language"><select class="c-lang"><option>Japanese</option><option>English</option><option>Indonesian</option></select></td>
+    <td data-label="Yen Price"><input type="number" class="c-yen" placeholder="0"></td>
+    <td data-label="Qty"><input type="number" class="c-qty" value="1" min="1"></td>
+    <td data-label="Condition"><button type="button" class="btn-outline btn-set-cond" data-cond="{}" style="padding: 6px 10px; font-size: 12px; white-space: nowrap; transition: all 0.2s;">Set</button></td>
+    <td data-label="Notes"><input type="text" class="c-notes" placeholder="Notes"></td>
+    <td data-label="Action"><button class="btn-outline del-row"><i class="fas fa-trash"></i></button></td>
+  `;
+  
+  tr.addEventListener('click', (e) => {
+    const isInteractive = ['INPUT', 'SELECT', 'BUTTON'].includes(e.target.tagName) || e.target.closest('button');
+    if (isInteractive) return;
+    if (tr.classList.contains('expanded') && (e.target.getAttribute('contenteditable') === 'true' || e.target.closest('[contenteditable="true"]'))) return;
+    if (window.innerWidth <= 768) tr.classList.toggle('expanded');
+  });
+  
+  tr.querySelector('.btn-set-cond').addEventListener('click', (e) => {
+     openConditionModal(e.currentTarget);
+  });
+  
+  const nameInput = tr.querySelector('.c-name');
+  const applyTranslation = (e) => { if (e.isComposing) return; let originalText = e.target.value; let translatedText = translatePokemonName(originalText); if (originalText !== translatedText) { e.target.value = translatedText; e.target.style.transition = 'background-color 0.3s'; e.target.style.backgroundColor = 'rgba(34, 197, 94, 0.2)'; setTimeout(() => e.target.style.backgroundColor = 'transparent', 300); } };
+  nameInput.addEventListener('blur', applyTranslation); nameInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') applyTranslation(e); }); nameInput.addEventListener('compositionend', (e) => { setTimeout(() => applyTranslation(e), 50); });
+  tr.querySelector('.del-row').addEventListener('click', () => { tr.remove(); reindexRows(); });
+  addCardsBody.appendChild(tr);
+}
+function reindexRows() { if (!addCardsBody) return; const rows = addCardsBody.querySelectorAll('tr'); rows.forEach((row, idx) => { row.children[0].textContent = idx + 1; }); }
+
+const saveCardsBtn = document.getElementById('btn-save-cards');
+if (saveCardsBtn) {
+  saveCardsBtn.addEventListener('click', () => {
+    const group = document.getElementById('group-select').value; if(!group) return alert("Please select or create a group first.");
+    const rows = addCardsBody.querySelectorAll('tr'); let cardsToSave = [];
+    rows.forEach((row, index) => {
+      const name = row.querySelector('.c-name').value.trim(); const yen = row.querySelector('.c-yen').value;
+      const notesField = row.querySelector('.c-notes').value.trim();
+      
+      const condRaw = row.querySelector('.btn-set-cond').getAttribute('data-cond');
+      const condParsed = JSON.parse(condRaw || '{}');
+      
+      let conditionString = '';
+      if (condParsed.grade) conditionString += `[Grade: ${condParsed.grade}] `;
+      if (condParsed.front && condParsed.front.length) conditionString += `Front: ${condParsed.front.join(', ')}. `;
+      if (condParsed.back && condParsed.back.length) conditionString += `Back: ${condParsed.back.join(', ')}.`;
+      
+      const storageVal = document.getElementById('global-storage-input') ? document.getElementById('global-storage-input').value.trim() : '';
+      if(name) { 
+        cardsToSave.push({ 
+            id: 'CARD_' + Date.now() + '_' + index + '_' + Math.random().toString(36).substr(2, 5), 
+            group: group, 
+            name: name, 
+            set: row.querySelector('.c-set').value, 
+            rarity: row.querySelector('.c-rarity').value, 
+            language: row.querySelector('.c-lang').value, 
+            yenPrice: yen || 0, 
+            quantity: row.querySelector('.c-qty').value || 1,
+            condition: conditionString.trim(),
+            storage: storageVal,
+            notes: notesField
+        }); 
+      }
+    });
+    if(cardsToSave.length > 0) { postData('saveCards', { cards: cardsToSave }); addCardsBody.innerHTML = ''; addMultipleRows(10); } else { alert("All rows are empty! Please enter at least one card name to save."); }
+  });
+}
+
+function renderInventory() {
+  const body = document.getElementById('inventory-body'); if(!body) return; body.innerHTML = '';
+  const calc = getCalculatedData(); let filteredList = calc.mergedList;
+  const searchInput = document.getElementById('search-inventory');
+  if (searchInput) {
+    const query = searchInput.value.toLowerCase().trim();
+    if (query) { filteredList = filteredList.filter(card => { const cardName = String(card.name || '').toLowerCase().trim(); const cardSet = String(card.set || '').toLowerCase().trim(); const cardRarity = String(card.rarity || '').toLowerCase().trim(); const cardLoc = String(card.storage || '').toLowerCase().trim(); if (query.length <= 2) return cardName.startsWith(query) || cardLoc.startsWith(query); else return cardName.includes(query) || cardSet.includes(query) || cardRarity.includes(query) || cardLoc.includes(query); }); }
+  }
+
+  const groupVal = document.getElementById('filter-group').value; const langVal = document.getElementById('filter-lang').value;
+  if (groupVal && !groupVal.toLowerCase().includes('all')) filteredList = filteredList.filter(c => c.group && String(c.group).toLowerCase() === groupVal.toLowerCase());
+  if (langVal && !langVal.toLowerCase().includes('all')) filteredList = filteredList.filter(c => c.language && String(c.language).toLowerCase() === langVal.toLowerCase());
+
+  const sortVal = document.getElementById('sort-inventory') ? document.getElementById('sort-inventory').value : 'default';
+  if (sortVal === 'az') filteredList.sort((a, b) => String(a.name || '').localeCompare(String(b.name || ''))); else if (sortVal === 'za') filteredList.sort((a, b) => String(b.name || '').localeCompare(String(b.name || ''))); else if (sortVal === 'price-high') filteredList.sort((a, b) => Number(b.totalCost || 0) - Number(a.totalCost || 0)); else if (sortVal === 'price-low') filteredList.sort((a, b) => Number(a.totalCost || 0) - Number(b.totalCost || 0));
+
+  const filteredQty = filteredList.reduce((sum, c) => sum + Number(c.quantity || 0), 0);
+  const subtitle = document.getElementById('inventory-subtitle');
+  if (subtitle) subtitle.textContent = `${filteredList.filter(c => c.quantity > 0).length} unique card(s) • ${filteredQty} total in stock`;
+
+  if(filteredList.length === 0) { body.innerHTML = `<tr><td colspan="14" style="text-align:center; color: var(--text-secondary);">No matching cards found.</td></tr>`; return; }
+  
+const rarityList = ['Promo', 'C', 'U', 'S', 'RR', 'RRR', 'AR', 'CHR', 'SR', 'SAR', 'UR', 'MUR'];
+  const langList = ['Japanese', 'English', 'Indonesian'];
+  const fragment = document.createDocumentFragment(); // ADD THIS LINE
+
+  filteredList.forEach(card => {    const qty = Number(card.quantity || 0); const isOutOfStock = qty <= 0; const tr = document.createElement('tr');
+    const rowBg = isOutOfStock ? 'rgba(239, 68, 68, 0.12)' : 'transparent'; const textColor = isOutOfStock ? '#ef4444' : 'inherit';
+    const qtyBg = isOutOfStock ? 'rgba(239, 68, 68, 0.2)' : 'rgba(234,179,8,0.15)'; const qtyColor = isOutOfStock ? '#ef4444' : 'var(--accent-yellow)';
+    const iconColor = isOutOfStock ? '#ef4444' : 'var(--text-secondary)';
+    tr.style.backgroundColor = rowBg; tr.style.color = textColor;
+
+    tr.addEventListener('click', (e) => {
+      const isInteractive = ['INPUT', 'SELECT', 'BUTTON'].includes(e.target.tagName) || e.target.closest('button');
+      if (isInteractive) return;
+      if (tr.classList.contains('expanded') && (e.target.getAttribute('contenteditable') === 'true' || e.target.closest('[contenteditable="true"]'))) return;
+      if (window.innerWidth <= 768) tr.classList.toggle('expanded');
+    });
+
+    const rarityOpts = rarityList.map(r => `<option value="${r}">${r}</option>`).join('');
+    const langOpts = langList.map(l => `<option value="${l}">${l}</option>`).join('');
+
+    tr.innerHTML = `
+      <td data-label="Select"><input type="checkbox" class="inv-check" data-name="${(card.name || '').replace(/"/g, '&quot;')}" data-set="${(card.set || '').replace(/"/g, '&quot;')}" data-rarity="${(card.rarity || '').replace(/"/g, '&quot;')}" style="cursor:pointer; width:16px; height:16px; accent-color: var(--accent-yellow);"></td>
+      <td data-label="Card Name"><span class="editable-cell edit-name" contenteditable="true" title="Click to edit"><strong style="color:${textColor}">${card.name || '—'}</strong></span></td>
+      <td data-label="Set"><span class="editable-cell edit-set" contenteditable="true" title="Click to edit">${card.set || '—'}</span></td>
+      <td data-label="Rarity" title="Click to change Rarity"><select class="inline-edit-select edit-rarity" style="width: auto; background:transparent; color:inherit; border:1px dashed transparent; outline:none; cursor:pointer; padding:2px 4px; border-radius:4px; font-size:inherit;"><option value="">—</option>${rarityOpts.replace(`value="${card.rarity}"`, `value="${card.rarity}" selected`)}</select></td>
+      <td data-label="Language" title="Click to change Language"><select class="inline-edit-select edit-lang" style="width: auto; background:transparent; color:inherit; border:1px dashed transparent; outline:none; cursor:pointer; padding:2px 4px; border-radius:4px; font-size:inherit;"><option value="">—</option>${langOpts.replace(`value="${card.language}"`, `value="${card.language}" selected`)}</select></td>
+      <td data-label="Qty"><span class="editable-cell edit-qty" contenteditable="true" title="Click to edit" style="background: ${qtyBg}; color: ${qtyColor}; padding: 2px 8px; border-radius: 4px; font-weight:600; display:inline-block;">${qty}</span></td>
+      <td data-label="Condition"><span class="editable-cell edit-cond" contenteditable="true" title="Click to edit">${card.condition || '—'}</span></td>
+      <td data-label="Location"><span class="editable-cell edit-storage" contenteditable="true" title="Click to edit">${card.storage || '—'}</span></td>
+      <td data-label="Base (¥)"><span class="editable-cell edit-yen" contenteditable="true" title="Click to edit">¥${Number(card.yenprice).toLocaleString('ja-JP')}</span></td>
+      <td data-label="Base (Rp)">Rp ${Math.round(card.priceRp).toLocaleString('id-ID')}</td>
+      <td data-label="Shipping">Rp ${Math.round(card.shippingAllocation).toLocaleString('id-ID')}</td>
+      <td data-label="Total Cost"><strong>Rp ${Math.round(card.totalCost).toLocaleString('id-ID')}</strong></td>
+      <td data-label="Group"><span style="color: ${iconColor};"><i class="fas fa-folder-open"></i> ${card.group || '—'}</span></td>
+      <td data-label="Action"><div style="display: flex; gap: 4px; align-items: center; justify-content: flex-start;"><button class="btn-outline action-trigger" style="padding: 4px 8px; color: ${textColor};"><i class="fas fa-ellipsis-v"></i></button><button class="btn-outline btn-delete-card" style="padding: 4px 8px; color: #ef4444; border-color: rgba(239, 68, 68, 0.3);" title="Delete card"><i class="fas fa-trash"></i></button></div></td>
+    `;
+
+    function saveRowData() {
+      let rawNameVal = tr.querySelector('.edit-name').textContent.trim(); let translatedName = translatePokemonName(rawNameVal);
+      if (rawNameVal !== translatedName) { rawNameVal = translatedName; tr.querySelector('.edit-name').innerHTML = `<strong style="color:${textColor}">${rawNameVal}</strong>`; }
+      const nameVal = rawNameVal; const setVal = tr.querySelector('.edit-set').textContent.trim(); const rarityVal = tr.querySelector('.edit-rarity').value; const langVal = tr.querySelector('.edit-lang').value; const qtyVal = Number(tr.querySelector('.edit-qty').textContent.trim()) || 0; const yenVal = Number(tr.querySelector('.edit-yen').textContent.replace(/[¥,]/g, '').trim()) || 0;
+      const condVal = tr.querySelector('.edit-cond').textContent.trim(); const storageVal = tr.querySelector('.edit-storage').textContent.trim();
+
+      const finalName = nameVal === '—' ? '' : nameVal; const finalSet = setVal === '—' ? '' : setVal; const finalRarity = rarityVal === '—' ? '' : rarityVal; const finalLang = langVal === '—' ? '' : langVal; const finalCond = condVal === '—' ? '' : condVal; const finalStorage = storageVal === '—' ? '' : storageVal;
+      const oldQty = Number(card.quantity) || 0; const isQtyChanged = (qtyVal !== oldQty);
+      const isDataChanged = (finalName !== (card.name || '') || finalSet !== (card.set || '') || finalRarity !== (card.rarity || '') || finalLang !== (card.language || '') || finalCond !== (card.condition || '') || finalStorage !== (card.storage || '') || yenVal !== card.yenprice);
+      if (!isQtyChanged && !isDataChanged) return; 
+
+      const searchName = String(card.name || '').toLowerCase().trim(); const searchSet = String(card.set || '').toLowerCase().trim(); const searchRarity = String(card.rarity || '').toLowerCase().trim(); const searchLang = String(card.language || '').toLowerCase().trim();
+      const matchingCards = state.inventory.filter(c => String(c.name || '').toLowerCase().trim() === searchName && String(c.set || '').toLowerCase().trim() === searchSet && String(c.rarity || '').toLowerCase().trim() === searchRarity && String(c.language || '').toLowerCase().trim() === searchLang);
+      let remainingQtyDiff = qtyVal - oldQty;
+
+      matchingCards.forEach((item, index) => {
+        if (isDataChanged) { item.name = finalName; item.set = finalSet; item.rarity = finalRarity; item.language = finalLang; item.yenprice = yenVal; item.condition = finalCond; item.storage = finalStorage; }
+        if (isQtyChanged) { if (remainingQtyDiff > 0) { if (index === 0) { item.quantity = Number(item.quantity || 0) + remainingQtyDiff; remainingQtyDiff = 0; } } else if (remainingQtyDiff < 0) { const currentItemQty = Number(item.quantity || 0); const deductAmt = Math.min(currentItemQty, Math.abs(remainingQtyDiff)); item.quantity = currentItemQty - deductAmt; remainingQtyDiff += deductAmt; } }
+        silentPostData('updateCard', { id: item.id, name: item.name, set: item.set, rarity: item.rarity, language: item.language, group: item.group, yenPrice: item.yenprice, quantity: item.quantity, condition: item.condition, storage: item.storage });
+      });
+      updateDashboard(); renderInventory();
+    }
+
+    tr.querySelectorAll('.editable-cell').forEach(cell => { cell.addEventListener('mouseenter', () => cell.style.background = 'rgba(128,128,128,0.1)'); cell.addEventListener('mouseleave', () => cell.style.background = 'transparent'); cell.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); cell.blur(); } }); cell.addEventListener('blur', () => { cell.style.background = 'transparent'; saveRowData(); }); });
+    tr.querySelectorAll('.inline-edit-select').forEach(select => { select.addEventListener('mouseenter', () => select.style.border = '1px dashed var(--border-color)'); select.addEventListener('mouseleave', () => select.style.border = '1px dashed transparent'); select.addEventListener('change', saveRowData); });
+
+    tr.querySelector('.btn-delete-card').addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (confirm(`Are you sure you want to delete ${card.name}?`)) {
+        const searchName = String(card.name || '').toLowerCase().trim(); const searchSet = String(card.set || '').toLowerCase().trim(); const searchRarity = String(card.rarity || '').toLowerCase().trim();
+        const cardsToDelete = state.inventory.filter(c => String(c.name || '').toLowerCase().trim() === searchName && String(c.set || '').toLowerCase().trim() === searchSet && String(c.rarity || '').toLowerCase().trim() === searchRarity);
+        let maxGroupStock = JSON.parse(localStorage.getItem('maxGroupStock')) || {};
+        cardsToDelete.forEach(cDel => { 
+            const delQty = Number(cDel.quantity || 0); const groupName = cDel.group; 
+            if (groupName && maxGroupStock[groupName]) { maxGroupStock[groupName] = Math.max(0, maxGroupStock[groupName] - delQty); } 
+            state.inventory = state.inventory.filter(item => item.id !== cDel.id); 
+            
+            // SYNC IN BACKGROUND
+            (async function backgroundSync() {
+                await silentPostData('deleteCard', { id: cDel.id });
+                fetchData();
+            })();
+        });
+        localStorage.setItem('maxGroupStock', JSON.stringify(maxGroupStock)); updateDashboard(); renderInventory();
+      }
+    });
+
+    const actionBtn = tr.querySelector('.action-trigger');
+    actionBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); document.querySelectorAll('.action-dropdown').forEach(d => d.remove());
+      const dropdown = document.createElement('div'); dropdown.className = 'action-dropdown'; dropdown.style.cssText = 'position: absolute; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; padding: 4px 0; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2); z-index: 1000; min-width: 140px; color: var(--text-primary);';
+      const rect = actionBtn.getBoundingClientRect(); dropdown.style.top = `${rect.bottom + window.scrollY + 4}px`; dropdown.style.left = `${rect.left + window.scrollX - 110}px`;
+      dropdown.innerHTML = `<div class="dropdown-item dropdown-sale" style="padding: 10px 14px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size:13px; font-weight:500;" ${qty <= 0 ? 'style="opacity:0.5; pointer-events:none;"' : ''}><i class="fas fa-money-bill-wave" style="color: #22c55e;"></i> Record Sale</div>`;
+      const item = dropdown.querySelector('.dropdown-item'); item.addEventListener('mouseenter', () => item.style.background = 'rgba(128,128,128,0.1)'); item.addEventListener('mouseleave', () => item.style.background = 'transparent'); item.addEventListener('click', () => { dropdown.remove(); openSaleModal(card); }); document.body.appendChild(dropdown);
+    });
+
+    // WITH THIS LINE:
+   fragment.appendChild(tr);
+  });
+
+  body.appendChild(fragment); 
+
+  // --- NEW: BULK STORAGE MOVER LOGIC ---
+  let checkAll = document.getElementById('check-all-inventory');
+  const itemChecks = document.querySelectorAll('.inv-check');
+  const bulkDiv = document.getElementById('bulk-storage-div');
+  const bulkCountText = document.getElementById('bulk-storage-count');
+  const bulkBtn = document.getElementById('btn-bulk-storage');
+  const bulkInput = document.getElementById('bulk-storage-input');
+
+  // 1. DYNAMICALLY INJECT THE BULK DELETE BUTTON
+  let bulkDeleteBtn = document.getElementById('btn-bulk-delete-inventory');
+  if (bulkDiv && !bulkDeleteBtn && bulkBtn) {
+      bulkDeleteBtn = document.createElement('button');
+      bulkDeleteBtn.id = 'btn-bulk-delete-inventory';
+      bulkDeleteBtn.innerHTML = '<i class="fas fa-trash"></i> Delete';
+      // Match the exact styling of your other red delete buttons
+      bulkDeleteBtn.style.cssText = 'background: #ef4444; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; margin-left: 8px;';
+      
+      // Place it right after the yellow Move button
+      bulkBtn.parentNode.style.display = 'flex';
+      bulkBtn.parentNode.insertBefore(bulkDeleteBtn, bulkBtn.nextSibling);
+  }
+
+  if (checkAll) {
+      const newCheckAll = checkAll.cloneNode(true);
+      checkAll.parentNode.replaceChild(newCheckAll, checkAll);
+      checkAll = newCheckAll;
+      checkAll.checked = false;
+  }
+
+  if (checkAll && itemChecks && bulkDiv && bulkBtn) {
+      function updateBulkUI() {
+          const checkedCount = document.querySelectorAll('.inv-check:checked').length;
+          if (checkedCount > 0) { bulkDiv.style.display = 'flex'; bulkCountText.textContent = checkedCount; } else { bulkDiv.style.display = 'none'; }
+          checkAll.checked = (checkedCount === itemChecks.length && itemChecks.length > 0);
+      }
+      checkAll.addEventListener('change', (e) => { itemChecks.forEach(chk => chk.checked = e.target.checked); updateBulkUI(); });
+      itemChecks.forEach(chk => chk.addEventListener('change', updateBulkUI));
+
+      const newBulkBtn = bulkBtn.cloneNode(true);
+      bulkBtn.parentNode.replaceChild(newBulkBtn, bulkBtn);
+      newBulkBtn.addEventListener('click', () => {
+          const checkedBoxes = document.querySelectorAll('.inv-check:checked');
+          const newStorage = bulkInput.value.trim();
+          if (checkedBoxes.length === 0 || !newStorage) return alert('Please select cards and enter a new location name (e.g. "Box B").');
+
+          const updates = [];
+          checkedBoxes.forEach(chk => {
+              const searchName = String(chk.getAttribute('data-name') || '').toLowerCase().trim();
+              const searchSet = String(chk.getAttribute('data-set') || '').toLowerCase().trim();
+              const searchRarity = String(chk.getAttribute('data-rarity') || '').toLowerCase().trim();
+
+              // Update locally
+              state.inventory.forEach(c => {
+                  if (String(c.name || '').toLowerCase().trim() === searchName && String(c.set || '').toLowerCase().trim() === searchSet && String(c.rarity || '').toLowerCase().trim() === searchRarity) {
+                      c.storage = newStorage;
+                      updates.push({ id: c.id, storage: newStorage });
+                  }
+              });
+          });
+
+          updateDashboard(); renderInventory();
+          bulkInput.value = '';
+
+          // Send bulk payload silently to Sheets
+          (async function syncBulkStorage() {
+              try {
+                  await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'updateStorageBulk', pass: sessionStorage.getItem('appPass'), updates: updates }) });
+              } catch(e) {}
+          })();
+      });
+
+      // 2. BULK DELETE LOGIC
+      if (bulkDeleteBtn) {
+          const newBulkDeleteBtn = bulkDeleteBtn.cloneNode(true);
+          bulkDeleteBtn.parentNode.replaceChild(newBulkDeleteBtn, bulkDeleteBtn);
+          
+          newBulkDeleteBtn.addEventListener('click', () => {
+              const checkedBoxes = document.querySelectorAll('.inv-check:checked');
+              if (checkedBoxes.length === 0) return;
+
+              if (confirm(`Are you sure you want to move the ${checkedBoxes.length} selected card group(s) to the Recycle Bin?`)) {
+                  let maxGroupStock = JSON.parse(localStorage.getItem('maxGroupStock')) || {};
+                  let allCardsToDelete = [];
+
+                  checkedBoxes.forEach(chk => {
+                      const searchName = String(chk.getAttribute('data-name') || '').toLowerCase().trim();
+                      const searchSet = String(chk.getAttribute('data-set') || '').toLowerCase().trim();
+                      const searchRarity = String(chk.getAttribute('data-rarity') || '').toLowerCase().trim();
+
+                      // Gather all raw items that match this visual row
+                      const cardsToDelete = state.inventory.filter(c => 
+                          String(c.name || '').toLowerCase().trim() === searchName && 
+                          String(c.set || '').toLowerCase().trim() === searchSet && 
+                          String(c.rarity || '').toLowerCase().trim() === searchRarity
+                      );
+
+                      cardsToDelete.forEach(cDel => {
+                          const delQty = Number(cDel.quantity || 0);
+                          const groupName = cDel.group;
+                          // Keep historical stock tracking accurate
+                          if (groupName && maxGroupStock[groupName]) {
+                              maxGroupStock[groupName] = Math.max(0, maxGroupStock[groupName] - delQty);
+                          }
+                          allCardsToDelete.push(cDel);
+                      });
+                  });
+
+                 // Wipe them from local app memory immediately for an instant UI update
+                  const idsToRemove = allCardsToDelete.map(c => c.id);
+                  state.inventory = state.inventory.filter(item => !idsToRemove.includes(item.id));
+                  localStorage.setItem('maxGroupStock', JSON.stringify(maxGroupStock));
+                  
+                  // ---> NEW: Instantly inject them into the local Trash memory! <---
+                  const now = new Date().toISOString();
+                  allCardsToDelete.forEach((cDel, index) => {
+                      state.trash.unshift({
+                          id: 'TRASH_' + Date.now() + Math.floor(Math.random() * 1000) + index,
+                          type: 'Card',
+                          deletedAt: now,
+                          payload: JSON.stringify(cDel)
+                      });
+                  });
+
+                  updateDashboard(); 
+                  renderInventory();
+                  renderTrash(); // ---> NEW: Render the Recycle Bin instantly <---
+
+                  // 3. SINGLE PAYLOAD SYNC (Lightning fast background sync)
+                  (async function syncBulkDelete() {
+                      const btnOriginalHTML = newBulkDeleteBtn.innerHTML;
+                      newBulkDeleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Moving...';
+                      newBulkDeleteBtn.style.pointerEvents = 'none';
+
+                      // Send ALL cards to the backend in one single network request
+                      await silentPostData('deleteCardsBulk', { cardsToDelete: allCardsToDelete });
+                      
+                      // Fetch fresh data in the background (removed "await" so the UI doesn't freeze!)
+                      fetchData(); 
+                      
+                      newBulkDeleteBtn.innerHTML = '<i class="fas fa-trash"></i> Delete';
+                      newBulkDeleteBtn.style.pointerEvents = 'auto';
+                  })();
+              }
+          });
+      }
+    }
+  }
+function ensureSaleModalExists() {
+  if (document.getElementById('modal-sale')) return;
+  const modal = document.createElement('div'); modal.id = 'modal-sale'; modal.style.cssText = 'display:none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);';
+  modal.innerHTML = `
+    <div style="background: var(--bg-surface); margin: 6% auto; padding: 24px; border: 1px solid var(--border-color); width: 90%; max-width: 680px; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3); position:relative; max-height: 85vh; display: flex; flex-direction: column; color: var(--text-primary);">
+      <h3 id="sale-modal-title" style="margin-top:0; margin-bottom:16px; font-size:18px;">💰 Record Sale</h3>
+      <div id="select-card-section" style="margin-bottom:16px; position:relative !important; z-index: 100;">
+        <label style="display:block; margin-bottom:6px; font-size:13px; color: var(--text-secondary);">Search & Add Cards to Sale</label>
+        <input type="text" id="sale-search-inventory" placeholder="Type card name or set..." autocomplete="off" style="width:100%; padding:10px; border-radius:6px; border:1px solid var(--border-color); background: transparent; color: inherit; box-sizing: border-box; margin-bottom:0;">
+        <div id="sale-inventory-results" style="display:none; position:absolute; top:calc(100% + 4px); left:0; width:100%; max-height:180px; overflow-y:auto; border:1px solid var(--border-color); border-radius:6px; background:var(--bg-surface); box-shadow: 0 10px 25px -3px rgba(0,0,0,0.3); z-index: 999999;"></div>
+      </div>
+      <div id="sale-cart-container" style="flex: 1; overflow-y: auto; margin-bottom: 16px; display: none; flex-direction: column; gap: 12px; padding-right: 4px;"></div>
+      <div style="display:flex; gap:12px; margin-bottom:20px; margin-top: auto; flex-wrap:wrap;">
+        <div style="flex:1; min-width: 120px;"><label style="display:block; margin-bottom:6px; font-size:13px; color: var(--text-secondary);">Date Sold</label><input type="date" id="sale-date" style="width:100%; padding:10px; border-radius:6px; border:1px solid var(--border-color); background: transparent; color: inherit; box-sizing: border-box; color-scheme: inherit;"></div>
+        <div style="flex:1.5; min-width: 150px;"><label style="display:block; margin-bottom:6px; font-size:13px; color: var(--text-secondary);">Buyer Name <span style="opacity:0.7;">(Fills Invoice)</span></label><input type="text" id="sale-buyer-name" placeholder="Leave blank for instant sale" style="width:100%; padding:10px; border-radius:6px; border:1px solid var(--border-color); background: transparent; color: inherit; box-sizing: border-box;"></div>
+        <div style="flex:2; min-width: 200px;"><label style="display:block; margin-bottom:6px; font-size:13px; color: var(--text-secondary);">Global Notes</label><input type="text" id="sale-notes" placeholder="e.g. Sold via marketplace" style="width:100%; padding:10px; border-radius:6px; border:1px solid var(--border-color); background: transparent; color: inherit; box-sizing: border-box;"></div>
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:10px;"><button type="button" id="btn-close-sale" class="btn-outline" style="padding:10px 16px; border-radius:6px; cursor:pointer;">Cancel</button><button type="button" id="btn-submit-sale" style="padding:10px 16px; background:var(--accent-yellow, #eab308); color:#000; border:none; border-radius:6px; font-weight:600; cursor:pointer;">Confirm Sale</button></div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  const resultsDiv = document.getElementById('sale-inventory-results'); const searchBox = document.getElementById('sale-search-inventory');
+  document.getElementById('btn-close-sale').addEventListener('click', () => { modal.style.display = 'none'; if (resultsDiv) resultsDiv.style.display = 'none'; });
+  document.getElementById('btn-submit-sale').addEventListener('click', submitSaleRecord);
+  
+  function handleSearchInput() {
+    const q = searchBox.value.toLowerCase().trim();
+    if (!q) { if (resultsDiv) { resultsDiv.style.display = 'none'; resultsDiv.innerHTML = ''; } return; }
+    
+    const availableCards = state.inventory.filter(c => {
+        const stock = Number(c.quantity || 0);
+        const cartItem = saleCart.find(item => item.id === c.id);
+        const cartQty = cartItem ? Number(cartItem.qty) : 0;
+        return stock > cartQty;
+    });
+    
+    const matches = availableCards.filter(c => { const cardName = String(c.name || '').toLowerCase().trim(); const cardSet = String(c.set || '').toLowerCase().trim(); const cardRarity = String(c.rarity || '').toLowerCase().trim(); if (q.length <= 2) return cardName.startsWith(q); else return cardName.includes(q) || cardSet.includes(q) || cardRarity.includes(q); });
+    if (!resultsDiv) return; if (matches.length === 0) { resultsDiv.innerHTML = '<div style="padding:10px 12px; color:var(--text-secondary); font-size:13px;">No available cards found</div>'; resultsDiv.style.display = 'block'; return; }
+    
+    resultsDiv.innerHTML = '';
+    matches.forEach(card => {
+      const calc = getCalculatedData(); const groupInfo = calc.groupsMap[card.group] || { rate: 0, shippingFee: 0, totalCardsInGroup: 0, shippingDivider: 1 }; const basePriceRp = (Number(card.yenprice||0) * groupInfo.rate); const shippingPerCard = groupInfo.shippingDivider > 0 ? (groupInfo.shippingFee / groupInfo.shippingDivider) : 0; const costPerCard = basePriceRp + shippingPerCard;
+      const itemEl = document.createElement('div'); itemEl.style.cssText = 'padding:10px 12px; cursor:pointer; font-size:13px; border-bottom:1px solid var(--border-color); display:flex; justify-content:space-between;';
+      itemEl.innerHTML = `<span><strong>${card.name}</strong> (${card.set || 'No Set'})</span> <span style="color:var(--accent-yellow);">Stock: ${card.quantity}</span>`;
+      itemEl.addEventListener('mouseenter', () => itemEl.style.background = 'rgba(128,128,128,0.1)'); itemEl.addEventListener('mouseleave', () => itemEl.style.background = 'transparent');
+      itemEl.addEventListener('mousedown', (ev) => { ev.preventDefault(); selectCardForSale(card, costPerCard); resultsDiv.style.display = 'none'; searchBox.value = ''; searchBox.focus(); });
+      resultsDiv.appendChild(itemEl);
+    });
+    resultsDiv.style.display = 'block';
+  }
+  searchBox.addEventListener('input', handleSearchInput); searchBox.addEventListener('keyup', handleSearchInput); searchBox.addEventListener('blur', () => { setTimeout(() => { if (resultsDiv) resultsDiv.style.display = 'none'; }, 150); });
+}
+function renderSaleCart() {
+  const container = document.getElementById('sale-cart-container'); if (!container) return; if (saleCart.length === 0) { container.style.display = 'none'; container.innerHTML = ''; return; }
+  container.style.display = 'flex'; container.innerHTML = '';
+  saleCart.forEach((item, index) => {
+    const itemEl = document.createElement('div'); itemEl.style.cssText = 'padding:14px; border:1px solid var(--border-color); border-radius:8px; background: rgba(128,128,128,0.05); position: relative;'; const displayPrice = item.price ? 'Rp ' + Number(item.price).toLocaleString('id-ID') : '';
+    itemEl.innerHTML = `<div style="display:flex; justify-content:space-between; margin-bottom:8px; align-items:center;"><strong style="font-size:14px;">${item.name} <span style="color:var(--text-secondary); font-weight:normal;">(${item.set || 'No Set'})</span></strong><button type="button" class="btn-remove-cart" data-index="${index}" style="background:none; border:none; color:#ef4444; cursor:pointer; padding:4px;" title="Remove"><i class="fas fa-times"></i></button></div><div style="font-size:12px; color:var(--text-secondary); margin-bottom:12px; display:flex; gap:12px;"><span><i class="fas fa-box"></i> Stock: ${item.maxQty} pcs</span><span style="color:var(--accent-yellow);"><i class="fas fa-tag"></i> Base Cost: Rp ${Math.round(item.unitCost).toLocaleString('id-ID')}/pc</span></div><div style="display:flex; gap:12px; flex-wrap:wrap;"><div style="flex:1; min-width: 100px;"><label style="display:block; margin-bottom:6px; font-size:12px; color: var(--text-secondary);">Qty Sold</label><input type="number" class="cart-qty" data-index="${index}" value="${item.qty}" min="1" max="${item.maxQty}" style="width:100%; padding:10px; border-radius:6px; border:1px solid var(--border-color); background: transparent; color: inherit; box-sizing: border-box;"></div><div style="flex:2; min-width: 180px;"><label style="display:block; margin-bottom:6px; font-size:12px; color: var(--text-secondary);">Total Selling Price</label><input type="text" class="cart-price" data-index="${index}" value="${displayPrice}" placeholder="e.g. Rp 75.000" style="width:100%; padding:10px; border-radius:6px; border:1px solid var(--border-color); background: transparent; color: inherit; box-sizing: border-box;"></div></div>`; container.appendChild(itemEl);
+  });
+  container.querySelectorAll('.btn-remove-cart').forEach(btn => { btn.addEventListener('click', (e) => { const idx = e.currentTarget.getAttribute('data-index'); saleCart.splice(idx, 1); renderSaleCart(); }); });
+  container.querySelectorAll('.cart-qty').forEach(input => { input.addEventListener('input', (e) => { const idx = e.target.getAttribute('data-index'); let val = Number(e.target.value); if (val > saleCart[idx].maxQty) { val = saleCart[idx].maxQty; e.target.value = val; } saleCart[idx].qty = val; }); });
+  container.querySelectorAll('.cart-price').forEach(input => { input.addEventListener('input', (e) => { const idx = e.target.getAttribute('data-index'); let rawValue = e.target.value.replace(/[^0-9]/g, ''); saleCart[idx].price = Number(rawValue) || 0; if (rawValue) e.target.value = 'Rp ' + Number(rawValue).toLocaleString('id-ID'); else e.target.value = ''; }); });
+}
+
+function openGlobalSaleSearchModal() {
+  ensureSaleModalExists(); saleCart = []; renderSaleCart(); document.getElementById('sale-modal-title').textContent = '💰 Record Bulk Sale'; document.getElementById('select-card-section').style.display = 'block'; document.getElementById('sale-search-inventory').value = ''; document.getElementById('sale-notes').value = '';
+  const today = new Date(); const offset = today.getTimezoneOffset() * 60000; document.getElementById('sale-date').value = (new Date(today - offset)).toISOString().split('T')[0]; 
+if(document.getElementById('sale-buyer-name')) document.getElementById('sale-buyer-name').value = '';
+document.getElementById('modal-sale').style.display = 'block';
+}
+
+function openSaleModal(card) {
+  ensureSaleModalExists(); saleCart = []; const calc = getCalculatedData(); const groupInfo = calc.groupsMap[card.group] || { rate: 0, shippingFee: 0, totalCardsInGroup: 0, shippingDivider: 1 }; const basePriceRp = (Number(card.yenprice||0) * groupInfo.rate); const shippingPerCard = groupInfo.shippingDivider > 0 ? (groupInfo.shippingFee / groupInfo.shippingDivider) : 0; const costPerCard = basePriceRp + shippingPerCard;
+  document.getElementById('sale-modal-title').textContent = `💰 Record Sale`; document.getElementById('select-card-section').style.display = 'block'; document.getElementById('sale-search-inventory').value = ''; document.getElementById('sale-notes').value = '';
+  const today = new Date(); const offset = today.getTimezoneOffset() * 60000; document.getElementById('sale-date').value = (new Date(today - offset)).toISOString().split('T')[0];
+  selectCardForSale(card, costPerCard); 
+if(document.getElementById('sale-buyer-name')) document.getElementById('sale-buyer-name').value = '';
+document.getElementById('modal-sale').style.display = 'block';
+}
+
+function selectCardForSale(card, costPerCard) { 
+    const exists = saleCart.find(c => c.id === card.id); 
+    if (!exists) { 
+        saleCart.push({ id: card.id, name: card.name, set: card.set, rarity: card.rarity, maxQty: card.quantity, qty: 1, price: '', unitCost: costPerCard }); 
+    } else {
+        // FIX: Add +1 to the quantity if clicked again from the search menu
+        if (exists.qty < exists.maxQty) {
+            exists.qty++;
+        }
+    }
+    renderSaleCart(); 
+}
+
+function submitSaleRecord() {
+  if (saleCart.length === 0) return alert("Please add at least one card to the cart.");
+  for (let i = 0; i < saleCart.length; i++) { const item = saleCart[i]; if (!item.price || item.qty <= 0) return alert(`Please enter a valid quantity and selling price for ${item.name}.`); if (item.qty > item.maxQty) return alert(`Insufficient stock for ${item.name}. You only have ${item.maxQty} pcs.`); }
+  
+  const notes = document.getElementById('sale-notes').value; 
+  const dateInput = document.getElementById('sale-date').value; 
+  const finalSaleDate = dateInput ? new Date(dateInput + 'T00:00:00').toISOString() : new Date().toISOString();
+  const buyerName = document.getElementById('sale-buyer-name') ? document.getElementById('sale-buyer-name').value.trim() : '';
+
+  if (buyerName) {
+    // INVOICE ROUTE FOR DIRECT SALES
+    let newInvoices = [];
+    saleCart.forEach(cartItem => {
+      let remainingQtyToSell = cartItem.qty; const searchName = String(cartItem.name || '').toLowerCase().trim(); const searchSet = String(cartItem.set || '').toLowerCase().trim(); const searchRarity = String(cartItem.rarity || '').toLowerCase().trim(); 
+      const matchingCards = state.inventory.filter(c => String(c.name || '').toLowerCase().trim() === searchName && String(c.set || '').toLowerCase().trim() === searchSet && String(c.rarity || '').toLowerCase().trim() === searchRarity && Number(c.quantity) > 0);
+      
+      matchingCards.forEach(targetCard => {
+        if (remainingQtyToSell <= 0) return; 
+        const cardStock = Number(targetCard.quantity); 
+        const qtyToDeduct = Math.min(cardStock, remainingQtyToSell); 
+        
+        // 1. Deduct stock immediately to reserve it for the invoice
+        targetCard.quantity = cardStock - qtyToDeduct; 
+        silentPostData('updateCard', { id: targetCard.id, name: targetCard.name, set: targetCard.set, rarity: targetCard.rarity, language: targetCard.language, group: targetCard.group, yenPrice: targetCard.yenprice, quantity: targetCard.quantity, condition: targetCard.condition });
+        
+        // 2. Create an invoice row for each piece of quantity so it matches the auction format
+        const pricePerUnit = cartItem.price / cartItem.qty;
+        for(let i = 0; i < qtyToDeduct; i++) {
+           const newInvoice = {
+             id: 'INV_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+             batch: 'Direct Sales',
+             cardId: targetCard.id, cardName: targetCard.name, set: targetCard.set, rarity: targetCard.rarity,
+             winner: buyerName, price: pricePerUnit, evidence: 'Direct Sale', payment: '', courier: '', insurance: 'No', shipFee: 0, toploaderQty: 0, address: '', resi: '', status: 'Unpaid', date: finalSaleDate
+           };
+           newInvoices.push(newInvoice);
+           state.invoices.push(newInvoice);
+        }
+        remainingQtyToSell -= qtyToDeduct;
+      });
+    });
+
+    document.getElementById('modal-sale').style.display = 'none'; 
+    saleCart = []; 
+    renderInventory(); 
+    updateDashboard();
+    if (typeof updateInvoiceBatchList === 'function') updateInvoiceBatchList();
+    if (typeof renderInvoiceHistory === 'function') renderInvoiceHistory();
+    
+    postData('saveInvoices', { invoices: newInvoices }).then(() => {
+        alert(`Invoice draft created!\n\nAdded to Invoice Manager under batch "Direct Sales" for buyer: ${buyerName}`);
+    });
+
+  } else {
+    // NORMAL INSTANT SALE ROUTE (Leaves Stock Deduction to the Backend)
+    saleCart.forEach(cartItem => {
+      let remainingQtyToSell = cartItem.qty; const searchName = String(cartItem.name || '').toLowerCase().trim(); const searchSet = String(cartItem.set || '').toLowerCase().trim(); const searchRarity = String(cartItem.rarity || '').toLowerCase().trim(); 
+      const matchingCards = state.inventory.filter(c => String(c.name || '').toLowerCase().trim() === searchName && String(c.set || '').toLowerCase().trim() === searchSet && String(c.rarity || '').toLowerCase().trim() === searchRarity && Number(c.quantity) > 0);
+      matchingCards.forEach(targetCard => {
+        if (remainingQtyToSell <= 0) return; const cardStock = Number(targetCard.quantity); const qtyToDeductFromThisCard = Math.min(cardStock, remainingQtyToSell); targetCard.quantity = cardStock - qtyToDeductFromThisCard; const splitSalePrice = (cartItem.price / cartItem.qty) * qtyToDeductFromThisCard;
+        
+        const saleRecord = { date: finalSaleDate, cardid: targetCard.id, name: targetCard.name, set: targetCard.set, rarity: targetCard.rarity, quantity: qtyToDeductFromThisCard, price: splitSalePrice, notes: notes };
+        state.sales.push(saleRecord);
+        remainingQtyToSell -= qtyToDeductFromThisCard;
+        
+        // SYNC IN BACKGROUND
+        (async function backgroundSync() {
+            await silentPostData('recordSale', { ...saleRecord, cardId: targetCard.id, deductStock: true });
+            fetchData();
+        })();
+      });
+    });
+    document.getElementById('modal-sale').style.display = 'none'; saleCart = []; renderInventory(); renderSales(); updateDashboard();
+  }
+}
+
+function updateSoldCardsStatsAndCharts(filteredSales) {
+  let totalRev = 0; let totalProfit = 0; let cardsSold = 0; const calc = getCalculatedData(); let setsData = {}; let cardsVolumeData = {};
+  filteredSales.forEach(sale => {
+      let rev = Number(sale.price || 0); totalRev += rev; let qty = Number(sale.quantity || 0); cardsSold += qty;
+      let setCode = sale.set || 'Unknown Set'; if(!setsData[setCode]) setsData[setCode] = 0; setsData[setCode] += rev;
+      let cardKey = `${sale.name || 'Unknown'} (${setCode})`; if(!cardsVolumeData[cardKey]) cardsVolumeData[cardKey] = 0; cardsVolumeData[cardKey] += qty;
+      const linkedCard = state.inventory.find(c => c.id === sale.cardid); let cost = 0;
+      if (linkedCard) { const groupInfo = calc.groupsMap[linkedCard.group] || { rate: 0, shippingFee: 0, totalCardsInGroup: 0, shippingDivider: 1 }; const basePriceRp = Number(linkedCard.yenprice || 0) * groupInfo.rate; const shippingPerCard = groupInfo.shippingDivider > 0 ? (groupInfo.shippingFee / groupInfo.shippingDivider) : 0; cost = (basePriceRp + shippingPerCard) * qty; }
+      totalProfit += (rev - cost);
+  });
+  const margin = totalRev > 0 ? ((totalProfit / totalRev) * 100).toFixed(1) : 0;
+  let rankedCards = Object.keys(cardsVolumeData).map(key => ({ cardInfo: key, qty: cardsVolumeData[key] })).sort((a, b) => b.qty - a.qty).slice(0, 3);
+  let leaderboardHTML = '';
+  if (rankedCards.length > 0) { rankedCards.forEach((item, index) => { const rankMedals = ['🥇', '🥈', '🥉']; leaderboardHTML += `<div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; padding: 4px 0; border-bottom:1px dashed rgba(255,255,255,0.04);"><span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:180px;">${rankMedals[index]} <strong>${item.cardInfo}</strong></span><span style="color:var(--accent-yellow); font-weight:700; white-space:nowrap;">${item.qty} sold</span></div>`; }); } else { leaderboardHTML = '<div style="color:var(--text-secondary); font-size:12px; text-align:center; padding:10px 0;">No sales recorded</div>'; }
+  let topSets = Object.keys(setsData).map(k => ({ set: k, rev: setsData[k] })).sort((a,b) => b.rev - a.rev).slice(0, 5); let maxSetRev = topSets.length > 0 ? topSets[0].rev : 1;
+  let setBarsHTML = '';
+  topSets.forEach(t => { let pct = Math.max((t.rev / maxSetRev) * 100, 2); setBarsHTML += `<div style="margin-bottom: 10px;"><div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; color: var(--text-secondary);"><span>${t.set}</span><span style="font-weight:600; color:var(--text-primary);">Rp ${Math.round(t.rev).toLocaleString('id-ID')}</span></div><div style="width: 100%; background: rgba(128,128,128,0.1); height: 6px; border-radius: 3px; overflow: hidden;"><div style="width: ${pct}%; background: var(--accent-yellow); height: 100%; border-radius: 3px;"></div></div></div>`; });
+
+  let viewSoldCards = document.getElementById('view-sold-cards'); let statsPanel = document.getElementById('sold-cards-stats-panel');
+  if (!statsPanel) { statsPanel = document.createElement('div'); statsPanel.id = 'sold-cards-stats-panel'; statsPanel.style.cssText = 'display: grid; gap: 20px; margin-bottom: 24px; align-items: stretch;'; const tablePanel = viewSoldCards.querySelector('.card-panel'); viewSoldCards.insertBefore(statsPanel, tablePanel); }
+  const isMobile = window.innerWidth < 1024; if(isMobile) { statsPanel.style.gridTemplateColumns = '1fr'; } else { statsPanel.style.gridTemplateColumns = '1.3fr 1fr 1.2fr'; }
+  statsPanel.innerHTML = `
+      <div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 20px; align-content: stretch;">
+          <div class="stat-card" style="padding: 20px; flex-direction: column; align-items: flex-start; justify-content: center; height: 100%; box-sizing: border-box; margin: 0;"><h4 style="margin: 0 0 8px 0; color: var(--text-secondary); font-size: 13px; font-weight: 500;">Filtered Revenue</h4><h2 style="margin: 0; font-size: 20px; color: var(--accent-yellow);">Rp ${Math.round(totalRev).toLocaleString('id-ID')}</h2></div>
+          <div class="stat-card" style="padding: 20px; flex-direction: column; align-items: flex-start; justify-content: center; height: 100%; box-sizing: border-box; margin: 0;"><h4 style="margin: 0 0 8px 0; color: var(--text-secondary); font-size: 13px; font-weight: 500;">Filtered Profit</h4><h2 style="margin: 0; font-size: 20px; color: ${totalProfit >= 0 ? '#22c55e' : '#ef4444'};">Rp ${Math.round(totalProfit).toLocaleString('id-ID')}</h2></div>
+          <div class="stat-card" style="padding: 20px; flex-direction: column; align-items: flex-start; justify-content: center; height: 100%; box-sizing: border-box; margin: 0;"><h4 style="margin: 0 0 8px 0; color: var(--text-secondary); font-size: 13px; font-weight: 500;">Profit Margin</h4><h2 style="margin: 0; font-size: 20px; color: var(--text-primary);">${margin}%</h2></div>
+          <div class="stat-card" style="padding: 20px; flex-direction: column; align-items: flex-start; justify-content: center; height: 100%; box-sizing: border-box; margin: 0;"><h4 style="margin: 0 0 8px 0; color: var(--text-secondary); font-size: 13px; font-weight: 500;">Cards Sold</h4><h2 style="margin: 0; font-size: 20px; color: var(--text-primary);">${cardsSold} pcs</h2></div>
+      </div>
+      <div class="stat-card" style="padding: 20px; flex-direction: column; align-items: flex-start; justify-content: flex-start; height: 100%; box-sizing: border-box; margin: 0; display: flex;"><h4 style="margin: 0 0 12px 0; color: var(--text-secondary); font-size: 13px; font-weight: 500; width: 100%;"><i class="fas fa-trophy" style="color:var(--accent-yellow); margin-right:4px;"></i> Top Selling Cards</h4><div style="width:100%; display:flex; flex-direction:column; gap:12px; flex: 1; justify-content: center;">${leaderboardHTML}</div></div>
+      <div class="card-panel" style="margin-bottom: 0; padding: 20px; display: flex; flex-direction: column; justify-content: flex-start; height: 100%; box-sizing: border-box;"><h4 style="margin: 0 0 16px 0; color: var(--text-secondary); font-size: 13px; font-weight: 500;"><i class="fas fa-chart-bar" style="color:var(--accent-yellow); margin-right:4px;"></i> Top Sets (Filtered)</h4><div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">${topSets.length > 0 ? setBarsHTML : '<div style="color:var(--text-secondary); font-size:12px; text-align:center;">No sets data available</div>'}</div></div>
+  `;
+}
+
+function renderGroups() {
+  const grid = document.getElementById('groups-grid'); const addCardsGroupSelect = document.getElementById('group-select'); const calc = getCalculatedData();
+  if(addCardsGroupSelect) { addCardsGroupSelect.innerHTML = '<option value="">Select a group...</option>'; state.groups.forEach(g => { addCardsGroupSelect.innerHTML += `<option value="${g.name}">${g.name}</option>`; }); }
+  const groupSelect = document.getElementById('filter-group'); const langSelect = document.getElementById('filter-lang');
+  if (groupSelect && langSelect) {
+    const currentGroup = groupSelect.value || 'All Groups'; const currentLang = langSelect.value || 'All Languages';
+    let groupOptions = '<option value="All Groups">All Groups</option>'; state.groups.forEach(g => { groupOptions += `<option value="${g.name}">${g.name}</option>`; }); groupSelect.innerHTML = groupOptions; groupSelect.value = currentGroup;
+    langSelect.innerHTML = `<option value="All Languages">All Languages</option><option value="Japanese">Japanese</option><option value="English">English</option><option value="Indonesian">Indonesian</option>`; langSelect.value = currentLang;
+  }
+  if(!grid) return; grid.innerHTML = '';
+  if(!state.groups || state.groups.length === 0) { grid.innerHTML = `<p style="color: var(--text-secondary);">No groups created yet.</p>`; return; }
+  state.groups.forEach(g => {
+    const groupDetail = calc.groupsMap[g.name] || { totalCardsInGroup: 0 }; const div = document.createElement('div'); div.className = 'group-card';
+    div.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;"><h3 style="margin:0; display:flex; align-items:center;"><i class="fas fa-box" style="color: var(--accent-yellow); margin-right:6px;"></i><span class="editable-group edit-g-name" contenteditable="true" title="Click to edit" style="padding:2px 6px; border-radius:4px;">${g.name}</span></h3><div style="display: flex; align-items: center; gap: 12px;"><span style="font-size:12px; color: var(--text-secondary);">ID: ${String(g.id).substring(4,10)}</span><button class="btn-outline btn-delete-group" style="padding: 4px 8px; color: #ef4444; border-color: rgba(239, 68, 68, 0.3);" title="Delete Group"><i class="fas fa-trash"></i></button></div></div>
+      <div class="group-stat-row"><span>Exchange Rate</span><strong>¥1 = Rp <span class="editable-group edit-g-rate" contenteditable="true" title="Click to edit" style="padding:2px 6px; border-radius:4px;">${g.exchangerate || 0}</span></strong></div>
+      <div class="group-stat-row"><span>Total Shipping Fee</span><strong>Rp <span class="editable-group edit-g-ship" contenteditable="true" title="Click to edit" style="padding:2px 6px; border-radius:4px;">${Number(g.shippingfee || 0).toLocaleString('id-ID')}</span></strong></div>
+      <div class="group-stat-row"><span>Cards Tracked</span><strong>${groupDetail.totalCardsInGroup} pcs</strong></div>
+    `;
+    div.querySelectorAll('.editable-group').forEach(cell => {
+      cell.addEventListener('mouseenter', () => cell.style.background = 'rgba(128,128,128,0.1)'); cell.addEventListener('mouseleave', () => cell.style.background = 'transparent'); cell.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); cell.blur(); }});
+      cell.addEventListener('blur', () => {
+        cell.style.background = 'transparent'; const oldName = g.name; let newName = div.querySelector('.edit-g-name').textContent.trim(); let newRate = Number(div.querySelector('.edit-g-rate').textContent.replace(/[^0-9]/g, '')) || 0; let newShip = Number(div.querySelector('.edit-g-ship').textContent.replace(/[^0-9]/g, '')) || 0;
+        if (!newName) newName = oldName; const nameChanged = (oldName !== newName);
+        state.groups.forEach(item => { if (item.id === g.id) { item.name = newName; item.exchangerate = newRate; item.shippingfee = newShip; } });
+        if (nameChanged) { state.inventory.forEach(card => { if (card.group === oldName) card.group = newName; }); }
+        updateDashboard(); renderInventory(); renderGroups(); silentPostData('updateGroup', { id: g.id, oldName: oldName, name: newName, rate: newRate, shipping: newShip, nameChanged: nameChanged });
+      });
+    });
+    div.querySelector('.btn-delete-group').addEventListener('click', () => {
+      const groupCards = state.inventory.filter(c => c.group === g.name); const confirmMsg = groupCards.length > 0 ? `Are you sure you want to delete the group "${g.name}" AND the ${groupCards.length} card(s) inside it?\n\nThis will move them to the Recycle Bin.` : `Are you sure you want to delete the empty group "${g.name}"?`;
+      if(confirm(confirmMsg)) {
+        const payload = { group: { id: g.id, name: g.name, exchangeRate: g.exchangerate, shippingFee: g.shippingfee }, cards: groupCards }; state.trash.unshift({ id: 'TRASH_' + Date.now() + Math.floor(Math.random()*1000), type: 'GroupBundle', deletedAt: new Date().toISOString(), payload: JSON.stringify(payload) });
+        state.groups = state.groups.filter(item => item.id !== g.id); state.inventory = state.inventory.filter(item => item.group !== g.name); 
+        updateDashboard(); renderInventory(); renderGroups(); renderTrash(); 
+        
+        // SYNC IN BACKGROUND
+        (async function backgroundSync() {
+            await silentPostData('deleteGroup', { id: g.id, name: g.name });
+            fetchData();
+        })();
+      }
+    });
+    grid.appendChild(div);
+  });
+}
+
+function renderSales() {
+  const body = document.getElementById('sales-body'); if(!body) return; body.innerHTML = '';
+  const table = body.closest('table');
+  if (table) {
+    const theadTr = table.querySelector('thead tr');
+    if (theadTr && !theadTr.querySelector('.bulk-check-header')) { const th = document.createElement('th'); th.className = 'bulk-check-header'; th.style.width = '40px'; th.innerHTML = '<input type="checkbox" id="check-all-sales" style="cursor:pointer; width:16px; height:16px; accent-color: var(--accent-yellow);">'; theadTr.insertBefore(th, theadTr.firstChild); }
+    let controlsDiv = document.getElementById('sales-controls-div');
+    if (!controlsDiv) {
+      controlsDiv = document.createElement('div'); controlsDiv.id = 'sales-controls-div'; controlsDiv.style.cssText = 'display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px;';
+      const filterBar = document.createElement('div'); filterBar.style.cssText = 'display: flex; justify-content: space-between; align-items: center; background: rgba(128,128,128,0.05); padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border-color); flex-wrap: wrap; gap: 12px;';
+      filterBar.innerHTML = `<div style="color: var(--text-secondary); font-size: 14px; font-weight: 500;" id="sales-count-display"></div><div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;"><label style="font-size: 13px; color: var(--text-secondary); margin: 0;">Sort:</label><select id="sort-sales" style="width: auto; display: inline-block; padding: 6px 12px; border-radius: 6px; background: transparent; color: inherit; border: 1px solid var(--border-color); outline: none; cursor: pointer; font-size: 13px;"><option value="newest">Newest First</option><option value="oldest">Oldest First</option><option value="az">Name (A-Z)</option><option value="za">Name (Z-A)</option><option value="price-high">Price (High-Low)</option><option value="price-low">Price (Low-High)</option></select><label style="font-size: 13px; color: var(--text-secondary); margin: 0; margin-left: 8px;">Filter:</label><select id="sales-month-filter" style="width: auto; display: inline-block; padding: 6px 12px; border-radius: 6px; background: transparent; color: inherit; border: 1px solid var(--border-color); outline: none; cursor: pointer; font-size: 13px;"><option value="all">All Months</option><option value="0">Jan</option><option value="1">Feb</option><option value="2">Mar</option><option value="3">Apr</option><option value="4">May</option><option value="5">Jun</option><option value="6">Jul</option><option value="7">Aug</option><option value="8">Sep</option><option value="9">Oct</option><option value="10">Nov</option><option value="11">Dec</option></select><select id="sales-year-filter" style="width: auto; display: inline-block; padding: 6px 12px; border-radius: 6px; background: transparent; color: inherit; border: 1px solid var(--border-color); outline: none; cursor: pointer; font-size: 13px;"><option value="all">All Years</option></select></div>`; controlsDiv.appendChild(filterBar);
+      const bulkDiv = document.createElement('div'); bulkDiv.id = 'bulk-delete-div'; bulkDiv.style.cssText = 'display: none; justify-content: space-between; align-items: center; padding: 12px 16px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px;';
+      bulkDiv.innerHTML = `<span style="color: #ef4444; font-weight: 600; font-size: 14px;"><span id="bulk-delete-count">0</span> sale(s) selected</span><button id="btn-bulk-delete" style="background: #ef4444; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"><i class="fas fa-trash"></i> Delete Selected</button>`; controlsDiv.appendChild(bulkDiv); table.parentNode.insertBefore(controlsDiv, table);
+      document.getElementById('sort-sales').addEventListener('change', () => { renderSales(); }); document.getElementById('sales-month-filter').addEventListener('change', () => { renderSales(); }); document.getElementById('sales-year-filter').addEventListener('change', () => { renderSales(); });
+    } else { document.getElementById('bulk-delete-div').style.display = 'none'; }
+    const yearSelect = document.getElementById('sales-year-filter');
+    if (yearSelect && state.sales) {
+      const currentYearVal = yearSelect.value; const years = [...new Set(state.sales.map(s => new Date(s.date || Date.now()).getFullYear()))].sort((a,b) => b - a); if(years.length === 0) years.push(new Date().getFullYear());
+      let yearOpts = '<option value="all">All Years</option>'; years.forEach(y => { yearOpts += `<option value="${y}" ${String(y) === currentYearVal ? 'selected' : ''}>${y}</option>`; }); yearSelect.innerHTML = yearOpts; if (!years.includes(Number(currentYearVal)) && currentYearVal !== 'all') yearSelect.value = 'all'; 
+    }
+  }
+
+  const monthFilter = document.getElementById('sales-month-filter') ? document.getElementById('sales-month-filter').value : 'all'; const yearFilter = document.getElementById('sales-year-filter') ? document.getElementById('sales-year-filter').value : 'all';
+  let filteredSales = [...state.sales]; filteredSales = filteredSales.filter(s => { const sDate = new Date(s.date || Date.now()); const matchMonth = (monthFilter === 'all') || (sDate.getMonth() === Number(monthFilter)); const matchYear = (yearFilter === 'all') || (sDate.getFullYear() === Number(yearFilter)); return matchMonth && matchYear; });
+
+  const sortVal = document.getElementById('sort-sales') ? document.getElementById('sort-sales').value : 'newest';
+  if (sortVal === 'newest') filteredSales.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0)); else if (sortVal === 'oldest') filteredSales.sort((a, b) => new Date(a.date || 0) - new Date(b.date || 0)); else if (sortVal === 'az') filteredSales.sort((a, b) => String(a.name || '').localeCompare(String(b.name || ''))); else if (sortVal === 'za') filteredSales.sort((a, b) => String(b.name || '').localeCompare(String(a.name || ''))); else if (sortVal === 'price-high') filteredSales.sort((a, b) => Number(b.price || 0) - Number(a.price || 0)); else if (sortVal === 'price-low') filteredSales.sort((a, b) => Number(a.price || 0) - Number(b.price || 0));
+
+  const countDisplay = document.getElementById('sales-count-display'); if (countDisplay) countDisplay.textContent = `Showing ${filteredSales.length} record(s)`;
+  updateSoldCardsStatsAndCharts(filteredSales);
+
+  if(filteredSales.length === 0) { body.innerHTML = `<tr><td colspan="10" style="text-align:center; color: var(--text-secondary);">No sales records found for this period.</td></tr>`; return; }
+
+  const calc = getCalculatedData();
+  filteredSales.forEach((sale, index) => {
+    const linkedCard = state.inventory.find(c => c.id === sale.cardid); let totalCostOfSold = 0;
+    if (linkedCard) { const groupInfo = calc.groupsMap[linkedCard.group] || { rate: 0, shippingFee: 0, totalCardsInGroup: 0, shippingDivider: 1 }; const basePriceRp = Number(linkedCard.yenprice || 0) * groupInfo.rate; const shippingPerCard = groupInfo.shippingDivider > 0 ? (groupInfo.shippingFee / groupInfo.shippingDivider) : 0; const totalCostPerCard = basePriceRp + shippingPerCard; totalCostOfSold = totalCostPerCard * Number(sale.quantity || 1); }
+    const salePrice = Number(sale.price || 0); const profit = salePrice - totalCostOfSold;
+    const isLoss = profit < 0; const profitColor = isLoss ? '#ef4444' : '#22c55e'; const formattedProfit = (isLoss ? '-' : '') + 'Rp ' + Math.abs(Math.round(profit)).toLocaleString('id-ID');
+    const saleDateObj = new Date(sale.date || Date.now()); const offset = saleDateObj.getTimezoneOffset() * 60000; const localISOTime = (new Date(saleDateObj.getTime() - offset)).toISOString().split('T')[0];
+
+    const tr = document.createElement('tr');
+    
+    tr.addEventListener('click', (e) => {
+      const isInteractive = ['INPUT', 'SELECT', 'BUTTON'].includes(e.target.tagName) || e.target.closest('button');
+      if (isInteractive) return;
+      if (tr.classList.contains('expanded') && (e.target.getAttribute('contenteditable') === 'true' || e.target.closest('[contenteditable="true"]'))) return;
+      if (window.innerWidth <= 768) tr.classList.toggle('expanded');
+    });
+
+    tr.innerHTML = `
+      <td data-label="Select"><input type="checkbox" class="sale-check" data-index="${index}" style="cursor:pointer; width:16px; height:16px; accent-color: var(--accent-yellow);"></td>
+      <td data-label="Date" title="Click to edit date"><input type="date" class="inline-edit-date edit-sale-date" value="${localISOTime}" style="background:transparent; color:inherit; border:1px dashed transparent; outline:none; cursor:pointer; padding:2px 4px; border-radius:4px; font-size:inherit; font-family:inherit; color-scheme: inherit;"></td>
+      <td data-label="Card Name"><strong>${sale.name || '—'}</strong></td>
+      <td data-label="Set">${sale.set || '—'}</td>
+      <td data-label="Rarity">${sale.rarity || '—'}</td> 
+      <td data-label="Qty Sold">${sale.quantity || 1}</td>
+      <td data-label="Selling Price">Rp ${salePrice.toLocaleString('id-ID')}</td>
+      <td data-label="Profit" style="color: ${profitColor}; font-weight: 600;">${formattedProfit}</td>
+      <td data-label="Notes"><span class="editable-cell edit-sale-notes" contenteditable="true" title="Click to edit">${sale.notes || '—'}</span></td>
+      <td data-label="Action"><div style="display: flex; gap: 4px; align-items: center; justify-content: flex-start;"><button class="btn-outline btn-delete-sale" style="padding: 4px 8px; color: #ef4444; border-color: rgba(239, 68, 68, 0.3);" title="Delete Sale"><i class="fas fa-trash"></i></button></div></td>
+    `;
+
+    const dateInput = tr.querySelector('.edit-sale-date'); dateInput.addEventListener('mouseenter', () => dateInput.style.border = '1px dashed var(--border-color)'); dateInput.addEventListener('mouseleave', () => dateInput.style.border = '1px dashed transparent'); dateInput.addEventListener('change', (e) => { const newDateStr = e.target.value; if(!newDateStr) return; const newSaleDate = new Date(newDateStr + 'T00:00:00').toISOString(); sale.date = newSaleDate; silentPostData('updateSale', { oldDate: sale.date, cardId: sale.cardid, newDate: newSaleDate, notes: sale.notes }); updateDashboard(); renderSales(); });
+    const notesCell = tr.querySelector('.edit-sale-notes'); notesCell.addEventListener('mouseenter', () => notesCell.style.background = 'rgba(128,128,128,0.1)'); notesCell.addEventListener('mouseleave', () => notesCell.style.background = 'transparent'); notesCell.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); notesCell.blur(); } }); notesCell.addEventListener('blur', () => { notesCell.style.background = 'transparent'; let newNotes = notesCell.textContent.trim(); if (newNotes === '—') newNotes = ''; if (newNotes !== (sale.notes || '')) { sale.notes = newNotes; silentPostData('updateSale', { oldDate: sale.date, cardId: sale.cardid, newDate: sale.date, notes: newNotes }); } });
+    tr.querySelector('.btn-delete-sale').addEventListener('click', () => { 
+        if (confirm(`Are you sure you want to delete this sale record for ${sale.name}? This will restore ${sale.quantity} stock back to the inventory.`)) { 
+            if (linkedCard) linkedCard.quantity = Number(linkedCard.quantity || 0) + Number(sale.quantity || 1); 
+            state.sales = state.sales.filter(s => s !== sale); 
+            updateDashboard(); renderSales(); renderInventory(); 
+            
+            // SYNC IN BACKGROUND
+            (async function backgroundSync() {
+                await silentPostData('deleteSale', { date: sale.date, cardId: sale.cardid, quantity: sale.quantity });
+                fetchData();
+            })();
+        } 
+    });
+    body.appendChild(tr);
+  });
+
+  let checkAll = document.getElementById('check-all-sales'); const itemChecks = document.querySelectorAll('.sale-check'); const bulkDeleteBtn = document.getElementById('btn-bulk-delete'); const bulkCountText = document.getElementById('bulk-delete-count'); const bulkDiv = document.getElementById('bulk-delete-div');
+  if (checkAll) { const newCheckAll = checkAll.cloneNode(true); checkAll.parentNode.replaceChild(newCheckAll, checkAll); checkAll = newCheckAll; checkAll.checked = false; }
+  if (checkAll && itemChecks && bulkDeleteBtn && bulkCountText && bulkDiv) {
+    function updateBulkUI() { const checkedCount = document.querySelectorAll('.sale-check:checked').length; if (checkedCount > 0) { bulkDiv.style.display = 'flex'; bulkCountText.textContent = checkedCount; } else { bulkDiv.style.display = 'none'; } checkAll.checked = (checkedCount === itemChecks.length && itemChecks.length > 0); }
+    checkAll.addEventListener('change', (e) => { itemChecks.forEach(chk => chk.checked = e.target.checked); updateBulkUI(); }); itemChecks.forEach(chk => { chk.addEventListener('change', updateBulkUI); });
+    const newBulkBtn = bulkDeleteBtn.cloneNode(true); bulkDeleteBtn.parentNode.replaceChild(newBulkBtn, bulkDeleteBtn);
+    newBulkBtn.addEventListener('click', () => {
+      const checkedBoxes = document.querySelectorAll('.sale-check:checked'); if (checkedBoxes.length === 0) return;
+      if (confirm(`Are you sure you want to delete ${checkedBoxes.length} sale record(s)? This will restore their stock back to the inventory.`)) {
+        const salesToDelete = Array.from(checkedBoxes).map(chk => filteredSales[chk.getAttribute('data-index')]);
+        salesToDelete.forEach(sale => { const linkedCard = state.inventory.find(c => c.id === sale.cardid); if (linkedCard) linkedCard.quantity = Number(linkedCard.quantity || 0) + Number(sale.quantity || 1); state.sales = state.sales.filter(s => s !== sale); });
+        updateDashboard(); renderInventory(); renderSales();
+        (async function syncBulkDelete() { 
+          for (const sale of salesToDelete) { 
+            await silentPostData('deleteSale', { date: sale.date, cardId: sale.cardid, quantity: sale.quantity }); 
+          } 
+        })();
+      }
+    });
+  }
+}
+
+function renderTrash() {
+  const body = document.getElementById('trash-body'); if(!body) return; body.innerHTML = '';
+  const table = body.closest('table');
+  if (table) {
+    const theadTr = table.querySelector('thead tr');
+    if (theadTr && !theadTr.querySelector('.bulk-check-header-trash')) { const th = document.createElement('th'); th.className = 'bulk-check-header-trash'; th.style.width = '40px'; th.innerHTML = '<input type="checkbox" id="check-all-trash" style="cursor:pointer; width:16px; height:16px; accent-color: var(--accent-yellow);">'; theadTr.insertBefore(th, theadTr.firstChild); }
+    let controlsDiv = document.getElementById('trash-controls-div');
+    if (!controlsDiv) {
+      controlsDiv = document.createElement('div'); controlsDiv.id = 'trash-controls-div'; controlsDiv.style.cssText = 'display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px;';
+      const bulkDiv = document.createElement('div'); bulkDiv.id = 'bulk-action-trash-div'; bulkDiv.style.cssText = 'display: none; justify-content: space-between; align-items: center; padding: 12px 16px; background: rgba(234, 179, 8, 0.1); border: 1px solid rgba(234, 179, 8, 0.3); border-radius: 8px;';
+      bulkDiv.innerHTML = `<span style="color: var(--accent-yellow); font-weight: 600; font-size: 14px;"><span id="bulk-trash-count">0</span> item(s) selected</span><div style="display: flex; gap: 10px;"><button id="btn-bulk-restore-trash" style="background: transparent; color: var(--text-primary); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s;"><i class="fas fa-undo" style="color: var(--accent-yellow);"></i> Restore Selected</button><button id="btn-bulk-delete-trash" style="background: #ef4444; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"><i class="fas fa-trash"></i> Delete Permanently</button></div>`;
+      controlsDiv.appendChild(bulkDiv); table.parentNode.insertBefore(controlsDiv, table);
+    } else { document.getElementById('bulk-action-trash-div').style.display = 'none'; }
+  }
+
+  if(!state.trash || state.trash.length === 0) { body.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 24px; color: var(--text-secondary);">Your Recycle Bin is empty.</td></tr>`; return; }
+
+  let sortedTrash = [...state.trash].sort((a,b) => new Date(b.deletedAt) - new Date(a.deletedAt));
+  sortedTrash.forEach((item, index) => {
+    let payloadStr = "Unknown Data";
+    try {
+      const p = JSON.parse(item.payload);
+      if (item.type === 'Card') { payloadStr = `<strong>${p.name || 'Unknown'}</strong> (${p.set || 'No Set'}) - Stock: ${p.quantity} | Yen: ¥${Number(p.yenPrice).toLocaleString('ja-JP')}`; } else if (item.type === 'Sale') { payloadStr = `<strong>${p.name || 'Unknown'}</strong> | Sold: ${p.quantity} pcs | Price: Rp ${Number(p.price).toLocaleString('id-ID')}`; } else if (item.type === 'GroupBundle') { payloadStr = `<strong>Group: ${p.group.name}</strong> | Rate: ¥1 = Rp ${p.group.exchangeRate} | Contains ${p.cards ? p.cards.length : 0} card(s)`; } else if (item.type === 'Invoice') { payloadStr = `<strong>Invoice: ${p.winner}</strong> | Batch: ${p.batch} | Contains ${p.invoices ? p.invoices.length : 0} item(s)`; }
+    } catch(e) {}
+    const typeBg = item.type === 'Card' ? 'rgba(59, 130, 246, 0.15)' : item.type === 'Sale' ? 'rgba(34, 197, 94, 0.15)' : item.type === 'Invoice' ? 'rgba(234, 179, 8, 0.15)' : 'rgba(168, 85, 247, 0.15)'; const typeColor = item.type === 'Card' ? '#3b82f6' : item.type === 'Sale' ? '#22c55e' : item.type === 'Invoice' ? '#eab308' : '#a855f7'; const displayType = item.type === 'GroupBundle' ? 'Group & Cards' : item.type;
+
+    const tr = document.createElement('tr');
+    
+    tr.addEventListener('click', (e) => {
+      const isInteractive = ['INPUT', 'SELECT', 'BUTTON'].includes(e.target.tagName) || e.target.closest('button');
+      if (isInteractive) return;
+      if (tr.classList.contains('expanded') && (e.target.getAttribute('contenteditable') === 'true' || e.target.closest('[contenteditable="true"]'))) return;
+      if (window.innerWidth <= 768) tr.classList.toggle('expanded');
+    });
+
+    tr.innerHTML = `
+      <td data-label="Select"><input type="checkbox" class="trash-check" data-index="${index}" style="cursor:pointer; width:16px; height:16px; accent-color: var(--accent-yellow);"></td>
+      <td data-label="Type"><span style="padding:4px 8px; border-radius:4px; font-size:12px; font-weight:600; background: ${typeBg}; color: ${typeColor};">${displayType}</span></td>
+      <td data-label="Deleted On">${new Date(item.deletedAt).toLocaleString()}</td>
+      <td data-label="Details">${payloadStr}</td>
+      <td data-label="Actions"><div style="display:flex; justify-content: flex-start; gap:8px;"><button class="btn-outline btn-restore-trash" style="padding: 6px 12px; font-weight: 500; color: var(--accent-yellow); border-color: rgba(234, 179, 8, 0.3);" title="Restore back to tracker"><i class="fas fa-undo"></i> Restore</button><button class="btn-outline btn-destroy-trash" style="padding: 6px 12px; font-weight: 500; color: #ef4444; border-color: rgba(239, 68, 68, 0.3);" title="Delete Permanently"><i class="fas fa-times"></i> Delete</button></div></td>
+    `;
+    tr.querySelector('.btn-restore-trash').addEventListener('click', () => { if(confirm(`Are you sure you want to restore this ${displayType} back to the active tracker?`)) restoreSingleTrash(item); });
+    tr.querySelector('.btn-destroy-trash').addEventListener('click', () => { if(confirm(`Permanently delete this ${displayType}? This action cannot be undone.`)) deleteSingleTrash(item); });
+    body.appendChild(tr);
+  });
+
+  let checkAll = document.getElementById('check-all-trash'); const itemChecks = document.querySelectorAll('.trash-check'); const bulkRestoreBtn = document.getElementById('btn-bulk-restore-trash'); const bulkDeleteBtn = document.getElementById('btn-bulk-delete-trash'); const bulkCountText = document.getElementById('bulk-trash-count'); const bulkDiv = document.getElementById('bulk-action-trash-div');
+  if (checkAll) { const newCheckAll = checkAll.cloneNode(true); checkAll.parentNode.replaceChild(newCheckAll, checkAll); checkAll = newCheckAll; checkAll.checked = false; }
+  if (checkAll && itemChecks && bulkRestoreBtn && bulkDeleteBtn && bulkCountText && bulkDiv) {
+    function updateBulkUI() { const checkedCount = document.querySelectorAll('.trash-check:checked').length; if (checkedCount > 0) { bulkDiv.style.display = 'flex'; bulkCountText.textContent = checkedCount; } else { bulkDiv.style.display = 'none'; } checkAll.checked = (checkedCount === itemChecks.length && itemChecks.length > 0); }
+    checkAll.addEventListener('change', (e) => { itemChecks.forEach(chk => chk.checked = e.target.checked); updateBulkUI(); }); itemChecks.forEach(chk => { chk.addEventListener('change', updateBulkUI); });
+    const newBulkRestore = bulkRestoreBtn.cloneNode(true); bulkRestoreBtn.parentNode.replaceChild(newBulkRestore, bulkRestoreBtn);
+    newBulkRestore.addEventListener('click', () => {
+      const checkedBoxes = document.querySelectorAll('.trash-check:checked'); if (checkedBoxes.length === 0) return;
+      if (confirm(`Are you sure you want to restore ${checkedBoxes.length} item(s)?`)) {
+        const itemsToRestore = Array.from(checkedBoxes).map(chk => sortedTrash[chk.getAttribute('data-index')]); 
+        itemsToRestore.forEach(item => processRestoreState(item)); 
+        updateDashboard(); renderInventory(); renderGroups(); renderTrash();
+        if (typeof renderInvoiceHistory === 'function') { renderInvoiceHistory(); updateInvoiceBatchList(); }
+        
+        // FIX: Replaced raw fetch with silentPostData to pass the database passcode
+        (async function syncBulkRestore() { 
+            for (const item of itemsToRestore) { 
+                await silentPostData('restoreTrash', { trashId: item.id }); 
+            } 
+        })();
+      }
+    });
+
+    const newBulkDelete = bulkDeleteBtn.cloneNode(true); bulkDeleteBtn.parentNode.replaceChild(newBulkDelete, bulkDeleteBtn);
+    newBulkDelete.addEventListener('click', () => {
+      const checkedBoxes = document.querySelectorAll('.trash-check:checked'); if (checkedBoxes.length === 0) return;
+      if (confirm(`Permanently delete ${checkedBoxes.length} item(s)? This cannot be undone.`)) {
+        const itemsToDelete = Array.from(checkedBoxes).map(chk => sortedTrash[chk.getAttribute('data-index')]); 
+        itemsToDelete.forEach(item => { state.trash = state.trash.filter(t => t.id !== item.id); }); 
+        renderTrash();
+        
+        // FIXED: Send ONE single request with all IDs instead of looping
+        const idsToDelete = itemsToDelete.map(item => item.id);
+        silentPostData('deleteTrash', { trashIds: idsToDelete });
+      }
+    });
+  }
+}
+
+function processRestoreState(item) {
+  state.trash = state.trash.filter(t => t.id !== item.id);
+  try {
+    const p = JSON.parse(item.payload);
+    if (item.type === 'GroupBundle') { state.groups.push({ id: p.group.id, name: p.group.name, exchangerate: p.group.exchangeRate, shippingfee: p.group.shippingFee }); if (p.cards) { p.cards.forEach(c => state.inventory.push(c)); } }
+    else if (item.type === 'Card') { state.inventory.push(p); }
+    else if (item.type === 'Sale') { state.sales.push({ date: p.date, cardid: p.cardId, name: p.name, set: p.set, rarity: p.rarity, quantity: p.quantity, price: p.price, notes: p.notes }); const linkedCard = state.inventory.find(c => c.id === p.cardId); if (linkedCard) linkedCard.quantity = Number(linkedCard.quantity || 0) - Number(p.quantity || 0); }
+    else if (item.type === 'Invoice') { 
+        if(p.invoices) { 
+            p.invoices.forEach(restoredInv => {
+                const existingIdx = state.invoices.findIndex(inv => inv.id === restoredInv.id);
+                if (existingIdx > -1) state.invoices[existingIdx] = restoredInv; // Overwrites instead of duplicates
+                else state.invoices.push(restoredInv);
+            }); 
+        } 
+    }
+  } catch (e) {}
+}
+function restoreSingleTrash(item) { 
+    processRestoreState(item); 
+    updateDashboard(); renderInventory(); renderGroups(); renderTrash(); 
+    if (typeof renderInvoiceHistory === 'function') { renderInvoiceHistory(); updateInvoiceBatchList(); }
+    
+    // SYNC IN BACKGROUND
+    (async function backgroundSync() {
+        await silentPostData('restoreTrash', { trashId: item.id });
+        fetchData();
+    })();
+}
+function deleteSingleTrash(item) { state.trash = state.trash.filter(t => t.id !== item.id); renderTrash(); silentPostData('deleteTrash', { trashId: item.id }); }
+
+/* ============================================================== */
+/* AUCTION & CLAIM SALE LOGIC                                     */
+/* ============================================================== */
+let auctionDrafts = [];
+
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('auction-search');
+  const resultsDiv = document.getElementById('auction-search-results');
+
+  // Clear draft button listener
+  document.getElementById('btn-clear-draft')?.addEventListener('click', function() {
+      auctionDrafts = [];
+      document.getElementById('auction-batch-input').value = '';
+      document.getElementById('auction-search').value = '';
+      const fbOutput = document.getElementById('fb-post-output');
+      if (fbOutput) {
+          fbOutput.style.display = 'none';
+          fbOutput.value = '';
+      }
+      renderAuctionDrafts();
+  });
+
+  // Shipping Recalculation Listener
+  const resetMathBtn = document.getElementById('btn-reset-shipping-math');
+  if (resetMathBtn) {
+      resetMathBtn.addEventListener('click', () => {
+          if(confirm("This will reset the historical maximum stock memory for all groups and recalculate shipping fees based purely on your CURRENT active inventory. Proceed?")) {
+              // 1. Clear the memory
+              localStorage.removeItem('maxGroupStock');
+              
+              // 2. Alert the user
+              alert("Memory cleared! The page will now reload to apply the fresh calculations.");
+              
+              // 3. Force a full page reload to re-fetch data and re-run the math
+              location.reload(); 
+          }
+      });
+  }
+
+  
+  
+  if(searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      if (!q) { resultsDiv.innerHTML = ''; return; }
+      
+    // FIX: Only hide the card if the drafted amount equals the total stock
+      const availableCards = state.inventory.filter(c => {
+          const stock = Number(c.quantity || 0);
+          const draftedQty = auctionDrafts.filter(draft => draft.id === c.id).length;
+          return stock > draftedQty;
+      });
+      const matches = availableCards.filter(c => {
+        const cardName = String(c.name || '').toLowerCase().trim();
+        const cardSet = String(c.set || '').toLowerCase().trim();
+        const cardRarity = String(c.rarity || '').toLowerCase().trim();
+        if (q.length <= 2) return cardName.startsWith(q);
+        else return cardName.includes(q) || cardSet.includes(q) || cardRarity.includes(q);
+      }).slice(0, 5);
+      
+      resultsDiv.innerHTML = matches.map(c => 
+        `<div style="padding:8px 12px; cursor:pointer; border-bottom:1px solid var(--border-color);" onclick="addCardToAuctionDraft('${c.id}')">
+          <strong>${c.name}</strong> (${c.rarity}) - Stock: ${c.quantity}
+        </div>`
+      ).join('');
+    });
+  }
+
+  document.addEventListener('paste', async (e) => {
+    const activeEl = document.activeElement;
+    if (activeEl && activeEl.classList.contains('auction-img-paste')) {
+      const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+      for (let index in items) {
+        const item = items[index];
+        if (item.kind === 'file' && item.type.includes('image/')) {
+          const blob = item.getAsFile();
+          activeEl.value = "Uploading image, please wait...";
+          activeEl.disabled = true;
+          activeEl.style.borderColor = "var(--border-color)";
+          
+          const reader = new FileReader();
+          reader.onload = async (event) => {
+            const base64Data = event.target.result.split(',')[1];
+            try {
+              const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'uploadImage', pass: sessionStorage.getItem('appPass'), filename: `Bid_${Date.now()}.png`, mimeType: item.type, base64: base64Data }) });
+              const data = await res.json();
+              if (data.success) { activeEl.value = data.downloadUrl; activeEl.style.borderColor = "#22c55e"; } 
+              else { activeEl.value = data.error ? `Error: ${data.error}` : "Error uploading."; activeEl.style.borderColor = "#ef4444"; }
+            } catch (err) { activeEl.value = "Network error."; activeEl.style.borderColor = "#ef4444"; }
+            activeEl.disabled = false;
+          };
+          reader.readAsDataURL(blob);
+        }
+      }
+    }
+  });
+  
+  const invPayment = document.getElementById('inv-payment');
+  const invCourier = document.getElementById('inv-courier');
+  const invInsurance = document.getElementById('inv-insurance');
+  const invShipFee = document.getElementById('inv-ship-fee');
+  const invToploader = document.getElementById('inv-toploader');
+
+  [invPayment, invCourier, invInsurance, invShipFee, invToploader].forEach(el => {
+    if(el) el.addEventListener('change', calculateInvoice);
+    if(el && el.tagName === 'INPUT') el.addEventListener('input', calculateInvoice);
+  });
+
+  document.getElementById('inv-status')?.addEventListener('change', (e) => {
+      const trackingContainer = document.getElementById('inv-tracking-container');
+      if (trackingContainer) {
+          trackingContainer.style.display = ['Ready to Ship', 'Shipped'].includes(e.target.value) ? 'block' : 'none';
+      }
+  });
+
+  document.getElementById('invoice-batch-select')?.addEventListener('change', updateInvoiceWinnerList);
+  document.getElementById('invoice-winner-select')?.addEventListener('change', loadWinnerInvoice);
+  document.getElementById('sort-invoices')?.addEventListener('change', renderInvoiceHistory);
+  
+  document.getElementById('btn-copy-invoice')?.addEventListener('click', copyInvoiceText);
+  document.getElementById('btn-download-evidence')?.addEventListener('click', downloadWinnerEvidence);
+  document.getElementById('btn-save-invoice-db')?.addEventListener('click', saveInvoiceDataToDB);
+
+  if(invShipFee) {
+      invShipFee.addEventListener('input', (e) => {
+          let raw = e.target.value.replace(/[^0-9]/g, '');
+          e.target.value = raw ? 'Rp ' + Number(raw).toLocaleString('id-ID') : '';
+      });
+  }
+});
+
+document.querySelector('[data-target="auction"]').addEventListener('click', () => {
+    updateInvoiceBatchList();
+    renderInvoiceHistory();
+});
+
+window.addCardToAuctionDraft = function(cardId) {
+  const card = state.inventory.find(c => c.id === cardId);
+  if (!card) return;
+  
+  // Allow duplicates as long as there is enough stock
+  const currentDraftedQty = auctionDrafts.filter(draft => draft.id === cardId).length;
+  if (currentDraftedQty < Number(card.quantity || 0)) {
+    auctionDrafts.push({ ...card, ob: '', nb: 'Bebas Loncat', bo: '', isSaved: false });
+    renderAuctionDrafts();
+  }
+  document.getElementById('auction-search').value = '';
+  document.getElementById('auction-search-results').innerHTML = '';
+};
+window.removeDraftCard = function(index) {
+    const draft = auctionDrafts[index];
+    const batchNo = document.getElementById('auction-batch-input').value.trim();
+
+    if (draft.isSaved) {
+        if(!confirm(`This card is already saved in the database.\nRemove it and return stock (+1) to inventory?`)) return;
+        const invCard = state.inventory.find(c => c.id === draft.id);
+        if(invCard) {
+            invCard.quantity = Number(invCard.quantity) + 1;
+            silentPostData('updateCard', { id: invCard.id, name: invCard.name, set: invCard.set, rarity: invCard.rarity, language: invCard.language, group: invCard.group, yenPrice: invCard.yenprice, quantity: invCard.quantity, condition: invCard.condition });
+        }
+        
+        const existingBatchIndex = state.batches.findIndex(b => String(b.batchNo) === String(batchNo));
+        if (existingBatchIndex > -1) {
+            const existingBatch = state.batches[existingBatchIndex];
+            const dbIndex = existingBatch.cards.findIndex(c => c.id === draft.id && c.cardName === draft.name);
+            if (dbIndex > -1) existingBatch.cards.splice(dbIndex, 1);
+
+            // --- NEW: If batch is empty, delete it entirely ---
+            if (existingBatch.cards.length === 0) {
+                state.batches.splice(existingBatchIndex, 1);
+                silentPostData('deleteBatch', { batchNo: batchNo });
+            } else {
+                silentPostData('saveBatch', { batchNo: batchNo, payload: existingBatch });
+            }
+        }
+
+        const origLen = state.invoices.length;
+        state.invoices = state.invoices.filter(inv => !(String(inv.batch) === String(batchNo) && inv.cardId === draft.id));
+        if (state.invoices.length !== origLen) {
+            silentPostData('deleteInvoiceByCard', { batchNo: batchNo, cardId: draft.id }).then(() => {
+                renderInvoiceHistory();
+                updateInvoiceBatchList();
+                updateInvoiceWinnerList();
+                loadWinnerInvoice(); 
+            });
+        }
+    }
+    
+    auctionDrafts.splice(index, 1);
+
+    // --- NEW: Auto-reset UI if batch becomes empty ---
+    if (auctionDrafts.length === 0) {
+        const batchInput = document.getElementById('auction-batch-input');
+        if (batchInput) batchInput.value = '';
+        
+        // NEW: Clear and hide the FB Post box so it doesn't linger
+        const fbOutput = document.getElementById('fb-post-output');
+        if (fbOutput) { fbOutput.style.display = 'none'; fbOutput.value = ''; }
+        
+        refreshLoggerDropdown(); // Clear from dropdowns
+    }
+
+    renderAuctionDrafts();
+    updateDashboard(); renderInventory();
+    
+    const loggerBatchSelect = document.getElementById('logger-batch-select');
+    if (loggerBatchSelect) {
+        if (auctionDrafts.length === 0) loggerBatchSelect.value = '';
+        loggerBatchSelect.dispatchEvent(new Event('change'));
+    }
+};function renderAuctionDrafts() {
+  const tbody = document.getElementById('auction-draft-body');
+  if(!tbody) return;
+  
+  tbody.innerHTML = auctionDrafts.map((c, i) => `
+    <tr>
+      <td>${c.name} ${c.isSaved ? '<span style="font-size:10px; color:#22c55e; margin-left:4px;" title="Already saved">💾</span>' : ''}</td>
+      <td>${c.rarity}</td>
+      <td><input type="text" class="format-rp draft-ob" oninput="auctionDrafts[${i}].ob = this.value.replace(/[^0-9]/g, '')" value="${c.ob ? 'Rp ' + Number(c.ob).toLocaleString('id-ID') : ''}" placeholder="e.g. Rp 50.000" style="width:110px; padding:4px;"></td>
+      <td>
+        <select class="draft-nb" onchange="auctionDrafts[${i}].nb = this.value" style="padding:4px; background:var(--bg-surface); color:inherit;">
+          <option value="Bebas Loncat" ${c.nb==='Bebas Loncat'?'selected':''}>Bebas Loncat</option>
+          <option value="Kelipatan 10k" ${c.nb==='Kelipatan 10k'?'selected':''}>Kelipatan 10k</option>
+          <option value="Kelipatan 50k" ${c.nb==='Kelipatan 50k'?'selected':''}>Kelipatan 50k</option>
+          <option value="Kelipatan 100k" ${c.nb==='Kelipatan 100k'?'selected':''}>Kelipatan 100k</option>
+        </select>
+      </td>
+      <td><input type="text" class="format-rp draft-bo" oninput="auctionDrafts[${i}].bo = this.value.replace(/[^0-9]/g, '')" value="${c.bo ? 'Rp ' + Number(c.bo).toLocaleString('id-ID') : ''}" placeholder="e.g. Rp 250.000" style="width:110px; padding:4px;"></td>
+      <td>
+                <div style="display: flex; gap: 12px; align-items: center;">
+                  <button onclick="copySingleDraftCard(${i})" style="color: ${c.isCopied ? '#22c55e' : 'var(--text-secondary)'}; background:none; border:none; cursor:pointer; font-size: 15px; transition: color 0.2s;" title="Copy FB Post for this card">
+                    <i class="fas ${c.isCopied ? 'fa-check-double' : 'fa-copy'}"></i>
+                  </button>
+                  <button onclick="removeDraftCard(${i})" style="color:#ef4444; background:none; border:none; cursor:pointer; font-size: 15px;" title="Delete Card">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+    </tr>
+  `).join('');
+
+  tbody.querySelectorAll('.format-rp').forEach(inp => {
+    inp.addEventListener('input', (e) => {
+        let raw = e.target.value.replace(/[^0-9]/g, '');
+        e.target.value = raw ? 'Rp ' + Number(raw).toLocaleString('id-ID') : '';
+    });
+  });
+}
+// Function to copy a single card's text and update its indicator
+window.copySingleDraftCard = function(index) {
+    const c = auctionDrafts[index];
+    if (!c) return;
+    
+    // Format the specific card text
+    const obText = c.ob ? (c.ob / 1000) + 'k' : '0';
+    const boText = c.bo ? (c.bo / 1000) + 'k' : 'None';
+    const textToCopy = `#${index + 1} ${c.name} ${c.rarity} | OB: ${obText} | NB: ${c.nb} | BO: ${boText}`;
+    
+    // Copy to clipboard
+    const tempInput = document.createElement("textarea"); 
+    tempInput.value = textToCopy; 
+    document.body.appendChild(tempInput);
+    tempInput.select(); 
+    document.execCommand("copy"); 
+    document.body.removeChild(tempInput);
+    
+    // Mark as copied in the local array
+    c.isCopied = true;
+    
+    // Refresh the table to apply the green checkmark
+    renderAuctionDrafts();
+};
+
+function generateFBPost() {
+  const text = auctionDrafts.map((c, i) => {
+    const obText = c.ob ? (c.ob / 1000) + 'k' : '0';
+    const boText = c.bo ? (c.bo / 1000) + 'k' : 'None';
+    return `#${i+1} ${c.name} ${c.rarity} | OB: ${obText} | NB: ${c.nb} | BO: ${boText}`;
+  }).join('\n');
+  
+  const output = document.getElementById('fb-post-output');
+  output.value = text; output.style.display = 'block'; output.select(); document.execCommand('copy');
+  alert("Facebook Post Copied to Clipboard!");
+}
+
+/* ============================================================== */
+/* AUCTION & CLAIMSALE LOGIC (STAGE 1 -> STAGE 2 -> STAGE 3)      */
+/* ============================================================== */
+
+function refreshLoggerDropdown() {
+    const select = document.getElementById('logger-batch-select');
+    
+    // Create/Update the Select for Stage 1 Batch Input
+    let batchInput = document.getElementById('auction-batch-input');
+    if (batchInput && batchInput.tagName === 'INPUT') {
+        const newSelect = document.createElement('select');
+        newSelect.id = 'auction-batch-input';
+        newSelect.className = batchInput.className;
+        newSelect.style.cssText = batchInput.style.cssText + '; padding: 10px; background: var(--bg-surface); color: inherit; border: 1px solid var(--border-color); border-radius: 6px; cursor: pointer;';
+        batchInput.parentNode.replaceChild(newSelect, batchInput);
+        batchInput = newSelect;
+        
+        // Cleanup the old messy datalist if it exists
+        const dl = document.getElementById('batch-list-opts');
+        if (dl) dl.remove();
+        
+        // Auto-load batch data if an existing batch is selected
+        batchInput.addEventListener('change', (e) => {
+            const val = e.target.value.trim();
+            if (val === 'NEW_BATCH') {
+                const newBatch = prompt("Enter new Batch Name/Number:");
+                if (newBatch) {
+                    if (state.batches.find(b => String(b.batchNo) === String(newBatch))) {
+                        alert("Batch already exists! Selecting it.");
+                        e.target.value = newBatch;
+                        e.target.dispatchEvent(new Event('change'));
+                    } else {
+                        const opt = document.createElement('option');
+                        opt.value = newBatch;
+                        opt.textContent = `Batch ${newBatch}`;
+                        batchInput.insertBefore(opt, batchInput.children[1]); // insert after "Select..."
+                        batchInput.value = newBatch;
+                        auctionDrafts = [];
+                        renderAuctionDrafts();
+                    }
+                } else {
+                    e.target.value = '';
+                }
+                return;
+            }
+            
+            if (val) {
+                const existingBatch = state.batches.find(b => String(b.batchNo) === String(val));
+                if (existingBatch) {
+                    
+                    // FIX: Only show the warning if there is at least one UNSAVED card in the draft
+                    const hasUnsavedDrafts = auctionDrafts.some(draft => !draft.isSaved);
+                    
+                    if (hasUnsavedDrafts && !confirm("Loading this batch will replace your current unsaved drafts. Continue?")) {
+                        e.target.value = ''; 
+                        return;
+                    }
+                    
+                    auctionDrafts = existingBatch.cards.map(c => ({
+                        id: c.id, name: c.cardName, rarity: c.rarity, set: c.set,
+                        ob: c.ob, nb: c.nb, bo: c.bo, winner: c.winner, bid: c.bid,
+                        evidence: c.evidence, status: c.status, isSaved: true 
+                    }));
+                    renderAuctionDrafts();
+                }
+            } else {
+                auctionDrafts = [];
+                renderAuctionDrafts();
+            }
+        });
+    }
+    
+    // Populate Stage 1 Dropdown
+    if (batchInput && batchInput.tagName === 'SELECT') {
+        const currentVal = batchInput.value;
+        let opts = '<option value="">Select or Create Batch...</option><option value="NEW_BATCH" style="color:var(--accent-yellow); font-weight:bold;">+ Create New Batch...</option>';
+        if (state.batches) {
+            opts += state.batches.map(b => `<option value="${b.batchNo}">Batch ${b.batchNo}</option>`).join('');
+        }
+        batchInput.innerHTML = opts;
+        if (currentVal && currentVal !== "NEW_BATCH") batchInput.value = currentVal;
+    }
+
+    // Stage 2 Dropdown Update
+    if (!select) return; 
+    const currentLoggerVal = select.value;
+    select.innerHTML = '<option value="">Select Running/Closed Batch...</option>';
+    if(state.batches) {
+        state.batches.forEach(batch => {
+            const opt = document.createElement('option');
+            opt.value = batch.batchNo;
+            opt.textContent = `${batch.status === 'Running' ? '🟢' : '🔴'} ${batch.batchNo} (${batch.status})`;
+            select.appendChild(opt);
+        });
+    }
+    if(currentLoggerVal) select.value = currentLoggerVal;
+}
+
+// STAGE 1 -> Generates Post & Sends to Google Sheets Database (INSTANT UI UPDATE)
+document.getElementById('btn-generate-fb-post').addEventListener('click', function() {
+    const batchInput = document.getElementById('auction-batch-input');
+    const batchNo = batchInput.value.trim();
+    
+    if(!batchNo) {
+        alert("Please enter a Batch No. before generating.");
+        batchInput.style.borderColor = "#ef4444";
+        return;
+    }
+    batchInput.style.borderColor = "var(--border-color)";
+
+    const draftRows = document.querySelectorAll('#auction-draft-body tr');
+    if(draftRows.length === 0) {
+        alert("No cards in draft to save!");
+        return;
+    }
+
+    let cards = [];
+    draftRows.forEach((row, index) => {
+        const draftItem = auctionDrafts[index];
+        const draftedCardId = draftItem?.id;
+        
+        cards.push({
+            id: draftedCardId || ('CARD_' + Date.now() + '_' + index),
+            cardName: draftItem?.name || row.cells[0].innerText.replace(' 💾', ''),
+            rarity: draftItem?.rarity || row.cells[1].innerText,
+            set: draftItem?.set || '',
+            ob: draftItem?.ob || '',
+            nb: draftItem?.nb || 'Bebas Loncat',
+            bo: draftItem?.bo || '',
+            winner: draftItem?.winner || '', 
+            bid: draftItem?.bid || '',       
+            evidence: draftItem?.evidence || '', 
+            status: draftItem?.status || 'Running' 
+        });
+
+        // DEDUCT STOCK ONLY IF NEWLY ADDED
+        if (draftedCardId && !draftItem.isSaved) {
+            const invCard = state.inventory.find(c => c.id === draftedCardId);
+            if (invCard && Number(invCard.quantity) > 0) {
+                invCard.quantity = Number(invCard.quantity) - 1;
+                
+                // Fire silent stock update
+                silentPostData('updateCard', { 
+                    id: invCard.id, name: invCard.name, set: invCard.set, 
+                    rarity: invCard.rarity, language: invCard.language, 
+                    group: invCard.group, yenPrice: invCard.yenprice, 
+                    quantity: invCard.quantity, condition: invCard.condition 
+                });
+            }
+            draftItem.isSaved = true; // Mark as saved instantly
+        }
+    });
+
+    // Update existing or push new to memory instantly
+    const existingIndex = state.batches.findIndex(b => String(b.batchNo) === String(batchNo));
+    let payload;
+    if(existingIndex > -1) {
+        payload = state.batches[existingIndex];
+        payload.cards = cards; 
+        payload.status = 'Running'; 
+    } else {
+        payload = { batchNo: batchNo, status: 'Running', cards: cards };
+        state.batches.push(payload);
+    }
+
+    // --- INSTANT UI UPDATES ---
+    refreshLoggerDropdown();
+    renderAuctionDrafts(); 
+    
+    const loggerSelect = document.getElementById('logger-batch-select');
+    if (loggerSelect) {
+        loggerSelect.value = batchNo; 
+        loggerSelect.dispatchEvent(new Event('change')); 
+    }
+    
+    generateFBPost(); // Copies FB post and alerts user
+    
+    // --- SILENT BACKGROUND SYNC ---
+    (async function backgroundSync() {
+        await silentPostData('saveBatch', { batchNo: batchNo, payload: payload });
+        fetchData(); // Sync up fully when done
+    })();
+});
+
+// STAGE 2 -> Dropdown loader (5 columns exactly)
+document.getElementById('logger-batch-select').addEventListener('change', function() {
+    const batchNo = this.value;
+    const tbody = document.getElementById('auction-logger-body');
+    
+    if(!batchNo) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--text-secondary);">Select a batch to log winners.</td></tr>`;
+        return;
+    }
+
+    const batch = state.batches.find(b => String(b.batchNo) === String(batchNo));
+    tbody.innerHTML = ''; 
+
+// Ensure Action Column Header exists
+    const theadTr = tbody.closest('table').querySelector('thead tr');
+    if (theadTr && !theadTr.querySelector('.batch-action-header')) {
+        const th = document.createElement('th'); th.className = 'batch-action-header'; th.textContent = 'Action';
+        theadTr.appendChild(th);
+    }
+
+    batch.cards.forEach((card, index) => {
+        const tr = document.createElement('tr');
+        const selectBorder = card.status === 'Closed' ? '#ef4444' : 'var(--accent-yellow)';
+        
+        tr.innerHTML = `
+            <td style="font-weight: 500;">
+                ${card.cardName}
+                <div style="font-size:10px; color:var(--text-secondary); margin-top:2px;">
+                    OB: ${card.ob ? (card.ob/1000)+'k' : '0'} | NB: ${card.nb || '-'} | BO: ${card.bo ? (card.bo/1000)+'k' : '-'}
+                </div>
+            </td>
+            <td><input type="text" class="log-winner" value="${card.winner || ''}" placeholder="Enter Name..." style="min-width: 150px;"></td>
+            <td><input type="number" class="log-bid" value="${card.bid || ''}" placeholder="Rp 0" style="min-width: 120px;"></td>
+            <td><input type="text" class="log-img auction-img-paste" value="${card.evidence || ''}" placeholder="Paste screenshot" style="min-width: 150px;"></td>
+            <td>
+                <select class="log-status" style="border-color: ${selectBorder}; min-width: 120px; color: ${selectBorder};">
+                    <option value="Running" ${card.status === 'Running' ? 'selected' : ''}>Running</option>
+                    <option value="Closed" ${card.status === 'Closed' ? 'selected' : ''}>Closed</option>
+                </select>
+            </td>
+            <td>
+                ${card.status === 'Running' ? `
+                <div style="display:flex; gap:6px;">
+                    <button class="btn-outline btn-edit-batch-card" data-index="${index}" style="padding: 4px; color: var(--accent-yellow); border-color: var(--accent-yellow);" title="Edit OB/NB/BO"><i class="fas fa-edit"></i></button>
+                    <button class="btn-outline btn-del-batch-card" data-index="${index}" style="padding: 4px; color: #ef4444; border-color: rgba(239, 68, 68, 0.3);" title="Delete Card"><i class="fas fa-trash"></i></button>
+                </div>
+                ` : `<span style="color:var(--text-secondary); font-size:12px;">Closed</span>`}
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+
+    // Handle Edit
+    document.querySelectorAll('.btn-edit-batch-card').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const idx = e.currentTarget.getAttribute('data-index');
+            const targetCard = batch.cards[idx];
+            
+            const newOB = prompt(`Edit OB for ${targetCard.cardName} (Numbers only):`, targetCard.ob || '');
+            if (newOB === null) return;
+            const newNB = prompt(`Edit NB for ${targetCard.cardName} (e.g. Kelipatan 10k, Bebas Loncat):`, targetCard.nb || 'Bebas Loncat');
+            if (newNB === null) return;
+            const newBO = prompt(`Edit BO for ${targetCard.cardName} (Numbers only):`, targetCard.bo || '');
+            if (newBO === null) return;
+
+            targetCard.ob = newOB.replace(/[^0-9]/g, ''); targetCard.nb = newNB; targetCard.bo = newBO.replace(/[^0-9]/g, '');
+            postData('saveBatch', { batchNo: batchNo, payload: batch });
+            document.getElementById('logger-batch-select').dispatchEvent(new Event('change')); 
+        });
+    });
+
+   // Handle Delete
+    document.querySelectorAll('.btn-del-batch-card').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const idx = e.currentTarget.getAttribute('data-index');
+            const targetCard = batch.cards[idx];
+            
+            if(confirm(`Are you sure you want to delete ${targetCard.cardName} from this batch?\n\nIts stock will be returned (+1) to your inventory.`)) {
+                const invCard = state.inventory.find(c => c.id === targetCard.id);
+                if(invCard) {
+                    invCard.quantity = Number(invCard.quantity) + 1;
+                    silentPostData('updateCard', { id: invCard.id, name: invCard.name, set: invCard.set, rarity: invCard.rarity, language: invCard.language, group: invCard.group, yenPrice: invCard.yenprice, quantity: invCard.quantity, condition: invCard.condition });
+                }
+                batch.cards.splice(idx, 1);
+                
+                /// FIX: Remove from saved invoices automatically to prevent ghost data
+                const origLen = state.invoices.length;
+                state.invoices = state.invoices.filter(inv => !(String(inv.batch) === String(batchNo) && inv.cardId === targetCard.id));
+                if (state.invoices.length !== origLen) {
+                    silentPostData('deleteInvoiceByCard', { batchNo: batchNo, cardId: targetCard.id }).then(() => {
+                        renderInvoiceHistory(); updateInvoiceBatchList();
+                        updateInvoiceWinnerList(); loadWinnerInvoice(); 
+                    });
+                }
+
+                // --- NEW: If batch is empty, delete it entirely ---
+                if (batch.cards.length === 0) {
+                    state.batches = state.batches.filter(b => String(b.batchNo) !== String(batchNo));
+                    postData('deleteBatch', { batchNo: batchNo }).then(() => {
+                        updateDashboard(); renderInventory();
+                        refreshLoggerDropdown();
+                        
+                        // Clear Stage 2 Dropdown
+                        const loggerSelect = document.getElementById('logger-batch-select');
+                        if (loggerSelect) {
+                            loggerSelect.value = '';
+                            loggerSelect.dispatchEvent(new Event('change'));
+                        }
+                        
+                        // Clear Stage 1 Dropdown and FB View
+                        const stage1Select = document.getElementById('auction-batch-input');
+                        if (stage1Select && stage1Select.value === String(batchNo)) {
+                            stage1Select.value = '';
+                            auctionDrafts = [];
+                            const fbOutput = document.getElementById('fb-post-output');
+                            if (fbOutput) { fbOutput.style.display = 'none'; fbOutput.value = ''; }
+                            renderAuctionDrafts();
+                        }
+                    });
+                } else {
+                    postData('saveBatch', { batchNo: batchNo, payload: batch }).then(() => {
+                        updateDashboard(); renderInventory();
+                        document.getElementById('logger-batch-select').dispatchEvent(new Event('change'));
+                    });
+                }
+            }
+        });
+    });
+    document.querySelectorAll('.log-status').forEach(select => {
+        select.addEventListener('change', function() {
+            const isClosed = this.value === 'Closed';
+            this.style.borderColor = isClosed ? '#ef4444' : 'var(--accent-yellow)';
+            this.style.color = isClosed ? '#ef4444' : 'var(--accent-yellow)';
+        });
+    });
+});
+
+// STAGE 2 -> Saving Winners (INSTANT UI UPDATE & BACKGROUND SYNC)
+document.getElementById('btn-save-winners').addEventListener('click', function() {
+  const batchNo = document.getElementById('logger-batch-select').value;
+  if(!batchNo) {
+      alert('Please select a running batch first!');
+      return;
+  }
+  
+  const batch = state.batches.find(b => String(b.batchNo) === String(batchNo));
+  if(!batch) return;
+
+  const winners = document.querySelectorAll('.log-winner');
+  const bids = document.querySelectorAll('.log-bid');
+  const imgs = document.querySelectorAll('.log-img');
+  const statuses = document.querySelectorAll('.log-status');
+  
+  let newInvoices = [];
+  let allClosed = true;
+
+  winners.forEach((winInput, i) => {
+    const winnerName = winInput.value.trim();
+    const bidPrice = Number(bids[i].value.replace(/[^0-9]/g, ''));
+    const imgUrl = imgs[i].value.trim();
+    const status = statuses[i].value;
+
+    batch.cards[i].winner = winnerName;
+    batch.cards[i].bid = bids[i].value;
+    batch.cards[i].evidence = imgUrl;
+    batch.cards[i].status = status;
+
+    if (status === 'Running') allClosed = false;
+    
+    if (status === 'Closed' && winnerName && bidPrice > 0) {
+      const cardId = batch.cards[i].id || ('CARD_TEMP_' + i); 
+      const existingInvoice = state.invoices.find(inv => String(inv.batch) === String(batchNo) && inv.cardName === batch.cards[i].cardName && inv.winner === winnerName);
+      
+      if (!existingInvoice) {
+         const newInvoice = {
+           id: 'INV_' + Date.now() + '_' + i, batch: batchNo, cardId: cardId, cardName: batch.cards[i].cardName,
+           set: batch.cards[i].set || 'Unknown', rarity: batch.cards[i].rarity || 'Promo', winner: winnerName, price: bidPrice, evidence: imgUrl || 'No image',
+           payment: '', courier: '', insurance: 'No', 
+           shipFee: 0, toploaderQty: 0, address: '', resi: '', status: 'Unpaid',
+           date: new Date().toISOString()
+         };
+         newInvoices.push(newInvoice); 
+         state.invoices.push(newInvoice); // Add to local memory immediately
+      }
+    }
+  });
+  
+  batch.status = allClosed ? 'Closed' : 'Running';
+
+  // --- INSTANT UI UPDATES ---
+  if (newInvoices.length > 0) {
+    updateInvoiceBatchList(); 
+    renderInvoiceHistory();
+    const invBatchSelect = document.getElementById('invoice-batch-select');
+    if (invBatchSelect) {
+        invBatchSelect.value = batchNo;
+        updateInvoiceWinnerList();
+        invBatchSelect.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    alert(`Progress saved! ${newInvoices.length} winners logged.\n\nPlease input shipping details in Stage 3 (Invoice Manager) before saving the final invoice.`);
+  } else if (allClosed) {
+    alert(`🔴 All cards closed! Batch status updated to Closed.`);
+  } else {
+    alert(`💾 Progress saved for ${batchNo}.`);
+  }
+  
+  refreshLoggerDropdown(); 
+  if(allClosed) {
+    document.getElementById('auction-logger-body').innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--text-secondary);">Batch closed.</td></tr>`;
+  }
+
+  // --- SILENT BACKGROUND SYNC ---
+  (async function backgroundSync() {
+    await silentPostData('saveBatch', { batchNo: batchNo, payload: batch });
+    if (newInvoices.length > 0) {
+        await silentPostData('saveInvoices', { invoices: newInvoices });
+    }
+    fetchData(); // Pull fresh data to verify parity silently
+  })();
+});
+
+// STAGE 2 -> Close Entire Batch
+document.getElementById('btn-close-batch')?.addEventListener('click', function() {
+    const batchNo = document.getElementById('logger-batch-select').value;
+    if(!batchNo) {
+        alert('Please select a running batch first!');
+        return;
+    }
+
+    if(!confirm(`Are you sure you want to close Batch ${batchNo}?\n\nThis will mark all items as closed. Items without a winner/bid will remain unsold.`)) {
+        return;
+    }
+
+    // 1. Visually change all dropdowns in the table to 'Closed'
+    const statuses = document.querySelectorAll('.log-status');
+    statuses.forEach(select => {
+        select.value = 'Closed';
+        select.dispatchEvent(new Event('change')); // Triggers the red border color update
+    });
+
+    // 2. Programmatically click the Save button to reuse your robust saving logic
+    document.getElementById('btn-save-winners').click();
+});
+
+// STAGE 3: Managing the Invoice
+function updateInvoiceBatchList() {
+  const select = document.getElementById('invoice-batch-select');
+  const uniqueBatches = [...new Set(state.invoices.map(i => i.batch))];
+  select.innerHTML = '<option value="">1. Select Auction Batch...</option>' + uniqueBatches.map(b => `<option value="${b}">${b}</option>`).join('');
+}
+
+function updateInvoiceWinnerList() {
+  const batch = document.getElementById('invoice-batch-select').value;
+  const select = document.getElementById('invoice-winner-select');
+  if(!batch) { select.innerHTML = '<option value="">2. Select a Winner...</option>'; return; }
+  const uniqueWinners = [...new Set(state.invoices.filter(i => String(i.batch) === String(batch)).map(w => w.winner))];
+  select.innerHTML = '<option value="">2. Select a Winner...</option>' + uniqueWinners.map(w => `<option value="${w}">${w}</option>`).join('');
+}
+
+let currentInvoiceData = [];
+
+function loadWinnerInvoice() {
+  const batch = document.getElementById('invoice-batch-select').value;
+  const winner = document.getElementById('invoice-winner-select').value;
+  const details = document.getElementById('invoice-details');
+  if (!batch || !winner) { details.style.display = 'none'; return; }
+  
+  currentInvoiceData = state.invoices.filter(w => String(w.batch) === String(batch) && w.winner === winner);
+  
+  document.getElementById('invoice-cards-body').innerHTML = currentInvoiceData.map(c => `
+    <tr><td>${c.cardName} ${c.rarity}</td><td>Rp ${c.price.toLocaleString('id-ID')}</td>
+    <td>${c.evidence.includes('http') ? `<a href="${c.evidence}" target="_blank">View</a>` : c.evidence}</td></tr>
+  `).join('');
+  
+  if(currentInvoiceData.length > 0) {
+      const t = currentInvoiceData[0];
+      document.getElementById('inv-payment').value = t.payment || '';
+      document.getElementById('inv-courier').value = t.courier || '';
+      document.getElementById('inv-insurance').value = t.insurance || 'No';
+      document.getElementById('inv-ship-fee').value = t.shipFee ? 'Rp ' + Number(t.shipFee).toLocaleString('id-ID') : '';
+      document.getElementById('inv-toploader').value = t.toploaderQty || 0;
+      document.getElementById('inv-address').value = t.address || '';
+      
+      if(document.getElementById('inv-phone')) document.getElementById('inv-phone').value = t.phone || '';
+      document.getElementById('inv-resi').value = t.resi || '';
+      if(document.getElementById('inv-tracking')) document.getElementById('inv-tracking').value = t.tracking || '';
+      
+      document.getElementById('inv-status').value = t.status || 'Unpaid';
+
+      const trackingContainer = document.getElementById('inv-tracking-container');
+      if (trackingContainer) {
+          trackingContainer.style.display = ['Ready to Ship', 'Shipped'].includes(t.status) ? 'block' : 'none';
+      }
+  }
+  
+  details.style.display = 'block'; calculateInvoice();
+}
+
+window.calculateInvoice = calculateInvoice; 
+function calculateInvoice() {
+  const payment = document.getElementById('inv-payment').value;
+  const courier = document.getElementById('inv-courier').value;
+  const useInsurance = document.getElementById('inv-insurance').value === 'Yes';
+  const baseShipping = Number(document.getElementById('inv-ship-fee').value.replace(/[^0-9]/g, '')) || 0;
+  const toploaderQty = Number(document.getElementById('inv-toploader').value) || 0;
+  const shipSection = document.getElementById('inv-shipping-section');
+  
+  let subtotal = currentInvoiceData.reduce((sum, c) => sum + c.price, 0);
+  
+  let toploaderFee = toploaderQty * 1300;
+  let packingFee = subtotal < 30000 ? 2500 : 0;
+  let extraFee = 0;
+  let insuranceFee = 0;
+  let displayedShipping = baseShipping;
+
+  if (payment === 'Shopee') {
+    shipSection.style.display = 'none';
+    extraFee = Math.round(subtotal * 0.14) + toploaderFee + packingFee; 
+    displayedShipping = 0;
+  } else {
+    shipSection.style.display = 'block';
+    extraFee = toploaderFee + packingFee;
+    if (useInsurance) {
+      if (courier.includes("Lion Parcel")) insuranceFee = Math.max(950, Math.round(subtotal * 0.004));
+      else if (courier.includes("J&T")) insuranceFee = Math.round(subtotal * 0.002);
+    }
+  }
+  
+  document.getElementById('inv-subtotal').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+  document.getElementById('inv-ship-display').textContent = `Rp ${displayedShipping.toLocaleString('id-ID')}`;
+  document.getElementById('inv-insurance-display').textContent = `Rp ${insuranceFee.toLocaleString('id-ID')}`;
+  document.getElementById('inv-extra-fee').textContent = `Rp ${extraFee.toLocaleString('id-ID')}`;
+  document.getElementById('inv-grand-total').textContent = `Rp ${(subtotal + displayedShipping + insuranceFee + extraFee).toLocaleString('id-ID')}`;
+}
+
+// STAGE 3 -> Save Invoice Data (INSTANT UI UPDATE & BACKGROUND SYNC)
+function saveInvoiceDataToDB() {
+    const batch = document.getElementById('invoice-batch-select').value;
+    const winner = document.getElementById('invoice-winner-select').value;
+    if(!batch || !winner) return alert("Select a batch and winner first!");
+
+    if (!document.getElementById('inv-payment').value) {
+        return alert("Please select a Payment Method before saving.");
+    }
+
+    if (!currentInvoiceData || currentInvoiceData.length === 0) {
+        return alert("No invoice data loaded. Please reselect the winner.");
+    }
+    
+    const shipFee = document.getElementById('inv-ship-fee').value.replace(/[^0-9]/g, '');
+    const toploaderQty = document.getElementById('inv-toploader').value;
+    let newlyShippedCards = [];
+
+    // 1. Update memory instantly
+    currentInvoiceData.forEach(inv => {
+        const wasNotShipped = inv.status !== 'Shipped';
+        inv.payment = document.getElementById('inv-payment').value;
+        inv.courier = document.getElementById('inv-courier').value;
+        inv.insurance = document.getElementById('inv-insurance').value;
+        inv.shipFee = shipFee;
+        inv.toploaderQty = toploaderQty;
+        inv.address = document.getElementById('inv-address').value;
+        
+        inv.phone = document.getElementById('inv-phone') ? document.getElementById('inv-phone').value : '';
+        inv.resi = document.getElementById('inv-resi').value;
+        inv.tracking = document.getElementById('inv-tracking') ? document.getElementById('inv-tracking').value : '';
+        
+        inv.status = document.getElementById('inv-status').value;
+
+        if (inv.status === 'Shipped' && wasNotShipped) newlyShippedCards.push(inv);
+    });
+
+    // 2. Perform UI Updates and Alerts Instantly
+    if (newlyShippedCards.length > 0) {
+        newlyShippedCards.forEach(inv => {
+            const saleData = { date: new Date().toISOString(), cardid: inv.cardId, name: inv.cardName, set: inv.set, rarity: inv.rarity, quantity: 1, price: inv.price, notes: `Auction Batch: ${batch}` };
+            state.sales.push(saleData); 
+            // Silent post data for sales included in background sync below
+            silentPostData('recordSale', { ...saleData, cardId: inv.cardId, deductStock: false });
+        });
+        alert(`Invoice saved as Shipped!\n${newlyShippedCards.length} cards have been moved to Sold Cards.`);
+        renderInventory(); 
+        renderSales(); 
+        updateDashboard();
+    } else {
+        alert('Invoice saved successfully!');
+    }
+    renderInvoiceHistory();
+
+    // 3. Send Payload silently in the background
+    (async function backgroundSync() {
+        await silentPostData('updateInvoicesBulk', { invoices: currentInvoiceData });
+        fetchData();
+    })();
+}
+
+// STAGE 4: Viewing & Editing History
+function renderInvoiceHistory() {
+  const tbody = document.getElementById('saved-invoices-body');
+  if(!tbody) return;
+  
+  let grouped = {};
+  state.invoices.filter(inv => inv.payment && String(inv.payment).trim() !== '').forEach(inv => {
+    const key = inv.batch + '___' + inv.winner;
+    if(!grouped[key]) {
+      grouped[key] = {
+        batch: inv.batch, winner: inv.winner, totalPrice: 0, 
+        courier: inv.payment === 'Shopee' ? 'Shopee' : (inv.courier || '—'), 
+        phone: inv.phone || '—', resi: inv.resi || '—', tracking: inv.tracking || '—',
+        status: inv.status || 'Unpaid',
+        shipFee: Number(inv.shipFee) || 0, toploaderQty: Number(inv.toploaderQty) || 0,
+        invoices: []
+      };
+    }
+    grouped[key].totalPrice += Number(inv.price);
+    grouped[key].invoices.push(inv);
+  });
+
+  let sortedData = Object.values(grouped);
+  const sortElement = document.getElementById('sort-invoices');
+  const sortVal = sortElement ? sortElement.value : 'batch-desc';
+  
+  if(sortVal === 'batch-desc') sortedData.sort((a,b) => String(b.batch).localeCompare(String(a.batch)));
+  if(sortVal === 'batch-asc') sortedData.sort((a,b) => String(a.batch).localeCompare(String(b.batch)));
+  if(sortVal === 'status') sortedData.sort((a,b) => String(a.status || '').localeCompare(String(b.status || '')));
+  if(sortVal === 'courier') sortedData.sort((a,b) => String(a.courier || '').localeCompare(String(b.courier || '')));
+
+  tbody.innerHTML = sortedData.map((g, index) => {
+      let packingFee = g.totalPrice < 30000 ? 2500 : 0;
+      let extraFee = (g.toploaderQty * 1300) + packingFee;
+      let finalTotal = g.totalPrice + g.shipFee + extraFee; 
+
+      let statusColor = g.status === 'Shipped' ? '#22c55e' : g.status === 'Ready to Ship' ? '#38bdf8' : g.status === 'Paid' ? '#8b5cf6' : '#ef4444';
+      let statusBg = g.status === 'Shipped' ? 'rgba(34, 197, 94, 0.15)' : g.status === 'Ready to Ship' ? 'rgba(56, 189, 248, 0.15)' : g.status === 'Paid' ? 'rgba(139, 92, 246, 0.15)' : 'rgba(239, 68, 68, 0.15)';
+
+      return `
+        <tr>
+          <td><input type="checkbox" class="invoice-check" data-batch="${g.batch}" data-winner="${g.winner}" style="accent-color: var(--accent-yellow);"></td>
+          <td><span style="background: rgba(234, 179, 8, 0.15); color: var(--accent-yellow); padding: 4px 8px; border-radius: 4px; font-weight: 600; font-size: 12px;">${g.batch}</span></td>
+          <td><strong>${g.winner}</strong></td>
+          <td>Rp ${finalTotal.toLocaleString('id-ID')}</td>
+          <td>${g.courier}</td>
+          <td><span class="editable-cell edit-phone" data-batch="${g.batch}" data-winner="${g.winner}" contenteditable="true" title="Click to edit">${g.phone}</span></td>
+          <td><span class="editable-cell edit-resi" data-batch="${g.batch}" data-winner="${g.winner}" contenteditable="true" title="Click to edit">${g.resi}</span></td>
+          <td>
+             ${['Ready to Ship', 'Shipped'].includes(g.status) ? `<span class="editable-cell edit-tracking" data-batch="${g.batch}" data-winner="${g.winner}" contenteditable="true" title="Click to edit" style="border-bottom:1px dashed var(--accent-yellow);">${g.tracking}</span>` : `<span style="color:var(--text-secondary); font-size:11px;">N/A</span>`}
+          </td>
+          <td style="position:relative;">
+            <span class="hover-status-btn" data-batch="${g.batch}" data-winner="${g.winner}" style="cursor:pointer; padding:4px 8px; border-radius:4px; font-size:12px; font-weight:600; background: ${statusBg}; color: ${statusColor}; border: 1px dashed transparent; display:inline-flex; align-items:center; gap:6px;" title="Click to change status">
+              ${g.status} <i class="fas fa-caret-down" style="font-size:10px; opacity:0.6;"></i>
+            </span>
+          </td>
+          <td>
+            <div style="display:flex; gap:6px;">
+                <button class="btn-outline btn-view-invoice" data-batch="${g.batch}" data-winner="${g.winner}" style="padding: 4px 10px; font-size: 12px;">View</button>
+                <button class="btn-outline btn-del-invoice" data-batch="${g.batch}" data-winner="${g.winner}" style="padding: 4px 10px; font-size: 12px; color:#ef4444; border-color: rgba(239, 68, 68, 0.3);"><i class="fas fa-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+      `;
+  }).join('');
+
+  tbody.querySelectorAll('.editable-cell').forEach(cell => {
+      if(!cell.hasAttribute('data-batch')) return; 
+      
+      cell.addEventListener('mouseenter', () => cell.style.background = 'rgba(128,128,128,0.1)');
+      cell.addEventListener('mouseleave', () => cell.style.background = 'transparent');
+      cell.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); cell.blur(); }});
+      cell.addEventListener('blur', () => {
+          cell.style.background = 'transparent';
+          const batch = cell.getAttribute('data-batch');
+          const winner = cell.getAttribute('data-winner');
+          let newVal = cell.textContent.trim();
+          if (newVal === '—') newVal = '';
+
+          let isChanged = false;
+          const targetInvoices = state.invoices.filter(i => String(i.batch) === String(batch) && i.winner === winner);
+          
+          targetInvoices.forEach(inv => {
+              if (cell.classList.contains('edit-phone') && inv.phone !== newVal) { inv.phone = newVal; isChanged = true; }
+              if (cell.classList.contains('edit-resi') && inv.resi !== newVal) { inv.resi = newVal; isChanged = true; }
+              if (cell.classList.contains('edit-tracking') && inv.tracking !== newVal) { inv.tracking = newVal; isChanged = true; }
+          });
+
+          if (isChanged) silentPostData('updateInvoicesBulk', { invoices: targetInvoices });
+      });
+  });
+
+  tbody.querySelectorAll('.btn-view-invoice').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const batch = btn.getAttribute('data-batch'); const winner = btn.getAttribute('data-winner');
+          document.getElementById('invoice-batch-select').value = batch; updateInvoiceWinnerList();
+          document.getElementById('invoice-winner-select').value = winner; loadWinnerInvoice();
+          document.getElementById('invoice-details').scrollIntoView({ behavior: 'smooth' });
+      });
+  });
+
+  tbody.querySelectorAll('.btn-del-invoice').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+          e.stopPropagation();
+          const batch = btn.getAttribute('data-batch'); const winner = btn.getAttribute('data-winner');
+          
+          if(confirm(`Move the invoice for ${winner} to the Recycle Bin?\n\nThis will reset the fulfillment data and return the invoice to Stage 3.`)) {
+              const origHTML = btn.innerHTML;
+              btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; btn.style.pointerEvents = 'none';
+
+              const targetInvoices = state.invoices.filter(i => String(i.batch) === String(batch) && String(i.winner) === String(winner));
+              const trashItem = { id: 'TRASH_INV_' + Date.now() + Math.floor(Math.random()*1000), type: 'Invoice', deletedAt: new Date().toISOString(), payload: JSON.stringify({ batch: batch, winner: winner, invoices: JSON.parse(JSON.stringify(targetInvoices)) }) };
+              
+              await silentPostData('addTrash', { trashItem: trashItem });
+              state.trash.unshift(trashItem);
+
+              state.invoices.forEach(inv => {
+                  if (String(inv.batch) === String(batch) && String(inv.winner) === String(winner)) {
+                      inv.payment = ''; inv.courier = ''; inv.insurance = 'No'; 
+                      inv.shipFee = 0; inv.toploaderQty = 0; inv.address = ''; inv.phone = '';
+                      inv.resi = ''; inv.tracking = ''; inv.status = 'Unpaid';
+                  }
+              });
+
+              postData('updateInvoicesBulk', { invoices: state.invoices }).then(() => {
+                  renderInvoiceHistory(); updateInvoiceBatchList(); renderTrash();
+                  const batchSelect = document.getElementById('invoice-batch-select');
+                  if (batchSelect) {
+                      batchSelect.value = batch; updateInvoiceWinnerList();
+                      const winnerSelect = document.getElementById('invoice-winner-select');
+                      if (winnerSelect) { winnerSelect.value = winner; loadWinnerInvoice(); }
+                  }
+              });
+          }
+      });
+  });
+
+  tbody.querySelectorAll('tr').forEach(tr => {
+    tr.addEventListener('click', (e) => {
+      const isInteractive = ['INPUT', 'SELECT', 'BUTTON', 'SPAN'].includes(e.target.tagName) || e.target.closest('button') || e.target.closest('.hover-status-btn') || e.target.closest('.editable-cell');
+      if (isInteractive) return;
+      if (window.innerWidth <= 768) tr.classList.toggle('expanded');
+    });
+  });
+
+  let checkAll = document.getElementById('check-all-invoices');
+  const itemChecks = document.querySelectorAll('.invoice-check');
+  const bulkBtn = document.getElementById('btn-bulk-delete-invoices');
+  
+  if (checkAll) { 
+      const newCheckAll = checkAll.cloneNode(true); 
+      checkAll.parentNode.replaceChild(newCheckAll, checkAll); 
+      checkAll = newCheckAll; 
+      checkAll.checked = false; 
+  }
+  
+  function updateBulkBtn() {
+      const checked = document.querySelectorAll('.invoice-check:checked').length;
+      bulkBtn.style.display = checked > 0 ? 'inline-block' : 'none';
+      if(checkAll) checkAll.checked = (checked === itemChecks.length && itemChecks.length > 0);
+  }
+  
+  if(checkAll) checkAll.addEventListener('change', (e) => { itemChecks.forEach(chk => chk.checked = e.target.checked); updateBulkBtn(); }); 
+  itemChecks.forEach(chk => chk.addEventListener('change', updateBulkBtn));
+  
+  bulkBtn.onclick = async () => {
+      const checkedBoxes = document.querySelectorAll('.invoice-check:checked');
+      if(confirm(`Move ${checkedBoxes.length} invoice groups to the Recycle Bin?\n\nThis will reset their fulfillment data and return them to Stage 3.`)) {
+          bulkBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Moving...';
+          bulkBtn.style.pointerEvents = 'none';
+
+          for (const chk of checkedBoxes) {
+              const b = chk.getAttribute('data-batch'); const w = chk.getAttribute('data-winner');
+              const targetInvoices = state.invoices.filter(i => String(i.batch) === String(b) && String(i.winner) === String(w));
+              const trashItem = { id: 'TRASH_INV_' + Date.now() + Math.random(), type: 'Invoice', deletedAt: new Date().toISOString(), payload: JSON.stringify({ batch: b, winner: w, invoices: JSON.parse(JSON.stringify(targetInvoices)) }) };
+              
+              await silentPostData('addTrash', { trashItem: trashItem });
+              state.trash.unshift(trashItem);
+
+              state.invoices.forEach(inv => {
+                  if (String(inv.batch) === String(b) && String(inv.winner) === String(w)) {
+                      inv.payment = ''; inv.courier = ''; inv.insurance = 'No'; 
+                      inv.shipFee = 0; inv.toploaderQty = 0; inv.address = ''; inv.phone = '';
+                      inv.resi = ''; inv.tracking = ''; inv.status = 'Unpaid';
+                  }
+              });
+          }
+          
+          if(checkAll) checkAll.checked = false;
+
+          postData('updateInvoicesBulk', { invoices: state.invoices }).then(() => {
+              renderInvoiceHistory(); updateInvoiceBatchList(); renderTrash();
+
+              const batchSelect = document.getElementById('invoice-batch-select');
+              if (batchSelect) batchSelect.value = '';
+              const winnerSelect = document.getElementById('invoice-winner-select');
+              if (winnerSelect) winnerSelect.innerHTML = '<option value="">2. Select a Winner...</option>';
+              document.getElementById('invoice-details').style.display = 'none';
+
+              bulkBtn.innerHTML = '<i class="fas fa-trash"></i> Delete Selected';
+              bulkBtn.style.pointerEvents = 'auto';
+              bulkBtn.style.display = 'none';
+          });
+      }
+  };
+
+  document.querySelectorAll('.hover-status-btn').forEach(btn => {
+      btn.addEventListener('mouseenter', () => btn.style.border = '1px dashed var(--accent-yellow)');
+      btn.addEventListener('mouseleave', () => btn.style.border = '1px dashed transparent');
+      btn.addEventListener('click', (e) => {
+          document.querySelectorAll('.status-dropdown').forEach(d => d.remove());
+          const dropdown = document.createElement('div');
+          dropdown.className = 'status-dropdown';
+          dropdown.style.cssText = 'position:absolute; background:var(--bg-surface); border:1px solid var(--border-color); border-radius:8px; padding:4px 0; z-index:1000; font-size:12px;';
+          
+          ['Unpaid', 'Paid', 'Ready to Ship', 'Shipped'].forEach(status => {
+              const item = document.createElement('div');
+              item.textContent = status;
+              item.style.cssText = 'padding:8px 16px; cursor:pointer; color:var(--text-primary);';
+              item.addEventListener('mouseenter', () => item.style.background = 'rgba(128,128,128,0.1)');
+              item.addEventListener('mouseleave', () => item.style.background = 'transparent');
+              item.addEventListener('click', () => {
+                  const b = btn.getAttribute('data-batch'); const w = btn.getAttribute('data-winner');
+                  const targetInvoices = state.invoices.filter(i => String(i.batch) === String(b) && i.winner === w);
+                  let newlyShipped = [];
+                  
+                  targetInvoices.forEach(inv => {
+                      if(status === 'Shipped' && inv.status !== 'Shipped') newlyShipped.push(inv);
+                      inv.status = status; 
+                  });
+                  
+                  dropdown.remove();
+                  renderInvoiceHistory();
+                  
+                  silentPostData('updateInvoicesBulk', { invoices: targetInvoices });
+                  
+                  if (newlyShipped.length > 0) {
+                      newlyShipped.forEach(inv => {
+                          const saleData = { date: new Date().toISOString(), cardid: inv.cardId, name: inv.cardName, set: inv.set, rarity: inv.rarity, quantity: 1, price: inv.price, notes: `Auction: ${b}` };
+                          state.sales.push(saleData); 
+                          silentPostData('recordSale', { ...saleData, cardId: inv.cardId });
+                      });
+                      
+                      setTimeout(() => {
+                          alert(`Cards successfully moved to Sold Cards!`);
+                          renderInventory(); renderSales(); updateDashboard();
+                      }, 500); 
+                  }
+              });
+              dropdown.appendChild(item);
+          });
+          
+          const rect = btn.getBoundingClientRect();
+          dropdown.style.top = `${rect.bottom + window.scrollY}px`;
+          dropdown.style.left = `${rect.left + window.scrollX}px`;
+          document.body.appendChild(dropdown);
+          
+          setTimeout(() => { document.addEventListener('click', function closeDropdown(ev) {
+              if(!dropdown.contains(ev.target)) { dropdown.remove(); document.removeEventListener('click', closeDropdown); }
+          }); }, 10);
+      });
+  });
+}
+
+function copyInvoiceText() {
+  const winner = document.getElementById('invoice-winner-select').value;
+  const address = document.getElementById('inv-address').value || 'Not provided';
+  const phone = document.getElementById('inv-phone') ? document.getElementById('inv-phone').value : 'Not provided';
+  const resi = document.getElementById('inv-resi').value || 'Pending';
+  const tracking = document.getElementById('inv-tracking') ? document.getElementById('inv-tracking').value : 'N/A';
+  
+  let itemsText = currentInvoiceData.map(c => `- ${c.cardName} ${c.rarity}: Rp ${c.price.toLocaleString('id-ID')}`).join('\n');
+  
+  const subtotalText = document.getElementById('inv-subtotal').textContent;
+  const shipText = document.getElementById('inv-ship-display').textContent;
+  const insText = document.getElementById('inv-insurance-display').textContent;
+  const extraFeeText = document.getElementById('inv-extra-fee').textContent;
+  const grandTotalText = document.getElementById('inv-grand-total').textContent;
+  
+  const finalString = `*INVOICE FOR ${winner.toUpperCase()}*\n\n*Items Won:*\n${itemsText}\n\nSubtotal: ${subtotalText}\nShipping Fee: ${shipText}\nInsurance: ${insText}\nPacking & Toploader: ${extraFeeText}\n*Grand Total: ${grandTotalText}*\n\n*Shipping Info:*\nAddress: ${address}\nPhone: ${phone}\nPickup/Dropoff Code: ${resi}\nTracking Number: ${tracking}\n\nThank you for participating!`;
+  
+  const tempInput = document.createElement("textarea"); tempInput.value = finalString; document.body.appendChild(tempInput);
+  tempInput.select(); document.execCommand("copy"); document.body.removeChild(tempInput); alert("Invoice copied to clipboard!");
+}
+
+function downloadWinnerEvidence() {
+  if(currentInvoiceData.length === 0) return; let downloadedCount = 0;
+  currentInvoiceData.forEach(item => {
+    if(item.evidence && item.evidence.includes('drive.google.com')) {
+      const iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src = item.evidence;
+      document.body.appendChild(iframe); downloadedCount++; setTimeout(() => document.body.removeChild(iframe), 10000); 
+    }
+  });
+  if(downloadedCount > 0) alert(`Triggered download for ${downloadedCount} image(s). Check your browser downloads folder.`);
+  else alert('No downloadable Google Drive image links found for this winner.');
+}
