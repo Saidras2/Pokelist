@@ -19,20 +19,26 @@ async function loadMasterDictionary() {
     const csvText = await response.text();
     const lines = csvText.split('\n');
     let tempMap = {}; 
+    
     for(let i = 1; i < lines.length; i++) {
       const parts = lines[i].split(',');
       if(parts.length < 3) continue;
       const speciesId = parts[0];
       const langId = parts[1]; 
       const name = parts[2].replace(/"/g, '').trim();
+      
       if (!tempMap[speciesId]) tempMap[speciesId] = {};
-      if (langId === '9') tempMap[speciesId].en = name;                
+      if (langId === '9') tempMap[speciesId].en = name;                 
       if (langId === '2') tempMap[speciesId].romaji = name.toLowerCase(); 
-      if (langId === '1') tempMap[speciesId].kana = name;              
+      if (langId === '1') tempMap[speciesId].kana = name;             
       if (langId === '11') tempMap[speciesId].kanji = name;            
     }
+    
     Object.values(tempMap).forEach(entry => {
       if (entry.en) {
+        // ADD THIS LINE: Index the English name as a searchable key
+        masterPokemonDictionary[entry.en.toLowerCase()] = entry.en; 
+        
         if (entry.romaji) masterPokemonDictionary[entry.romaji] = entry.en;
         if (entry.kana) masterPokemonDictionary[entry.kana] = entry.en;
         if (entry.kanji) masterPokemonDictionary[entry.kanji] = entry.en;
