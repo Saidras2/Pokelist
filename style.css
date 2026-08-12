@@ -55,6 +55,9 @@ body {
   display: flex;
   flex-direction: column;
   transition: background-color 0.3s;
+  /* ✅ ADD THESE TWO LINES */
+  position: relative;
+  z-index: 100; /* FIXED */
 }
 
 .sidebar-header {
@@ -137,6 +140,9 @@ body {
   flex-grow: 1;
   padding: 40px;
   overflow-y: auto;
+  /* ✅ ADD THESE TWO LINES */
+  position: relative;
+  z-index: 1; /* FIXED */
 }
 
 .view {
@@ -205,9 +211,30 @@ h1 { font-size: 28px; margin-bottom: 8px; }
 }
 
 .table-responsive { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+
+/* 1. Force the table into a strict grid */
+table { 
+  width: 100%; 
+  table-layout: fixed; /* This locks the columns so they don't stretch */
+  border-collapse: collapse; 
+  margin-top: 16px; 
+}
+
 th { text-align: left; padding: 12px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-weight: 500; font-size: 14px; }
 td { padding: 12px; border-bottom: 1px solid var(--border-color); font-size: 14px; }
+
+/* 2. Assign specific widths to all 11 columns to perfectly align headers and inputs */
+th:nth-child(1), td:nth-child(1) { width: 3%; }   /* # */
+th:nth-child(2), td:nth-child(2) { width: 17%; }  /* Card Name */
+th:nth-child(3), td:nth-child(3) { width: 10%; }  /* Set Code */
+th:nth-child(4), td:nth-child(4) { width: 10%; }  /* Card No. */
+th:nth-child(5), td:nth-child(5) { width: 7%; }   /* Rarity */
+th:nth-child(6), td:nth-child(6) { width: 9%; }   /* Language */
+th:nth-child(7), td:nth-child(7) { width: 10%; }  /* Yen Price */
+th:nth-child(8), td:nth-child(8) { width: 6%; }   /* Qty */
+th:nth-child(9), td:nth-child(9) { width: 9%; }   /* Condition */
+th:nth-child(10), td:nth-child(10) { width: 11%; } /* Notes */
+th:nth-child(11), td:nth-child(11) { width: 8%; }  /* Action (Scan/Delete) */
 
 input, select {
   padding: 8px 12px;
@@ -247,8 +274,12 @@ input, select {
 .group-controls { display: flex; gap: 12px; max-width: 400px; }
 
 /* Modals & Popups Overrides */
-.modal-overlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); z-index: 10; }
-.modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg-card); padding: 24px; border-radius: 12px; z-index: 11; width: 400px; border: 1px solid var(--border-color); }
+.modal-overlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); z-index: 99990 !important; }
+.modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg-card); padding: 24px; border-radius: 12px; z-index: 99995 !important; width: 400px; border: 1px solid var(--border-color); }
+
+/* Catch-all to ensure any dynamically generated JS modals also respect the top-layer stacking */
+#modal-overlay { z-index: 99990 !important; }
+#modal-variant, #modal-media-manager, #modal-camera, .modal-container { z-index: 99995 !important; }
 .modal h2 { margin-bottom: 16px; }
 .form-group { margin-bottom: 16px; }
 .form-group label { display: block; margin-bottom: 8px; font-size: 14px; }
@@ -307,4 +338,47 @@ body[data-theme="dark"] option {
         width: 100%;
         box-sizing: border-box;
     }
+}
+
+/* ============================================================== */
+/* FB CLIPBOARD QUEUE DRAWER                                      */
+/* ============================================================== */
+.queue-drawer {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 300px;
+  background: var(--bg-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  z-index: 99990;
+  display: flex;
+  flex-direction: column;
+  color: var(--text-primary);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+.queue-drawer.hidden {
+  transform: translateY(150%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.queue-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0,0,0,0.2);
+  border-radius: 12px 12px 0 0;
+}
+
+.queue-actions {
+  display: flex;
+  gap: 8px;
+  padding: 0 12px 12px 12px;
 }
