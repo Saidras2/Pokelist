@@ -3820,14 +3820,15 @@ function processAutoRowCreation(frontBase64, backBase64, frontPromise, backPromi
         scanBtn.style.borderColor = '#38bdf8';
     }
 
-    if (useAI && frontBase64) {
-        processAICognition(frontBase64, targetRow);
-    }
-
-    // Wait for photos AND video to finish uploading
+    // Wait for photos AND video to finish uploading FIRST
     Promise.all([frontPromise, backPromise, videoPromise]).then(([frontUrl, backUrl, videoUrl]) => {
         if(frontUrl) targetRow.setAttribute('data-front-img', frontUrl);
         if(backUrl) targetRow.setAttribute('data-back-img', backUrl);
+        
+        // 🚀 NEW: Trigger AI using the Cloud URL instead of raw base64 to prevent server crashes
+        if (useAI && frontUrl) {
+            processAICognition(frontUrl, targetRow);
+        }
         
         // Push the video silently into the row's condition media memory
         if(videoUrl) {
@@ -3976,7 +3977,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-function processAICognition(base64Image, rowElement) {
+function processAICognition(imageUrl, rowElement) {
     const inputs = rowElement.querySelectorAll('input, select');
     let nameInput = null;
     let setInput = null;
@@ -3988,22 +3989,18 @@ function processAICognition(base64Image, rowElement) {
     });
 
     if (nameInput) {
-        // If queue is busy, tell the user their spot in line
         const statusText = isProcessingAI ? `🤖 In Queue (${aiRequestQueue.length + 1})...` : "🤖 AI analyzing...";
         nameInput.value = statusText;
         nameInput.style.color = isProcessingAI ? "#38bdf8" : "inherit";
     }
 
-    // Add to the back of the line
-    aiRequestQueue.push({ base64Image, rowElement, inputs, nameInput, setInput });
+    aiRequestQueue.push({ imageUrl, rowElement, inputs, nameInput, setInput });
     
-    // Show all Kill Switches if queue builds up
     const killButtons = document.querySelectorAll('.btn-kill-queue');
     if (aiRequestQueue.length > 0) {
         killButtons.forEach(b => b.style.display = 'inline-flex');
     }
 
-    // If the worker is asleep, wake it up
     if (!isProcessingAI) {
         processNextInAIQueue();
     }
@@ -4021,17 +4018,14 @@ async function processNextInAIQueue() {
 
     isProcessingAI = true;
     const task = aiRequestQueue.shift();
-    
-    // 1. FIX: Reference the row element directly
     const row = task.rowElement;
 
     if (row) {
-        // 2. FIX: Use the exact CSS classes from your HTML table
         const nameInput = row.querySelector('.c-name');
         const setInput = row.querySelector('.c-set');
         const raritySelect = row.querySelector('.c-rarity');
         const languageSelect = row.querySelector('.c-lang');
-        const numberInput = row.querySelector('.c-number'); // <-- Added Card No. Input
+        const numberInput = row.querySelector('.c-number'); 
 
         if (nameInput) nameInput.value = `⏳ Analyzing...`;
 
@@ -4040,29 +4034,26 @@ async function processNextInAIQueue() {
             
             const response = await fetch(API_URL, {
                 method: 'POST',
-                // 3. FIX: Send task.base64Image (not task.base64)
-                body: JSON.stringify({ action: 'analyzeCardAI', base64: task.base64Image, pass: pass })
+                // 🚀 NEW: Send the short URL instead of the massive base64 payload
+                body: JSON.stringify({ action: 'analyzeCardAI', imageUrl: task.imageUrl, pass: pass })
             });
 
             const res = await response.json();
 
-           if (res.success && res.data) {
-                // Safely grab the returned name (handles both string errors and JSON objects)
+            if (res.success && res.data) {
                 const returnedName = typeof res.data === 'string' ? res.data : (res.data.name || '');
                 
-                // Catch overloaded AI / 503 High Demand Errors
                 if (returnedName.includes("API 429") || returnedName.includes("RESOURCE_EXHAUSTED") || returnedName.includes("high demand") || returnedName.includes("ERROR")) {
                     if (nameInput) {
                         nameInput.value = "⚠️ High Demand. Retrying in 5s...";
-                        nameInput.style.color = "#f59e0b"; // Orange warning
+                        nameInput.style.color = "#f59e0b"; 
                     }
-                    aiRequestQueue.unshift(task); // Put back in queue
-                    await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5s before retrying
+                    aiRequestQueue.unshift(task); 
+                    await new Promise(resolve => setTimeout(resolve, 5000)); 
                 } else {
-                    // ✅ NEW: Safety Net! Never allow an empty string to wipe the row
                     if (nameInput && returnedName.trim() !== '') {
                         nameInput.value = returnedName;
-                        nameInput.style.color = ''; // Empty string cleanly removes the stuck blue color!
+                        nameInput.style.color = ''; 
                     } else if (nameInput) {
                         nameInput.value = "⚠️ AI Failed (Check Image)";
                         nameInput.style.color = "#ef4444";
@@ -4085,7 +4076,6 @@ async function processNextInAIQueue() {
         }
     }
 
-    // Wait exactly 4.3 seconds before processing the next image
     if (aiRequestQueue.length > 0) {
         await new Promise(resolve => setTimeout(resolve, DELAY_BETWEEN_REQUESTS));
         processNextInAIQueue();
@@ -4124,7 +4114,10 @@ function captureAndUpload(side, directBase64 = null) {
         const aiToggle = document.getElementById('ai-scan-toggle');
         const useAI = aiToggle ? aiToggle.checked : false;
         if (useAI && target && target.type === 'new_row') {
-            processAICognition(base64Image, target.element);
+            // 🚀 NEW: Wait for URL before sending to AI
+            frontUploadPromise.then(url => {
+                if (url) processAICognition(url, target.element);
+            });
         }
         
         btn.style.display = 'none';
