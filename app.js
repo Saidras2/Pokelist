@@ -1864,6 +1864,23 @@ window.addCardToAuctionDraft = function(cardId, displayName) {
   document.getElementById('auction-search').value = '';
   document.getElementById('auction-search-results').innerHTML = '';
 };
+window.moveDraftCardUp = function(index) {
+    if (index > 0) {
+        const temp = auctionDrafts[index - 1];
+        auctionDrafts[index - 1] = auctionDrafts[index];
+        auctionDrafts[index] = temp;
+        renderAuctionDrafts();
+    }
+};
+
+window.moveDraftCardDown = function(index) {
+    if (index < auctionDrafts.length - 1) {
+        const temp = auctionDrafts[index + 1];
+        auctionDrafts[index + 1] = auctionDrafts[index];
+        auctionDrafts[index] = temp;
+        renderAuctionDrafts();
+    }
+};
 window.removeDraftCard = function(index) {
     const draft = auctionDrafts[index];
     const batchNo = document.getElementById('auction-batch-input').value.trim();
@@ -1934,7 +1951,7 @@ window.removeDraftCard = function(index) {
       <td>${c.name} ${c.isSaved ? '<span style="font-size:10px; color:#22c55e; margin-left:4px;" title="Already saved">💾</span>' : ''}</td>
       <td>${c.rarity}</td>
       <td><input type="text" class="format-rp draft-ob" oninput="auctionDrafts[${i}].ob = this.value.replace(/[^0-9]/g, '')" value="${c.ob ? 'Rp ' + Number(c.ob).toLocaleString('id-ID') : ''}" placeholder="e.g. Rp 50.000" style="width:110px; padding:4px;"></td>
-      <td>
+    <td>
         <select class="draft-nb" onchange="auctionDrafts[${i}].nb = this.value" style="padding:4px; background:var(--bg-surface); color:inherit;">
           <option value="Bebas Loncat" ${c.nb==='Bebas Loncat'?'selected':''}>Bebas Loncat</option>
           <option value="Minimal 3, bebas loncat" ${c.nb==='Minimal 3, bebas loncat'?'selected':''}>Minimal 3, bebas loncat</option>
@@ -1945,19 +1962,28 @@ window.removeDraftCard = function(index) {
           <option value="Kelipatan 4, bebas loncat" ${c.nb==='Kelipatan 4, bebas loncat'?'selected':''}>Kelipatan 4, bebas loncat</option>
           <option value="Kelipatan 5, bebas loncat" ${c.nb==='Kelipatan 5, bebas loncat'?'selected':''}>Kelipatan 5, bebas loncat</option>
           <option value="Kelipatan 10, bebas loncat" ${c.nb==='Kelipatan 10, bebas loncat'?'selected':''}>Kelipatan 10, bebas loncat</option>
+          <option value="Kelipatan 50, bebas loncat" ${c.nb==='Kelipatan 50, bebas loncat'?'selected':''}>Kelipatan 50, bebas loncat</option>
+          <option value="Kelipatan 100, bebas loncat" ${c.nb==='Kelipatan 100, bebas loncat'?'selected':''}>Kelipatan 100, bebas loncat</option>
         </select>
       </td>
       <td><input type="text" class="format-rp draft-bo" oninput="auctionDrafts[${i}].bo = this.value.replace(/[^0-9]/g, '')" value="${c.bo ? 'Rp ' + Number(c.bo).toLocaleString('id-ID') : ''}" placeholder="e.g. Rp 250.000" style="width:110px; padding:4px;"></td>
       <td>
-                <div style="display: flex; gap: 12px; align-items: center;">
-                  <button onclick="copySingleDraftCard(${i})" style="color: ${c.isCopied ? '#22c55e' : 'var(--text-secondary)'}; background:none; border:none; cursor:pointer; font-size: 15px; transition: color 0.2s;" title="Copy FB Post for this card">
-                    <i class="fas ${c.isCopied ? 'fa-check-double' : 'fa-copy'}"></i>
-                  </button>
-                  <button onclick="removeDraftCard(${i})" style="color:#ef4444; background:none; border:none; cursor:pointer; font-size: 15px;" title="Delete Card">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </div>
-              </td>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button onclick="moveDraftCardUp(${i})" style="color:var(--text-secondary); background:none; border:none; cursor:${i === 0 ? 'not-allowed' : 'pointer'}; opacity: ${i === 0 ? 0.3 : 1}; font-size: 15px;" title="Move Up" ${i === 0 ? 'disabled' : ''}>
+            <i class="fas fa-chevron-up"></i>
+          </button>
+          <button onclick="moveDraftCardDown(${i})" style="color:var(--text-secondary); background:none; border:none; cursor:${i === auctionDrafts.length - 1 ? 'not-allowed' : 'pointer'}; opacity: ${i === auctionDrafts.length - 1 ? 0.3 : 1}; font-size: 15px;" title="Move Down" ${i === auctionDrafts.length - 1 ? 'disabled' : ''}>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div style="width: 1px; height: 16px; background: var(--border-color); margin: 0 2px;"></div>
+          <button onclick="copySingleDraftCard(${i})" style="color: ${c.isCopied ? '#22c55e' : 'var(--text-secondary)'}; background:none; border:none; cursor:pointer; font-size: 15px; transition: color 0.2s;" title="Copy FB Post for this card">
+            <i class="fas ${c.isCopied ? 'fa-check-double' : 'fa-copy'}"></i>
+          </button>
+          <button onclick="removeDraftCard(${i})" style="color:#ef4444; background:none; border:none; cursor:pointer; font-size: 15px;" title="Delete Card">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </td>
     </tr>
   `).join('');
 
