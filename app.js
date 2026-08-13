@@ -1937,14 +1937,16 @@ window.removeDraftCard = function(index) {
       <td>
         <select class="draft-nb" onchange="auctionDrafts[${i}].nb = this.value" style="padding:4px; background:var(--bg-surface); color:inherit;">
           <option value="Bebas Loncat" ${c.nb==='Bebas Loncat'?'selected':''}>Bebas Loncat</option>
-          <option value="Minimal 4,bebas loncat" ${c.nb==='Minimal 4,bebas loncat'?'selected':''}>Minimal 4,bebas loncat</option>
-          <option value="Kelipatan 2,bebas loncat" ${c.nb==='Kelipatan 2,bebas loncat'?'selected':''}>Kelipatan 2,bebas loncat</option>
-          <option value="Kelipatan 3,bebas loncat" ${c.nb==='Kelipatan 3,bebas loncat'?'selected':''}>Kelipatan 3,bebas loncat</option>
-          <option value="Kelipatan 4,bebas loncat" ${c.nb==='Kelipatan 4,bebas loncat'?'selected':''}>Kelipatan 4,bebas loncat</option>
-          <option value="Kelipatan 5,bebas loncat" ${c.nb==='Kelipatan 5,bebas loncat'?'selected':''}>Kelipatan 5,bebas loncat</option>
-          <option value="Kelipatan 10,bebas loncat" ${c.nb==='Kelipatan 10,bebas loncat'?'selected':''}>Kelipatan 10,bebas loncat</option>
-          <option value="Kelipatan 50,bebas loncat" ${c.nb==='Kelipatan 50,bebas loncat'?'selected':''}>Kelipatan 50,bebas loncat</option>
-          <option value="Kelipatan 100,bebas loncat" ${c.nb==='Kelipatan 100,bebas loncat'?'selected':''}>Kelipatan 100,bebas loncat</option>
+          <option value="Minimal 3, bebas loncat" ${c.nb==='Minimal 3, bebas loncat'?'selected':''}>Minimal 3, bebas loncat</option>
+          <option value="Minimal 4, bebas loncat" ${c.nb==='Minimal 4, bebas loncat'?'selected':''}>Minimal 4, bebas loncat</option>
+          <option value="Minimal 5, bebas loncat" ${c.nb==='Minimal 5, bebas loncat'?'selected':''}>Minimal 5, bebas loncat</option>
+          <option value="Kelipatan 2, bebas loncat" ${c.nb==='Kelipatan 2, bebas loncat'?'selected':''}>Kelipatan 2, bebas loncat</option>
+          <option value="Kelipatan 3, bebas loncat" ${c.nb==='Kelipatan 3, bebas loncat'?'selected':''}>Kelipatan 3, bebas loncat</option>
+          <option value="Kelipatan 4, bebas loncat" ${c.nb==='Kelipatan 4, bebas loncat'?'selected':''}>Kelipatan 4, bebas loncat</option>
+          <option value="Kelipatan 5, bebas loncat" ${c.nb==='Kelipatan 5, bebas loncat'?'selected':''}>Kelipatan 5, bebas loncat</option>
+          <option value="Kelipatan 10, bebas loncat" ${c.nb==='Kelipatan 10, bebas loncat'?'selected':''}>Kelipatan 10, bebas loncat</option>
+          <option value="Kelipatan 50, bebas loncat" ${c.nb==='Kelipatan 50, bebas loncat'?'selected':''}>Kelipatan 50, bebas loncat</option>
+          <option value="Kelipatan 100, bebas loncat" ${c.nb==='Kelipatan 100, bebas loncat'?'selected':''}>Kelipatan 100, bebas loncat</option>
         </select>
       </td>
       <td><input type="text" class="format-rp draft-bo" oninput="auctionDrafts[${i}].bo = this.value.replace(/[^0-9]/g, '')" value="${c.bo ? 'Rp ' + Number(c.bo).toLocaleString('id-ID') : ''}" placeholder="e.g. Rp 250.000" style="width:110px; padding:4px;"></td>
