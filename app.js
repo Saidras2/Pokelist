@@ -1935,8 +1935,9 @@ window.removeDraftCard = function(index) {
       <td>${c.rarity}</td>
       <td><input type="text" class="format-rp draft-ob" oninput="auctionDrafts[${i}].ob = this.value.replace(/[^0-9]/g, '')" value="${c.ob ? 'Rp ' + Number(c.ob).toLocaleString('id-ID') : ''}" placeholder="e.g. Rp 50.000" style="width:110px; padding:4px;"></td>
       <td>
-      <select class="draft-nb" onchange="auctionDrafts[${i}].nb = this.value" style="padding:4px; background:var(--bg-surface); color:inherit;">
+        <select class="draft-nb" onchange="auctionDrafts[${i}].nb = this.value" style="padding:4px; background:var(--bg-surface); color:inherit;">
           <option value="Bebas Loncat" ${c.nb==='Bebas Loncat'?'selected':''}>Bebas Loncat</option>
+          <option value="Minimal 4,bebas loncat" ${c.nb==='Minimal 4,bebas loncat'?'selected':''}>Minimal 4,bebas loncat</option>
           <option value="Kelipatan 2,bebas loncat" ${c.nb==='Kelipatan 2,bebas loncat'?'selected':''}>Kelipatan 2,bebas loncat</option>
           <option value="Kelipatan 3,bebas loncat" ${c.nb==='Kelipatan 3,bebas loncat'?'selected':''}>Kelipatan 3,bebas loncat</option>
           <option value="Kelipatan 4,bebas loncat" ${c.nb==='Kelipatan 4,bebas loncat'?'selected':''}>Kelipatan 4,bebas loncat</option>
