@@ -1937,9 +1937,13 @@ window.removeDraftCard = function(index) {
       <td>
         <select class="draft-nb" onchange="auctionDrafts[${i}].nb = this.value" style="padding:4px; background:var(--bg-surface); color:inherit;">
           <option value="Bebas Loncat" ${c.nb==='Bebas Loncat'?'selected':''}>Bebas Loncat</option>
-          <option value="Kelipatan 10k" ${c.nb==='Kelipatan 10k'?'selected':''}>Kelipatan 10k</option>
-          <option value="Kelipatan 50k" ${c.nb==='Kelipatan 50k'?'selected':''}>Kelipatan 50k</option>
-          <option value="Kelipatan 100k" ${c.nb==='Kelipatan 100k'?'selected':''}>Kelipatan 100k</option>
+          <option value="Kelipatan 2,bebas Loncat" ${c.nb==='Kelipatan 2'?'selected':''}>Kelipatan 2</option>
+          <option value="Kelipatan 3,bebas Loncat" ${c.nb==='Kelipatan 3'?'selected':''}>Kelipatan 3</option>
+          <option value="Kelipatan 4,bebas Loncat" ${c.nb==='Kelipatan 4'?'selected':''}>Kelipatan 4</option>
+          <option value="Kelipatan 5,bebas Loncat" ${c.nb==='Kelipatan 5'?'selected':''}>Kelipatan 5</option>
+          <option value="Kelipatan 10,bebas Loncat" ${c.nb==='Kelipatan 10'?'selected':''}>Kelipatan 10</option>
+          <option value="Kelipatan 50,bebas Loncat" ${c.nb==='Kelipatan 50'?'selected':''}>Kelipatan 50</option>
+          <option value="Kelipatan 100,bebas Loncat" ${c.nb==='Kelipatan 100'?'selected':''}>Kelipatan 100</option>
         </select>
       </td>
       <td><input type="text" class="format-rp draft-bo" oninput="auctionDrafts[${i}].bo = this.value.replace(/[^0-9]/g, '')" value="${c.bo ? 'Rp ' + Number(c.bo).toLocaleString('id-ID') : ''}" placeholder="e.g. Rp 250.000" style="width:110px; padding:4px;"></td>
@@ -2249,7 +2253,7 @@ document.getElementById('logger-batch-select').addEventListener('change', functi
             
             const newOB = prompt(`Edit OB for ${targetCard.cardName} (Numbers only):`, targetCard.ob || '');
             if (newOB === null) return;
-            const newNB = prompt(`Edit NB for ${targetCard.cardName} (e.g. Kelipatan 10k, Bebas Loncat):`, targetCard.nb || 'Bebas Loncat');
+            const newNB = prompt(`Edit NB for ${targetCard.cardName} (e.g. Kelipatan 10, Bebas Loncat):`, targetCard.nb || 'Bebas Loncat');
             if (newNB === null) return;
             const newBO = prompt(`Edit BO for ${targetCard.cardName} (Numbers only):`, targetCard.bo || '');
             if (newBO === null) return;
