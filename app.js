@@ -1945,8 +1945,6 @@ window.removeDraftCard = function(index) {
           <option value="Kelipatan 4, bebas loncat" ${c.nb==='Kelipatan 4, bebas loncat'?'selected':''}>Kelipatan 4, bebas loncat</option>
           <option value="Kelipatan 5, bebas loncat" ${c.nb==='Kelipatan 5, bebas loncat'?'selected':''}>Kelipatan 5, bebas loncat</option>
           <option value="Kelipatan 10, bebas loncat" ${c.nb==='Kelipatan 10, bebas loncat'?'selected':''}>Kelipatan 10, bebas loncat</option>
-          <option value="Kelipatan 50, bebas loncat" ${c.nb==='Kelipatan 50, bebas loncat'?'selected':''}>Kelipatan 50, bebas loncat</option>
-          <option value="Kelipatan 100, bebas loncat" ${c.nb==='Kelipatan 100, bebas loncat'?'selected':''}>Kelipatan 100, bebas loncat</option>
         </select>
       </td>
       <td><input type="text" class="format-rp draft-bo" oninput="auctionDrafts[${i}].bo = this.value.replace(/[^0-9]/g, '')" value="${c.bo ? 'Rp ' + Number(c.bo).toLocaleString('id-ID') : ''}" placeholder="e.g. Rp 250.000" style="width:110px; padding:4px;"></td>
