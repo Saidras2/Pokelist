@@ -41,22 +41,34 @@ so just double-click it (or open it in any browser).
 
 | File | What it is |
 | --- | --- |
-| [`view.html`](view.html) | **Start here** — everything on one page, opens in a browser |
-| [`preview-iso.svg`](preview-iso.svg) | Isometric preview — closed and lid-lifted, with magnet positions |
-| [`SPEC.md`](SPEC.md) | The full design: dimensions, cut list, magnet spec, drilling, assembly, variants |
+| [`compare.html`](compare.html) | **Three self-assembly variants side by side** — start here |
+| [`VARIANTS.md`](VARIANTS.md) | Full spec for each self-assembly variant: cut lists, joint dimensions, assembly, trade-offs |
+| [`view.html`](view.html) | The original glued version, all on one page |
+| [`preview-iso.svg`](preview-iso.svg) | Isometric preview of the glued version |
+| [`SPEC.md`](SPEC.md) | Spec for the glued version: dimensions, cut list, magnets, assembly |
 | [`openscad/booster_box_case.scad`](openscad/booster_box_case.scad) | Parametric 3D model — change 3 numbers and it resizes itself |
-| [`cut-plan.svg`](cut-plan.svg) | 2D layout on a 600 × 900 mm sheet, with magnet pockets marked |
-| [`tools/make_preview.py`](tools/make_preview.py) | Regenerates `preview-iso.svg` from the same parameters |
+| [`cut-plan.svg`](cut-plan.svg) | 1:1 sheet layout for the glued version |
+| [`variants/`](variants) | Generated illustrations of the three self-assembly joints |
+| [`tools/make_preview.py`](tools/make_preview.py) | Regenerates `preview-iso.svg` |
+| [`tools/make_variants.py`](tools/make_variants.py) | Regenerates the three variant illustrations |
 
-| File | What it is |
-| --- | --- |
-| [`preview-iso.svg`](preview-iso.svg) | Isometric preview — closed and lid-lifted, with magnet positions |
-| [`SPEC.md`](SPEC.md) | The full design: dimensions, cut list, magnet spec, drilling, assembly, variants |
-| [`openscad/booster_box_case.scad`](openscad/booster_box_case.scad) | Parametric 3D model — change 3 numbers and it resizes itself |
-| [`cut-plan.svg`](cut-plan.svg) | 2D layout on a 600 × 900 mm sheet, with magnet pockets marked |
-| [`tools/make_preview.py`](tools/make_preview.py) | Regenerates `preview-iso.svg` from the same parameters |
+## Self-assembly, no glue
 
-## TL;DR of the build
+If the customer assembles it, the design forks three ways. All three share the same
+booster box envelope, the same 5 mm acrylic and the same magnetic lid, and differ
+only in how the walls join:
+
+| | A · Box joint | B · Routed groove | C · Exposed tabs |
+|---|---|---|---|
+| Cutting | Laser only | Laser + router | Laser only |
+| Look | Flush, zigzag corner seams | Seamless, plinth base | Proud tabs |
+| Assembly | 3 moves | 4 moves | 4 moves |
+| Kerf sensitivity | High | Low | Medium |
+
+Full detail in [`VARIANTS.md`](VARIANTS.md), visuals in [`compare.html`](compare.html).
+
+
+## TL;DR of the glued build
 
 1. **Material:** cast acrylic (Perspex® / Plexiglas® G), **5 mm** thick.
    Not extruded — extrusion crazes when solvent welded.

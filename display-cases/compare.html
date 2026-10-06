@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Self-assembly display case — three variants compared</title>
+<style>
+  :root { --ink:#111827; --mid:#4b5563; --dim:#9aa0ae; --line:#e5e7eb; --blue:#1d4ed8; --red:#b91c1c; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:32px 20px 90px; background:#f6f7f9; color:var(--ink);
+         font:15px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .wrap { max-width: 1360px; margin:0 auto; }
+  header { border-bottom:1px solid var(--line); padding-bottom:20px; margin-bottom:26px; }
+  h1 { font-size:27px; margin:0 0 6px; letter-spacing:-0.02em; }
+  .sub { color:var(--mid); font-size:14px; }
+  h2 { font-size:18px; margin:40px 0 14px; }
+  .cols { display:grid; grid-template-columns: repeat(3, 1fr); gap:22px; }
+  @media (max-width: 1180px) { .cols { grid-template-columns: 1fr; } }
+  .col { background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden;
+         display:flex; flex-direction:column; }
+  .col.pick { border-color:#93c5fd; box-shadow:0 0 0 3px #dbeafe; }
+  .col img { width:100%; height:auto; display:block; border-bottom:1px solid var(--line); }
+  .body { padding:16px 18px 20px; }
+  .tag { display:inline-block; font-size:11px; font-weight:700; letter-spacing:.06em;
+         text-transform:uppercase; padding:2px 8px; border-radius:999px; margin-bottom:8px; }
+  .t-a { background:#dbeafe; color:#1e40af; }
+  .t-b { background:#dcfce7; color:#166534; }
+  .t-c { background:#fee2e2; color:#991b1b; }
+  .star { background:#1d4ed8; color:#fff; }
+  h3 { font-size:16px; margin:0 0 10px; }
+  dl { margin:0; font-size:13.5px; }
+  dt { color:var(--mid); font-size:11px; text-transform:uppercase; letter-spacing:.04em;
+       margin-top:11px; }
+  dd { margin:2px 0 0; }
+  table { border-collapse:collapse; width:100%; font-size:13.5px; background:#fff;
+          border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  th, td { text-align:left; padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { background:#f9fafb; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--mid); }
+  tr:last-child td { border-bottom:none; }
+  td.best { background:#eff6ff; font-weight:600; }
+  code { background:#eef1f5; padding:1px 5px; border-radius:4px; font-size:12.5px; }
+  .note { background:#fffbeb; border:1px solid #fde68a; border-radius:10px; padding:14px 16px;
+          font-size:14px; margin-top:22px; }
+  ol { padding-left:20px; margin:6px 0 0; }
+  li { margin-bottom:4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Self-assembly display case — three variants, side by side</h1>
+  <div class="sub">
+    Same booster box, same 5 mm cast acrylic, same magnetic cap lid.
+    Three different ways to join the walls with <strong>no glue and no fasteners</strong>.
+  </div>
+</header>
+
+<h2>What you actually see</h2>
+<div class="cols">
+
+  <div class="col pick">
+    <img src="variants/boxjoint.svg" alt="Variant A: box-jointed walls">
+    <div class="body">
+      <span class="tag t-a">A</span> <span class="tag star">My pick</span>
+      <h3>Box-jointed walls</h3>
+      <dl>
+        <dt>Cutting</dt><dd>Laser only</dd>
+        <dt>Look</dt><dd>Flush, continuous faces with a crisp zigzag seam down each corner</dd>
+        <dt>Assembly</dt><dd>3 moves — a genuine puzzle</dd>
+        <dt>Silhouette</dt><dd>154 × 94 × 140 mm</dd>
+        <dt>Catch</dt><dd>The finger width <em>is</em> your kerf setting — cut one corner test first</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="col">
+    <img src="variants/groove.svg" alt="Variant B: routed-groove base">
+    <div class="body">
+      <span class="tag t-b">B</span>
+      <h3>Routed-groove base</h3>
+      <dl>
+        <dt>Cutting</dt><dd>Laser <strong>+ router</strong></dd>
+        <dt>Look</dt><dd>Nothing to see — hairline seams only</dd>
+        <dt>Assembly</dt><dd>4 moves — walls drop into the channel</dd>
+        <dt>Silhouette</dt><dd>165 × 105 × 140 mm, walls recessed</dd>
+        <dt>Catch</dt><dd>Needs a second machine and a 10 mm sheet. The plinth is unavoidable — a groove needs material outboard of the wall</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="col">
+    <img src="variants/tabs.svg" alt="Variant C: exposed tab and slot">
+    <div class="body">
+      <span class="tag t-c">C</span>
+      <h3>Exposed tab &amp; slot</h3>
+      <dl>
+        <dt>Cutting</dt><dd>Laser only</dd>
+        <dt>Look</dt><dd>Tabs pass through and stand 3 mm proud on the front and back</dd>
+        <dt>Assembly</dt><dd>4 moves — biggest tabs, biggest tolerances</dd>
+        <dt>Silhouette</dt><dd>154 × 100 × 140 mm</dd>
+        <dt>Catch</dt><dd>The tabs are the design. Cheapest and most forgiving, but you are not hiding anything</dd>
+      </dl>
+    </div>
+  </div>
+
+</div>
+
+<h2>The comparison matrix</h2>
+<table>
+  <thead>
+    <tr><th>&nbsp;</th><th>A · Box joint</th><th>B · Routed groove</th><th>C · Exposed tabs</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Cutting process</td><td class="best">Laser only</td><td>Laser + router</td><td class="best">Laser only</td></tr>
+    <tr><td>Pieces / distinct shapes</td><td>9 / 6</td><td>9 / 6</td><td>9 / 6</td></tr>
+    <tr><td>Assembly moves</td><td class="best">3</td><td>4</td><td>4</td></tr>
+    <tr><td>Glue or fasteners</td><td class="best">none</td><td class="best">none</td><td class="best">none</td></tr>
+    <tr><td>Kerf sensitivity</td><td>High — fingers must be right</td><td class="best">Low — 0.2 mm slop is invisible</td><td>Medium</td></tr>
+    <tr><td>Forgiving of mistakes</td><td>Low</td><td class="best">High</td><td class="best">High</td></tr>
+    <tr><td>Rigidity</td><td class="best">Excellent — self-locking</td><td>Good — clamped by the lid</td><td>Good</td></tr>
+    <tr><td>Sheet thicknesses to stock</td><td class="best">5 mm only</td><td>5 mm + 10 mm</td><td class="best">5 mm only</td></tr>
+    <tr><td>Build experience</td><td class="best">Best — a real 3-move puzzle</td><td>Minimal</td><td>Good</td></tr>
+    <tr><td>Finished look</td><td>Craft — visible joinery</td><td class="best">Cleanest</td><td>Industrial — tabs on show</td></tr>
+  </tbody>
+</table>
+
+<h2>Cut lists</h2>
+<table>
+  <thead>
+    <tr><th>Part</th><th>A · Box joint</th><th>B · Routed groove</th><th>C · Exposed tabs</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Front / back wall &times;2</td><td>154 × 130, castellated ends</td><td>154 × 130, plain</td><td>154 × 130, notched ends</td></tr>
+    <tr><td>Left / right wall &times;2</td><td>94 × 130, castellated ends</td><td>84 × 130, plain</td><td>100 × 130, 8 mm tabs</td></tr>
+    <tr><td>Base plate &times;1</td><td>154 × 94 × 5</td><td>165 × 105 × 10, routed channel</td><td>160 × 100 × 5</td></tr>
+    <tr><td>Lid top &times;1</td><td>165 × 105</td><td>165 × 105</td><td>165 × 105</td></tr>
+    <tr><td>Lid skirt &times;4</td><td>165 × 22 and 95 × 22</td><td>165 × 22 and 95 × 22</td><td>165 × 22 and 95 × 22</td></tr>
+    <tr><td>Assembled</td><td>154 × 94 × 140</td><td>165 × 105 × 140</td><td>154 × 100 × 140</td></tr>
+  </tbody>
+</table>
+
+<h2>Shared by all three</h2>
+<table>
+  <tbody>
+    <tr><td>Acrylic</td><td>5 mm cast (Perspex® / Plexiglas® G). Not 3 mm — thin fingers chip</td></tr>
+    <tr><td>Interior</td><td>144 × 84 × 130 mm, for a 140 × 80 × 125 mm booster box</td></tr>
+    <tr><td>Magnets</td><td>8 × N42 neodymium 6 × 2 mm discs, 6.2 mm dia × 2 mm deep blind pockets</td></tr>
+    <tr><td>Magnet position</td><td>11 mm below the top rim, one pair centred on each wall</td></tr>
+    <tr><td>Lid</td><td>Cap with a 22 mm skirt, outer 165 × 105 mm</td></tr>
+  </tbody>
+</table>
+
+<h2>Assembly, move by move</h2>
+<div class="cols" style="grid-template-columns:repeat(3,1fr)">
+  <div class="col"><div class="body">
+    <span class="tag t-a">A</span>
+    <ol>
+      <li>Left wall + front wall → slide the front wall <strong>in −X</strong></li>
+      <li>Right wall + back wall → slide the back wall <strong>in +X</strong></li>
+      <li>Slide the two halves together <strong>in −X</strong> — both remaining corners mesh at once</li>
+      <li>Base plate under, magnetic lid on top</li>
+    </ol>
+  </div></div>
+  <div class="col"><div class="body">
+    <span class="tag t-b">B</span>
+    <ol>
+      <li>Drop the front and back walls into the channel</li>
+      <li>Drop the left and right walls in, butting the corners</li>
+      <li>Set the lid on — the magnets clamp the stack</li>
+    </ol>
+  </div></div>
+  <div class="col"><div class="body">
+    <span class="tag t-c">C</span>
+    <ol>
+      <li>Stand the front and back walls up, notches facing in</li>
+      <li>Slide the left wall <strong>in +Y</strong> — both tabs drop into the notches</li>
+      <li>Slide the right wall <strong>in +Y</strong> the same way</li>
+      <li>Base plate on, magnetic lid on top</li>
+    </ol>
+  </div></div>
+</div>
+
+<div class="note">
+  <strong>Read this before cutting.</strong> Acrylic breaks at 2–3% strain and every
+  notch concentrates stress, so a true <em>snap-fit will crack</em> — usually on the second
+  or third assembly. All three of these are <strong>press fits</strong>, not clicks.
+  Whatever you pick, cut <strong>one corner test</strong> and tune the finger or tab width
+  to your laser's kerf (typically 0.1–0.2 mm) before committing a full sheet.
+  Full detail in <a href="VARIANTS.md">VARIANTS.md</a>.
+</div>
+
+</div>
+</body>
+</html>
+
