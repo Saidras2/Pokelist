@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Cut plan / layout for the magnetic-lid booster box display case.
+  Sheet: 600 x 900 mm cast acrylic, 5 mm thick.
+  All rectangles are drawn at 1:1 scale so you can print this as a template.
+  Magnet pockets are shown as 6.2 mm circles; drill them BEFORE welding.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="620" height="960"
+     viewBox="0 0 620 960" font-family="Helvetica, Arial, sans-serif">
+
+  <rect width="620" height="960" fill="#ffffff"/>
+
+  <!-- sheet outline -->
+  <rect x="10" y="10" width="580" height="880" fill="#fbfbfd"
+        stroke="#c9ccd6" stroke-width="0.8" stroke-dasharray="6 4"/>
+  <text x="16" y="24" font-size="8" fill="#9aa0ae">600 x 900 mm sheet, 5 mm cast acrylic</text>
+
+  <g stroke="#111827" stroke-width="0.9" fill="#e8ecf5">
+    <!-- row 1 : the two tall body walls -->
+    <rect x="15"  y="15"  width="154" height="130"/>
+    <rect x="175" y="15"  width="154" height="130"/>
+    <!-- row 2 : lid top + body bottom -->
+    <rect x="15"  y="151" width="165" height="105"/>
+    <rect x="186" y="151" width="154" height="94"/>
+    <!-- row 3 : the two short body walls -->
+    <rect x="15"  y="262" width="84"  height="130"/>
+    <rect x="105" y="262" width="84"  height="130"/>
+    <!-- row 4 : the four lid skirt strips -->
+    <rect x="15"  y="398" width="165" height="22"/>
+    <rect x="186" y="398" width="165" height="22"/>
+    <rect x="357" y="398" width="95"  height="22"/>
+    <rect x="458" y="398" width="95"  height="22"/>
+  </g>
+
+  <!-- panel labels -->
+  <g fill="#111827" font-size="10" text-anchor="middle">
+    <text x="92"  y="72">Front / Back Wall</text>
+    <text x="92"  y="86" font-size="9" fill="#4b5563">154 x 130 - x2</text>
+    <text x="252" y="72">Front / Back Wall</text>
+    <text x="252" y="86" font-size="9" fill="#4b5563">154 x 130 - x2</text>
+
+    <text x="97"  y="196">Lid Top</text>
+    <text x="97"  y="210" font-size="9" fill="#4b5563">165 x 105 - x1</text>
+
+    <text x="263" y="191">Body Bottom</text>
+    <text x="263" y="205" font-size="9" fill="#4b5563">154 x 94 - x1</text>
+
+    <text x="57"  y="319">Left / Right Wall</text>
+    <text x="57"  y="333" font-size="9" fill="#4b5563">84 x 130 - x2</text>
+
+    <text x="147" y="319">Left / Right Wall</text>
+    <text x="147" y="333" font-size="9" fill="#4b5563">84 x 130 - x2</text>
+  </g>
+
+  <!-- skirt strip labels with leader lines -->
+  <g font-size="9" fill="#4b5563" text-anchor="middle">
+    <text x="97"  y="438">Lid Skirt F/B   165 x 22 - x2</text>
+    <text x="268" y="438">Lid Skirt F/B   165 x 22 - x2</text>
+    <text x="404" y="438">Lid Skirt L/R  95 x 22 - x2</text>
+    <text x="505" y="438">Lid Skirt L/R  95 x 22 - x2</text>
+  </g>
+
+  <!-- magnet pockets : 6.2 mm dia, 11 mm down from the panel's top edge -->
+  <g fill="none" stroke="#dc2626" stroke-width="0.9">
+    <!-- 154 x 130 panels -->
+    <circle cx="92"  cy="26"  r="3.1"/>
+    <circle cx="252" cy="26"  r="3.1"/>
+    <!-- 84 x 130 panels -->
+    <circle cx="57"  cy="273" r="3.1"/>
+    <circle cx="147" cy="273" r="3.1"/>
+    <!-- 165 x 22 skirt strips -->
+    <circle cx="97.5"  cy="409" r="3.1"/>
+    <circle cx="268.5" cy="409" r="3.1"/>
+    <!-- 95 x 22 skirt strips -->
+    <circle cx="404.5" cy="409" r="3.1"/>
+    <circle cx="505.5" cy="409" r="3.1"/>
+  </g>
+
+  <!-- magnet detail callout -->
+  <g transform="translate(15, 490)">
+    <rect x="0" y="0" width="360" height="150" fill="#fff7f7"
+          stroke="#dc2626" stroke-width="0.8"/>
+    <text x="10" y="16" font-size="10" fill="#dc2626" font-weight="bold">
+      MAGNET DETAIL (x6 shown) - 8 pockets total, 4 pairs</text>
+    <text x="10" y="32" font-size="9" fill="#374151">
+      Pocket: 6.2 mm dia, 2.0 mm deep BLIND hole.</text>
+    <text x="10" y="46" font-size="9" fill="#374151">
+      Magnet: N42 neodymium disc, 6 mm dia x 2 mm. Epoxy in, face flush.</text>
+    <text x="10" y="60" font-size="9" fill="#374151">
+      Place 11 mm below the top rim of the wall / top edge of the skirt strip,</text>
+    <text x="10" y="74" font-size="9" fill="#374151">
+      centred along the panel. Never drill through - leave 3 mm of acrylic.</text>
+    <text x="10" y="90" font-size="9" fill="#374151">
+      Body walls: pocket in the OUTER face. Lid skirt: pocket in the INNER face.</text>
+    <text x="10" y="106" font-size="9" fill="#6b7280">
+      For a 2-box-wide or larger case use 2 pockets per wall at +/-40 mm.</text>
+
+    <!-- section sketch -->
+    <g transform="translate(255, 30)">
+      <rect x="0" y="0" width="18" height="90" fill="#dbeafe" stroke="#1d4ed8" stroke-width="0.8"/>
+      <rect x="24" y="10" width="18" height="90" fill="#dbeafe" stroke="#1d4ed8" stroke-width="0.8"/>
+      <rect x="0"  y="18" width="7" height="6" fill="#dc2626"/>
+      <rect x="35" y="18" width="7" height="6" fill="#dc2626"/>
+      <text x="21" y="-4" font-size="7" fill="#1d4ed8" text-anchor="middle">body | lid skirt</text>
+      <text x="21" y="112" font-size="7" fill="#6b7280" text-anchor="middle">magnets face to face</text>
+    </g>
+  </g>
+
+  <!-- title block -->
+  <g transform="translate(15, 660)" font-size="9" fill="#374151">
+    <text x="0" y="0" font-size="14" font-weight="bold" fill="#111827">
+      MagnaCase - Pokémon Booster Box Display Case</text>
+    <text x="0" y="18">Magnetic slip-on lid | 154 x 94 x 135 mm body | 165 x 105 x 140 mm assembled</text>
+    <text x="0" y="32">Cut list: 2 x (154x130), 2 x (84x130), 1 x (154x94), 1 x (165x105),</text>
+    <text x="0" y="46">2 x (165x22), 2 x (95x22) - all from 5 mm cast acrylic</text>
+    <text x="0" y="64">Total part area ~ 105,000 mm2. A 400 x 620 mm offcut is enough;</text>
+    <text x="0" y="78">this 600 x 900 sheet leaves slack for a spare magnet pocket.</text>
+    <text x="0" y="100" fill="#6b7280">Note: the 95 x 22 skirt strips are shown at 22 mm. Trim to 18 mm for a</text>
+    <text x="0" y="114" fill="#6b7280">finger reveal on the two short sides (see SPEC.md section 8).</text>
+  </g>
+</svg>
