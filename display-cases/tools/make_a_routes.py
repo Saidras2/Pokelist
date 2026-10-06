@@ -541,6 +541,86 @@ def base_explained(t):
                  "The walls carry on down past the slot to the floor, which is why the case sits flat.")
 
 
+def six_sheets(t):
+    """The whole case laid out flat: 6 acrylic sheets, nothing else."""
+    g = geom(t)
+    OX, OY, H = g["OX"], g["OY"], g["H"]
+    W, Hc = 1010, 500
+    d = []
+    FING = "#dbeafe"
+
+    def notches(x, y, h, on_left, t2):
+        """Alternating finger notches down one vertical edge."""
+        out = []
+        n = int(round(h / t2))
+        for i in range(n):
+            if i % 3 == 1:
+                continue
+            yy = y + i * t2
+            if on_left:
+                out.append(rect(x, yy, t2, t2, "#ffffff", "#1d4ed8", 0.8))
+            else:
+                out.append(rect(x - t2, yy, t2, t2, "#ffffff", "#1d4ed8", 0.8))
+        return "".join(out)
+
+    panels = [
+        ("Front wall", 40, 104, OX, H, "corner fingers, both ends"),
+        ("Back wall", 236, 104, OX, H, "corner fingers, both ends"),
+        ("Left wall", 432, 104, OY, H, "corner fingers, both ends"),
+        ("Right wall", 558, 104, OY, H, "corner fingers, both ends"),
+    ]
+    for name, x, y, w, h, note in panels:
+        d.append(rect(x, y, w, h, "#f7f9fd", INK, 1.2))
+        d.append(notches(x, y, h, True, t))
+        d.append(notches(x + w, y, h, False, t))
+        d.append(text(x, y - 10, name, 11.5, INK, weight="bold"))
+        d.append(text(x, y + h + 18, note, 9.5, MID))
+
+    # lid
+    lx, ly = 40, 320
+    d.append(rect(lx, ly, OX, OY, "#f7f9fd", INK, 1.2))
+    for (mx, my) in ((OX / 2, t), (OX / 2, OY - t), (t, OY / 2), (OX - t, OY / 2)):
+        d.append(f'<circle cx="{lx+mx:.1f}" cy="{ly+my:.1f}" r="4.5" fill="#fca5a5" '
+                 f'stroke="#991b1b" stroke-width="1"/>')
+    d.append(text(lx, ly - 10, "Lid plate", 11.5, INK, weight="bold"))
+    d.append(text(lx, ly + OY + 18, "4 magnet pockets. Otherwise plain.", 9.5, MID))
+
+    # base
+    bx, by = 260, 320
+    d.append(rect(bx + t, by + t, OX - 2 * t, OY - 2 * t, "#f7f9fd", INK, 1.2))
+    for (tx, ty) in ((bx, by), (bx + OX - t, by), (bx, by + OY - t),
+                     (bx + OX - t, by + OY - t)):
+        d.append(rect(tx, ty, t, t, "#fca5a5", "#991b1b", 1.1))
+    d.append(text(bx, by - 10, "Base plate", 11.5, INK, weight="bold"))
+    d.append(text(bx, by + OY + 18, "4 corner tabs (red). Otherwise plain.", 9.5, MID))
+
+    # summary panel
+    sx = 660
+    d.append(text(sx, 128, "Six sheets. Nothing else.", 15, INK, weight="bold"))
+    d.append(text(sx, 154, "No extra acrylic parts, no brackets, no pins.", 10.5, MID))
+    rows = [
+        ("4 \u00d7 side sheets", "the walls, joined at the corners"),
+        ("1 \u00d7 top sheet", "the lid, held by magnets"),
+        ("1 \u00d7 bottom sheet", "the floor, held by geometry"),
+    ]
+    yy = 184
+    for a, b in rows:
+        d.append(text(sx, yy, a, 11.5, INK, weight="bold"))
+        d.append(text(sx, yy + 16, b, 10, MID))
+        yy += 46
+    d.append(text(sx, yy + 10, "The joint shapes are cut INTO these", 10.5, GREEN))
+    d.append(text(sx, yy + 26, "sheets \u2014 they are not extra pieces.", 10.5, GREEN))
+    d.append(text(sx, yy + 52, "Non-acrylic: 8 magnets, 6 foam pads,", 10, MID))
+    d.append(text(sx, yy + 68, "and adhesive for the foam.", 10, MID))
+
+    d.append(text(40, 476, "Dimensions on the following pages. Everything here is cut from one sheet "
+                           "of the same thickness.", 10, DIM))
+    return sheet(W, Hc, "The whole case, laid out flat",
+                 "Four side sheets, one top sheet, one bottom sheet.",
+                 "".join(d),
+                 "The finger notches shown are simplified \u2014 see the cut list for the real profile.")
+
+
 if __name__ == "__main__":
     here = os.path.dirname(os.path.abspath(__file__))
     out = os.path.join(here, "..", "variants")
@@ -554,6 +634,7 @@ if __name__ == "__main__":
         files[f"assembly-{i:02d}.svg"] = (lambda f=fn: f(geom(8.0)))
     files["base-joint.svg"] = lambda: base_joint(8.0)
     files["base-explained.svg"] = lambda: base_explained(8.0)
+    files["six-sheets.svg"] = lambda: six_sheets(8.0)
 
     for name, fn in files.items():
         p = os.path.join(out, name)

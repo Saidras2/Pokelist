@@ -24,6 +24,26 @@ protruding anywhere on the outside.
 
 ---
 
+## 0. What you are actually making
+
+**Six acrylic sheets. Nothing else.** See `variants/six-sheets.svg`.
+
+| Sheet | Qty | What is cut into it |
+|---|---|---|
+| Side | 4 | Corner fingers at both vertical ends. Otherwise plain. |
+| Top (lid) | 1 | 4 magnet pockets. Otherwise plain. |
+| Bottom (base) | 1 | 4 corner tabs. Otherwise plain. |
+
+There are no brackets, no pins, no separate corner pieces, no second sheet
+thickness. The joint shapes are profiles cut **into** these six sheets — they are
+not additional parts.
+
+Non-acrylic: **8 magnets**, 6 EVA foam pads, and adhesive for the foam.
+
+Everything is cut from one sheet of the same thickness, in one laser pass.
+
+---
+
 ## 1. The base joint, explained simply
 
 See `variants/base-explained.svg` — four pictures, left to right.
