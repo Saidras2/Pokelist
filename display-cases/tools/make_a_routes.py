@@ -25,13 +25,22 @@ OZ_MINUS = None  # placeholder, geometry comes from geom()
 
 
 def geom(t):
-    """Everything derives from the wall thickness t."""
+    """Everything derives from the wall thickness t.
+
+    Band 1 (z = 0..t) is a corner finger of the side walls.  Band 2
+    (z = t..2t) is the base plate.  The walls therefore run all the way to
+    the floor and the case sits flat on their edge rim - no feet.
+    """
+    n = -(-135 // t) + 2                  # number of finger bands
+    H = n * t                             # wall height
     return {
-        "t": t, "IZ": IZ,
-        "OX": IX + 2 * t,          # outside width
-        "OY": IY + 2 * t,          # outside depth
-        "OZ": t + IZ,              # top of the walls
-        "TOP": 2 * t + IZ,         # top of the lid plate
+        "t": t,
+        "OX": IX + 2 * t,                 # outside width
+        "OY": IY + 2 * t,                 # outside depth
+        "H": H,                           # wall height (floor to rim)
+        "IZ": H - 2 * t,                  # interior height
+        "OZ": H,                          # top of the walls
+        "TOP": H + t,                     # top of the lid plate
     }
 
 
@@ -127,25 +136,24 @@ def walls(g, s, cx, cy, style=F_WALL, seams=True):
     """The four walls as a closed tube, with the corner seams drawn on."""
     t, OX, OY, OZ = g["t"], g["OX"], g["OY"], g["OZ"]
     out = []
-    # front / back (full width) then left / right (between them)
-    out.append(box(0, OY - t, t, OX, OY, OZ, s, cx, cy, *style))
-    out.append(box(0, 0, t, OX, t, OZ, s, cx, cy, *style))
-    out.append(box(0, 0, t, t, OY, OZ, s, cx, cy, *style))
-    out.append(box(OX - t, 0, t, OX, OY, OZ, s, cx, cy, *style))
+    # front / back (full width) then left / right (full depth)
+    out.append(box(0, OY - t, 0, OX, OY, OZ, s, cx, cy, *style))
+    out.append(box(0, 0, 0, OX, t, OZ, s, cx, cy, *style))
+    out.append(box(0, 0, 0, t, OY, OZ, s, cx, cy, *style))
+    out.append(box(OX - t, 0, 0, OX, OY, OZ, s, cx, cy, *style))
     if seams:
+        n = int(OZ / t)
         for (x, y) in ((OX, OY), (OX, 0), (0, OY)):
-            out.append(zigzag(proj(x, y, t, s, cx, cy), proj(x, y, OZ, s, cx, cy),
-                              9, 1.6, BLUE, 1.5))
+            out.append(zigzag(proj(x, y, 0, s, cx, cy), proj(x, y, OZ, s, cx, cy),
+                              n, 1.5, BLUE, 1.2))
     return "".join(out)
 
 
 def case_closed(g, s, cx, cy):
     """Finished case: base plate, tube, flush lid plate."""
     t, OX, OY, OZ, TOP = g["t"], g["OX"], g["OY"], g["OZ"], g["TOP"]
-    out = [box(0, 0, 0, OX, OY, t, s, cx, cy, *F_BASE)]
-    out.append(walls(g, s, cx, cy))
+    out = [walls(g, s, cx, cy)]
     out.append(box(0, 0, OZ, OX, OY, TOP, s, cx, cy, *F_LID))
-    # the two horizontal seams - this is all you see of the lid
     out.append(zigzag(proj(OX, OY, OZ, s, cx, cy), proj(OX, 0, OZ, s, cx, cy), 1, 0, LINE, 1))
     return "".join(out)
 
@@ -158,24 +166,27 @@ def route_image(t, name):
     # magnet callouts on the rim
     px, py = proj(OX, OY / 2, OZ - 6, S, CX, CY)
     body.append(text(px + 8, py, "lid magnets", 9.5, RED))
-    px, py = proj(OX, OY / 2, 6, S, CX, CY)
-    body.append(text(px + 8, py, "base: keyed, no magnet", 9.5, GREEN))
+    px, py = proj(OX, OY / 2, t / 2, S, CX, CY)
+    body.append(text(px + 8, py, "flat floor rim - no feet", 9.5, GREEN))
 
     # ---- side panel: cut list + the key numbers ----
+    H = g["H"]
     rows = [
         ("Outside", f'{OX:.0f} &#215; {OY:.0f} &#215; {TOP:.0f} mm',
          f'{OX/10:.1f} &#215; {OY/10:.1f} &#215; {TOP/10:.1f} cm'),
         ("Interior", f'{IX:.0f} &#215; {IY:.0f} &#215; {IZ:.0f} mm',
          f'{IX/10:.1f} &#215; {IY/10:.1f} &#215; {IZ/10:.1f} cm'),
         ("Wall thickness", f'{t:.0f} mm', f'{t/10:.1f} cm'),
-        ("Front / back wall &#215;2", f'{OX:.0f} &#215; {IZ:.0f} mm',
-         f'{OX/10:.1f} &#215; {IZ/10:.1f} cm'),
-        ("Left / right wall &#215;2", f'{OY:.0f} &#215; {IZ:.0f} mm',
-         f'{OY/10:.1f} &#215; {IZ/10:.1f} cm'),
+        ("Front / back wall &#215;2", f'{OX:.0f} &#215; {H:.0f} mm',
+         f'{OX/10:.1f} &#215; {H/10:.1f} cm'),
+        ("Left / right wall &#215;2", f'{OY:.0f} &#215; {H:.0f} mm',
+         f'{OY/10:.1f} &#215; {H/10:.1f} cm'),
         ("Lid plate", f'{OX:.0f} &#215; {OY:.0f} &#215; {t:.0f} mm',
          f'{OX/10:.1f} &#215; {OY/10:.1f} &#215; {t/10:.1f} cm'),
-        ("Base plate", f'{OX:.0f} &#215; {OY:.0f} &#215; {t:.0f} mm',
+        ("Base plate + 4 corner tabs", f'{OX:.0f} &#215; {OY:.0f} &#215; {t:.0f} mm',
          f'{OX/10:.1f} &#215; {OY/10:.1f} &#215; {t/10:.1f} cm'),
+        ("Corner finger bands", f'{int(H/t)} &#215; {t:.0f} mm',
+         f'{int(H/t)} &#215; {t/10:.1f} cm'),
     ]
     body.append(text(580, 90, "mm", 10, MID, "start", "bold"))
     body.append(text(700, 90, "cm", 10, MID, "start", "bold"))
@@ -185,7 +196,7 @@ def route_image(t, name):
         body.append(text(580, y, mm, 10, MID))
         body.append(text(700, y, cm, 10, MID))
         body.append(f'<line x1="460" y1="{y+6}" x2="840" y2="{y+6}" stroke="{LINE}"/>')
-        y += 26
+        y += 22
 
     mag = (["3 &#215; 8 &#215; 2 mm blocks in slot pockets cut",
             "flush to the inner face - 2 mm of acrylic outside."]
@@ -197,7 +208,7 @@ def route_image(t, name):
     body.append(text(460, y + 44, mag[1], 10, MID))
     body.append(text(460, y + 62, "8 total, 4 pairs - lid only. Base is mechanical.", 10, GREEN))
     body.append(text(460, y + 78, "Corner joint: 7.5 mm fingers, 15 mm pitch, 9 up", 10, MID))
-    body.append(text(460, y + 94, "Base: 4 corner notches + 4 keyhole hooks", 10, MID))
+    body.append(text(460, y + 94, "Base: trapped between corner finger bands", 10, MID))
     body.append(text(460, y + 110, "Radius every internal corner R2 minimum", 10, GREEN))
 
     sub = ("5 mm walls &#183; slot pockets &#183; keeps the thin profile"
@@ -225,19 +236,18 @@ def mag(x, y, z, s, cx, cy, r=3.2, colour=RED):
 def step1(g):
     """Lay out every part."""
     t, OX, OY, OZ, TOP = g["t"], g["OX"], g["OY"], g["OZ"], g["TOP"]
-    s, cx, cy = 0.64, 200.0, 228.0
+    s, cx, cy = 0.48, 200.0, 202.0
     d = 26.0
-    o = [box(0, 0, 0, OX, OY, t, s, cx, cy, *F_BASE)]
-    o.append(box(0, -d, t + 40, OX, t - d, OZ + 40, s, cx, cy, *F_WALL))
-    o.append(box(0, OY + d, t + 40, OX, OY + t + d, OZ + 40, s, cx, cy, *F_WALL))
-    o.append(box(-d, 0, t + 40, t - d, OY, OZ + 40, s, cx, cy, *F_WALL))
-    o.append(box(OX + d, 0, t + 40, OX + t + d, OY, OZ + 40, s, cx, cy, *F_WALL))
-    o.append(box(0, 0, OZ + 96, OX, OY, TOP + 96, s, cx, cy, *F_LID))
-    o.append(box(IX / 2 - 20, IY / 2 - 20, t + 12, IX / 2 + 20, IY / 2 + 20, t + 16,
-                 s, cx, cy, *F_FOAM))
+    o = []
+    o.append(box(0, -d, 30, OX, t - d, OZ + 30, s, cx, cy, *F_WALL))
+    o.append(box(0, OY + d, 30, OX, OY + t + d, OZ + 30, s, cx, cy, *F_WALL))
+    o.append(box(-d, 0, 30, t - d, OY, OZ + 30, s, cx, cy, *F_WALL))
+    o.append(box(OX + d, 0, 30, OX + t + d, OY, OZ + 30, s, cx, cy, *F_WALL))
+    o.append(box(t, t, OZ + 56, OX - t, OY - t, OZ + 56 + t, s, cx, cy, *F_BASE))
+    o.append(box(0, 0, OZ + 104, OX, OY, TOP + 104, s, cx, cy, *F_LID))
     return step_sheet(
         1, "Lay out every part",
-        "9 acrylic panels, 16 magnets, 5 foam pads - no factory glue.",
+        "9 acrylic panels, 8 magnets, 6 foam pads - no factory glue.",
         "".join(o),
         "Check the panels against the cut list before you touch a drill.")
 
@@ -279,7 +289,7 @@ def step2(g):
 def step3(g):
     """Bond the 4 wall magnets."""
     OX, OY, OZ = g["OX"], g["OY"], g["OZ"]
-    s, cx, cy = 0.85, 200.0, 204.0
+    s, cx, cy = 0.78, 200.0, 196.0
     d = [walls(g, s, cx, cy)]
     for (x, y) in ((OX / 2, 0), (OX / 2, OY), (0, OY / 2), (OX, OY / 2)):
         d.append(mag(x, y, OZ - 4, s, cx, cy))
@@ -316,31 +326,31 @@ def step4(g):
 
 
 def step5(g):
-    """Base plate down, then the two side walls drop onto it."""
+    """Base plate in, then the two side walls drop onto it."""
     t, OX, OY, OZ = g["t"], g["OX"], g["OY"], g["OZ"]
-    s, cx, cy = 0.66, 200.0, 188.0
-    d = [box(0, 0, 0, OX, OY, t, s, cx, cy, *F_BASE)]
-    for (x, y) in ((0, 0), (OX, 0), (0, OY), (OX, OY)):
-        px, py = proj(x, y, t + 0.4, s, cx, cy)
-        d.append(f'<circle cx="{px:.1f}" cy="{py:.1f}" r="5" fill="none" '
-                 f'stroke="{RED}" stroke-width="1.1"/>')
-    for xf in (OX * 0.28, OX * 0.72):
-        for yf in (t * 0.5, OY - t * 0.5):
-            px, py = proj(xf, yf, t + 0.4, s, cx, cy)
-            d.append(f'<rect x="{px-5:.1f}" y="{py-3.5:.1f}" width="10" height="7" '
-                     f'fill="none" stroke="{AMBER}" stroke-width="1.1"/>')
-    d.append(box(0, 0, t + 30, t, OY, OZ + 30, s, cx, cy, *F_WALL))
-    d.append(box(OX - t, 0, t + 30, OX, OY, OZ + 30, s, cx, cy, *F_WALL))
-    d.append(text(24, 300, "Base plate flat on the bench. Four corner notches (red)",
+    s, cx, cy = 0.62, 200.0, 190.0
+    gap = 22.0
+    d = [box(0, 0, 0, t, OY, OZ, s, cx, cy, *F_WALL),
+         box(OX - t, 0, 0, OX, OY, OZ, s, cx, cy, *F_WALL)]
+    # the base plate, floating in at band 2
+    d.append(box(t, t - gap, t, OX - t, OY - t - gap, 2 * t, s, cx, cy, *F_BASE))
+    for x0 in (0.0, OX - t):
+        for y0 in (-gap, OY - t - gap):
+            d.append(box(x0, y0, t, x0 + t, y0 + t, 2 * t, s, cx, cy,
+                         "#fca5a5", "#991b1b", "#7f1d1d", 0.7))
+    d.append(arrow(*proj(OX / 2, -gap - 34, 2 * t + 30, s, cx, cy),
+                   *proj(OX / 2, -gap - 8, 2 * t + 30, s, cx, cy)))
+    d.append(text(24, 300, "Base plate in at the second finger band. Its four corner",
                   9.5, MID))
-    d.append(text(24, 316, "and four keyhole slots (amber). Then the two side walls",
+    d.append(text(24, 316, "tabs (red) slide into the corner sockets the side walls",
                   9.5, MID))
-    d.append(text(24, 332, "drop onto it, inside the notches.", 9.5, MID))
-    d.append(text(24, 350, "The base cannot move sideways: the notches lock it.", 9.5, GREEN))
-    return step_sheet(5, "Base down, side walls on",
-                      "The base is not magnetic. It is keyed, and the walls lock it.",
+    d.append(text(24, 332, "leave open, and land on the finger band below.", 9.5, MID))
+    d.append(text(24, 350, "The walls run to the floor, so the case sits dead flat.",
+                  9.5, GREEN))
+    return step_sheet(5, "Base plate in, side walls on",
+                      "The floor is not magnetic. It is trapped by geometry alone.",
                       "".join(d),
-                      "Cut the keyhole slots in the same laser pass as everything else.")
+                      "No hooks, no keyholes, no feet. The base sits one band up.")
 
 
 def step6(g):
@@ -348,10 +358,10 @@ def step6(g):
     t, OX, OY, OZ = g["t"], g["OX"], g["OY"], g["OZ"]
     s, cx, cy = 0.70, 200.0, 190.0
     gap = t + 14
-    d = [box(0, 0, 0, OX, OY, t, s, cx, cy, *F_BASE)]
-    d.append(box(0, 0, t, t, OY, OZ, s, cx, cy, *F_WALL))
-    d.append(box(OX - t, 0, t, OX, OY, OZ, s, cx, cy, *F_WALL))
-    d.append(box(0, -gap, t, OX, t - gap, OZ, s, cx, cy, *F_WALL))
+    d = [box(0, 0, 0, t, OY, OZ, s, cx, cy, *F_WALL),
+         box(OX - t, 0, 0, OX, OY, OZ, s, cx, cy, *F_WALL),
+         box(t, t, t, OX - t, OY - t, 2 * t, s, cx, cy, *F_BASE)]
+    d.append(box(0, -gap, 0, OX, t - gap, OZ, s, cx, cy, *F_WALL))
     d.append(arrow(*proj(OX / 2, -gap - 26, OZ * 0.62, s, cx, cy),
                    *proj(OX / 2, -gap - 4, OZ * 0.62, s, cx, cy)))
     d.append(text(24, 300, "Slide the front wall straight in along its own width.",
@@ -370,11 +380,11 @@ def step6(g):
 def step7(g):
     """Back wall slides in +Y and completes the box."""
     t, OX, OY, OZ = g["t"], g["OX"], g["OY"], g["OZ"]
-    s, cx, cy = 0.66, 200.0, 188.0
+    s, cx, cy = 0.62, 200.0, 186.0
     gap = t + 14
-    d = [box(0, 0, 0, OX, OY, t, s, cx, cy, *F_BASE)]
-    d.append(box(0, 0, t, OX, OY, OZ, s, cx, cy, *F_WALL))
-    d.append(box(0, OY + gap, t, OX, OY + t + gap, OZ, s, cx, cy, *F_WALL))
+    d = [walls(g, s, cx, cy)]
+    d.append(box(t, t, t, OX - t, OY - t, 2 * t, s, cx, cy, *F_BASE))
+    d.append(box(0, OY + gap, 0, OX, OY + t + gap, OZ, s, cx, cy, *F_WALL))
     d.append(arrow(*proj(OX / 2, OY + gap + 30, OZ * 0.62, s, cx, cy),
                    *proj(OX / 2, OY + gap + 6, OZ * 0.62, s, cx, cy)))
     d.append(text(24, 300, "Same move for the back wall, the other way.", 9.5, MID))
@@ -393,11 +403,12 @@ def step8(g):
     """Foam, box, lid."""
     t, OX, OY, OZ, TOP = g["t"], g["OX"], g["OY"], g["OZ"], g["TOP"]
     s, cx, cy = 0.66, 200.0, 192.0
-    d = [box(0, 0, 0, OX, OY, t, s, cx, cy, *F_BASE)]
-    d.append(box(0, 0, t, OX, OY, OZ, s, cx, cy, *F_WALL))
-    d.append(box(t, t, t, OX - t, OY - t, t + 4, s, cx, cy, *F_FOAM))
-    d.append(box(t + FOAM, t + FOAM, t, t + FOAM + BOX_W, t + FOAM + BOX_D,
-                 t + FOAM + BOX_H, s, cx, cy, "#fed7aa", "#ea580c", "#c2410c", 0.6))
+    z0 = 2 * t
+    d = [walls(g, s, cx, cy),
+         box(t, t, t, OX - t, OY - t, z0, s, cx, cy, *F_BASE)]
+    d.append(box(t, t, z0, OX - t, OY - t, z0 + 4, s, cx, cy, *F_FOAM))
+    d.append(box(t + FOAM, t + FOAM, z0, t + FOAM + BOX_W, t + FOAM + BOX_D,
+                 z0 + FOAM + BOX_H, s, cx, cy, "#fed7aa", "#ea580c", "#c2410c", 0.6))
     d.append(box(0, 0, OZ + 50, OX, OY, TOP + 50, s, cx, cy, *F_LID))
     d.append(arrow(*proj(OX / 2, OY / 2, OZ + 100, s, cx, cy),
                    *proj(OX / 2, OY / 2, OZ + 56, s, cx, cy), RED))
@@ -416,33 +427,50 @@ def step8(g):
 
 
 def base_joint(t):
-    """Enlarged section through one base keyhole and hook."""
-    W, H = 460, 360
-    sc = 6.0
-    ox, oy = 70.0, 130.0
+    """Section through one corner: the base tab trapped between finger bands."""
+    W, H = 470, 500
+    sc = 3.0
+    ox, oy = 90.0, 350.0        # oy = the floor line
     d = []
-    d.append(rect(ox, oy, 46 * sc, t * sc, "#eef2f9", INK))
-    d.append(rect(ox + 16 * sc, oy - 46 * sc, t * sc, 46 * sc, "#f7f9fd", INK))
-    d.append(rect(ox + 16 * sc, oy, t * sc, t * sc, "#fca5a5", "#991b1b", 1.2))
-    d.append(rect(ox + 16 * sc, oy + t * sc, 26 * sc, 3 * sc, "#fca5a5", "#991b1b", 1.2))
-    d.append(f'<line x1="{ox+16*sc:.1f}" y1="{oy-46*sc:.1f}" x2="{ox+16*sc:.1f}" '
-             f'y2="{oy+t*sc+3*sc:.1f}" stroke="{RED}" stroke-width="1" '
-             f'stroke-dasharray="4 3"/>')
-    d.append(text(ox + 16 * sc + 8, oy - 40 * sc, "wall", 10, MID))
-    d.append(text(ox + 4, oy + t * sc - 4, "base plate", 10, MID))
-    d.append(text(ox + 16 * sc + 6, oy + t * sc + 3 * sc + 26,
-                  "26 mm head, 3 mm below the base", 10, RED))
-    d.append(text(20, 300, "The wall's own material is cut as an L-shaped hook. It drops through a",
+    bands = 5
+    for i in range(bands):
+        z1 = (i + 1) * t
+        y = oy - z1 * sc
+        h = t * sc
+        if i == 1:
+            fill, line = "#fca5a5", "#991b1b"      # the base tab
+            lbl = "base plate corner tab"
+        elif i % 2 == 0:
+            fill, line = "#dbeafe", "#1d4ed8"      # wall A
+            lbl = "wall A finger"
+        else:
+            fill, line = "#e5e7eb", "#4b5563"      # wall B
+            lbl = "wall B finger"
+        d.append(rect(ox, y, 26 * sc, h, fill, line, 1.0))
+        d.append(text(ox + 27 * sc, y + h * 0.72, lbl, 10,
+                      line, weight="bold" if i == 1 else "normal"))
+    # the base plate body running inboard
+    d.append(rect(ox + 26 * sc, oy - 2 * t * sc, 24 * sc, t * sc,
+                  "#fca5a5", "#991b1b", 1.0))
+    d.append(text(ox + 27 * sc, oy - 2 * t * sc + t * sc * 0.72, "base plate", 10, "#991b1b"))
+    # floor line
+    d.append(f'<line x1="{ox - 20}" y1="{oy:.1f}" x2="{ox + 52 * sc:.1f}" y2="{oy:.1f}" '
+             f'stroke="{INK}" stroke-width="1.6"/>')
+    d.append(text(ox - 22, oy + 16, "floor", 10, INK, "end"))
+    d.append(text(ox, oy + 16, "the walls run right down to here, so the case sits flat",
+                  10, GREEN))
+    d.append(text(20, 400, "Band 1 belongs to the side walls. Band 2 is left empty, and the base",
                   10, MID))
-    d.append(text(20, 318, "keyhole slot in the base plate: 26 mm wide at the entry, only 9 mm wide",
+    d.append(text(20, 418, "plate's corner tab drops into it. Band 3 belongs to the front and back",
                   10, MID))
-    d.append(text(20, 336, "where the neck ends up. The wall's slide is the assembly motion, so the",
+    d.append(text(20, 436, "walls. So the tab is boxed in above, below and on both sides - it can",
                   10, MID))
-    d.append(text(20, 354, "head ends up trapped under solid acrylic and cannot pull back up.", 10, MID))
+    d.append(text(20, 454, "neither slide nor drop, and nothing protrudes below the floor.",
+                  10, MID))
     return sheet(W, H, "Base joint - enlarged section",
-                 "Mechanical. No magnet, no glue. This is what holds the floor in.",
+                 "Mechanical. No magnet, no glue, and nothing sticking out underneath.",
                  "".join(d),
-                 "The head sits 3 mm below the base plate, flush with a 3 mm felt pad.")
+                 "The base sits one finger band up, so the underside is a flat rim.")
 
 
 if __name__ == "__main__":

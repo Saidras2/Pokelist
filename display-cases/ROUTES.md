@@ -12,8 +12,8 @@ them is in the lid.**
 | Wall thickness | 5 mm (0.5 cm) | 8 mm (0.8 cm) |
 | Magnet pocket | 3 × 8 mm slot, cut flush to the inner face | 4 mm dia round hole, centred |
 | Acrylic around the magnet | 2.0 mm, outside only | 2.0 mm on **both** sides |
-| Magnets | 8 × 3 × 8 × 2 mm blocks | 8 × 4 mm dia × 2 mm discs |
-| Outside size | **16.0 × 10.0 × 14.5 cm** (160 × 100 × 145 mm) | **16.6 × 10.6 × 15.1 cm** (166 × 106 × 151 mm) |
+| Magnets — lid only | 8 × 3 × 8 × 2 mm blocks | 8 × 4 mm dia × 2 mm discs |
+| Outside size | **16.0 × 10.0 × 15.0 cm** (160 × 100 × 150 mm) | **16.6 × 10.6 × 16.0 cm** (166 × 106 × 160 mm) |
 | Margin around the box | 10 mm (1.0 cm) per side | 13 mm (1.3 cm) per side |
 | Impact strength | baseline | roughly **2.5×** |
 | Material cost per case | baseline | about **+$2.50** |
@@ -24,44 +24,52 @@ protruding anywhere on the outside.
 
 ---
 
-## 1. How the base actually attaches
+## 1. How the base attaches — and why it no longer floats
 
-This is the part you asked about, and it is the whole trick. The base plate is
-a flat panel, so it can only carry features **in its own plane** — slots and
-notches, nothing that sticks up. The walls are vertical panels, so they can
-carry features in *their* plane. That asymmetry is what makes a mechanical
-floor possible.
+The hook idea was wrong and you spotted it. A hook head has to be trapped
+*under* the plate, so it has to stick out *below* the plate — which means the
+case stands on four little feet instead of sitting flat.
 
-The base plate gets two different features:
+So the base plate moved. It now sits **one finger band up inside the tube**,
+not at the very bottom.
 
-| Feature | Qty | What it does |
+```
+  band 3   z = 2t .. 3t    front / back wall finger     <- traps the tab from above
+  band 2   z =  t .. 2t    BASE PLATE + its corner tabs <- captured here
+  band 1   z =  0 ..  t    side wall finger             <- traps the tab from below
+  -----------------------  floor
+```
+
+**The walls now run all the way down to the floor.** The case sits on their
+bottom edge — a flat, continuous rim, `t` wide, all the way round. Nothing
+protrudes. The base plate is recessed by one band inside, which is invisible
+from outside and actually helps: it lifts the booster box another 5–8 mm off
+the ground.
+
+### What the base plate looks like
+
+A rectangle the size of the interior, with **four corner tabs** (t × t) that
+reach out to the corners. Those tabs are what gets captured:
+
+| Trapped by | What it stops |
+|---|---|
+| The band-1 finger underneath | The base dropping |
+| The band-3 finger above | The base rising |
+| The walls' bodies on both sides | The base sliding or rotating |
+
+No hook, no keyhole, no magnet, no glue, no extra part, and **nothing sticking
+out underneath.** See `variants/base-joint.svg`.
+
+### The cost
+
+One extra finger band of height. The case grows by 5 mm (A5) or 9 mm (A8):
+
+| | Old hook design | Flush-floor design |
 |---|---|---|
-| **Corner notches**, one per corner, t × t | 4 | The side walls' bottom corner fingers drop through them. This stops the base sliding in X, Y, or rotationally. |
-| **Keyhole slots**, two near the front edge and two near the back | 4 | The front and back walls' bottom hooks pass through these. This stops the base dropping out. |
+| Route A5 total height | 145 mm (14.5 cm) | **150 mm (15.0 cm)** |
+| Route A8 total height | 151 mm (15.1 cm) | **160 mm (16.0 cm)** |
 
-And the base ends up trapped in all three axes:
-
-- **Sideways** — the four corner notches, filled by the side walls' fingers
-- **Downwards** — the four hooks, whose heads sit *under* the base plate
-- **Upwards** — the walls themselves sit on top of the base plate
-
-No magnet, no glue, no extra part. See `variants/base-joint.svg` for the
-enlarged section.
-
-### The hook, exactly
-
-Each front and back wall carries **two L-shaped hooks** cut from its own bottom
-edge. A hook is a neck (the wall's full thickness, 9 mm wide) with a **26 mm
-head** at the bottom.
-
-- The hook drops through a keyhole slot in the base plate.
-- The slot is **26 mm wide at the entry** (so the head passes through) and only
-  **9 mm wide** where the neck ends up.
-- The wall's slide moves the neck from the wide part into the narrow part, so
-  the head finishes **under solid acrylic** and cannot pull back up.
-
-The head sits 3 mm below the base plate, flush with a 3 mm felt pad on the
-underside — so the case still sits dead flat.
+That is the honest price of a flat bottom, and I think it is worth paying.
 
 ---
 
@@ -83,8 +91,7 @@ If a wall slides **across its own face** (perpendicular to its plane), both
 corners mesh simultaneously with no sweep collision at all.
 
 **So each front and back wall goes in with one straight push, and both of its
-corners click home at once.** That same push drives its two base hooks under
-the base plate. The whole assembly is two pushes.
+corners click home at once.** The whole assembly is two pushes.
 
 ---
 
@@ -101,34 +108,34 @@ the base plate. The whole assembly is two pushes.
 | | mm | cm |
 |---|---|---|
 | Interior | 150 × 90 × 135 | 15.0 × 9.0 × 13.5 |
-| Outside | **160 × 100 × 145** | **16.0 × 10.0 × 14.5** |
-| Front / back wall ×2 | 160 × 135 | 16.0 × 13.5 |
-| Left / right wall ×2 | 100 × 135 | 10.0 × 13.5 |
+| Outside | **160 × 100 × 150** | **16.0 × 10.0 × 15.0** |
+| Front / back wall ×2 | 160 × 145 | 16.0 × 14.5 |
+| Left / right wall ×2 | 100 × 145 | 10.0 × 14.5 |
 | Lid plate | 160 × 100 × 5 | 16.0 × 10.0 × 0.5 |
 | Base plate | 160 × 100 × 5 | 16.0 × 10.0 × 0.5 |
+| Corner finger bands | 29 × 5 | 29 × 0.5 |
 
 ### Route A8 — 8 mm walls
 
 | | mm | cm |
 |---|---|---|
-| Interior | 150 × 90 × 135 | 15.0 × 9.0 × 13.5 |
-| Outside | **166 × 106 × 151** | **16.6 × 10.6 × 15.1** |
-| Front / back wall ×2 | 166 × 135 | 16.6 × 13.5 |
-| Left / right wall ×2 | 106 × 135 | 10.6 × 13.5 |
+| Interior | 150 × 90 × 136 | 15.0 × 9.0 × 13.6 |
+| Outside | **166 × 106 × 160** | **16.6 × 10.6 × 16.0** |
+| Front / back wall ×2 | 166 × 152 | 16.6 × 15.2 |
+| Left / right wall ×2 | 106 × 152 | 10.6 × 15.2 |
 | Lid plate | 166 × 106 × 8 | 16.6 × 10.6 × 0.8 |
 | Base plate | 166 × 106 × 8 | 16.6 × 10.6 × 0.8 |
+| Corner finger bands | 19 × 8 | 19 × 0.8 |
 
 ### Shared detailing
 
 | Feature | mm | cm |
 |---|---|---|
-| Corner joint pitch | 15.0 | 1.50 |
-| Finger width | 7.5 | 0.75 |
-| Fingers per corner | 9 | — |
+| Corner finger height | = wall thickness | — |
+| Corner finger depth | = wall thickness | — |
+| Base plate body | 150 × 90 | 15.0 × 9.0 |
+| Base corner tab | t × t | — |
 | Magnet pocket inset from the rim | 4.0 | 0.40 |
-| Base corner notch | t × t | — |
-| Keyhole entry / neck width | 26.0 / 9.0 | 2.60 / 0.90 |
-| Hook head below the base plate | 3.0 | 0.30 |
 | Internal corner radius, every corner | R2 minimum | R0.2 minimum |
 | Foam thickness | 5.0 | 0.50 |
 | Finger-lift scallop in the front rim | 20 × 4 | 2.0 × 0.4 |
@@ -139,25 +146,17 @@ the base plate. The whole assembly is two pushes.
 
 | # | Part | Qty | A5 | A8 |
 |---|---|---|---|---|
-| 1 | Front / back wall — full width, notched both ends, **2 hooks** on the bottom edge | 2 | 160 × 135 × 5 | 166 × 135 × 8 |
-| 2 | Left / right wall — full depth, notched both ends, **corner fingers extend down** | 2 | 100 × 135 × 5 | 106 × 135 × 8 |
+| 1 | Front / back wall — notched both ends | 2 | 160 × 145 × 5 | 166 × 152 × 8 |
+| 2 | Left / right wall — notched both ends | 2 | 100 × 145 × 5 | 106 × 152 × 8 |
 | 3 | Lid plate — plain except 4 magnet pockets | 1 | 160 × 100 × 5 | 166 × 106 × 8 |
-| 4 | Base plate — 4 corner notches + 4 keyhole slots | 1 | 160 × 100 × 5 | 166 × 106 × 8 |
+| 4 | Base plate — interior rectangle + 4 corner tabs | 1 | 160 × 100 × 5 | 166 × 106 × 8 |
 | 5 | EVA foam, floor pad | 1 | 150 × 90 × 5 | 150 × 90 × 5 |
 | 6 | EVA foam, front / back pads | 2 | 150 × 130 × 5 | 150 × 130 × 5 |
 | 7 | EVA foam, left / right pads | 2 | 80 × 130 × 5 | 80 × 130 × 5 |
 | 8 | EVA foam, lid pad | 1 | 150 × 90 × 5 | 150 × 90 × 5 |
-| 9 | Neodymium magnets | 8 | 3 × 8 × 2 mm blocks | 4 mm dia × 2 mm discs |
-| 10 | Felt pad, 3 mm, with 4 holes for the hook heads | 1 | 150 × 90 | 156 × 96 |
+| 9 | Neodymium magnets | **8** | 3 × 8 × 2 mm blocks | 4 mm dia × 2 mm discs |
 
-Blank sizes are the panel outlines before the joint profiles are cut. The side
-walls' blanks run t mm taller than the finished wall (the corner fingers extend
-down through the base). The front and back walls' blanks run t + 3 mm taller
-(the hooks reach 3 mm below the base plate).
-
-Still only **four distinct acrylic shapes**, which keeps the cutting simple.
-
----
+No felt pad with holes any more, and no keyholes. Four distinct acrylic shapes.
 
 ## 5. Assembly — eight steps
 
@@ -168,16 +167,16 @@ Illustrations: `variants/assembly-01.svg` … `assembly-08.svg`, plus
 | # | Step | What to watch |
 |---|---|---|
 | 1 | **Lay out every part.** 9 acrylic panels, 8 magnets, 6 foam pads. | Check against the cut list |
-| 2 | **Drill the 8 magnet pockets** — one in each wall's top edge, four in the lid plate. | The base needs no pockets. Do it while the panels are flat |
-| 3 | **Bond the 4 wall magnets.** | Set them flush; proud magnets stop the lid seating |
+| 2 | **Drill the 8 magnet pockets** — one in each wall's top edge, four in the lid plate. | The base needs none. Do it while the panels are flat |
+| 3 | **Bond the 4 wall magnets.** | Flush, not proud |
 | 4 | **Bond the 4 lid magnets.** | Offer them dry, let the wall magnets pull each one round, then glue |
-| 5 | **Base plate down, side walls on.** | The side walls' corner fingers drop into the base's corner notches |
-| 6 | **Front wall in.** One push across its face. | Both corners mesh at once and both hooks drive home |
-| 7 | **Back wall in.** Same push, opposite direction. | The box is now closed on all six faces |
+| 5 | **Base plate in, side walls on.** The side walls stand up first; the base slides in at the second finger band and its corner tabs drop into the sockets. | The tabs land on the finger band below |
+| 6 | **Front wall in.** One push across its face. | Both corners mesh at once |
+| 7 | **Back wall in.** Same push, opposite direction. | The base is now boxed in on all four sides, above and below |
 | 8 | **Foam, box, lid.** | The lid is the only magnetically-held part |
 
-The base cannot slide, cannot drop and cannot rise. Every one of the six faces
-is mechanically connected before the lid goes on.
+By the end of step 7 the case is a closed, rigid box with a captive floor, and
+nothing protrudes below the bottom rim.
 
 ### Why the finger-lift scallop is there
 
@@ -187,7 +186,6 @@ the difference between a case that opens easily and one that generates support
 emails. You can also just press one corner and the opposite corner tips up.
 
 ---
-
 
 ## 6. Making it survive a drop
 
@@ -221,7 +219,6 @@ there is no excuse for a square internal corner anywhere:
 - the root of every finger on the corner joints
 - the rim of every magnet pocket
 - the corners of the base plate's notches and keyhole slots
-- the inside of every hook
 - the ends of the finger-lift scallop
 
 ### 4. Anneal after cutting — the cheapest upgrade there is
@@ -274,17 +271,14 @@ undamaged, case cracked at most at a seam and not shattered into pieces.
 
 | Item | Qty | A5 | A8 |
 |---|---|---|---|
-| Cast acrylic sheet | 1 | 5 mm, ~115 000 mm² of parts | 8 mm, ~125 000 mm² of parts |
+| Cast acrylic sheet | 1 | 5 mm, ~125 000 mm² of parts | 8 mm, ~140 000 mm² of parts |
 | Neodymium magnets | **8** | 3 × 8 × 2 mm block, N42 | 4 mm dia × 2 mm disc, N42 |
 | EVA foam, closed cell | — | 5 mm, ~0.1 m² | 5 mm, ~0.1 m² |
-| Felt pad, 3 mm | 1 | with 4 holes for the hook heads | same |
 | Two-part epoxy or CA gel | — | for the magnets | for the magnets |
-| 3M 467 or contact adhesive | — | for the foam and felt | for the foam and felt |
+| 3M 467 or contact adhesive | — | for the foam | for the foam |
 
-**Down from 16 magnets to 8**, and all of them at the top where they are easy
-to fit and easy to check.
-
----
+**8 magnets**, all at the top, all easy to fit and easy to check. The floor uses
+none.
 
 ## 8. Which route
 
@@ -304,7 +298,7 @@ Specified and illustrated, but not modelled:
 - a parametric OpenSCAD model of either route
 - a 1:1 nested cut plan for the sheet
 - the foam pad templates
-- the exact hook and keyhole profile coordinates
+- the exact corner tab and finger band coordinates
 
 Say the word and I will produce them for the route you pick.
 
