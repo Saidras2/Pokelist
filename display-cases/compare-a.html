@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Route A5 vs Route A8 — flush magnetic lid display case</title>
+<style>
+  :root { --ink:#111827; --mid:#4b5563; --dim:#9aa0ae; --line:#e5e7eb;
+          --blue:#1d4ed8; --red:#b91c1c; --green:#15803d; --amber:#b45309; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:32px 20px 90px; background:#f6f7f9; color:var(--ink);
+         font:15px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .wrap { max-width: 1360px; margin:0 auto; }
+  header { border-bottom:1px solid var(--line); padding-bottom:20px; margin-bottom:26px; }
+  h1 { font-size:27px; margin:0 0 6px; letter-spacing:-0.02em; }
+  .sub { color:var(--mid); font-size:14px; }
+  h2 { font-size:18px; margin:44px 0 14px; letter-spacing:-0.01em; }
+  h2 .n { color:var(--dim); font-weight:600; margin-right:8px; }
+  .cols2 { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  .cols4 { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  @media (max-width:1100px) { .cols2, .cols4 { grid-template-columns:1fr 1fr; } }
+  @media (max-width:700px)  { .cols2, .cols4 { grid-template-columns:1fr; } }
+  .card { background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+  .card.pick { border-color:#93c5fd; box-shadow:0 0 0 3px #dbeafe; }
+  .card img { display:block; width:100%; height:auto; }
+  .body { padding:16px 18px 20px; }
+  .tag { display:inline-block; font-size:11px; font-weight:700; letter-spacing:.06em;
+         text-transform:uppercase; padding:2px 8px; border-radius:999px; margin-bottom:8px;
+         background:#e5e7eb; color:#374151; }
+  .tag.a5 { background:#dbeafe; color:#1e40af; }
+  .tag.a8 { background:#dcfce7; color:#166534; }
+  .tag.star { background:#1d4ed8; color:#fff; }
+  h3 { font-size:16px; margin:0 0 10px; }
+  table { border-collapse:collapse; width:100%; font-size:13.5px; background:#fff;
+          border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  th, td { text-align:left; padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { background:#f9fafb; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--mid); }
+  tr:last-child td { border-bottom:none; }
+  td.best { background:#eff6ff; font-weight:600; }
+  td.win { background:#f0fdf4; font-weight:600; }
+  code { background:#eef1f5; padding:1px 5px; border-radius:4px; font-size:12.5px; }
+  .cap { color:var(--mid); font-size:12.5px; margin-top:10px; }
+  .note { background:#fffbeb; border:1px solid #fde68a; border-radius:10px; padding:16px 18px; font-size:14px; }
+  .warn { background:#fef2f2; border:1px solid #fecaca; border-radius:10px; padding:16px 18px; font-size:14px; }
+  ol, ul { padding-left:20px; margin:6px 0 0; }
+  li { margin-bottom:5px; }
+  .step { background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+  .step img { display:block; width:100%; height:auto; border-bottom:1px solid var(--line); }
+  .steptxt { padding:12px 14px 16px; font-size:13px; }
+  .steptxt strong { display:block; font-size:13.5px; margin-bottom:4px; }
+  .steptxt span { color:var(--mid); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Route A5 vs Route A8 — flush magnetic lid</h1>
+  <div class="sub">
+    Same case, same self-assembly, same magnetic lid. One number differs —
+    the wall thickness — and it decides the magnets, the size, the cost and how
+    well the case survives a drop. Both are a <strong>true rectangular prism</strong>:
+    flush lid, flush base, nothing protruding.
+  </div>
+</header>
+
+<h2><span class="n">01</span>The two routes</h2>
+<div class="cols2">
+  <div class="card">
+    <img src="variants/a5.svg" alt="Route A5 - 5 mm walls, flush magnetic lid">
+    <div class="body">
+      <span class="tag a5">Route A5</span>
+      <h3>5 mm walls &middot; slot pockets</h3>
+      <p style="margin:0;font-size:13.5px;color:var(--mid)">
+        Thin, glassy, cheaper. The magnet pocket is a 3 &times; 8 mm slot cut flush
+        to the wall's <strong>inner</strong> face, so all 2 mm of acrylic sits on
+        the outside where it matters.
+      </p>
+    </div>
+  </div>
+  <div class="card pick">
+    <img src="variants/a8.svg" alt="Route A8 - 8 mm walls, flush magnetic lid">
+    <div class="body">
+      <span class="tag a8">Route A8</span> <span class="tag star">Drop-safe pick</span>
+      <h3>8 mm walls &middot; round pockets</h3>
+      <p style="margin:0;font-size:13.5px;color:var(--mid)">
+        Chunky, stronger, about $2.50 more. Ordinary round pockets with 2 mm of
+        acrylic on <strong>both</strong> sides of the magnet, and roughly 2.5&times;
+        the impact energy before it cracks.
+      </p>
+    </div>
+  </div>
+</div>
+
+<h2><span class="n">02</span>Side by side</h2>
+<table>
+  <thead><tr><th>&nbsp;</th><th>Route A5</th><th>Route A8</th></tr></thead>
+  <tbody>
+    <tr><td>Wall thickness</td><td>5 mm &nbsp;(0.5 cm)</td><td class="win">8 mm &nbsp;(0.8 cm)</td></tr>
+    <tr><td>Magnet pocket</td><td>3 &times; 8 mm slot, flush to inner face</td><td>4 mm dia round, centred</td></tr>
+    <tr><td>Acrylic around the magnet</td><td>2.0 mm, outside only</td><td class="win">2.0 mm on both sides</td></tr>
+    <tr><td>Magnets</td><td>16 &times; 3 &times; 8 &times; 2 mm blocks</td><td>16 &times; 4 mm dia &times; 2 mm discs</td></tr>
+    <tr><td>Outside size</td>
+        <td class="win">16.0 &times; 10.0 &times; 14.5 cm<br><span style="color:var(--mid);font-weight:400">160 &times; 100 &times; 145 mm</span></td>
+        <td>16.6 &times; 10.6 &times; 15.1 cm<br><span style="color:var(--mid)">166 &times; 106 &times; 151 mm</span></td></tr>
+    <tr><td>Interior</td><td colspan="2">15.0 &times; 9.0 &times; 13.5 cm &nbsp;(150 &times; 90 &times; 135 mm) &mdash; identical on both</td></tr>
+    <tr><td>Margin around the box</td><td>10 mm (1.0 cm) per side</td><td>13 mm (1.3 cm) per side</td></tr>
+    <tr><td>Impact strength</td><td>baseline</td><td class="win">&asymp; 2.5&times;</td></tr>
+    <tr><td>Material cost per case</td><td class="win">baseline</td><td>&asymp; +$2.50</td></tr>
+    <tr><td>Look</td><td>thin, glassy, display case</td><td>chunky, instrument case</td></tr>
+    <tr><td>Best for</td><td>a shelf, handled by you</td><td class="win">shipping, handling, posting</td></tr>
+  </tbody>
+</table>
+
+<h2><span class="n">03</span>Why the wall thickness decides everything</h2>
+<p style="font-size:14px;color:var(--mid);margin-top:0">
+  A flush lid is a plain plate resting on the walls' rim, so the magnets have to
+  sit <strong>vertically in the rim</strong> &mdash; and the rim is only as wide as the
+  wall is thick.
+</p>
+<table>
+  <thead><tr><th>Wall</th><th>Magnet</th><th>Acrylic each side</th><th>Verdict</th></tr></thead>
+  <tbody>
+    <tr><td>5 mm</td><td>4 mm</td><td>0.5 mm</td><td style="color:var(--red);font-weight:600">cracks</td></tr>
+    <tr><td>5 mm</td><td>3 mm</td><td>1.0 mm</td><td>risky</td></tr>
+    <tr><td>5 mm</td><td>3 &times; 8 mm slot flush to the inner face</td><td>2.0 mm outboard</td><td class="best">A5 &mdash; works</td></tr>
+    <tr><td>6 mm</td><td>3 mm</td><td>1.5 mm</td><td>acceptable</td></tr>
+    <tr><td>8 mm</td><td>4 mm</td><td>2.0 mm</td><td class="win">A8 &mdash; comfortable</td></tr>
+  </tbody>
+</table>
+<p class="cap">
+  A5 gets away with 5 mm by cutting the pocket as a slot flush with the wall's
+  inner face, so the acrylic is all on the outside. The trade is that the slot is
+  open on the inside &mdash; hidden by the booster box, but it is a notch in the
+  inner top edge. A8 just uses ordinary round pockets.
+</p>
+
+
+<h2><span class="n">04</span>Will it survive a drop?</h2>
+<div class="cols2">
+  <div class="card"><div class="body">
+    <h3>What does the work, in order</h3>
+    <ol>
+      <li><strong>The foam liner.</strong> It decouples the box from the case, so the box decelerates over 5 mm of crush instead of instantly &mdash; roughly <strong>5&ndash;10&times;</strong> less peak force on the box. This is the single biggest item and the cheapest.</li>
+      <li><strong>Wall thickness.</strong> Impact resistance scales roughly with the cube of thickness. 5 mm &rarr; 8 mm is about <strong>2.5&times;</strong> the energy before it cracks.</li>
+      <li><strong>Radius every internal corner, R2 minimum.</strong> A sharp internal corner in acrylic has a theoretically infinite stress concentration. A laser can cut any radius &mdash; so do it at every finger root, pocket rim and notch corner.</li>
+      <li><strong>Anneal after cutting.</strong> 2&ndash;3 hours at 80&nbsp;&deg;C, then cool slowly inside the oven. Laser cutting locks stress into the cut edge, and that stress is why acrylic shatters instead of flexing. Cheapest upgrade there is, and almost nobody does it.</li>
+      <li><strong>Polish the cut edges.</strong> A laser-cut edge is a row of micro-cracks. Flame polish or wet-sand to 1500 grit.</li>
+      <li><strong>Box-jointed corners.</strong> Nine interlocking fingers per corner spread the impact instead of failing along one line, and no glue means no weak link.</li>
+    </ol>
+  </div></div>
+  <div class="card"><div class="body">
+    <h3>The honest part</h3>
+    <div class="warn" style="padding:12px 14px">
+      <strong>The magnetic lid will pop off in a hard drop.</strong><br><br>
+      The A8 lid plate weighs 168&nbsp;g. A 1&nbsp;m drop onto concrete decelerates at
+      roughly 500&nbsp;g, so the lid sees about <strong>84&nbsp;kg</strong> of inertial force.
+      Four magnet pairs hold about <strong>1.4&nbsp;kg</strong>. No practical magnet
+      array holds that.
+    </div>
+    <p style="font-size:13.5px;color:var(--mid);margin-bottom:0">
+      This is exactly why the foam matters. When the lid comes off, the foam cradle
+      still holds the box. You lose a lid, not the contents.
+      <br><br>
+      If you truly need the lid to stay on through a drop it has to be
+      <strong>mechanically</strong> retained &mdash; a tongue engaging a lip inside the
+      walls &mdash; but then the case takes the whole impact and cracks instead. A lid
+      that pops off is a lid that releases energy.
+      <br><br>
+      <strong>Test it rather than trusting the numbers.</strong> Drop a prototype
+      1&nbsp;m onto concrete in all six orientations.
+    </p>
+  </div></div>
+</div>
+
+<h2><span class="n">05</span>Assembly, step by step</h2>
+<p style="font-size:14px;color:var(--mid);margin-top:0">
+  Eight steps. No glue, no fasteners, no tools beyond a drill for the magnet
+  pockets. The same sequence applies to both routes &mdash; only the pocket shape and
+  the magnet change.
+</p>
+<div class="cols4">
+
+  <div class="step">
+    <img src="variants/assembly-01.svg" alt="Step 1 - lay out every part">
+    <div class="steptxt"><strong>1 &middot; Lay out every part</strong>
+      <span>9 acrylic panels, 16 magnets, 6 foam pads. Nothing is glued in the factory.</span></div>
+  </div>
+
+  <div class="step">
+    <img src="variants/assembly-02.svg" alt="Step 2 - drill the 16 magnet pockets">
+    <div class="steptxt"><strong>2 &middot; Drill the 16 pockets</strong>
+      <span>Every wall gets 2, each plate gets 4. Do it while the panels are flat.</span></div>
+  </div>
+
+  <div class="step">
+    <img src="variants/assembly-03.svg" alt="Step 3 - bond the 8 wall magnets">
+    <div class="steptxt"><strong>3 &middot; Bond the wall magnets</strong>
+      <span>4 in the top edges, 4 in the bottom. Set them flush, not proud.</span></div>
+  </div>
+
+  <div class="step">
+    <img src="variants/assembly-04.svg" alt="Step 4 - bond the lid and base magnets">
+    <div class="steptxt"><strong>4 &middot; Bond the plate magnets</strong>
+      <span>Let the wall magnets pull each one round the right way before you glue.</span></div>
+  </div>
+
+  <div class="step">
+    <img src="variants/assembly-05.svg" alt="Step 5 - build the two halves">
+    <div class="steptxt"><strong>5 &middot; Build the two halves</strong>
+      <span>Left + front wall, right + back wall. One straight slide each.</span></div>
+  </div>
+
+  <div class="step">
+    <img src="variants/assembly-06.svg" alt="Step 6 - slide into a rigid tube">
+    <div class="steptxt"><strong>6 &middot; Slide into a tube</strong>
+      <span>Both remaining corners mesh at once. Check the diagonals.</span></div>
+  </div>
+
+  <div class="step">
+    <img src="variants/assembly-07.svg" alt="Step 7 - click on the base and fit the foam">
+    <div class="steptxt"><strong>7 &middot; Base on, foam in</strong>
+      <span>The base locates on four notches, then the magnets clamp it.</span></div>
+  </div>
+
+  <div class="step">
+    <img src="variants/assembly-08.svg" alt="Step 8 - box in, lid on">
+    <div class="steptxt"><strong>8 &middot; Box in, lid on</strong>
+      <span>To open: press one corner and the far corner tips up.</span></div>
+  </div>
+
+</div>
+
+<div class="note" style="margin-top:26px">
+  <strong>One thing a flush lid costs you.</strong> A perfectly flush lid has nothing to
+  grip. The 20 &times; 4 mm scallop in the front wall's top rim is the one place the
+  rectangle is not perfect &mdash; and it is the difference between a case that opens
+  easily and one that generates support emails. Alternatively press firmly on one
+  corner and the opposite corner levers up.
+</div>
+
+<p class="cap" style="margin-top:30px">
+  Full specification, cut lists, dimensions in mm and cm, and the drop analysis:
+  <a href="ROUTES.md">ROUTES.md</a>. The other self-assembly options are in
+  <a href="VARIANTS.md">VARIANTS.md</a>.
+</p>
+
+</div>
+</body>
+</html>
+

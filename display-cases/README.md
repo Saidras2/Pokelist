@@ -41,16 +41,19 @@ so just double-click it (or open it in any browser).
 
 | File | What it is |
 | --- | --- |
-| [`compare.html`](compare.html) | **Three self-assembly variants side by side** — start here |
+| [`compare-a.html`](compare-a.html) | **Route A5 vs A8, flush magnetic lid, with the 8-step assembly sequence** — start here |
+| [`ROUTES.md`](ROUTES.md) | Full spec for both flush-lid routes: dimensions in mm and cm, cut lists, drop analysis |
+| [`compare.html`](compare.html) | The three earlier self-assembly variants side by side |
 | [`VARIANTS.md`](VARIANTS.md) | Full spec for each self-assembly variant: cut lists, joint dimensions, assembly, trade-offs |
 | [`view.html`](view.html) | The original glued version, all on one page |
 | [`preview-iso.svg`](preview-iso.svg) | Isometric preview of the glued version |
 | [`SPEC.md`](SPEC.md) | Spec for the glued version: dimensions, cut list, magnets, assembly |
 | [`openscad/booster_box_case.scad`](openscad/booster_box_case.scad) | Parametric 3D model — change 3 numbers and it resizes itself |
 | [`cut-plan.svg`](cut-plan.svg) | 1:1 sheet layout for the glued version |
-| [`variants/`](variants) | Generated illustrations of the three self-assembly joints |
+| [`variants/`](variants) | Generated illustrations: the flush-lid routes, the 8 assembly steps, and the three joint types |
 | [`tools/make_preview.py`](tools/make_preview.py) | Regenerates `preview-iso.svg` |
 | [`tools/make_variants.py`](tools/make_variants.py) | Regenerates the three variant illustrations |
+| [`tools/make_a_routes.py`](tools/make_a_routes.py) | Regenerates the flush-lid route images and the 8 assembly steps |
 
 ## Self-assembly, no glue
 
