@@ -24,52 +24,96 @@ protruding anywhere on the outside.
 
 ---
 
-## 1. How the base attaches — and why it no longer floats
+## 1. The base joint, explained simply
 
-The hook idea was wrong and you spotted it. A hook head has to be trapped
-*under* the plate, so it has to stick out *below* the plate — which means the
-case stands on four little feet instead of sitting flat.
+See `variants/base-explained.svg` — four pictures, left to right.
 
-So the base plate moved. It now sits **one finger band up inside the tube**,
-not at the very bottom.
+### The one-sentence version
+
+> The four walls lock together at the corners with interlocking fingers, which
+> makes a stack of little alternating blocks up each corner. Leave one block out
+> of the stack, and the base plate has a tab that slots into the gap — so it is
+> sandwiched between the blocks above and below.
+
+That is the whole thing. There is no hook, no keyhole, no magnet and no glue.
+
+### The long version
+
+**Start with the corners.** The walls do not butt together — they interlock,
+like a box joint in woodworking. At each corner, wall A owns one 5 mm slice,
+wall B owns the next, then wall A again, all the way up. Nine or ten slices on
+A5, nineteen on A8.
+
+**So each corner is a stack.** Picture a stack of Lego bricks up the corner,
+alternating colour: blue, grey, blue, grey. Every brick is the full thickness of
+the wall, so the stack is solid.
+
+**Now leave one brick out.** Take the second brick from the bottom out of the
+stack. You now have a rectangular gap, the exact size of a brick, with a blue
+brick underneath it and a grey brick above it.
+
+**The base plate has a tab that fits the gap.** At each of its four corners the
+base plate has a little square tab sticking out — exactly brick-sized. Slide the
+base plate in, and each tab sits in one of those gaps.
+
+**Now it cannot move.**
+
+| Direction | What stops it |
+|---|---|
+| Down | The brick below the gap |
+| Up | The brick above the gap |
+| Sideways | The walls' bodies, which surround the tab on both sides |
+
+That is all four of the base plate's corners, so it is locked in every direction
+at once.
+
+### Why the floor is flat
+
+The walls do not stop at the gap. They carry on down past it, all the way to
+the floor. So the bottom of the case is the walls' own bottom edge — a
+continuous rim, one wall-thickness wide, all the way round, with nothing
+protruding anywhere.
 
 ```
-  band 3   z = 2t .. 3t    front / back wall finger     <- traps the tab from above
-  band 2   z =  t .. 2t    BASE PLATE + its corner tabs <- captured here
-  band 1   z =  0 ..  t    side wall finger             <- traps the tab from below
+  band 3   z = 2t .. 3t    front / back wall block    <- stops the tab rising
+  band 2   z =  t .. 2t    BASE PLATE + its corner tabs
+  band 1   z =  0 ..  t    side wall block           <- stops the tab dropping
   -----------------------  floor
 ```
 
-**The walls now run all the way down to the floor.** The case sits on their
-bottom edge — a flat, continuous rim, `t` wide, all the way round. Nothing
-protrudes. The base plate is recessed by one band inside, which is invisible
-from outside and actually helps: it lifts the booster box another 5–8 mm off
-the ground.
+The base plate ends up recessed one band inside the case. You cannot see that
+from outside, and it lifts the booster box another 5–8 mm off the ground, which
+is a small bonus.
 
-### What the base plate looks like
+### What the base plate actually looks like
 
-A rectangle the size of the interior, with **four corner tabs** (t × t) that
-reach out to the corners. Those tabs are what gets captured:
+Not a plain rectangle. It is a rectangle the size of the interior, with four
+square tabs reaching out to the corners:
 
-| Trapped by | What it stops |
-|---|---|
-| The band-1 finger underneath | The base dropping |
-| The band-3 finger above | The base rising |
-| The walls' bodies on both sides | The base sliding or rotating |
+```
+      +--+                        +--+
+      |  +------------------------+  |
+      |  |                        |  |     <- the four tabs
+      +--|                        |--+
+         |                        |
+      +--|                        |--+
+      |  |                        |  |
+      |  +------------------------+  |
+      +--+                        +--+
+```
 
-No hook, no keyhole, no magnet, no glue, no extra part, and **nothing sticking
-out underneath.** See `variants/base-joint.svg`.
+Same sheet, same thickness, cut in the same laser pass as everything else.
 
 ### The cost
 
 One extra finger band of height. The case grows by 5 mm (A5) or 9 mm (A8):
 
-| | Old hook design | Flush-floor design |
+| | Old hook design | This design |
 |---|---|---|
 | Route A5 total height | 145 mm (14.5 cm) | **150 mm (15.0 cm)** |
 | Route A8 total height | 151 mm (15.1 cm) | **160 mm (16.0 cm)** |
 
-That is the honest price of a flat bottom, and I think it is worth paying.
+That is the honest price of a flat bottom.
 
 ---
 

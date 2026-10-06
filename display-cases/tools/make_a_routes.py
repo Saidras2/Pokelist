@@ -473,6 +473,74 @@ def base_joint(t):
                  "The base sits one finger band up, so the underside is a flat rim.")
 
 
+def base_explained(t):
+    """Four panels, left to right, explaining the base joint from scratch."""
+    W, H = 960, 448
+    bh, bw = 20.0, 46.0
+    oy = 320.0
+    A_F, A_L = "#dbeafe", "#1d4ed8"
+    B_F, B_L = "#e5e7eb", "#4b5563"
+    T_F, T_L = "#fca5a5", "#991b1b"
+    steps = [(30.0, 1), (260.0, 2), (490.0, 3), (720.0, 4)]
+    d = []
+    titles = ["1. The corner is a stack",
+              "2. Leave one band empty",
+              "3. Slide the tab in",
+              "4. It cannot move"]
+    for ox, step in steps:
+        d.append(text(ox, 96, titles[step - 1], 12, INK, weight="bold"))
+        # floor
+        d.append(f'<line x1="{ox-14:.0f}" y1="{oy:.1f}" x2="{ox+bw+104:.1f}" y2="{oy:.1f}" '
+                 f'stroke="{INK}" stroke-width="1.6"/>')
+        if step == 1:
+            d.append(text(ox - 18, oy + 16, "floor", 9.5, MID, "end"))
+        # the seven bands of the corner
+        owners = ["A", "B", "A", "B", "A", "B", "A"]
+        if step >= 2:
+            owners = ["A", None, "B", "A", "B", "A", "B"]
+        for i, own in enumerate(owners):
+            y = oy - (i + 1) * bh
+            if own is None:
+                d.append(rect(ox, y, bw, bh, "#ffffff", DIM, 1.0, "4 3"))
+            else:
+                f, l = (A_F, A_L) if own == "A" else (B_F, B_L)
+                d.append(rect(ox, y, bw, bh, f, l, 1.0))
+        caps = ["Fingers interlock up each corner,",
+                "Take one block out of the stack.",
+                "The base plate's corner tab is",
+                "Sandwiched top, bottom and sides."]
+        d.append(text(ox, oy + 22, caps[step - 1], 9.5, MID))
+        # the base plate
+        if step == 3:
+            d.append(rect(ox + bw + 70, oy - 2 * bh, 34, bh, T_F, T_L, 1.1))
+            d.append(rect(ox + bw + 70 + 34, oy - 2 * bh, 22, bh, T_F, T_L, 1.1))
+            d.append(arrow(ox + bw + 66, oy - 1.5 * bh, ox + bw + 6, oy - 1.5 * bh, T_L))
+        elif step == 4:
+            d.append(rect(ox + bw, oy - 2 * bh, 104, bh, T_F, T_L, 1.1))
+            d.append(text(ox + bw + 52, oy - 2 * bh + 14, "base plate", 9.5, T_L, "middle"))
+    # annotations under panel 1
+    d.append(text(30 + bw + 10, oy - 0.5 * bh - 4, "wall A", 10, A_L))
+    d.append(text(30 + bw + 10, oy - 1.5 * bh - 4, "wall B", 10, B_L))
+    d.append(text(30 + bw + 10, oy - 2.5 * bh - 4, "wall A", 10, A_L))
+    d.append(text(260 + bw + 10, oy - 1.5 * bh + 4, "empty", 10, DIM))
+    d.append(text(720 + bw + 10, oy - 2 * bh - 6, "trapped above", 9.5, GREEN))
+    d.append(text(720 + bw + 10, oy - bh + 14, "trapped below", 9.5, GREEN))
+    d.append(text(720 + bw + 10, oy + 4, "walls block the sides", 9.5, GREEN))
+    # running notes
+    d.append(text(30, 378, "The four walls lock together at the corners with interlocking fingers. "
+                           "Up each corner that makes a stack of", 10.5, MID))
+    d.append(text(30, 396, "little blocks, alternating which wall owns them. Leave one block out of "
+                           "the stack and you get a slot.", 10.5, MID))
+    d.append(text(30, 414, "The base plate has a tab at each of its four corners that is exactly "
+                           "block-sized. Drop it into the slot and it is", 10.5, MID))
+    d.append(text(30, 432, "sandwiched: the block below stops it dropping, the block above stops it "
+                           "rising, the walls stop it sliding.", 10.5, MID))
+    return sheet(W, H, "The base joint, from scratch",
+                 "Forget hooks and keyholes. It is a shelf slotted into a gap in the corner joinery.",
+                 "".join(d),
+                 "The walls carry on down past the slot to the floor, which is why the case sits flat.")
+
+
 if __name__ == "__main__":
     here = os.path.dirname(os.path.abspath(__file__))
     out = os.path.join(here, "..", "variants")
@@ -485,6 +553,7 @@ if __name__ == "__main__":
     for i, fn in enumerate((step1, step2, step3, step4, step5, step6, step7, step8), 1):
         files[f"assembly-{i:02d}.svg"] = (lambda f=fn: f(geom(8.0)))
     files["base-joint.svg"] = lambda: base_joint(8.0)
+    files["base-explained.svg"] = lambda: base_explained(8.0)
 
     for name, fn in files.items():
         p = os.path.join(out, name)
