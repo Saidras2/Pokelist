@@ -159,7 +159,7 @@ def route_image(t, name):
     px, py = proj(OX, OY / 2, OZ - 6, S, CX, CY)
     body.append(text(px + 8, py, "lid magnets", 9.5, RED))
     px, py = proj(OX, OY / 2, 6, S, CX, CY)
-    body.append(text(px + 8, py, "base magnets", 9.5, RED))
+    body.append(text(px + 8, py, "base: keyed, no magnet", 9.5, GREEN))
 
     # ---- side panel: cut list + the key numbers ----
     rows = [
@@ -195,9 +195,10 @@ def route_image(t, name):
     body.append(text(460, y + 14, "MAGNETS", 10, RED, weight="bold"))
     body.append(text(460, y + 30, mag[0], 10, MID))
     body.append(text(460, y + 44, mag[1], 10, MID))
-    body.append(text(460, y + 62, "16 total: 4 pairs lid + 4 pairs base", 10, MID))
-    body.append(text(460, y + 78, "Finger joint: 7.5 mm fingers, 15 mm pitch, 9 up", 10, MID))
-    body.append(text(460, y + 94, "Radius every internal corner R2 minimum", 10, GREEN))
+    body.append(text(460, y + 62, "8 total, 4 pairs - lid only. Base is mechanical.", 10, GREEN))
+    body.append(text(460, y + 78, "Corner joint: 7.5 mm fingers, 15 mm pitch, 9 up", 10, MID))
+    body.append(text(460, y + 94, "Base: 4 corner notches + 4 keyhole hooks", 10, MID))
+    body.append(text(460, y + 110, "Radius every internal corner R2 minimum", 10, GREEN))
 
     sub = ("5 mm walls &#183; slot pockets &#183; keeps the thin profile"
            if t <= 5 else
@@ -242,179 +243,206 @@ def step1(g):
 
 
 def step2(g):
-    """Drill the magnet pockets - while everything is still flat."""
-    t, OX, OY = g["t"], g["OX"], g["OY"]
-    IZ = g["IZ"] if "IZ" in g else globals()["IZ"]
-    sc = 1.30
-    ox, oy = 40.0, 76.0
+    """Drill the 8 magnet pockets - wall top edges and the lid plate."""
+    t, OX = g["t"], g["OX"]
+    IZ = g["IZ"]
+    sc, ox, oy = 1.30, 40.0, 76.0
     W, H = OX * sc, IZ * sc
     d = [rect(ox, oy, W, H, "#f7f9fd", INK)]
-    # pockets: one in the top edge, one in the bottom edge, centred
-    for yy, lbl in ((oy + 6, "lid pocket"), (oy + H - 6, "base pocket")):
-        d.append(rect(ox + W / 2 - 8, yy - 5, 16, 10, "#fca5a5", "#991b1b", 1.2))
-    d.append(dim(ox, oy + H + 16, ox + W, oy + H + 16, f"{OX:.0f} mm  ({OX/10:.1f} cm)", GREEN, 12))
-    d.append(dim(ox - 16, oy, ox - 16, oy + H, f"{IZ:.0f} mm", GREEN, -4))
-    d.append(text(ox + W + 14, oy + 14, f"{t:.0f} mm", 10, MID))
-    d.append(text(ox + W + 14, oy + 28, "thick", 10, MID))
-    d.append(text(ox + W + 14, oy + 50, "pocket:", 10, RED, weight="bold"))
+    d.append(rect(ox + W / 2 - 8, oy + 3, 16, 10, "#fca5a5", "#991b1b", 1.2))
+    d.append(dim(ox, oy + H + 18, ox + W, oy + H + 18,
+                 f"{OX:.0f} mm  ({OX/10:.1f} cm)", GREEN, 12))
+    d.append(dim(ox - 18, oy, ox - 18, oy + H, f"{IZ:.0f} mm", GREEN, -4))
+    d.append(text(ox + W + 14, oy + 16, f"{t:.0f} mm", 10, MID))
+    d.append(text(ox + W + 14, oy + 30, "thick", 10, MID))
+    d.append(text(ox + W + 14, oy + 52, "Pocket:", 10, RED, weight="bold"))
     if t <= 5:
-        d.append(text(ox + W + 14, oy + 66, "3 &#215; 8 mm slot,", 10, MID))
-        d.append(text(ox + W + 14, oy + 80, "cut flush to the", 10, MID))
-        d.append(text(ox + W + 14, oy + 94, "INNER face, so", 10, MID))
-        d.append(text(ox + W + 14, oy + 108, "2 mm of acrylic", 10, MID))
-        d.append(text(ox + W + 14, oy + 122, "is left outside.", 10, MID))
+        rows = ["3 &#215; 8 mm slot,", "flush to the INNER", "face, so 2 mm of",
+                "acrylic stays outside."]
     else:
-        d.append(text(ox + W + 14, oy + 66, "4 mm dia &#215; 2 mm", 10, MID))
-        d.append(text(ox + W + 14, oy + 80, "deep, centred, so", 10, MID))
-        d.append(text(ox + W + 14, oy + 94, "2 mm of acrylic", 10, MID))
-        d.append(text(ox + W + 14, oy + 108, "is left each side.", 10, MID))
-    d.append(text(ox, oy + H + 100, "Every wall gets 2 pockets; each plate gets 4.",
+        rows = ["4 mm dia &#215; 2 mm", "deep, centred, so", "2 mm of acrylic",
+                "is left each side."]
+    for k, s in enumerate(rows):
+        d.append(text(ox + W + 14, oy + 68 + k * 14, s, 10, MID))
+    d.append(text(ox, oy + H + 100,
+                  "One pocket in the top edge of each wall; four in the lid plate.",
                   9.5, MID))
-    d.append(text(ox, oy + H + 116, "Do it while the panels are flat, not after.",
-                  9.5, MID))
-    return step_sheet(
-        2, "Drill the 16 magnet pockets",
-        "Brad-point bit, ~500 rpm, panel clamped to a backer board.",
-        "".join(d),
-        "Radius every internal corner R2 - that is where cracks start.")
+    d.append(text(ox, oy + H + 116,
+                  "The base needs no pockets at all - that joint is mechanical.",
+                  9.5, GREEN))
+    return step_sheet(2, "Drill the 8 magnet pockets",
+                      "Brad-point bit, ~500 rpm, panel clamped to a backer board.",
+                      "".join(d),
+                      "Only the top is magnetic. Radius every pocket rim R2.")
 
 
 def step3(g):
-    """Bond the wall magnets."""
-    t, OX, OY, OZ = g["t"], g["OX"], g["OY"], g["OZ"]
+    """Bond the 4 wall magnets."""
+    OX, OY, OZ = g["OX"], g["OY"], g["OZ"]
     s, cx, cy = 0.85, 200.0, 204.0
     d = [walls(g, s, cx, cy)]
     for (x, y) in ((OX / 2, 0), (OX / 2, OY), (0, OY / 2), (OX, OY / 2)):
         d.append(mag(x, y, OZ - 4, s, cx, cy))
-        d.append(mag(x, y, t + 4, s, cx, cy))
-    d.append(text(24, 326, "Top edge: 4 magnets, one per wall - holds the lid.",
+    d.append(text(24, 326, "Four magnets, one centred in the top edge of each wall.",
                   9.5, MID))
-    d.append(text(24, 342, "Bottom edge: 4 more, holding the base plate.",
+    d.append(text(24, 342, "Epoxy them flush. Proud magnets stop the lid seating.",
                   9.5, MID))
-    d.append(text(24, 358, "Epoxy them flush. Proud magnets stop the lid seating.",
-                  9.5, RED))
-    return step_sheet(
-        3, "Bond the 8 wall magnets",
-        "Two-part epoxy or CA gel. Set them flush, not proud.",
-        "".join(d),
-        "Polarity: walls first, then let each magnet find its own way round.")
+    d.append(text(24, 358, "Nothing is magnetic below the rim - the base is keyed.",
+                  9.5, GREEN))
+    return step_sheet(3, "Bond the 4 wall magnets",
+                      "Two-part epoxy or CA gel. Set them flush with the edge.",
+                      "".join(d),
+                      "Walls first, then let each lid magnet find its own way round.")
 
 
 def step4(g):
-    """Bond the lid and base magnets."""
+    """Bond the 4 lid magnets."""
     t, OX, OY, OZ, TOP = g["t"], g["OX"], g["OY"], g["OZ"], g["TOP"]
-    s, cx, cy = 0.85, 200.0, 204.0
-    d = [box(0, 0, OZ + 60, OX, OY, TOP + 60, s, cx, cy, *F_LID)]
+    s, cx, cy = 0.80, 200.0, 200.0
+    d = [box(0, 0, OZ + 62, OX, OY, TOP + 62, s, cx, cy, *F_LID)]
     d.append(box(0, 0, 0, OX, OY, t, s, cx, cy, *F_BASE))
     for (x, y) in ((OX / 2, 0), (OX / 2, OY), (0, OY / 2), (OX, OY / 2)):
-        d.append(mag(x, y, t - 2, s, cx, cy))
-        d.append(mag(x, y, OZ + 62, s, cx, cy))
-    d.append(text(24, 330, "The same four positions on both flat plates.",
+        d.append(mag(x, y, OZ + 64, s, cx, cy))
+    d.append(text(24, 322, "Four magnets in the lid plate, at the matching points.",
                   9.5, MID))
-    d.append(text(24, 346, "Offer them dry and let the wall magnets pull each",
+    d.append(text(24, 338, "Offer them up dry and let the wall magnets pull each one",
                   9.5, MID))
-    d.append(text(24, 362, "one round the right way. That solves polarity.",
+    d.append(text(24, 354, "round the right way before you glue. Polarity solved.",
                   9.5, GREEN))
-    return step_sheet(
-        4, "Bond the lid and base magnets",
-        "8 more magnets, at the matching positions on both plates.",
-        "".join(d),
-        "Work on a non-magnetic surface - spare magnets chip when they snap.")
-
+    return step_sheet(4, "Bond the 4 lid magnets",
+                      "8 magnets in the whole case, and every one of them is at the top.",
+                      "".join(d),
+                      "Work on a non-magnetic surface - spare magnets chip when they snap.")
 
 
 def step5(g):
-    """Build the two L-halves."""
+    """Base plate down, then the two side walls drop onto it."""
     t, OX, OY, OZ = g["t"], g["OX"], g["OY"], g["OZ"]
-    s, cx, cy = 0.72, 213.0, 182.0
-    gap = 18.0
-    d = []
-    # left + front  (slides in -X)
-    d.append(box(0, 0, t, t, OY, OZ, s, cx, cy, *F_WALL))
-    d.append(box(gap, 0, t, OX + gap, t, OZ, s, cx, cy, *F_WALL))
-    d.append(arrow(*proj(OX * 0.62 + gap, t / 2, OZ * 0.6, s, cx, cy),
-                   *proj(OX * 0.62, t / 2, OZ * 0.6, s, cx, cy)))
-    # right + back (slides in +X)
-    d.append(box(OX - t, OY + gap, t, OX, OY + gap + OY, OZ, s, cx, cy, *F_WALL))
-    d.append(box(0, OY + gap, t, OX - t - gap, OY + t + gap, OZ, s, cx, cy, *F_WALL))
-    d.append(text(24, 350, "Half 1: left + front wall, front slides in &#8722;X.",
+    s, cx, cy = 0.66, 200.0, 188.0
+    d = [box(0, 0, 0, OX, OY, t, s, cx, cy, *F_BASE)]
+    for (x, y) in ((0, 0), (OX, 0), (0, OY), (OX, OY)):
+        px, py = proj(x, y, t + 0.4, s, cx, cy)
+        d.append(f'<circle cx="{px:.1f}" cy="{py:.1f}" r="5" fill="none" '
+                 f'stroke="{RED}" stroke-width="1.1"/>')
+    for xf in (OX * 0.28, OX * 0.72):
+        for yf in (t * 0.5, OY - t * 0.5):
+            px, py = proj(xf, yf, t + 0.4, s, cx, cy)
+            d.append(f'<rect x="{px-5:.1f}" y="{py-3.5:.1f}" width="10" height="7" '
+                     f'fill="none" stroke="{AMBER}" stroke-width="1.1"/>')
+    d.append(box(0, 0, t + 30, t, OY, OZ + 30, s, cx, cy, *F_WALL))
+    d.append(box(OX - t, 0, t + 30, OX, OY, OZ + 30, s, cx, cy, *F_WALL))
+    d.append(text(24, 300, "Base plate flat on the bench. Four corner notches (red)",
                   9.5, MID))
-    d.append(text(24, 366, "Half 2: right + back wall, back slides in +X.",
+    d.append(text(24, 316, "and four keyhole slots (amber). Then the two side walls",
                   9.5, MID))
-    return step_sheet(
-        5, "Build the two halves",
-        "Two L-shapes. Each locks with one straight slide.",
-        "".join(d),
-        "A press fit goes by hand. If you need a mallet, the kerf is wrong.")
+    d.append(text(24, 332, "drop onto it, inside the notches.", 9.5, MID))
+    d.append(text(24, 350, "The base cannot move sideways: the notches lock it.", 9.5, GREEN))
+    return step_sheet(5, "Base down, side walls on",
+                      "The base is not magnetic. It is keyed, and the walls lock it.",
+                      "".join(d),
+                      "Cut the keyhole slots in the same laser pass as everything else.")
 
 
 def step6(g):
-    """Slide the halves together into a tube."""
+    """Front wall slides in -Y: both corners mesh and both hooks lock."""
     t, OX, OY, OZ = g["t"], g["OX"], g["OY"], g["OZ"]
-    s, cx, cy = 0.80, 172.0, 204.0
-    d = [walls(g, s, cx, cy)]
-    d.append(arrow(*proj(OX + 46, OY / 2, OZ * 0.55, s, cx, cy),
-                   *proj(OX + 6, OY / 2, OZ * 0.55, s, cx, cy)))
-    d.append(text(24, 326, "Slide the two halves together in &#8722;X. Both",
+    s, cx, cy = 0.70, 200.0, 190.0
+    gap = t + 14
+    d = [box(0, 0, 0, OX, OY, t, s, cx, cy, *F_BASE)]
+    d.append(box(0, 0, t, t, OY, OZ, s, cx, cy, *F_WALL))
+    d.append(box(OX - t, 0, t, OX, OY, OZ, s, cx, cy, *F_WALL))
+    d.append(box(0, -gap, t, OX, t - gap, OZ, s, cx, cy, *F_WALL))
+    d.append(arrow(*proj(OX / 2, -gap - 26, OZ * 0.62, s, cx, cy),
+                   *proj(OX / 2, -gap - 4, OZ * 0.62, s, cx, cy)))
+    d.append(text(24, 300, "Slide the front wall straight in along its own width.",
                   9.5, MID))
-    d.append(text(24, 342, "remaining corners mesh at the same moment.", 9.5, MID))
-    d.append(text(24, 360, "The tube is now rigid - a finger joint cannot",
+    d.append(text(24, 316, "Both corners mesh at once, because the wall travels",
+                  9.5, MID))
+    d.append(text(24, 332, "across its own face - not along it.", 9.5, MID))
+    d.append(text(24, 350, "The same slide drives its two hooks under the base plate.",
                   9.5, GREEN))
-    d.append(text(24, 376, "splay, shear or lift. It needs no base.", 9.5, GREEN))
-    return step_sheet(
-        6, "Slide into a rigid tube",
-        "Three moves total. Self-locking once the fourth wall is home.",
-        "".join(d),
-        "Check both diagonals are equal before you go on.")
+    return step_sheet(6, "Front wall in - one move, two corners",
+                      "A slide along the wall's length jams at the second corner. Across it, both mesh.",
+                      "".join(d),
+                      "You should feel it stop dead when the fingers bottom out.")
 
 
 def step7(g):
-    """Click the base on and fit the foam."""
-    t, OX, OY, OZ, TOP = g["t"], g["OX"], g["OY"], g["OZ"], g["TOP"]
-    s, cx, cy = 0.70, 195.0, 229.0
+    """Back wall slides in +Y and completes the box."""
+    t, OX, OY, OZ = g["t"], g["OX"], g["OY"], g["OZ"]
+    s, cx, cy = 0.66, 200.0, 188.0
+    gap = t + 14
     d = [box(0, 0, 0, OX, OY, t, s, cx, cy, *F_BASE)]
-    d.append(box(0, 0, t + 26, OX, OY, OZ + 26, s, cx, cy, *F_WALL))
-    # foam liner, drawn inside
-    f = 4.0
-    d.append(box(t, t, t + 28, OX - t, OY - t, t + 28 + f, s, cx, cy, *F_FOAM))
-    d.append(arrow(*proj(OX / 2, OY / 2, OZ + 74, s, cx, cy),
-                   *proj(OX / 2, OY / 2, OZ + 32, s, cx, cy), RED))
-    d.append(text(24, 338, "Drop the tube onto the base; the magnets pull",
+    d.append(box(0, 0, t, OX, OY, OZ, s, cx, cy, *F_WALL))
+    d.append(box(0, OY + gap, t, OX, OY + t + gap, OZ, s, cx, cy, *F_WALL))
+    d.append(arrow(*proj(OX / 2, OY + gap + 30, OZ * 0.62, s, cx, cy),
+                   *proj(OX / 2, OY + gap + 6, OZ * 0.62, s, cx, cy)))
+    d.append(text(24, 300, "Same move for the back wall, the other way.", 9.5, MID))
+    d.append(text(24, 316, "The case is now closed on all four sides, and the base",
                   9.5, MID))
-    d.append(text(24, 354, "it home. Then lay in the 5 mm foam liner.",
+    d.append(text(24, 332, "is trapped: notches stop it sliding, the hooks stop it",
                   9.5, MID))
-    d.append(text(24, 372, "The foam saves the box in a drop, not the acrylic.",
-                  9.5, GREEN))
-    return step_sheet(
-        7, "Click on the base, fit the foam",
-        "The base locates on four notches, then the magnets clamp.",
-        "".join(d),
-        "Foam is the single biggest drop-protection item in the whole build.")
+    d.append(text(24, 350, "dropping, the walls above stop it rising.", 9.5, GREEN))
+    return step_sheet(7, "Back wall in - the box is closed",
+                      "Every one of the six faces is now mechanically connected.",
+                      "".join(d),
+                      "Check both diagonals are equal before going on.")
 
 
 def step8(g):
-    """Box in, lid on."""
+    """Foam, box, lid."""
     t, OX, OY, OZ, TOP = g["t"], g["OX"], g["OY"], g["OZ"], g["TOP"]
-    s, cx, cy = 0.70, 195.0, 229.0
+    s, cx, cy = 0.66, 200.0, 192.0
     d = [box(0, 0, 0, OX, OY, t, s, cx, cy, *F_BASE)]
     d.append(box(0, 0, t, OX, OY, OZ, s, cx, cy, *F_WALL))
-    # ghost of the booster box inside
-    d.append(box(t + FOAM, t + FOAM, t + FOAM, t + FOAM + BOX_W, t + FOAM + BOX_D,
+    d.append(box(t, t, t, OX - t, OY - t, t + 4, s, cx, cy, *F_FOAM))
+    d.append(box(t + FOAM, t + FOAM, t, t + FOAM + BOX_W, t + FOAM + BOX_D,
                  t + FOAM + BOX_H, s, cx, cy, "#fed7aa", "#ea580c", "#c2410c", 0.6))
-    d.append(box(0, 0, OZ + 40, OX, OY, TOP + 40, s, cx, cy, *F_LID))
-    d.append(arrow(*proj(OX / 2, OY / 2, OZ + 88, s, cx, cy),
-                   *proj(OX / 2, OY / 2, OZ + 46, s, cx, cy), RED))
-    d.append(text(24, 332, "Lower the lid on; the magnets self-centre it.",
+    d.append(box(0, 0, OZ + 50, OX, OY, TOP + 50, s, cx, cy, *F_LID))
+    d.append(arrow(*proj(OX / 2, OY / 2, OZ + 100, s, cx, cy),
+                   *proj(OX / 2, OY / 2, OZ + 56, s, cx, cy), RED))
+    d.append(text(24, 300, "Lay the 5 mm foam in, drop the booster box into its",
                   9.5, MID))
-    d.append(text(24, 350, "To open: press one corner and the far corner tips.",
+    d.append(text(24, 316, "cradle, then lower the lid on. The lid is the only",
+                  9.5, MID))
+    d.append(text(24, 332, "magnetically held part of the whole case.", 9.5, MID))
+    d.append(text(24, 350, "To open: press one corner, or use the front rim scallop.",
                   9.5, GREEN))
-    d.append(text(24, 368, "Or hook a nail into the front rim scallop.", 9.5, GREEN))
-    return step_sheet(
-        8, "Box in, lid on",
-        "Slide the box into the foam cradle, then drop the lid on.",
-        "".join(d),
-        "Flush lid and base - a true rectangular prism.")
+    return step_sheet(8, "Foam, box, lid",
+                      "One single magnetically-held part, and it is the lid.",
+                      "".join(d),
+                      "Flush lid and flush base - a true rectangular prism.")
 
+
+
+def base_joint(t):
+    """Enlarged section through one base keyhole and hook."""
+    W, H = 460, 360
+    sc = 6.0
+    ox, oy = 70.0, 130.0
+    d = []
+    d.append(rect(ox, oy, 46 * sc, t * sc, "#eef2f9", INK))
+    d.append(rect(ox + 16 * sc, oy - 46 * sc, t * sc, 46 * sc, "#f7f9fd", INK))
+    d.append(rect(ox + 16 * sc, oy, t * sc, t * sc, "#fca5a5", "#991b1b", 1.2))
+    d.append(rect(ox + 16 * sc, oy + t * sc, 26 * sc, 3 * sc, "#fca5a5", "#991b1b", 1.2))
+    d.append(f'<line x1="{ox+16*sc:.1f}" y1="{oy-46*sc:.1f}" x2="{ox+16*sc:.1f}" '
+             f'y2="{oy+t*sc+3*sc:.1f}" stroke="{RED}" stroke-width="1" '
+             f'stroke-dasharray="4 3"/>')
+    d.append(text(ox + 16 * sc + 8, oy - 40 * sc, "wall", 10, MID))
+    d.append(text(ox + 4, oy + t * sc - 4, "base plate", 10, MID))
+    d.append(text(ox + 16 * sc + 6, oy + t * sc + 3 * sc + 26,
+                  "26 mm head, 3 mm below the base", 10, RED))
+    d.append(text(20, 300, "The wall's own material is cut as an L-shaped hook. It drops through a",
+                  10, MID))
+    d.append(text(20, 318, "keyhole slot in the base plate: 26 mm wide at the entry, only 9 mm wide",
+                  10, MID))
+    d.append(text(20, 336, "where the neck ends up. The wall's slide is the assembly motion, so the",
+                  10, MID))
+    d.append(text(20, 354, "head ends up trapped under solid acrylic and cannot pull back up.", 10, MID))
+    return sheet(W, H, "Base joint - enlarged section",
+                 "Mechanical. No magnet, no glue. This is what holds the floor in.",
+                 "".join(d),
+                 "The head sits 3 mm below the base plate, flush with a 3 mm felt pad.")
 
 
 if __name__ == "__main__":
@@ -428,6 +456,7 @@ if __name__ == "__main__":
     }
     for i, fn in enumerate((step1, step2, step3, step4, step5, step6, step7, step8), 1):
         files[f"assembly-{i:02d}.svg"] = (lambda f=fn: f(geom(8.0)))
+    files["base-joint.svg"] = lambda: base_joint(8.0)
 
     for name, fn in files.items():
         p = os.path.join(out, name)
