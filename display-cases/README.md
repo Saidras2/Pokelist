@@ -21,7 +21,32 @@ into the walls, so there is no visible latch, no hinge, and no screws.
 Assembled size (for a standard English 36-pack box): **165 × 105 × 140 mm
 (6.5 × 4.1 × 5.5 in)** — about 12 mm bigger than the box in every direction.
 
+## How to look at these files
+
+**Easiest:** open [`view.html`](view.html) — one page with the preview, the cut plan,
+the dimensions, the cut list and the magnet spec all together. It has no dependencies,
+so just double-click it (or open it in any browser).
+
+**Just the drawings:**
+
+| Want to see | Do this |
+| --- | --- |
+| Isometric preview | Open `preview-iso.svg` in any browser — SVG *is* an image, so it just opens |
+| Cut plan | Same — open `cut-plan.svg` in a browser |
+| On GitHub | Click the file in the repo; GitHub renders SVG inline, no download needed |
+| True-size template | Open `cut-plan.svg` and print at **100%** (not "fit to page") |
+| The 3D model | Install [OpenSCAD](https://openscad.org) (free), open `openscad/booster_box_case.scad`, press <kbd>F5</kbd> |
+
 ## Files
+
+| File | What it is |
+| --- | --- |
+| [`view.html`](view.html) | **Start here** — everything on one page, opens in a browser |
+| [`preview-iso.svg`](preview-iso.svg) | Isometric preview — closed and lid-lifted, with magnet positions |
+| [`SPEC.md`](SPEC.md) | The full design: dimensions, cut list, magnet spec, drilling, assembly, variants |
+| [`openscad/booster_box_case.scad`](openscad/booster_box_case.scad) | Parametric 3D model — change 3 numbers and it resizes itself |
+| [`cut-plan.svg`](cut-plan.svg) | 2D layout on a 600 × 900 mm sheet, with magnet pockets marked |
+| [`tools/make_preview.py`](tools/make_preview.py) | Regenerates `preview-iso.svg` from the same parameters |
 
 | File | What it is |
 | --- | --- |

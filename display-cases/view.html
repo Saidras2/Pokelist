@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MagnaCase — Pokémon Booster Box Display Case</title>
+<style>
+  :root { --ink:#111827; --mid:#4b5563; --dim:#9aa0ae; --line:#e5e7eb; --accent:#2563eb; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 80px;
+    font: 15px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink); background: #f6f7f9;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 28px; }
+  h1 { font-size: 27px; margin: 0 0 6px; letter-spacing: -0.02em; }
+  .sub { color: var(--mid); font-size: 14px; }
+  h2 { font-size: 18px; margin: 40px 0 12px; letter-spacing: -0.01em; }
+  h2 .n { color: var(--dim); font-weight: 600; margin-right: 8px; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+  .card img { display: block; width: 100%; height: auto; }
+  .cap { color: var(--mid); font-size: 13px; margin-top: 12px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  th { font-weight: 600; color: var(--mid); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .hi { background: #eff6ff; }
+  .hi td { font-weight: 600; border-bottom-color: #bfdbfe; }
+  code { background: #eef1f5; padding: 1px 5px; border-radius: 4px; font-size: 13px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+  ol, ul { padding-left: 22px; }
+  li { margin-bottom: 5px; }
+  .note { background:#fffbeb; border:1px solid #fde68a; border-radius:10px; padding:14px 16px; font-size:14px; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>MagnaCase — Pokémon Booster Box Display Case</h1>
+  <div class="sub">
+    Acrylic display case with a hidden magnetic lid &middot;
+    <strong>165 × 105 × 140 mm</strong> assembled &middot;
+    5 mm cast acrylic &middot; 4 magnet pairs
+  </div>
+</header>
+
+<h2><span class="n">01</span>What it looks like</h2>
+<div class="card">
+  <img src="preview-iso.svg" alt="Isometric preview of the display case, closed and with the lid lifted">
+  <div class="cap">
+    <strong>Left:</strong> assembled. The 22 mm skirt wraps down over the body and hides the
+    magnets completely — the case reads as a plain acrylic block.
+    <strong>Right:</strong> lid lifted 45 mm. The red dots are magnets set in the body's outer
+    wall faces; the blue dots are their partners set in the inside of the lid skirt.
+    They land on the same axis, so the skirt gets pulled onto the body in all four directions.
+  </div>
+</div>
+
+<h2><span class="n">02</span>Cut plan &amp; magnet positions</h2>
+<div class="card">
+  <img src="cut-plan.svg" alt="Cut plan on a 600 by 900 mm acrylic sheet, with magnet pocket positions">
+  <div class="cap">
+    All nine panels nested on one sheet, drawn at 1:1. The red circles are the eight
+    magnet pockets. <strong>Print this at 100% and it is a true-size template</strong> you
+    can lay straight onto the acrylic.
+  </div>
+</div>
+
+<h2><span class="n">03</span>The numbers</h2>
+<div class="card">
+<table>
+  <thead><tr><th>Dimension</th><th>mm</th><th>inches</th></tr></thead>
+  <tbody>
+    <tr><td>Interior — the pocket the box sits in</td><td class="num">144 × 84 × 130</td><td class="num">5.67 × 3.31 × 5.12</td></tr>
+    <tr><td>Body, outside</td><td class="num">154 × 94 × 135</td><td class="num">6.06 × 3.70 × 5.31</td></tr>
+    <tr><td>Lid, outside</td><td class="num">165 × 105 × 27</td><td class="num">6.50 × 4.13 × 1.06</td></tr>
+    <tr class="hi"><td>Assembled case</td><td class="num">165 × 105 × 140</td><td class="num">6.50 × 4.13 × 5.51</td></tr>
+  </tbody>
+</table>
+<div class="cap">Sized for a 140 × 80 × 125 mm booster box envelope, with 2 mm of air each side
+and 5 mm of headroom. Change the three input numbers in the OpenSCAD file and every
+dimension above recalculates.</div>
+</div>
+
+<h2><span class="n">04</span>Cut list — 5 mm cast acrylic</h2>
+<div class="card">
+<table>
+  <thead><tr><th>#</th><th>Part</th><th>Qty</th><th>Size</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Bottom</td><td>1</td><td class="num">154 × 94</td></tr>
+    <tr><td>2</td><td>Front / back wall</td><td>2</td><td class="num">154 × 130</td></tr>
+    <tr><td>3</td><td>Left / right wall</td><td>2</td><td class="num">84 × 130</td></tr>
+    <tr><td>4</td><td>Lid top</td><td>1</td><td class="num">165 × 105</td></tr>
+    <tr><td>5</td><td>Lid skirt, front / back</td><td>2</td><td class="num">165 × 22</td></tr>
+    <tr><td>6</td><td>Lid skirt, left / right</td><td>2</td><td class="num">95 × 22</td></tr>
+  </tbody>
+</table>
+<div class="cap">Total part area ≈ 105 000 mm². A 400 × 620 mm offcut is enough;
+the 600 × 900 sheet in the plan leaves slack for a spare.</div>
+</div>
+
+<h2><span class="n">05</span>Magnet spec</h2>
+<div class="grid">
+  <div class="card">
+    <table>
+      <tbody>
+        <tr><td>Type</td><td>Neodymium disc, N42</td></tr>
+        <tr><td>Size</td><td class="num">6 mm dia × 2 mm</td></tr>
+        <tr><td>Quantity</td><td>8 (4 pairs)</td></tr>
+        <tr><td>Hold each</td><td class="num">~0.85 kg</td></tr>
+        <tr><td>Pocket</td><td class="num">6.2 mm dia × 2 mm deep</td></tr>
+        <tr><td>Position</td><td>11 mm below the top rim, centred</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="cap" style="margin-top:0">
+      A 2 mm-deep pocket leaves <strong>3 mm of acrylic</strong> behind the magnet.
+      A 3 mm-thick magnet would leave only 2 mm, which is where acrylic starts
+      star-cracking under load — so if you want thicker magnets, step the walls up to 6 mm.
+      <br><br>
+      Body walls get their pocket in the <strong>outer</strong> face; lid skirt strips get
+      theirs in the <strong>inner</strong> face. Drill blind, never through.
+    </div>
+  </div>
+</div>
+
+<h2><span class="n">06</span>Build order</h2>
+<div class="card">
+  <ol>
+    <li><strong>Drill the eight magnet pockets first</strong>, while the panels are still flat.
+        Brad-point bit, ~500 rpm, sacrificial backer board, tape on the bit to mark 2 mm depth.</li>
+    <li>Dry-fit everything with masking tape. Check both diagonals are equal.</li>
+    <li>Weld the body: bottom → side walls → front/back walls, with Weld-On® 4 by capillary
+        action (25 G needle and syringe). Don't flood it.</li>
+    <li>Weld the lid skirt into a ring first, let it cure, then weld the ring to the lid top.</li>
+    <li>Glue the four body magnets in. Then slide the lid on and let each lid magnet
+        <em>find its own orientation</em> — the body magnet pulls it in the right way round.
+        Glue it there. That is the whole polarity problem solved.</li>
+    <li>Cure 24–48 h. Add felt pads to the base, flame-polish the exposed top edges.</li>
+  </ol>
+</div>
+
+<div class="note" style="margin-top:28px">
+  <strong>Before you cut anything:</strong> booster box sizes drift between sets, and the
+  140 × 80 × 125 mm envelope above is a typical hobby figure, not a manufacturer spec.
+  Measure your actual box, then edit <code>BOX_W</code>, <code>BOX_D</code> and
+  <code>BOX_H</code> at the top of <code>openscad/booster_box_case.scad</code>.
+  Full detail is in <a href="SPEC.md">SPEC.md</a>.
+</div>
+
+</div>
+</body>
+</html>
+
